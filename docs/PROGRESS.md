@@ -21,8 +21,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-03 | Test runners and CI test jobs                                      | done   | 9f7ddf7          |
 | T-04 | Changesets, licence check, docs check, templates                   | done   | e5b5c4d          |
 | T-05 | Configuration, errors and internal helpers                         | done   | 7fd18e8          |
-| T-06 | Decimal module and minor units                                     | doing  | —                |
-| T-07 | Input decoding and guard                                           | todo   | —                |
+| T-06 | Decimal module and minor units                                     | done   | 7a413ed          |
+| T-07 | Input decoding and guard                                           | doing  | —                |
 | T-08 | Namespace-resolved XML tree, query, select and paths               | todo   | —                |
 | T-09 | Public model types and value conventions                           | todo   | —                |
 | T-10 | Code lists and their verification                                  | todo   | —                |
@@ -64,8 +64,6 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 ## Open questions for the owner
 
-- T-07/T-08: approve explicit unlimited parser depth in TRD §6.3 (`maxNestedTags: Number.POSITIVE_INFINITY`) to satisfy UT-07. fast-xml-parser 5.11.2 defaults to 100 and rejects the required 10,000-level document. Input-size and DOCTYPE limits remain enforced.
-
 - T-01 owner checklist: enable Dependabot alerts in GitHub settings. Secret scanning and push protection were verified enabled; vulnerability alerts returned disabled.
 
 ## Verification limits
@@ -81,4 +79,6 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 T-05 local lint, typecheck, unit coverage, three-browser smoke tests, build, size and package/docs checks passed. CI run 39567971153 passed all jobs. M1 case design is recorded before implementation in qa/test-cases.md.
 
-T-06 local acceptance checks passed, including 100% decimal line/branch coverage, all normative vectors, browser smoke, build/size and docs parity. CI verification follows the task push.
+T-06 local acceptance checks passed, including 100% decimal line/branch coverage, all normative vectors, browser smoke, build/size and docs parity. CI run 39568717677 passed all jobs.
+
+T-07 local lint, typecheck, 56 unit tests, coverage, build/size/docs checks and browser decoding tests passed. D-57 records approved parser depth; full tree depth verification is T-08. Node 20/22/24 encoding verification follows in CI.

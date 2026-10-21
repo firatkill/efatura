@@ -590,6 +590,87 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-011",
+      "ac_reference": "FR-04, NFR-12",
+      "milestone": "M1 Model + core parser",
+      "title": "XML guard and entity security",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Targeted guard tests passed, but integration lint rejected deprecated Vitest matcher aliases, shorthand void callbacks and the prescribed bundled XMLValidator API. Tests will use current matchers; the normative validator is retained with a documented local lint exception.",
+          "note": "Targeted guard tests passed, but integration lint rejected deprecated Vitest matcher aliases, shorthand void callbacks and the prescribed bundled XMLValidator API. Tests will use current matchers; the normative validator is retained with a documented local lint exception."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Retest passed lint, typecheck and coverage; all 56 unit tests passed. Guard rejects DOCTYPE/ENTITY, allows comment/CDATA literals, and the 1000-level declaration test meets the 10 ms bound.",
+          "note": "Retest passed lint, typecheck and coverage; all 56 unit tests passed. Guard rejects DOCTYPE/ENTITY, allows comment/CDATA literals, and the 1000-level declaration test meets the 10 ms bound."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-008",
+      "ac_reference": "FR-02",
+      "milestone": "M1 Model + core parser",
+      "title": "Encoding detection",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-07 targeted decode tests and Chromium/Firefox/WebKit tests passed for BOM/UTF-16 and declared Turkish encodings; exact parser ordered-output shape verified.",
+          "note": "T-07 targeted decode tests and Chromium/Firefox/WebKit tests passed for BOM/UTF-16 and declared Turkish encodings; exact parser ordered-output shape verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-009",
+      "ac_reference": "FR-02",
+      "milestone": "M1 Model + core parser",
+      "title": "Encoding fallback",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Unsupported encoding and invalid UTF-8 fallback emit exact bilingual EF035 diagnostics; valid U+FFFD and unavailable decoder label cases passed.",
+          "note": "Unsupported encoding and invalid UTF-8 fallback emit exact bilingual EF035 diagnostics; valid U+FFFD and unavailable decoder label cases passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-010",
+      "ac_reference": "FR-04",
+      "milestone": "M1 Model + core parser",
+      "title": "Input bounds",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Empty byte input, string and byte size boundaries and too-large details passed.",
+          "note": "Empty byte input, string and byte size boundaries and too-large details passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

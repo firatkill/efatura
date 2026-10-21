@@ -927,6 +927,7 @@ import { XMLParser } from 'fast-xml-parser';
 
 export const xmlParser = new XMLParser({
   preserveOrder: true,
+  maxNestedTags: Number.POSITIVE_INFINITY,
   ignoreAttributes: false,
   attributeNamePrefix: '',
   attributesGroupName: false,

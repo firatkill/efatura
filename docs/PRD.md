@@ -776,6 +776,8 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-54 | Add Zlib to the production licence allowlist. | Owner approved the licence of pako, a transitive dependency of the prescribed Excel writer; no new runtime dependency. | T-04, 2026-10-21 |
 | D-55 | Include . alongside playground in pnpm workspace packages. | Owner approved explicit root membership so Changesets discovers the published package. | T-04, 2026-10-21 |
 | D-56 | Verified the T-06 currency subset against SIX ISO 4217 List One, published 2026-09-17: TRY/USD/EUR/GBP/CHF 2, JPY 0, KWD 3, XAU N.A. | Official list checked 2026-10-21; full A-11 verification remains T-10. | T-06; https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml |
+| D-57 | Set fast-xml-parser maxNestedTags to Number.POSITIVE_INFINITY to preserve depth-independent parsing. | Owner approved after the 5.11.2 default limit of 100 rejected UT-07. Input-size and DOCTYPE/ENTITY guards remain unchanged. | A-14, T-07/T-08, 2026-10-21 |
+| D-58 | Verified fast-xml-parser 5.11.2 ordered output, string values, raw entity behavior and validator error shape. Turkish TextDecoder labels work locally and in Chromium, Firefox and WebKit; Node 20/22/24 verification runs in CI. | A-14 and A-24 compatibility checks; bundled XMLValidator is deprecated but still implements the normative API and avoids an unapproved runtime dependency. | T-07, 2026-10-21 |
 
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
