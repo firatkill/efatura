@@ -737,3 +737,16 @@ export type ZipErrorCode =
   | 'ZIP_TOO_LARGE'
   | 'ZIP_ENTRY_TOO_LARGE'
   | 'ZIP_RATIO_EXCEEDED';
+
+/** Per-top-level-archive decompression limits (TRD §5.4).
+ * @example
+ * const limits: Partial<ZipLimits> = {maxEntries: 10};
+ */
+export interface ZipLimits {
+  maxDepth: number;
+  maxEntries: number;
+  maxTotalBytes: number;
+  maxEntryBytes: number;
+  maxRatio: number;
+  ratioMinBytes: number;
+}

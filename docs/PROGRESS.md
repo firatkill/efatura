@@ -38,8 +38,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-20 | Currency and amount rules (EF020–EF035)                            | done   | 6f32db8          |
 | T-21 | Totals rules (EF040–EF049)                                         | done   | f65f3b4          |
 | T-22 | Line and tax rules (EF050–EF066)                                   | done   | b3d7697          |
-| T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | done   | HEAD             |
-| T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                |
+| T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | done   | 730d9bb          |
+| T-24 | ZIP helpers: classification, junk, limits, errors                  | done   | HEAD             |
 | T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                |
 | T-26 | Rows                                                               | todo   | —                |
 | T-27 | CSV                                                                | todo   | —                |
@@ -148,3 +148,7 @@ T-23 QA before size decision: 265 unit tests pass; coverage 100% lines / 97.81% 
 D-84 approved: implementing guarded path specialization and completing T-23 acceptance.
 
 T-23 complete locally: D-81–D-84 recorded; batch API, duplicates, sources, summaries, progress and cancellation implemented. 267 unit tests and 15 browser tests pass; coverage 100% lines / 97.81% branches. Full core 39.12 kB, parser 33.81 kB. Build/package/tooling/lint/types/docs/publint/attw/licences pass; ledger passes. Finishing commit is HEAD; push and CI verification follow.
+
+T-23 CI 39630107500: all 11 jobs green at 730d9bb. T-24 started.
+
+T-24 local acceptance complete: classification/junk detection, positive finite ZIP limits, bilingual error factory and normative ZipLimits type; 270 tests pass, 100% lines / 97.76% branches, 15 browser tests and all required local gates. Two unchanged depth tests initially timed out under local load, then passed targeted/full retests. Finishing commit HEAD; push and CI verification follow.
