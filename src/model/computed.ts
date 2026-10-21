@@ -1,5 +1,5 @@
 import { TRY_ALIASES } from '../config';
-import { decimal } from '../decimal/decimal';
+import * as decimal from '../decimal/operations';
 import type { Amount, ComputedTotals, Invoice } from '../types';
 
 function sum(values: (Amount | null)[]): string | null {

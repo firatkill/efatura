@@ -1,4 +1,4 @@
-import { decimal } from '../decimal/decimal';
+import * as decimal from '../decimal/operations';
 import type { Amount, Decimal, Quantity } from '../types';
 import { text, attr } from '../xml/query';
 import type { XmlElement } from '../xml/tree';

@@ -1,6 +1,6 @@
 import type { InvoiceTypeCode, ProfileId } from '../types';
-import { PROFILES } from './profiles';
-import { INVOICE_TYPES } from './invoice-types';
+import { PROFILE_IDS } from './profiles';
+import { INVOICE_TYPE_IDS } from './invoice-types';
 
 /** Resolve a trimmed, case-insensitive profile code (TRD §7.1).
  * @example
@@ -8,7 +8,7 @@ import { INVOICE_TYPES } from './invoice-types';
  */
 export function lookupProfile(raw: string | null): ProfileId {
   const key = raw?.trim().toUpperCase() ?? '';
-  return PROFILES.has(key) ? (key as ProfileId) : 'OTHER';
+  return PROFILE_IDS.some((code) => code === key) ? (key as ProfileId) : 'OTHER';
 }
 
 /** Resolve a trimmed, case-insensitive invoice type (TRD §7.1).
@@ -17,5 +17,5 @@ export function lookupProfile(raw: string | null): ProfileId {
  */
 export function lookupInvoiceType(raw: string | null): InvoiceTypeCode {
   const key = raw?.trim().toUpperCase() ?? '';
-  return INVOICE_TYPES.has(key) ? (key as InvoiceTypeCode) : 'OTHER';
+  return INVOICE_TYPE_IDS.some((code) => code === key) ? (key as InvoiceTypeCode) : 'OTHER';
 }

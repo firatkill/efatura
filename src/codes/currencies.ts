@@ -1,241 +1,183 @@
-const entries = [
-  { code: 'AED', minorUnits: 2, label: { en: 'UAE Dirham', tr: 'Birleşik Arap Emirlikleri dirhemi' } },
-  { code: 'AFN', minorUnits: 2, label: { en: 'Afghani', tr: 'Afghani' } },
-  { code: 'ALL', minorUnits: 2, label: { en: 'Lek', tr: 'Lek' } },
-  { code: 'AMD', minorUnits: 2, label: { en: 'Armenian Dram', tr: 'Armenian Dram' } },
-  { code: 'AOA', minorUnits: 2, label: { en: 'Kwanza', tr: 'Kwanza' } },
-  { code: 'ARS', minorUnits: 2, label: { en: 'Argentine Peso', tr: 'Argentine Peso' } },
-  { code: 'AUD', minorUnits: 2, label: { en: 'Australian Dollar', tr: 'Australian Dollar' } },
-  { code: 'AWG', minorUnits: 2, label: { en: 'Aruban Florin', tr: 'Aruban Florin' } },
-  { code: 'AZN', minorUnits: 2, label: { en: 'Azerbaijan Manat', tr: 'Azerbaycan manatı' } },
-  { code: 'BAM', minorUnits: 2, label: { en: 'Convertible Mark', tr: 'Convertible Mark' } },
-  { code: 'BBD', minorUnits: 2, label: { en: 'Barbados Dollar', tr: 'Barbados Dollar' } },
-  { code: 'BDT', minorUnits: 2, label: { en: 'Taka', tr: 'Taka' } },
-  { code: 'BHD', minorUnits: 3, label: { en: 'Bahraini Dinar', tr: 'Bahraini Dinar' } },
-  { code: 'BIF', minorUnits: 0, label: { en: 'Burundi Franc', tr: 'Burundi Franc' } },
-  { code: 'BMD', minorUnits: 2, label: { en: 'Bermudian Dollar', tr: 'Bermudian Dollar' } },
-  { code: 'BND', minorUnits: 2, label: { en: 'Brunei Dollar', tr: 'Brunei Dollar' } },
-  { code: 'BOB', minorUnits: 2, label: { en: 'Boliviano', tr: 'Boliviano' } },
-  { code: 'BOV', minorUnits: 2, label: { en: 'Mvdol', tr: 'Mvdol' } },
-  { code: 'BRL', minorUnits: 2, label: { en: 'Brazilian Real', tr: 'Brazilian Real' } },
-  { code: 'BSD', minorUnits: 2, label: { en: 'Bahamian Dollar', tr: 'Bahamian Dollar' } },
-  { code: 'BTN', minorUnits: 2, label: { en: 'Ngultrum', tr: 'Ngultrum' } },
-  { code: 'BWP', minorUnits: 2, label: { en: 'Pula', tr: 'Pula' } },
-  { code: 'BYN', minorUnits: 2, label: { en: 'Belarusian Ruble', tr: 'Belarusian Ruble' } },
-  { code: 'BZD', minorUnits: 2, label: { en: 'Belize Dollar', tr: 'Belize Dollar' } },
-  { code: 'CAD', minorUnits: 2, label: { en: 'Canadian Dollar', tr: 'Canadian Dollar' } },
-  { code: 'CDF', minorUnits: 2, label: { en: 'Congolese Franc', tr: 'Congolese Franc' } },
-  { code: 'CHE', minorUnits: 2, label: { en: 'WIR Euro', tr: 'WIR Euro' } },
-  { code: 'CHF', minorUnits: 2, label: { en: 'Swiss Franc', tr: 'İsviçre frangı' } },
-  { code: 'CHW', minorUnits: 2, label: { en: 'WIR Franc', tr: 'WIR Franc' } },
-  { code: 'CLF', minorUnits: 4, label: { en: 'Unidad de Fomento', tr: 'Unidad de Fomento' } },
-  { code: 'CLP', minorUnits: 0, label: { en: 'Chilean Peso', tr: 'Chilean Peso' } },
-  { code: 'CNY', minorUnits: 2, label: { en: 'Yuan Renminbi', tr: 'Çin yuanı' } },
-  { code: 'COP', minorUnits: 2, label: { en: 'Colombian Peso', tr: 'Colombian Peso' } },
-  { code: 'COU', minorUnits: 2, label: { en: 'Unidad de Valor Real', tr: 'Unidad de Valor Real' } },
-  { code: 'CRC', minorUnits: 2, label: { en: 'Costa Rican Colon', tr: 'Costa Rican Colon' } },
-  { code: 'CUP', minorUnits: 2, label: { en: 'Cuban Peso', tr: 'Cuban Peso' } },
-  { code: 'CVE', minorUnits: 2, label: { en: 'Cabo Verde Escudo', tr: 'Cabo Verde Escudo' } },
-  { code: 'CZK', minorUnits: 2, label: { en: 'Czech Koruna', tr: 'Czech Koruna' } },
-  { code: 'DJF', minorUnits: 0, label: { en: 'Djibouti Franc', tr: 'Djibouti Franc' } },
-  { code: 'DKK', minorUnits: 2, label: { en: 'Danish Krone', tr: 'Danish Krone' } },
-  { code: 'DOP', minorUnits: 2, label: { en: 'Dominican Peso', tr: 'Dominican Peso' } },
-  { code: 'DZD', minorUnits: 2, label: { en: 'Algerian Dinar', tr: 'Algerian Dinar' } },
-  { code: 'EGP', minorUnits: 2, label: { en: 'Egyptian Pound', tr: 'Egyptian Pound' } },
-  { code: 'ERN', minorUnits: 2, label: { en: 'Nakfa', tr: 'Nakfa' } },
-  { code: 'ETB', minorUnits: 2, label: { en: 'Ethiopian Birr', tr: 'Ethiopian Birr' } },
-  { code: 'EUR', minorUnits: 2, label: { en: 'Euro', tr: 'Euro' } },
-  { code: 'FJD', minorUnits: 2, label: { en: 'Fiji Dollar', tr: 'Fiji Dollar' } },
-  { code: 'FKP', minorUnits: 2, label: { en: 'Falkland Islands Pound', tr: 'Falkland Islands Pound' } },
-  { code: 'GBP', minorUnits: 2, label: { en: 'Pound Sterling', tr: 'İngiliz sterlini' } },
-  { code: 'GEL', minorUnits: 2, label: { en: 'Lari', tr: 'Lari' } },
-  { code: 'GHS', minorUnits: 2, label: { en: 'Ghana Cedi', tr: 'Ghana Cedi' } },
-  { code: 'GIP', minorUnits: 2, label: { en: 'Gibraltar Pound', tr: 'Gibraltar Pound' } },
-  { code: 'GMD', minorUnits: 2, label: { en: 'Dalasi', tr: 'Dalasi' } },
-  { code: 'GNF', minorUnits: 0, label: { en: 'Guinean Franc', tr: 'Guinean Franc' } },
-  { code: 'GTQ', minorUnits: 2, label: { en: 'Quetzal', tr: 'Quetzal' } },
-  { code: 'GYD', minorUnits: 2, label: { en: 'Guyana Dollar', tr: 'Guyana Dollar' } },
-  { code: 'HKD', minorUnits: 2, label: { en: 'Hong Kong Dollar', tr: 'Hong Kong Dollar' } },
-  { code: 'HNL', minorUnits: 2, label: { en: 'Lempira', tr: 'Lempira' } },
-  { code: 'HTG', minorUnits: 2, label: { en: 'Gourde', tr: 'Gourde' } },
-  { code: 'HUF', minorUnits: 2, label: { en: 'Forint', tr: 'Forint' } },
-  { code: 'IDR', minorUnits: 2, label: { en: 'Rupiah', tr: 'Rupiah' } },
-  { code: 'ILS', minorUnits: 2, label: { en: 'New Israeli Sheqel', tr: 'New Israeli Sheqel' } },
-  { code: 'INR', minorUnits: 2, label: { en: 'Indian Rupee', tr: 'Indian Rupee' } },
-  { code: 'IQD', minorUnits: 3, label: { en: 'Iraqi Dinar', tr: 'Iraqi Dinar' } },
-  { code: 'IRR', minorUnits: 2, label: { en: 'Iranian Rial', tr: 'Iranian Rial' } },
-  { code: 'ISK', minorUnits: 0, label: { en: 'Iceland Krona', tr: 'Iceland Krona' } },
-  { code: 'JMD', minorUnits: 2, label: { en: 'Jamaican Dollar', tr: 'Jamaican Dollar' } },
-  { code: 'JOD', minorUnits: 3, label: { en: 'Jordanian Dinar', tr: 'Jordanian Dinar' } },
-  { code: 'JPY', minorUnits: 0, label: { en: 'Yen', tr: 'Japon yeni' } },
-  { code: 'KES', minorUnits: 2, label: { en: 'Kenyan Shilling', tr: 'Kenyan Shilling' } },
-  { code: 'KGS', minorUnits: 2, label: { en: 'Som', tr: 'Som' } },
-  { code: 'KHR', minorUnits: 2, label: { en: 'Riel', tr: 'Riel' } },
-  { code: 'KMF', minorUnits: 0, label: { en: 'Comorian Franc ', tr: 'Comorian Franc ' } },
-  { code: 'KPW', minorUnits: 2, label: { en: 'North Korean Won', tr: 'North Korean Won' } },
-  { code: 'KRW', minorUnits: 0, label: { en: 'Won', tr: 'Won' } },
-  { code: 'KWD', minorUnits: 3, label: { en: 'Kuwaiti Dinar', tr: 'Kuveyt dinarı' } },
-  { code: 'KYD', minorUnits: 2, label: { en: 'Cayman Islands Dollar', tr: 'Cayman Islands Dollar' } },
-  { code: 'KZT', minorUnits: 2, label: { en: 'Tenge', tr: 'Tenge' } },
-  { code: 'LAK', minorUnits: 2, label: { en: 'Lao Kip', tr: 'Lao Kip' } },
-  { code: 'LBP', minorUnits: 2, label: { en: 'Lebanese Pound', tr: 'Lebanese Pound' } },
-  { code: 'LKR', minorUnits: 2, label: { en: 'Sri Lanka Rupee', tr: 'Sri Lanka Rupee' } },
-  { code: 'LRD', minorUnits: 2, label: { en: 'Liberian Dollar', tr: 'Liberian Dollar' } },
-  { code: 'LSL', minorUnits: 2, label: { en: 'Loti', tr: 'Loti' } },
-  { code: 'LYD', minorUnits: 3, label: { en: 'Libyan Dinar', tr: 'Libyan Dinar' } },
-  { code: 'MAD', minorUnits: 2, label: { en: 'Moroccan Dirham', tr: 'Moroccan Dirham' } },
-  { code: 'MDL', minorUnits: 2, label: { en: 'Moldovan Leu', tr: 'Moldovan Leu' } },
-  { code: 'MGA', minorUnits: 2, label: { en: 'Malagasy Ariary', tr: 'Malagasy Ariary' } },
-  { code: 'MKD', minorUnits: 2, label: { en: 'Denar', tr: 'Denar' } },
-  { code: 'MMK', minorUnits: 2, label: { en: 'Kyat', tr: 'Kyat' } },
-  { code: 'MNT', minorUnits: 2, label: { en: 'Tugrik', tr: 'Tugrik' } },
-  { code: 'MOP', minorUnits: 2, label: { en: 'Pataca', tr: 'Pataca' } },
-  { code: 'MRU', minorUnits: 2, label: { en: 'Ouguiya', tr: 'Ouguiya' } },
-  { code: 'MUR', minorUnits: 2, label: { en: 'Mauritius Rupee', tr: 'Mauritius Rupee' } },
-  { code: 'MVR', minorUnits: 2, label: { en: 'Rufiyaa', tr: 'Rufiyaa' } },
-  { code: 'MWK', minorUnits: 2, label: { en: 'Malawi Kwacha', tr: 'Malawi Kwacha' } },
-  { code: 'MXN', minorUnits: 2, label: { en: 'Mexican Peso', tr: 'Mexican Peso' } },
-  {
-    code: 'MXV',
-    minorUnits: 2,
-    label: { en: 'Mexican Unidad de Inversion (UDI)', tr: 'Mexican Unidad de Inversion (UDI)' },
-  },
-  { code: 'MYR', minorUnits: 2, label: { en: 'Malaysian Ringgit', tr: 'Malaysian Ringgit' } },
-  { code: 'MZN', minorUnits: 2, label: { en: 'Mozambique Metical', tr: 'Mozambique Metical' } },
-  { code: 'NAD', minorUnits: 2, label: { en: 'Namibia Dollar', tr: 'Namibia Dollar' } },
-  { code: 'NGN', minorUnits: 2, label: { en: 'Naira', tr: 'Naira' } },
-  { code: 'NIO', minorUnits: 2, label: { en: 'Cordoba Oro', tr: 'Cordoba Oro' } },
-  { code: 'NOK', minorUnits: 2, label: { en: 'Norwegian Krone', tr: 'Norwegian Krone' } },
-  { code: 'NPR', minorUnits: 2, label: { en: 'Nepalese Rupee', tr: 'Nepalese Rupee' } },
-  { code: 'NZD', minorUnits: 2, label: { en: 'New Zealand Dollar', tr: 'New Zealand Dollar' } },
-  { code: 'OMR', minorUnits: 3, label: { en: 'Rial Omani', tr: 'Rial Omani' } },
-  { code: 'PAB', minorUnits: 2, label: { en: 'Balboa', tr: 'Balboa' } },
-  { code: 'PEN', minorUnits: 2, label: { en: 'Sol', tr: 'Sol' } },
-  { code: 'PGK', minorUnits: 2, label: { en: 'Kina', tr: 'Kina' } },
-  { code: 'PHP', minorUnits: 2, label: { en: 'Philippine Peso', tr: 'Philippine Peso' } },
-  { code: 'PKR', minorUnits: 2, label: { en: 'Pakistan Rupee', tr: 'Pakistan Rupee' } },
-  { code: 'PLN', minorUnits: 2, label: { en: 'Zloty', tr: 'Zloty' } },
-  { code: 'PYG', minorUnits: 0, label: { en: 'Guarani', tr: 'Guarani' } },
-  { code: 'QAR', minorUnits: 2, label: { en: 'Qatari Rial', tr: 'Qatari Rial' } },
-  { code: 'RON', minorUnits: 2, label: { en: 'Romanian Leu', tr: 'Romanian Leu' } },
-  { code: 'RSD', minorUnits: 2, label: { en: 'Serbian Dinar', tr: 'Serbian Dinar' } },
-  { code: 'RUB', minorUnits: 2, label: { en: 'Russian Ruble', tr: 'Rus rublesi' } },
-  { code: 'RWF', minorUnits: 0, label: { en: 'Rwanda Franc', tr: 'Rwanda Franc' } },
-  { code: 'SAR', minorUnits: 2, label: { en: 'Saudi Riyal', tr: 'Suudi Arabistan riyali' } },
-  { code: 'SBD', minorUnits: 2, label: { en: 'Solomon Islands Dollar', tr: 'Solomon Islands Dollar' } },
-  { code: 'SCR', minorUnits: 2, label: { en: 'Seychelles Rupee', tr: 'Seychelles Rupee' } },
-  { code: 'SDG', minorUnits: 2, label: { en: 'Sudanese Pound', tr: 'Sudanese Pound' } },
-  { code: 'SEK', minorUnits: 2, label: { en: 'Swedish Krona', tr: 'Swedish Krona' } },
-  { code: 'SGD', minorUnits: 2, label: { en: 'Singapore Dollar', tr: 'Singapore Dollar' } },
-  { code: 'SHP', minorUnits: 2, label: { en: 'Saint Helena Pound', tr: 'Saint Helena Pound' } },
-  { code: 'SLE', minorUnits: 2, label: { en: 'Leone', tr: 'Leone' } },
-  { code: 'SOS', minorUnits: 2, label: { en: 'Somali Shilling', tr: 'Somali Shilling' } },
-  { code: 'SRD', minorUnits: 2, label: { en: 'Surinam Dollar', tr: 'Surinam Dollar' } },
-  { code: 'SSP', minorUnits: 2, label: { en: 'South Sudanese Pound', tr: 'South Sudanese Pound' } },
-  { code: 'STN', minorUnits: 2, label: { en: 'Dobra', tr: 'Dobra' } },
-  { code: 'SVC', minorUnits: 2, label: { en: 'El Salvador Colon', tr: 'El Salvador Colon' } },
-  { code: 'SYP', minorUnits: 2, label: { en: 'Syrian Pound', tr: 'Syrian Pound' } },
-  { code: 'SZL', minorUnits: 2, label: { en: 'Lilangeni', tr: 'Lilangeni' } },
-  { code: 'THB', minorUnits: 2, label: { en: 'Baht', tr: 'Baht' } },
-  { code: 'TJS', minorUnits: 2, label: { en: 'Somoni', tr: 'Somoni' } },
-  { code: 'TMT', minorUnits: 2, label: { en: 'Turkmenistan New Manat', tr: 'Turkmenistan New Manat' } },
-  { code: 'TND', minorUnits: 3, label: { en: 'Tunisian Dinar', tr: 'Tunisian Dinar' } },
-  { code: 'TOP', minorUnits: 2, label: { en: 'Pa’anga', tr: 'Pa’anga' } },
-  { code: 'TRY', minorUnits: 2, label: { en: 'Turkish Lira', tr: 'Türk lirası' } },
-  {
-    code: 'TTD',
-    minorUnits: 2,
-    label: { en: 'Trinidad and Tobago Dollar', tr: 'Trinidad and Tobago Dollar' },
-  },
-  { code: 'TWD', minorUnits: 2, label: { en: 'New Taiwan Dollar', tr: 'New Taiwan Dollar' } },
-  { code: 'TZS', minorUnits: 2, label: { en: 'Tanzanian Shilling', tr: 'Tanzanian Shilling' } },
-  { code: 'UAH', minorUnits: 2, label: { en: 'Hryvnia', tr: 'Hryvnia' } },
-  { code: 'UGX', minorUnits: 0, label: { en: 'Uganda Shilling', tr: 'Uganda Shilling' } },
-  { code: 'USD', minorUnits: 2, label: { en: 'US Dollar', tr: 'ABD doları' } },
-  { code: 'USN', minorUnits: 2, label: { en: 'US Dollar (Next day)', tr: 'US Dollar (Next day)' } },
-  {
-    code: 'UYI',
-    minorUnits: 0,
-    label: { en: 'Uruguay Peso en Unidades Indexadas (UI)', tr: 'Uruguay Peso en Unidades Indexadas (UI)' },
-  },
-  { code: 'UYU', minorUnits: 2, label: { en: 'Peso Uruguayo', tr: 'Peso Uruguayo' } },
-  { code: 'UYW', minorUnits: 4, label: { en: 'Unidad Previsional', tr: 'Unidad Previsional' } },
-  { code: 'UZS', minorUnits: 2, label: { en: 'Uzbekistan Sum', tr: 'Uzbekistan Sum' } },
-  { code: 'VED', minorUnits: 2, label: { en: 'Bolívar Soberano', tr: 'Bolívar Soberano' } },
-  { code: 'VES', minorUnits: 2, label: { en: 'Bolívar Soberano', tr: 'Bolívar Soberano' } },
-  { code: 'VND', minorUnits: 0, label: { en: 'Dong', tr: 'Dong' } },
-  { code: 'VUV', minorUnits: 0, label: { en: 'Vatu', tr: 'Vatu' } },
-  { code: 'WST', minorUnits: 2, label: { en: 'Tala', tr: 'Tala' } },
-  { code: 'XAD', minorUnits: 2, label: { en: 'Arab Accounting Dinar', tr: 'Arab Accounting Dinar' } },
-  { code: 'XAF', minorUnits: 0, label: { en: 'CFA Franc BEAC', tr: 'CFA Franc BEAC' } },
-  { code: 'XAG', minorUnits: null, label: { en: 'Silver', tr: 'Silver' } },
-  { code: 'XAU', minorUnits: null, label: { en: 'Gold', tr: 'Gold' } },
-  {
-    code: 'XBA',
-    minorUnits: null,
-    label: {
-      en: 'Bond Markets Unit European Composite Unit (EURCO)',
-      tr: 'Bond Markets Unit European Composite Unit (EURCO)',
-    },
-  },
-  {
-    code: 'XBB',
-    minorUnits: null,
-    label: {
-      en: 'Bond Markets Unit European Monetary Unit (E.M.U.-6)',
-      tr: 'Bond Markets Unit European Monetary Unit (E.M.U.-6)',
-    },
-  },
-  {
-    code: 'XBC',
-    minorUnits: null,
-    label: {
-      en: 'Bond Markets Unit European Unit of Account 9 (E.U.A.-9)',
-      tr: 'Bond Markets Unit European Unit of Account 9 (E.U.A.-9)',
-    },
-  },
-  {
-    code: 'XBD',
-    minorUnits: null,
-    label: {
-      en: 'Bond Markets Unit European Unit of Account 17 (E.U.A.-17)',
-      tr: 'Bond Markets Unit European Unit of Account 17 (E.U.A.-17)',
-    },
-  },
-  { code: 'XCD', minorUnits: 2, label: { en: 'East Caribbean Dollar', tr: 'East Caribbean Dollar' } },
-  { code: 'XCG', minorUnits: 2, label: { en: 'Caribbean Guilder', tr: 'Caribbean Guilder' } },
-  {
-    code: 'XDR',
-    minorUnits: null,
-    label: { en: 'SDR (Special Drawing Right)', tr: 'SDR (Special Drawing Right)' },
-  },
-  { code: 'XOF', minorUnits: 0, label: { en: 'CFA Franc BCEAO', tr: 'CFA Franc BCEAO' } },
-  { code: 'XPD', minorUnits: null, label: { en: 'Palladium', tr: 'Palladium' } },
-  { code: 'XPF', minorUnits: 0, label: { en: 'CFP Franc', tr: 'CFP Franc' } },
-  { code: 'XPT', minorUnits: null, label: { en: 'Platinum', tr: 'Platinum' } },
-  { code: 'XSU', minorUnits: null, label: { en: 'Sucre', tr: 'Sucre' } },
-  {
-    code: 'XTS',
-    minorUnits: null,
-    label: {
-      en: 'Codes specifically reserved for testing purposes',
-      tr: 'Codes specifically reserved for testing purposes',
-    },
-  },
-  { code: 'XUA', minorUnits: null, label: { en: 'ADB Unit of Account', tr: 'ADB Unit of Account' } },
-  {
-    code: 'XXX',
-    minorUnits: null,
-    label: {
-      en: 'The codes assigned for transactions where no currency is involved',
-      tr: 'The codes assigned for transactions where no currency is involved',
-    },
-  },
-  { code: 'YER', minorUnits: 2, label: { en: 'Yemeni Rial', tr: 'Yemeni Rial' } },
-  { code: 'ZAR', minorUnits: 2, label: { en: 'Rand', tr: 'Rand' } },
-  { code: 'ZMW', minorUnits: 2, label: { en: 'Zambian Kwacha', tr: 'Zambian Kwacha' } },
-  { code: 'ZWG', minorUnits: 2, label: { en: 'Zimbabwe Gold', tr: 'Zimbabwe Gold' } },
-] as const;
+// Fixed columns: code, minorUnits, en, tr. Empty minorUnits means null.
+// Delimited literals keep the complete verified labels within the core size budget.
+const entries = `AED|2|UAE Dirham|Birleşik Arap Emirlikleri dirhemi
+AFN|2|Afghani|Afghani
+ALL|2|Lek|Lek
+AMD|2|Armenian Dram|Armenian Dram
+AOA|2|Kwanza|Kwanza
+ARS|2|Argentine Peso|Argentine Peso
+AUD|2|Australian Dollar|Australian Dollar
+AWG|2|Aruban Florin|Aruban Florin
+AZN|2|Azerbaijan Manat|Azerbaycan manatı
+BAM|2|Convertible Mark|Convertible Mark
+BBD|2|Barbados Dollar|Barbados Dollar
+BDT|2|Taka|Taka
+BHD|3|Bahraini Dinar|Bahraini Dinar
+BIF|0|Burundi Franc|Burundi Franc
+BMD|2|Bermudian Dollar|Bermudian Dollar
+BND|2|Brunei Dollar|Brunei Dollar
+BOB|2|Boliviano|Boliviano
+BOV|2|Mvdol|Mvdol
+BRL|2|Brazilian Real|Brazilian Real
+BSD|2|Bahamian Dollar|Bahamian Dollar
+BTN|2|Ngultrum|Ngultrum
+BWP|2|Pula|Pula
+BYN|2|Belarusian Ruble|Belarusian Ruble
+BZD|2|Belize Dollar|Belize Dollar
+CAD|2|Canadian Dollar|Canadian Dollar
+CDF|2|Congolese Franc|Congolese Franc
+CHE|2|WIR Euro|WIR Euro
+CHF|2|Swiss Franc|İsviçre frangı
+CHW|2|WIR Franc|WIR Franc
+CLF|4|Unidad de Fomento|Unidad de Fomento
+CLP|0|Chilean Peso|Chilean Peso
+CNY|2|Yuan Renminbi|Çin yuanı
+COP|2|Colombian Peso|Colombian Peso
+COU|2|Unidad de Valor Real|Unidad de Valor Real
+CRC|2|Costa Rican Colon|Costa Rican Colon
+CUP|2|Cuban Peso|Cuban Peso
+CVE|2|Cabo Verde Escudo|Cabo Verde Escudo
+CZK|2|Czech Koruna|Czech Koruna
+DJF|0|Djibouti Franc|Djibouti Franc
+DKK|2|Danish Krone|Danish Krone
+DOP|2|Dominican Peso|Dominican Peso
+DZD|2|Algerian Dinar|Algerian Dinar
+EGP|2|Egyptian Pound|Egyptian Pound
+ERN|2|Nakfa|Nakfa
+ETB|2|Ethiopian Birr|Ethiopian Birr
+EUR|2|Euro|Euro
+FJD|2|Fiji Dollar|Fiji Dollar
+FKP|2|Falkland Islands Pound|Falkland Islands Pound
+GBP|2|Pound Sterling|İngiliz sterlini
+GEL|2|Lari|Lari
+GHS|2|Ghana Cedi|Ghana Cedi
+GIP|2|Gibraltar Pound|Gibraltar Pound
+GMD|2|Dalasi|Dalasi
+GNF|0|Guinean Franc|Guinean Franc
+GTQ|2|Quetzal|Quetzal
+GYD|2|Guyana Dollar|Guyana Dollar
+HKD|2|Hong Kong Dollar|Hong Kong Dollar
+HNL|2|Lempira|Lempira
+HTG|2|Gourde|Gourde
+HUF|2|Forint|Forint
+IDR|2|Rupiah|Rupiah
+ILS|2|New Israeli Sheqel|New Israeli Sheqel
+INR|2|Indian Rupee|Indian Rupee
+IQD|3|Iraqi Dinar|Iraqi Dinar
+IRR|2|Iranian Rial|Iranian Rial
+ISK|0|Iceland Krona|Iceland Krona
+JMD|2|Jamaican Dollar|Jamaican Dollar
+JOD|3|Jordanian Dinar|Jordanian Dinar
+JPY|0|Yen|Japon yeni
+KES|2|Kenyan Shilling|Kenyan Shilling
+KGS|2|Som|Som
+KHR|2|Riel|Riel
+KMF|0|Comorian Franc |Comorian Franc\u0020
+KPW|2|North Korean Won|North Korean Won
+KRW|0|Won|Won
+KWD|3|Kuwaiti Dinar|Kuveyt dinarı
+KYD|2|Cayman Islands Dollar|Cayman Islands Dollar
+KZT|2|Tenge|Tenge
+LAK|2|Lao Kip|Lao Kip
+LBP|2|Lebanese Pound|Lebanese Pound
+LKR|2|Sri Lanka Rupee|Sri Lanka Rupee
+LRD|2|Liberian Dollar|Liberian Dollar
+LSL|2|Loti|Loti
+LYD|3|Libyan Dinar|Libyan Dinar
+MAD|2|Moroccan Dirham|Moroccan Dirham
+MDL|2|Moldovan Leu|Moldovan Leu
+MGA|2|Malagasy Ariary|Malagasy Ariary
+MKD|2|Denar|Denar
+MMK|2|Kyat|Kyat
+MNT|2|Tugrik|Tugrik
+MOP|2|Pataca|Pataca
+MRU|2|Ouguiya|Ouguiya
+MUR|2|Mauritius Rupee|Mauritius Rupee
+MVR|2|Rufiyaa|Rufiyaa
+MWK|2|Malawi Kwacha|Malawi Kwacha
+MXN|2|Mexican Peso|Mexican Peso
+MXV|2|Mexican Unidad de Inversion (UDI)|Mexican Unidad de Inversion (UDI)
+MYR|2|Malaysian Ringgit|Malaysian Ringgit
+MZN|2|Mozambique Metical|Mozambique Metical
+NAD|2|Namibia Dollar|Namibia Dollar
+NGN|2|Naira|Naira
+NIO|2|Cordoba Oro|Cordoba Oro
+NOK|2|Norwegian Krone|Norwegian Krone
+NPR|2|Nepalese Rupee|Nepalese Rupee
+NZD|2|New Zealand Dollar|New Zealand Dollar
+OMR|3|Rial Omani|Rial Omani
+PAB|2|Balboa|Balboa
+PEN|2|Sol|Sol
+PGK|2|Kina|Kina
+PHP|2|Philippine Peso|Philippine Peso
+PKR|2|Pakistan Rupee|Pakistan Rupee
+PLN|2|Zloty|Zloty
+PYG|0|Guarani|Guarani
+QAR|2|Qatari Rial|Qatari Rial
+RON|2|Romanian Leu|Romanian Leu
+RSD|2|Serbian Dinar|Serbian Dinar
+RUB|2|Russian Ruble|Rus rublesi
+RWF|0|Rwanda Franc|Rwanda Franc
+SAR|2|Saudi Riyal|Suudi Arabistan riyali
+SBD|2|Solomon Islands Dollar|Solomon Islands Dollar
+SCR|2|Seychelles Rupee|Seychelles Rupee
+SDG|2|Sudanese Pound|Sudanese Pound
+SEK|2|Swedish Krona|Swedish Krona
+SGD|2|Singapore Dollar|Singapore Dollar
+SHP|2|Saint Helena Pound|Saint Helena Pound
+SLE|2|Leone|Leone
+SOS|2|Somali Shilling|Somali Shilling
+SRD|2|Surinam Dollar|Surinam Dollar
+SSP|2|South Sudanese Pound|South Sudanese Pound
+STN|2|Dobra|Dobra
+SVC|2|El Salvador Colon|El Salvador Colon
+SYP|2|Syrian Pound|Syrian Pound
+SZL|2|Lilangeni|Lilangeni
+THB|2|Baht|Baht
+TJS|2|Somoni|Somoni
+TMT|2|Turkmenistan New Manat|Turkmenistan New Manat
+TND|3|Tunisian Dinar|Tunisian Dinar
+TOP|2|Pa’anga|Pa’anga
+TRY|2|Turkish Lira|Türk lirası
+TTD|2|Trinidad and Tobago Dollar|Trinidad and Tobago Dollar
+TWD|2|New Taiwan Dollar|New Taiwan Dollar
+TZS|2|Tanzanian Shilling|Tanzanian Shilling
+UAH|2|Hryvnia|Hryvnia
+UGX|0|Uganda Shilling|Uganda Shilling
+USD|2|US Dollar|ABD doları
+USN|2|US Dollar (Next day)|US Dollar (Next day)
+UYI|0|Uruguay Peso en Unidades Indexadas (UI)|Uruguay Peso en Unidades Indexadas (UI)
+UYU|2|Peso Uruguayo|Peso Uruguayo
+UYW|4|Unidad Previsional|Unidad Previsional
+UZS|2|Uzbekistan Sum|Uzbekistan Sum
+VED|2|Bolívar Soberano|Bolívar Soberano
+VES|2|Bolívar Soberano|Bolívar Soberano
+VND|0|Dong|Dong
+VUV|0|Vatu|Vatu
+WST|2|Tala|Tala
+XAD|2|Arab Accounting Dinar|Arab Accounting Dinar
+XAF|0|CFA Franc BEAC|CFA Franc BEAC
+XAG||Silver|Silver
+XAU||Gold|Gold
+XBA||Bond Markets Unit European Composite Unit (EURCO)|Bond Markets Unit European Composite Unit (EURCO)
+XBB||Bond Markets Unit European Monetary Unit (E.M.U.-6)|Bond Markets Unit European Monetary Unit (E.M.U.-6)
+XBC||Bond Markets Unit European Unit of Account 9 (E.U.A.-9)|Bond Markets Unit European Unit of Account 9 (E.U.A.-9)
+XBD||Bond Markets Unit European Unit of Account 17 (E.U.A.-17)|Bond Markets Unit European Unit of Account 17 (E.U.A.-17)
+XCD|2|East Caribbean Dollar|East Caribbean Dollar
+XCG|2|Caribbean Guilder|Caribbean Guilder
+XDR||SDR (Special Drawing Right)|SDR (Special Drawing Right)
+XOF|0|CFA Franc BCEAO|CFA Franc BCEAO
+XPD||Palladium|Palladium
+XPF|0|CFP Franc|CFP Franc
+XPT||Platinum|Platinum
+XSU||Sucre|Sucre
+XTS||Codes specifically reserved for testing purposes|Codes specifically reserved for testing purposes
+XUA||ADB Unit of Account|ADB Unit of Account
+XXX||The codes assigned for transactions where no currency is involved|The codes assigned for transactions where no currency is involved
+YER|2|Yemeni Rial|Yemeni Rial
+ZAR|2|Rand|Rand
+ZMW|2|Zambian Kwacha|Zambian Kwacha
+ZWG|2|Zimbabwe Gold|Zimbabwe Gold`;
 /** Active ISO 4217 currency definitions from SIX List One (2026-09-17).
  * @example
  * CURRENCIES.get("AED");
@@ -247,4 +189,13 @@ export const CURRENCIES: ReadonlyMap<
     readonly minorUnits: number | null;
     readonly label: { readonly en: string; readonly tr: string };
   }
-> = new Map(entries.map((entry) => [entry.code, entry]));
+> = /* @__PURE__ */ new Map(
+  /* @__PURE__ */ entries.split('\n').map((row) => {
+    // The checked-in table above has exactly these columns on every row.
+    const [code, digits, en, tr] = row.split('|') as [string, string, string, string];
+    return [
+      code,
+      { code, minorUnits: digits === '' ? null : Number.parseInt(digits, 10), label: { en, tr } },
+    ];
+  }),
+);

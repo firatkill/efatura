@@ -1,4 +1,4 @@
-import { decimal } from '../decimal/decimal';
+import * as decimal from '../decimal/operations';
 import type { InvoiceLine, LineDelivery, TaxTotal } from '../types';
 import type { XmlElement } from '../xml/tree';
 import { attr, child, children, text, textOf } from '../xml/query';

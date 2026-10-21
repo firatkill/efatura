@@ -1,5 +1,5 @@
 import { TAX_TYPES, WITHHOLDING_CODES, EXEMPTION_CODES } from '../codes';
-import { decimal } from '../decimal/decimal';
+import * as decimal from '../decimal/operations';
 import type { TaxSubtotal, TaxTotal } from '../types';
 import type { XmlElement } from '../xml/tree';
 import { child, children, text, textOf } from '../xml/query';

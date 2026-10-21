@@ -50,3 +50,11 @@ export function decodeInput(
     return decode('windows-1254', [encodingIssue('fallback', '(none)')]);
   }
 }
+
+/** Decode XML bytes using the documented encoding rules without mapping an invoice.
+ * @example
+ * decodeXml(new TextEncoder().encode('<Invoice/>')).encoding; // 'utf-8'
+ */
+export function decodeXml(input: string | Uint8Array | ArrayBuffer) {
+  return decodeInput(input);
+}

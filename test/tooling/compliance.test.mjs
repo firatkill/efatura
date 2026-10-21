@@ -62,11 +62,11 @@ function docsFixture(run) {
       { cwd: root, encoding: 'utf8' },
     );
   try {
-    put('src/index.ts', '/** A public value. @example VERSION */\nexport const VERSION = "0.0.0";');
     put(
-      'src/zip.ts',
-      '/** Shared value. @example ZIP_VERSION */\nexport { VERSION as ZIP_VERSION } from "./index";',
+      'src/index.ts',
+      '/** Parse an invoice. @example parseInvoice(xml) */\nexport function parseInvoice(xml) { return xml; }',
     );
+    put('src/zip.ts', 'export {};');
     put('README.md', '# efatura\n\n## Use\n\n```ts\nconst a = 1;\n```\n');
     put('README.tr.md', '# efatura\n\n## Kullanım\n\n```ts\nconst a = 1;\n```\n');
     run({ put, check });
@@ -78,7 +78,7 @@ function docsFixture(run) {
 test('TC-M0-015–016 / NFR-18: documented exports pass and missing TSDoc fails', () =>
   docsFixture(({ put, check }) => {
     assert.equal(check().status, 0);
-    put('src/index.ts', 'export const VERSION = "0.0.0";');
+    put('src/index.ts', 'export function parseInvoice(xml) { return xml; }');
     const result = check();
     assert.equal(result.status, 1);
     assert.match(result.stderr, /export lacks TSDoc with @example/);
