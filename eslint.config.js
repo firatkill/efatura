@@ -77,7 +77,10 @@ export default tseslint.config(
     files: ['src/**/*.ts'],
     ignores: ['src/cli/**'],
     rules: {
-      'no-restricted-imports': ['error', { patterns: coreImports }],
+      'no-restricted-imports': [
+        'error',
+        { paths: coreImports.filter((name) => name !== 'node:*'), patterns: ['node:*'] },
+      ],
       'no-restricted-globals': ['error', 'Buffer', 'process', 'require', '__dirname', '__filename', 'global'],
     },
   },
@@ -88,7 +91,12 @@ export default tseslint.config(
   },
   {
     files: ['src/zip/**/*.ts'],
-    rules: { 'no-restricted-imports': ['error', { patterns: [...coreImports, ...relativeCore] }] },
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        { paths: coreImports.filter((name) => name !== 'node:*'), patterns: ['node:*', ...relativeCore] },
+      ],
+    },
   },
   { files: ['src/cli/**/*.ts'], rules: { 'no-restricted-imports': ['error', { patterns: relativeCore }] } },
   {
