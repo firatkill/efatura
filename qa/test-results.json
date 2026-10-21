@@ -669,6 +669,15 @@
         {
           "result": "pass",
           "note": "Sequential targeted coverage run passed 10000 levels with unchanged timeout."
+        },
+        {
+          "result": "fail",
+          "actual_result": "T-24 full coverage run: unchanged deep XML tree test timed out at 23710ms; prior T-23 run and CI passed.",
+          "note": "Retry affected depth tests sequentially after the current run finishes."
+        },
+        {
+          "result": "pass",
+          "note": "Sequential affected-suite retest: all 9 tests pass in 2.66s; unchanged timeout and all depth assertions retained. Full coverage retest follows."
         }
       ],
       "regression_of": "TC-M1-015",
@@ -3525,11 +3534,95 @@
         {
           "result": "pass",
           "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        },
+        {
+          "result": "fail",
+          "actual_result": "T-24 full coverage run: unchanged original-parser depth test timed out at 5654ms; specialization depth check passed. Local process/memory load observed; thresholds unchanged.",
+          "note": "Retry affected depth tests sequentially after the current run finishes."
+        },
+        {
+          "result": "pass",
+          "note": "Sequential affected-suite retest: all 9 tests pass in 2.66s; unchanged timeout and all depth assertions retained. Full coverage retest follows."
+        },
+        {
+          "result": "pass",
+          "note": "T-24 final acceptance passes: 270 unit tests; 100% lines, 97.76% branches; 15 browser tests; build, lint, typecheck, docs, size and all five package checks. Earlier environmental depth timeouts passed affected-suite and full coverage retests without threshold changes."
         }
       ],
       "regression_of": null,
       "root_cause_group": null,
       "clickup_task": "docs/T23-BUNDLE-PROPOSAL.md",
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-012",
+      "ac_reference": "FR-24, FR-27",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "ZIP classification and junk",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-24 targeted spec-derived tests pass: classifications/junk/signatures, all positive finite limit validations and all ten exact bilingual batch/ZIP errors. ESLint and library typecheck pass."
+        },
+        {
+          "result": "pass",
+          "note": "T-24 final acceptance passes: 270 unit tests; 100% lines, 97.76% branches; 15 browser tests; build, lint, typecheck, docs, size and all five package checks. Earlier environmental depth timeouts passed affected-suite and full coverage retests without threshold changes."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-013",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "ZIP limit validation",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-24 targeted spec-derived tests pass: classifications/junk/signatures, all positive finite limit validations and all ten exact bilingual batch/ZIP errors. ESLint and library typecheck pass."
+        },
+        {
+          "result": "fail",
+          "note": "Correction to prior run note: behavioral tests and typecheck passed, but ESLint rejected an unnecessary test-only type assertion. Removed the redundant assertion; aggregate lint retest follows.",
+          "actual_result": "Correction to prior run note: behavioral tests and typecheck passed, but ESLint rejected an unnecessary test-only type assertion. Removed the redundant assertion; aggregate lint retest follows."
+        },
+        {
+          "result": "pass",
+          "note": "T-24 final acceptance passes: 270 unit tests; 100% lines, 97.76% branches; 15 browser tests; build, lint, typecheck, docs, size and all five package checks. Earlier environmental depth timeouts passed affected-suite and full coverage retests without threshold changes."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-014",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "ZIP error catalogue",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-24 targeted spec-derived tests pass: classifications/junk/signatures, all positive finite limit validations and all ten exact bilingual batch/ZIP errors. ESLint and library typecheck pass."
+        },
+        {
+          "result": "pass",
+          "note": "T-24 final acceptance passes: 270 unit tests; 100% lines, 97.76% branches; 15 browser tests; build, lint, typecheck, docs, size and all five package checks. Earlier environmental depth timeouts passed affected-suite and full coverage retests without threshold changes."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
       "retraction_reason": null
     }
   ]
