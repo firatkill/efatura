@@ -750,3 +750,15 @@ export interface ZipLimits {
   maxRatio: number;
   ratioMinBytes: number;
 }
+
+/** Archive iteration options (TRD §5.4).
+ * @example
+ * const options: ZipOptions = {limits:{maxDepth:2}};
+ */
+export interface ZipOptions extends BatchOptions {
+  limits?: Partial<ZipLimits>;
+  /** Filter leaf paths; archives are always descended. */
+  entryFilter?: (path: string) => boolean;
+  /** Archive label; defaults to archive.zip. */
+  name?: string;
+}

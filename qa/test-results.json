@@ -3547,6 +3547,52 @@
         {
           "result": "pass",
           "note": "T-24 final acceptance passes: 270 unit tests; 100% lines, 97.76% branches; 15 browser tests; build, lint, typecheck, docs, size and all five package checks. Earlier environmental depth timeouts passed affected-suite and full coverage retests without threshold changes."
+        },
+        {
+          "result": "fail",
+          "note": "T-25 draft typecheck: iterator done alias did not narrow void | Uint8Array; use the discriminant directly.",
+          "actual_result": "T-25 draft typecheck: iterator done alias did not narrow void | Uint8Array; use the discriminant directly."
+        },
+        {
+          "result": "fail",
+          "note": "T-25 test helper typecheck: ZipDeflate takes mtime as an entry property, not a DeflateOptions field.",
+          "actual_result": "T-25 test helper typecheck: ZipDeflate takes mtime as an entry property, not a DeflateOptions field."
+        },
+        {
+          "result": "pass",
+          "note": "T-25 typecheck passes after correcting ZipDeflate helper options."
+        },
+        {
+          "result": "fail",
+          "note": "Targeted coverage command omitted --project unit and loaded unsupported Firefox/WebKit V8 coverage. Correct command selection; no test or threshold changed.",
+          "actual_result": "Targeted coverage command omitted --project unit and loaded unsupported Firefox/WebKit V8 coverage. Correct command selection; no test or threshold changed."
+        },
+        {
+          "result": "fail",
+          "note": "Draft ESLint found empty decoder callbacks, void shorthand, constant loop condition, closure flag inference and an async test generator without await. Correcting implementation/test style.",
+          "actual_result": "Draft ESLint found empty decoder callbacks, void shorthand, constant loop condition, closure flag inference and an async test generator without await. Correcting implementation/test style."
+        },
+        {
+          "result": "fail",
+          "note": "Third tooling failure: ESLint considers callbackFailed always false despite callback mutation. Paused tooling case for required QA check-in; owner asked whether to continue. Behavior/memory cases pass.",
+          "actual_result": "Third tooling failure: ESLint considers callbackFailed always false despite callback mutation. Paused tooling case for required QA check-in; owner asked whether to continue. Behavior/memory cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "D-86 resumed tooling case. Full lint and typecheck now pass; callback error state preserves thrown callback errors."
+        },
+        {
+          "result": "fail",
+          "note": "Browser run: Vite discovered new fflate dependency during WebKit tests and reloaded two test modules. Pre-optimize the newly used dependency to avoid mid-run reload.",
+          "actual_result": "Browser run: Vite discovered new fflate dependency during WebKit tests and reloaded two test modules. Pre-optimize the newly used dependency to avoid mid-run reload."
+        },
+        {
+          "result": "pass",
+          "note": "Browser retest passes all 15 cases with fflate pre-optimized; five package and six tooling tests pass. Coverage passed 289 tests at 99.02% lines / 96.24% branches; final regression suite follows the queue-draining correction."
+        },
+        {
+          "result": "pass",
+          "note": "T-25 final lint/typecheck/build/docs and size pass: core 39.10 kB, parser 33.81 kB, ZIP 49.12 kB. All 15 browser, five package and six tooling cases pass; publint, attw and licences pass. No thresholds changed."
         }
       ],
       "regression_of": null,
@@ -3618,6 +3664,247 @@
         {
           "result": "pass",
           "note": "T-24 final acceptance passes: 270 unit tests; 100% lines, 97.76% branches; 15 browser tests; build, lint, typecheck, docs, size and all five package checks. Earlier environmental depth timeouts passed affected-suite and full coverage retests without threshold changes."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-015",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Pinned streaming unzip behavior",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "A-14 verified against installed/upstream fflate 0.8.3: synchronous callbacks, unknown descriptor sizes, no sync terminate, no exposed encryption flags. Public delayed-start spike confirms unstarted entries buffer compressed data; proposal records required reconciliation."
+        },
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-020",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Ratio rejection and memory",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "note": "Normative direct-UnzipInflate 20 MiB bomb spike allocates 87,941,824 arrayBuffer bytes before rejection, exceeding 30 MiB. Isolated 1024-byte inner-push wrapper limits growth to 8,706,666 bytes; production adoption requires approval.",
+          "actual_result": "Normative direct-UnzipInflate 20 MiB bomb spike allocates 87,941,824 arrayBuffer bytes before rejection, exceeding 30 MiB. Isolated 1024-byte inner-push wrapper limits growth to 8,706,666 bytes; production adoption requires approval."
+        },
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "14 targeted ZIP/any tests passed, including independent child-process peak arrayBuffers growth below 30 MiB. Targeted coverage is diagnostic only; full-suite thresholds pending."
+        },
+        {
+          "result": "fail",
+          "note": "Strengthened the normal descriptor test to assert its archive fits one outer push; existing random alphabet produced 2,076,011 compressed bytes. Adjust synthetic comment alphabet to fit the specified case.",
+          "actual_result": "Strengthened the normal descriptor test to assert its archive fits one outer push; existing random alphabet produced 2,076,011 compressed bytes. Adjust synthetic comment alphabet to fit the specified case."
+        },
+        {
+          "result": "pass",
+          "note": "Descriptor archive now asserted below 1 MiB and accepted; queued invoices completed before the entry-count stop are retained. Targeted regression tests pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-016",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Stored deflated nested traversal",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-017",
+      "ac_reference": "FR-24, FR-27",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Leaf filtering and sniffing",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-018",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Depth and entry limits",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "Descriptor archive now asserted below 1 MiB and accepted; queued invoices completed before the entry-count stop are retained. Targeted regression tests pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-021",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Invalid encrypted unsupported ZIP",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "All 18 targeted ZIP/any tests pass, including corrupt/truncated deflate, bounded encryption scan, cancellation after Blob read and yielded item, reader cancellation, unreadable sniff, and duplicate counting with EF090 off."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-022",
+      "ac_reference": "FR-24, FR-26",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Streaming Blob and cancellation",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "All 18 targeted ZIP/any tests pass, including corrupt/truncated deflate, bounded encryption scan, cancellation after Blob read and yielded item, reader cancellation, unreadable sniff, and duplicate counting with EF090 off."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-023",
+      "ac_reference": "FR-22, FR-23, FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Mixed inputs and shared duplicates",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "T-25 initial targeted Vitest cases passed; bomb emits one ratio error; normal descriptor accepted. Peak memory gate remains to run."
+        },
+        {
+          "result": "pass",
+          "note": "All 18 targeted ZIP/any tests pass, including corrupt/truncated deflate, bounded encryption scan, cancellation after Blob read and yielded item, reader cancellation, unreadable sniff, and duplicate counting with EF090 off."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-019",
+      "ac_reference": "FR-24",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Entry and aggregate byte limits",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "note": "Test expected NOT_INVOICE for <Invoice/>; TRD namespace fallback accepts this root with content issues. Correct synthetic non-invoice input to <Other/>.",
+          "actual_result": "Test expected NOT_INVOICE for <Invoice/>; TRD namespace fallback accepts this root with content issues. Correct synthetic non-invoice input to <Other/>."
+        },
+        {
+          "result": "pass",
+          "note": "All 13 ZIP/mixed-input cases pass after correcting the synthetic non-invoice root against the spec."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
         }
       ],
       "regression_of": null,

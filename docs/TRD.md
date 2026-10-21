@@ -457,6 +457,8 @@ export const DEFAULT_ZIP_LIMITS = {
 
 /** Chunk size when pushing archive bytes into the streaming unzipper. */
 export const ZIP_PUSH_CHUNK_BYTES = 1024 * 1024;
+/** Maximum compressed bytes per inner synchronous inflater push (D-85). */
+export const ZIP_INFLATE_CHUNK_BYTES = 1024;
 
 /** Iterators yield to the event loop after this much continuous work (FR-25). */
 export const YIELD_BUDGET_MS = 50;
@@ -581,7 +583,7 @@ export { efaturaConfig } from './config-public';
 export type * from './types';
 ```
 
-`efaturaConfig` is a frozen object `{ maxXmlBytes, defaultTolerance, zipLimits: DEFAULT_ZIP_LIMITS, playground: PLAYGROUND, yieldBudgetMs: YIELD_BUDGET_MS, progressIntervalMs: PROGRESS_INTERVAL_MS, zipPushChunkBytes: ZIP_PUSH_CHUNK_BYTES }`.
+`efaturaConfig` is a frozen object `{ maxXmlBytes, defaultTolerance, zipLimits: DEFAULT_ZIP_LIMITS, playground: PLAYGROUND, yieldBudgetMs: YIELD_BUDGET_MS, progressIntervalMs: PROGRESS_INTERVAL_MS, zipPushChunkBytes: ZIP_PUSH_CHUNK_BYTES, zipInflateChunkBytes: ZIP_INFLATE_CHUNK_BYTES }`.
 
 ### 5.2 `parseInvoice` (normative signature)
 
@@ -2448,9 +2450,9 @@ Summary counting (normative, shared by `iterateMany`, `iterateZip` and `iterateA
 
 ### 10.3 ZIP reading (normative algorithm, `src/zip/iterate-zip.ts`)
 
-Uses fflate's streaming `Unzip` with `UnzipInflate` registered. Entries are processed as their data arrives, so memory holds the current entry, the chunk being pushed, and one buffered nested archive per depth level (NFR-04).
+Uses fflate's streaming `Unzip` with a private bounded, terminating wrapper around `UnzipInflate` registered (D-85). Entries are processed as their data arrives, so memory holds the current entry, the chunk being pushed, and one buffered nested archive per depth level (NFR-04).
 
-fflate facts the algorithm relies on (confirm at A-14): `onfile` and `ondata` run synchronously inside `unzip.push()` when the synchronous `UnzipInflate` is used; `file.size` (compressed) and `file.originalSize` are `undefined` for entries written with a data descriptor; and `file.terminate()` is a no-op for `UnzipInflate` (only the asynchronous decompressor implements it), so `ondata` keeps being called for the rest of a terminated entry. Each entry therefore has its own `rejected` flag; once set, `ondata` only counts bytes and never buffers or queues again.
+fflate facts the algorithm relies on (confirm at A-14): `onfile` and `ondata` run synchronously inside `unzip.push()` when the synchronous `UnzipInflate` is used; `file.size` (compressed) and `file.originalSize` are `undefined` for entries written with a data descriptor; and `file.terminate()` is a no-op for `UnzipInflate` (only the asynchronous decompressor implements it), so `ondata` keeps being called for the rest of a terminated entry. D-85 replaces the native decoder with a bounded synchronous wrapper that stops feeding compressed input after termination. Each entry retains its own `rejected` flag so errors cannot buffer or queue again; the rejecting output chunk counts toward aggregate work.
 
 State per top-level archive: `entries = 0`, `totalBytes = 0`, `stopped = false`, `pushStart = 0` (bytes of this archive pushed before the current `push` call), `pushEnd = 0` (`pushStart` + length of the chunk being pushed). Limits = `{ ...DEFAULT_ZIP_LIMITS, ...options.limits }`. `encrypted` = the set of entry names whose general-purpose flag bit 0 is set, read before streaming by `src/zip/encryption.ts` (below).
 
@@ -2458,11 +2460,11 @@ State per top-level archive: `entries = 0`, `totalBytes = 0`, `stopped = false`,
 walk(source, path, depth):            # depth = depth of entries inside this archive (top-level archive: 1)
   if depth > limits.maxDepth: yield error ZIP_DEPTH_EXCEEDED(path, max); return
   queue ← []
-  unzip ← new Unzip(onFile); unzip.register(UnzipInflate)
+  unzip ← new Unzip(onFile); register bounded inflater for accepted deflate entries (D-85)
   onFile(file):
     if stopped: return
     entryPath ← `${path}!/${file.name}`
-    if file.name ends with '/' or isJunk(file.name): return            # not started → skipped by fflate
+    if file.name ends with '/' or isJunk(file.name): start discard decoder; return  # D-85: consume without buffering or decompression
     entries += 1
     if entries > limits.maxEntries: stop(ZIP_TOO_MANY_ENTRIES, path); return
     kind ← classifyByName(file.name)                                    # 'xml' | 'zip' | 'sniff' | 'other'
@@ -2477,8 +2479,8 @@ walk(source, path, depth):            # depth = depth of entries inside this arc
     file.ondata = (err, chunk, final):
       if stopped: return
       if err: if not rejected: reject(error mapZipError(err)); return  # ZIP_INVALID with reason = err.message
-      out += chunk.length ; totalBytes += chunk.length                  # also counted after rejection: it is real work
-      if totalBytes > limits.maxTotalBytes: rejected ← true ; chunks ← [] ; stop(ZIP_TOO_LARGE, path); return
+      out += chunk.length ; totalBytes += chunk.length                  # includes the rejecting chunk (D-85)
+      if totalBytes > limits.maxTotalBytes: rejected ← true ; chunks ← [] ; file.terminate() ; stop(ZIP_TOO_LARGE, path); return
       if rejected: return
       if out > limits.maxEntryBytes: reject(error ZIP_ENTRY_TOO_LARGE); return
       compressed ← file.size defined and > 0 ? file.size : max(1, pushEnd − entryStart)   # upper bound of compressed bytes consumed so far
@@ -2506,11 +2508,12 @@ walk(source, path, depth):            # depth = depth of entries inside this arc
 
 Notes:
 
+- D-85: every early return for an ignored, filtered, encrypted, unsupported or pre-rejected entry starts a registered no-output discard decoder for that entry’s method. Native unstarted entries retain compressed bytes. Accepted deflate entries use the bounded terminating wrapper; accepted stored entries use pass-through. The outer push bounds remain the denominator for unknown compressed sizes.
 - `classifyByName`: lower-cased basename ending `.xml` → `xml`; `.zip` → `zip`; no `.` in the basename → `sniff`; anything else (`.pdf`, `.html`, `.xslt`, `.txt`, …) → `other` (yielded as `skipped`, never decompressed).
 - `isJunk(name)`: any path segment equal to `__MACOSX`; basename `.DS_Store`, `Thumbs.db` or `desktop.ini`; basename starting with `._`. Junk yields nothing and does not count towards `maxEntries`.
 - `stop(code, path)` sets `stopped = true` and records the error; the walk returns after the current push. Already yielded items stay valid.
 - When the compressed size is unknown (data descriptor entries), the ratio is estimated as `out / (pushEnd − entryStart)`, where both bounds include the whole chunk being pushed. This over-estimates the compressed bytes by at most one chunk (1 MB), so it can only make the ratio check more lenient, never flag a normal entry; the size limits still apply. (Using bytes pushed _before_ the current chunk would give 0 for an entry that starts and inflates within one chunk and flag every such entry above 1 MB.)
-- A rejected entry (ratio, entry size, decompression error) keeps being inflated by fflate until its data ends, because `terminate()` cannot stop `UnzipInflate`. Its output is discarded but still added to `totalBytes`, so a bomb entry costs at most `maxTotalBytes` of inflation work before the archive stops with `ZIP_TOO_LARGE`.
+- A rejected entry (ratio, entry size, decompression error) keeps being inflated by fflate until its data ends, because `terminate()` cannot stop `UnzipInflate`. D-85 replaces this native behavior: the private wrapper feeds at most ZIP_INFLATE_CHUNK_BYTES per inner push and terminates after rejection. Count output actually produced, including the rejecting chunk; no further output is inflated for that entry.
 - Encryption (`src/zip/encryption.ts`): fflate's streaming `Unzip` does not report encrypted entries (confirm at A-14; if the pinned version reports them, use that and drop this pre-read). Before streaming an archive, read its end-of-central-directory record (search backwards for `50 4B 05 06` in the last 65,557 bytes; for a `Blob`, `blob.slice()` reads only that tail and then the central-directory range) and collect the names of central-directory entries whose general-purpose flag has bit 0 set. Zip64 or an EOCD that cannot be read gives an empty set; encrypted entries then fail decompression and surface as `ZIP_INVALID`. The pre-read is bounded by `maxEntries` records.
 - Entry names are used only as labels. Nothing is ever written to disk, so path traversal names (`../`) are harmless; they are shown as-is.
 - Blob inputs are read through `blob.stream()` and pushed chunk by chunk; `Uint8Array` inputs are sliced without copying.

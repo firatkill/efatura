@@ -20,6 +20,9 @@ export const DEFAULT_ZIP_LIMITS = {
 /** Chunk size when pushing archive bytes into the streaming unzipper. */
 export const ZIP_PUSH_CHUNK_BYTES = 1024 * 1024;
 
+/** Maximum compressed bytes per inner synchronous inflater push (D-85). */
+export const ZIP_INFLATE_CHUNK_BYTES = 1024;
+
 /** Iterators yield to the event loop after this much continuous work (FR-25). */
 export const YIELD_BUDGET_MS = 50;
 
