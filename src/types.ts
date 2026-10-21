@@ -68,6 +68,8 @@ export type ProfileId =
   | 'ENERJI'
   | 'ILAC_TIBBICIHAZ'
   | 'YATIRIMTESVIK'
+  | 'OZELFATURA'
+  | 'IDIS'
   | 'OTHER';
 
 /** InvoiceTypeCode public data contract (TRD §§5 and 7).
