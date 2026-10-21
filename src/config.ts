@@ -78,3 +78,10 @@ export const PLAYGROUND = {
   filterDebounceMs: 200,
   mobileBreakpointPx: 640,
 } as const;
+
+/** Exchange-rate note recognition, including Turkish dotted and dotless I (TRD §7.4).
+ * @example
+ * RATE_NOTE_PATTERN.exec('DÖVİZ KURU: 35,1')?.[1]; // '35,1'
+ */
+export const RATE_NOTE_PATTERN =
+  /(?:d[öo]v[iıİ]z\s*kuru|exchange\s*rate|kur)\s*[:=]\s*([0-9]{1,6}(?:[.,][0-9]{1,10})?)/iu;

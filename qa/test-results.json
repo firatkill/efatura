@@ -849,6 +849,82 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-020",
+      "ac_reference": "FR-05",
+      "milestone": "M1 Model + core parser",
+      "title": "Identity and references",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All identity/reference fields, absent values, embedded attachment separation and exact signature namespace ancestry pass. Full local checks: 113 units, lint/typecheck, 100% line/97.36% branch coverage, nine browser cases, build/size/docs.",
+          "note": "All identity/reference fields, absent values, embedded attachment separation and exact signature namespace ancestry pass. Full local checks: 113 units, lint/typecheck, 100% line/97.36% branch coverage, nine browser cases, build/size/docs."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-021",
+      "ac_reference": "FR-11",
+      "milestone": "M1 Model + core parser",
+      "title": "Exchange rate precedence",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All four exchange-rate sources, first nonempty precedence, invalid/raw/comma values, TRY handling and exact EF023 diagnostics pass.",
+          "note": "All four exchange-rate sources, first nonempty precedence, invalid/raw/comma values, TRY handling and exact EF023 diagnostics pass."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-022",
+      "ac_reference": "FR-11",
+      "milestone": "M1 Model + core parser",
+      "title": "Exchange rate notes",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All UT-15 note variants pass, retain raw rates and original XML note indices, add exact EF023 without EF031, and reject Kurum false matches.",
+          "note": "All UT-15 note variants pass, retain raw rates and original XML note indices, add exact EF023 without EF031, and reject Kurum false matches."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-023",
+      "ac_reference": "FR-10",
+      "milestone": "M1 Model + core parser",
+      "title": "Due date precedence",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Payment means/terms and both note formats pass, including uppercase Turkish, invalid calendar dates, leap years and prescribed format precedence.",
+          "note": "Payment means/terms and both note formats pass, including uppercase Turkish, invalid calendar dates, leap years and prescribed format precedence."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
