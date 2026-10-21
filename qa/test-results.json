@@ -260,6 +260,149 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-012",
+      "ac_reference": "NFR-13, NFR-14",
+      "milestone": "M0 Setup",
+      "title": "Test CI matrices pass",
+      "status": "open",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "CI 39563369677 passed Node 20/22/24 units, browser and Linux CLI; both Windows CLI jobs failed because the normative shell chmod command resolved distcli.js. Owner approval requested for direct Node callback.",
+          "note": "CI 39563369677 passed Node 20/22/24 units, browser and Linux CLI; both Windows CLI jobs failed because the normative shell chmod command resolved distcli.js. Owner approval requested for direct Node callback."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-013",
+      "ac_reference": "NFR-15",
+      "milestone": "M0 Setup",
+      "title": "Allowed production licences pass",
+      "status": "open",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Installed write-excel-file → jszip → pako has (MIT AND Zlib); the required allowlist omits Zlib. Owner decision requested; no bypass applied.",
+          "note": "Installed write-excel-file → jszip → pako has (MIT AND Zlib); the required allowlist omits Zlib. Owner decision requested; no bypass applied."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-015",
+      "ac_reference": "NFR-18",
+      "milestone": "M0 Setup",
+      "title": "Docs parity and export examples pass",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Docs check passed; isolated tests reject README drift, missing fixture coverage, message and bilingual UI copy mismatches.",
+          "note": "Docs check passed; isolated tests reject README drift, missing fixture coverage, message and bilingual UI copy mismatches."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-016",
+      "ac_reference": "NFR-18",
+      "milestone": "M0 Setup",
+      "title": "Missing export example is rejected",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "An undocumented VERSION export in an isolated fixture caused docs check to fail with the expected diagnostic.",
+          "note": "An undocumented VERSION export in an isolated fixture caused docs check to fail with the expected diagnostic."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Removed TSDoc from the actual VERSION export temporarily; docs:check failed as required, then the original source was restored.",
+          "note": "Removed TSDoc from the actual VERSION export temporarily; docs:check failed as required, then the original source was restored."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-018",
+      "ac_reference": "FR-56",
+      "milestone": "M0 Setup",
+      "title": "Templates require synthetic reproductions",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Privacy template tests passed, including exact wording and disabled blank issues.",
+          "note": "Privacy template tests passed, including exact wording and disabled blank issues."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-017",
+      "ac_reference": "FR-60",
+      "milestone": "M0 Setup",
+      "title": "Changesets status works",
+      "status": "open",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Changesets did not recognize the published root package with only playground in pnpm-workspace.yaml.",
+          "note": "Changesets did not recognize the published root package with only playground in pnpm-workspace.yaml."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-014",
+      "ac_reference": "NFR-15",
+      "milestone": "M0 Setup",
+      "title": "Disallowed production licence fails",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Temporary GPL dependency installation was blocked by stale offline Vite metadata before the licence assertion; original manifest and lockfile were restored and frozen install passed. Retrying with online metadata.",
+          "note": "Temporary GPL dependency installation was blocked by stale offline Vite metadata before the licence assertion; original manifest and lockfile were restored and frozen install passed. Retrying with online metadata."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Online temporary GPL-3.0 dependency installation succeeded; licenses:check rejected efatura-qa-gpl-probe by name. Original manifest and lockfile restored; frozen offline install passed.",
+          "note": "Online temporary GPL-3.0 dependency installation succeeded; licenses:check rejected efatura-qa-gpl-probe by name. Original manifest and lockfile restored; frozen offline install passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
