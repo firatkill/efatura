@@ -27,7 +27,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-09 | Public model types and value conventions                           | done   | 748533d          |
 | T-10 | Code lists and their verification                                  | done   | 1a582d0          |
 | T-11 | Identity, references, exchange rate and due date mapping           | doing  | —                |
-| T-12 | Party mapping                                                      | todo   | —                |
+| T-12 | Party mapping                                                      | doing  | —                |
 | T-13 | Line, item, price, delivery and allowance mapping                  | todo   | —                |
 | T-14 | Taxes, withholding, totals, payment and computed totals            | todo   | —                |
 | T-15 | Attachments and base64                                             | todo   | —                |
@@ -92,3 +92,5 @@ T-09 local acceptance passed: 89 unit tests, lint/typecheck, 100% line and 97.23
 T-10 membership reconciliation and abbreviation exceptions approved (D-59/D-60). Source verification and code lists implemented. Local checks passed: 94 unit tests, lint/typecheck, 100% line and 97.30% branch coverage, browser suite, build, size, docs parity, publint and attw. CI run 39573480868 passed all jobs.
 
 T-11 local acceptance passed: 113 unit tests, lint/typecheck, 100% line and 97.36% branch coverage, browser suite, build/size and docs parity. CI pending.
+
+T-12 independent party/address/contact field mapping is implemented; targeted UT-16 field tests and full local checks pass: 115 unit tests, lint/typecheck, 100% lines and 97.47% branches, nine browser cases, build/size/docs. The prescribed synthetic identity subset is introduced now for these tests; T-31 completes the generator identities. Tax-ID diagnostic implementation awaits the EF015 owner decision.
