@@ -925,6 +925,44 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-024",
+      "ac_reference": "FR-06",
+      "milestone": "M1 Model + core parser",
+      "title": "Party fields",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Independent T-12 fields pass targeted UT-16 and full local checks: 115 unit tests, lint/typecheck, 100% lines/97.47% branches, nine browser cases, build/size/docs. Case wording corrected against TRD: identifier indices use the filtered array; checksum metadata belongs to T-18, not TaxId.",
+          "note": "Independent T-12 fields pass targeted UT-16 and full local checks: 115 unit tests, lint/typecheck, 100% lines/97.47% branches, nine browser cases, build/size/docs. Case wording corrected against TRD: identifier indices use the filtered array; checksum metadata belongs to T-18, not TaxId."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-025",
+      "ac_reference": "FR-06",
+      "milestone": "M1 Model + core parser",
+      "title": "Tax identifier resolution",
+      "status": "pending_decision",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "blocked",
+          "actual_result": "Tax-ID diagnostic checks are not run: awaiting the owner decision on conflicting EF015 details in TRD sections 7.5.1 and 9.3. Escalated to the owner in docs/PROGRESS.md under the repository override; no ClickUp is used.",
+          "note": "Tax-ID diagnostic checks are not run: awaiting the owner decision on conflicting EF015 details in TRD sections 7.5.1 and 9.3. Escalated to the owner in docs/PROGRESS.md under the repository override; no ClickUp is used."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": "docs/PROGRESS.md#open-questions-for-the-owner (repository override: owner escalation, no ClickUp)",
+      "retraction_reason": null
     }
   ]
 }
