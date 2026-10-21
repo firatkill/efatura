@@ -25,8 +25,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-07 | Input decoding and guard                                           | done   | 6032094          |
 | T-08 | Namespace-resolved XML tree, query, select and paths               | done   | fbf42af          |
 | T-09 | Public model types and value conventions                           | done   | 748533d          |
-| T-10 | Code lists and their verification                                  | doing  | —                |
-| T-11 | Identity, references, exchange rate and due date mapping           | todo   | —                |
+| T-10 | Code lists and their verification                                  | done   | 1a582d0          |
+| T-11 | Identity, references, exchange rate and due date mapping           | doing  | —                |
 | T-12 | Party mapping                                                      | todo   | —                |
 | T-13 | Line, item, price, delivery and allowance mapping                  | todo   | —                |
 | T-14 | Taxes, withholding, totals, payment and computed totals            | todo   | —                |
@@ -64,6 +64,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 ## Open questions for the owner
 
+- T-12: reconcile EF015 details between TRD §7.5.1 and §9.3; combined reason and message parameters proposed, awaiting owner answer.
+
 - T-01 owner checklist: enable Dependabot alerts in GitHub settings. Secret scanning and push protection were verified enabled; vulnerability alerts returned disabled.
 
 ## Verification limits
@@ -87,4 +89,6 @@ T-08 local acceptance passed: 75 unit cases, strict lint/typecheck, 100% line an
 
 T-09 local acceptance passed: 89 unit tests, lint/typecheck, 100% line and 97.23% branch coverage, browser suite and build/size/docs checks. Public numeric fields inspected: only size, position, line count, details and limits use number. Unit lookup is injected until T-10 supplies verified lists. CI run 39570674656 passed all jobs.
 
-T-10 membership reconciliation and abbreviation exceptions approved (D-59/D-60). Source verification and code lists implemented. Local checks passed: 94 unit tests, lint/typecheck, 100% line and 97.30% branch coverage, browser suite, build, size, docs parity, publint and attw. CI pending.
+T-10 membership reconciliation and abbreviation exceptions approved (D-59/D-60). Source verification and code lists implemented. Local checks passed: 94 unit tests, lint/typecheck, 100% line and 97.30% branch coverage, browser suite, build, size, docs parity, publint and attw. CI run 39573480868 passed all jobs.
+
+T-11 local acceptance passed: 113 unit tests, lint/typecheck, 100% line and 97.36% branch coverage, browser suite, build/size and docs parity. CI pending.
