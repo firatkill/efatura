@@ -1231,6 +1231,11 @@
           "result": "pass",
           "actual_result": "Final pnpm check and three-browser suite passed after the explicit table guard correction. Full core 39.95 kB / 40 kB; parser 35.70 kB / 36 kB. Unit suite: 184 tests, 100% lines and 96.79% branches; decimal lines 100%. Package formats, CLI baseline, tooling, publint, attw, licences and docs parity passed. All 434 code-list records remain identical. D-72 authorizes the completed optimization.",
           "note": "Final pnpm check and three-browser suite passed after the explicit table guard correction. Full core 39.95 kB / 40 kB; parser 35.70 kB / 36 kB. Unit suite: 184 tests, 100% lines and 96.79% branches; decimal lines 100%. Package formats, CLI baseline, tooling, publint, attw, licences and docs parity passed. All 434 code-list records remain identical. D-72 authorizes the completed optimization."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-16 implementation f983667 pushed; CI run 39583967695 passed every job, including Node 20/22/24 unit coverage, Windows/Linux CLI baseline, browser engines, lint/typecheck and package checks. M1 report and review confirm all 37 cases resolved with limits documented.",
+          "note": "T-16 implementation f983667 pushed; CI run 39583967695 passed every job, including Node 20/22/24 unit coverage, Windows/Linux CLI baseline, browser engines, lint/typecheck and package checks. M1 report and review confirm all 37 cases resolved with limits documented."
         }
       ],
       "regression_of": null,
