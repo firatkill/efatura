@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { chmodSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'tsup';
 
 const { version } = JSON.parse(readFileSync('./package.json', 'utf8')) as { version: string };
@@ -27,6 +27,8 @@ export default defineConfig([
     banner: { js: '#!/usr/bin/env node' },
     define: { __EFATURA_VERSION__: JSON.stringify(version) },
     external: ['fast-xml-parser', 'fflate', '@firatkill/efatura', '@firatkill/efatura/zip'],
-    onSuccess: "node -e \"require('node:fs').chmodSync('dist/cli.js', 0o755)\"",
+    onSuccess: async () => {
+      chmodSync('dist/cli.js', 0o755);
+    },
   },
 ]);

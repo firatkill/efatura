@@ -348,12 +348,12 @@ Notes:
 
 - The root package is published; the workspace package `playground` is `"private": true`.
 - `"types"` and `typesVersions` point to the `.d.cts` files for `node10` resolution; `attw --pack .` must report no problems for `node10`, `node16-cjs`, `node16-esm` and `bundler` (NFR-11).
-- `dist/cli.js` is ESM only, starts with `#!/usr/bin/env node`, and is executable (`tsup` `onSuccess` runs `chmod +x` via `node -e` so it works on Windows too).
+- `dist/cli.js` is ESM only, starts with `#!/usr/bin/env node`, and is executable (`tsup` `onSuccess` calls Node `chmodSync` directly, avoiding shell path escaping on Windows).
 
 ### 3.2 `tsup.config.ts` (normative)
 
 ```ts
-import { readFileSync } from 'node:fs';
+import { chmodSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'tsup';
 
 const { version } = JSON.parse(readFileSync('./package.json', 'utf8')) as { version: string };
@@ -382,7 +382,9 @@ export default defineConfig([
     banner: { js: '#!/usr/bin/env node' },
     define: { __EFATURA_VERSION__: JSON.stringify(version) },
     external: ['fast-xml-parser', 'fflate', '@firatkill/efatura', '@firatkill/efatura/zip'],
-    onSuccess: "node -e \"require('node:fs').chmodSync('dist/cli.js', 0o755)\"",
+    onSuccess: async () => {
+      chmodSync('dist/cli.js', 0o755);
+    },
   },
 ]);
 ```
