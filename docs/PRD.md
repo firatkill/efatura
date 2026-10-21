@@ -130,7 +130,7 @@ Priority: **Must** (required for 0.1.0), **Should** (expected in 0.1.0; may slip
 
 | ID    | Requirement                                                                                                                                                                                                                                                                            | Priority | Stories |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| FR-22 | `parseMany(files, options?)` parses many XML inputs (`{ name, data }` or `File`/`Blob`) and returns items plus a summary. `iterateMany` yields the same items one at a time as an async iterator.                                                                                      | Must     | US-03   |
+| FR-22 | `parseMany(files, options?)` parses many XML inputs (`{ name, data }` or `File`; Blob requires a name through `{ name, data }`) and returns items plus a summary. `iterateMany` yields the same items one at a time as an async iterator.                                              | Must     | US-03   |
 | FR-23 | Across one batch, a UUID seen before adds warning EF090 to the later invoice with the first source path; `duplicates: 'skip'` returns a `duplicate` item instead. The same supplier tax ID and invoice number with a different UUID adds info EF091.                                   | Must     | US-12   |
 | FR-24 | `parseZip(bytes, options?)` and `iterateZip` (subpath `@firatkill/efatura/zip`) read nested ZIPs with limits `maxDepth` 3, `maxEntries` 5000, `maxTotalBytes` 500 MB, `maxEntryBytes` 50 MB and `maxRatio` 100 (TRD §10). Limit violations become error items, never crashes or hangs. | Must     | US-05   |
 | FR-25 | Iterators yield to the event loop at least every 50 ms of work so a browser main thread or worker can process messages.                                                                                                                                                                | Must     | US-06   |
@@ -800,6 +800,12 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-78 | Use `(none)` for absent EF025 currency and EF061 percent parameters when their rule predicates otherwise trigger. | Reuses the existing diagnostic missing-value convention without suppressing applicable rules. | Owner approved, 2026-10-21 |
 | D-79 | Specialize the bundled pinned parser for fixed false numeric/HTML-entity options and true preserveOrder, with version/source/option guards and output equivalence tests. | Removes unreachable modes to meet unchanged size limits; retains XML entities, decoder and all HTML/XML security checks. See docs/T20-BUNDLE-PROPOSAL.md. | Owner approved, 2026-10-21 |
 | D-80 | Continue behavior-preserving internal size optimization after the T-22 QA three-failure check-in. | Retain all size budgets, tests, messages and approved parser guards. | Owner approved, 2026-10-21 |
+
+| D-81 | Batch accepts File directly and Blob through named InputFile; extension/content classification applies equally to strings and bytes. | Reconciles FR-22 with the normative named-input API and general classification rule. | Owner approved, 2026-10-21 |
+| D-82 | Batch diagnostics sort by default severity/path/code before applying overrides; duplicate summary counts detections even when EF090 is off. | Preserves §1.3 ordering and separates duplicate detection from issue display. | Owner approved, 2026-10-21 |
+| D-83 | Expose yieldBudgetMs, progressIntervalMs and zipPushChunkBytes on efaturaConfig. | Shares existing constants across the ZIP package self-reference boundary without duplicate values. | Owner approved, 2026-10-21 |
+
+| D-84 | Specialize unused parser path expressions to a private tag stack under pinned source/default/option guards. | T-23 prototype meets unchanged size budgets; preserves security checks, requires expanded equivalence tests and actual bundled licence parity. See docs/T23-BUNDLE-PROPOSAL.md. | Owner approved continuation, 2026-10-21 |
 
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 

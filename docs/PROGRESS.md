@@ -38,7 +38,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-20 | Currency and amount rules (EF020–EF035)                            | done   | 6f32db8          |
 | T-21 | Totals rules (EF040–EF049)                                         | done   | f65f3b4          |
 | T-22 | Line and tax rules (EF050–EF066)                                   | done   | b3d7697          |
-| T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                |
+| T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | done   | HEAD             |
 | T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                |
 | T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                |
 | T-26 | Rows                                                               | todo   | —                |
@@ -138,3 +138,13 @@ Owner approved continuing size optimization (D-80). Currency membership now has 
 T-22 final local acceptance passed: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; 12 browser tests, CLI baseline, five package and six tooling tests; lint/typecheck/build/size/publint/attw/licences/docs parity. D-80 authorizes continued internal optimization; shared currency membership preserves every prior record. Full core 39.56 kB and parser 35.84 kB meet unchanged limits. All M2 cases are resolved; T-22 CI and milestone review follow the push.
 
 M2 is complete. T-22 finished in b3d7697; CI run 39616305268 reports success and all acceptance steps passed (lint/typecheck job headers temporarily lagged their successful completed steps). All 63 designed M2 cases are resolved; qa/M2-report.md and qa/M2-review.md record the evidence, retained failures and deferred verification. TC-M2-011 is correctly marked as completed source research, with automated checksum vectors retained. Generated fixtures, batch/ZIP/exports/CLI processing, broad fuzzing, benchmarks, private-corpus and playground/manual acceptance remain later tasks. Stopped at the milestone boundary; T-23 has not started.
+
+M3 started. Owner approved D-81–D-83; milestone cases designed before code. T-23 implementation in progress.
+
+T-23: batch implementation and targeted tests pass. Full core size 41.04 kB exceeds 40 kB; guarded path-specialization prototype meets limits (39.03 / 33.80 kB), production transform restored. Open owner question: approve docs/T23-BUNDLE-PROPOSAL.md before adoption. No task completion commit/push yet.
+
+T-23 QA before size decision: 265 unit tests pass; coverage 100% lines / 97.81% branches, 100% functions. All 15 browser tests pass across Chromium, Firefox and WebKit. Lint, typecheck and docs parity pass. Final progress fix counts unreadable Blob bytes as zero consumed. T-23 remains doing pending size proposal approval; T-24 not started, CI and completion commit/push not yet applicable.
+
+D-84 approved: implementing guarded path specialization and completing T-23 acceptance.
+
+T-23 complete locally: D-81–D-84 recorded; batch API, duplicates, sources, summaries, progress and cancellation implemented. 267 unit tests and 15 browser tests pass; coverage 100% lines / 97.81% branches. Full core 39.12 kB, parser 33.81 kB. Build/package/tooling/lint/types/docs/publint/attw/licences pass; ledger passes. Finishing commit is HEAD; push and CI verification follow.

@@ -73,3 +73,19 @@ export { ISSUE_CATALOGUE, ISSUE_CODES } from './validate/catalogue';
  * classifyTaxId('9990000013'); // { scheme: 'VKN', valid: true, anonymous: false }
  */
 export { isValidVkn, isValidTckn, isValidUuid, classifyTaxId } from './ids';
+
+/** Iterate or collect named XML batches.
+ * @example
+ * const result = await parseMany(files);
+ */
+export { iterateMany } from './batch/iterate-many';
+/** Collect named XML inputs and their summary.
+ * @example
+ * const result = await parseMany(files);
+ */
+export { parseMany } from './batch/parse-many';
+/** Share duplicate detection across batches.
+ * @example
+ * const tracker = createDuplicateTracker();
+ */
+export { createDuplicateTracker } from './batch/duplicates';

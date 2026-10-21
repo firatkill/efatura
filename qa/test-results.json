@@ -469,6 +469,20 @@
           "result": "pass",
           "actual_result": "T-05 targeted Vitest run: public config matches constants and nested writes throw.",
           "note": "T-05 targeted Vitest run: public config matches constants and nested writes throw."
+        },
+        {
+          "result": "fail",
+          "actual_result": "D-83 adds three approved public config fields; update expected normative config.",
+          "note": "T-23 full coverage run regression; no thresholds changed."
+        },
+        {
+          "result": "fail",
+          "note": "Second config equality assertion still omitted approved D-83 fields; corrected to the same constants.",
+          "actual_result": "Second config equality assertion still omitted approved D-83 fields; corrected to the same constants."
+        },
+        {
+          "result": "pass",
+          "note": "Targeted normative config test passes with all D-83 fields in both literal and constant comparisons."
         }
       ],
       "regression_of": null,
@@ -646,6 +660,15 @@
         {
           "result": "pass",
           "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Coverage run overlapped build; 10000-level test took 6213ms over unchanged 5000ms timeout. Rerun sequentially.",
+          "note": "T-23 full coverage run regression; no thresholds changed."
+        },
+        {
+          "result": "pass",
+          "note": "Sequential targeted coverage run passed 10000 levels with unchanged timeout."
         }
       ],
       "regression_of": "TC-M1-015",
@@ -1366,6 +1389,15 @@
         {
           "result": "pass",
           "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        },
+        {
+          "result": "fail",
+          "actual_result": "New parseMany re-export lacks its own @example block; add required TSDoc.",
+          "note": "T-23 full coverage run regression; no thresholds changed."
+        },
+        {
+          "result": "pass",
+          "note": "Targeted docs regression passed with per-export @example added."
         }
       ],
       "regression_of": null,
@@ -3023,6 +3055,481 @@
       "regression_of": null,
       "root_cause_group": null,
       "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-001",
+      "ac_reference": "FR-22, D-22",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Named input forms and defaults",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "note": "Initial assertion expected undefined raw; TRD model requires null when includeRaw is false. Correcting test against spec.",
+          "actual_result": "Initial assertion expected undefined raw; TRD model requires null when includeRaw is false. Correcting test against spec."
+        },
+        {
+          "result": "fail",
+          "note": "Second run exposed wrong attachment field in test (data instead of TRD base64). Test corrected to attachment.base64 null.",
+          "actual_result": "Second run exposed wrong attachment field in test (data instead of TRD base64). Test corrected to attachment.base64 null."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-002",
+      "ac_reference": "FR-22",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Source and retained bytes",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-003",
+      "ac_reference": "FR-22, FR-27",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Input classification",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-004",
+      "ac_reference": "FR-22",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Read and parse failures",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-005",
+      "ac_reference": "FR-23",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "EF090 flag and skip",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-006",
+      "ac_reference": "FR-23",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "EF091 supplier number collision",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-007",
+      "ac_reference": "FR-23",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Tracker state and reset",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-008",
+      "ac_reference": "FR-23, FR-28",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Summary and rule overrides",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-009",
+      "ac_reference": "FR-28",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Progress throttling and totals",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-010",
+      "ac_reference": "FR-26",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Batch cancellation",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-011",
+      "ac_reference": "FR-25",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Cooperative batch scheduling",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Targeted T-23 Vitest run passed; test/unit/batch.test.ts and test/unit/validate/batch.test.ts."
+        },
+        {
+          "result": "pass",
+          "note": "Second targeted run: remaining cases passed."
+        },
+        {
+          "result": "pass",
+          "note": "12 targeted tests pass after correcting raw and attachment assertions to TRD §1.3."
+        },
+        {
+          "result": "pass",
+          "note": "Full coverage run: 263 tests pass; 100% lines, 97.8% branches, batch 100% lines. Subsequent targeted duplicate edge/order tests also pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-23 coverage run passed all 265 tests: 100% lines, 97.81% branches. Browser run passed 15 tests across Chromium/Firefox/WebKit; lint, typecheck, docs parity and targeted post-review progress check passed. Size adoption pending owner."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M3-024",
+      "ac_reference": "NFR-05, NFR-11, NFR-12",
+      "milestone": "M3 ZIP + batch + exports",
+      "title": "Package boundaries and size",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "note": "T-23 first size check: core 41.04 kB exceeds 40 kB; parser 35.91 kB passes. No budgets changed.",
+          "actual_result": "T-23 first size check: core 41.04 kB exceeds 40 kB; parser 35.91 kB passes. No budgets changed."
+        },
+        {
+          "result": "fail",
+          "note": "Build minification experiment did not help: core 41.08 kB and parser 38.33 kB. Restored original build config; no transform change.",
+          "actual_result": "Build minification experiment did not help: core 41.08 kB and parser 38.33 kB. Restored original build config; no transform change."
+        },
+        {
+          "result": "pass",
+          "note": "Isolated proposed path specialization: full core 39.03 kB, parser 33.80 kB; two equivalence tests and four package behavior tests pass. Production transform restored; adoption awaits owner approval."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Prototype package licence test still expects removed path-expression-matcher notice.",
+          "note": "No parser behavior failure; update licence expectation against bundle source map only if proposal approved. Production core remains over budget."
+        },
+        {
+          "result": "fail",
+          "note": "Guard implementation initially compared normalized built processEntities to false; pinned OptionsBuilder converts it to configuration. Check the explicit input option instead, retaining source hash guard.",
+          "actual_result": "Guard implementation initially compared normalized built processEntities to false; pinned OptionsBuilder converts it to configuration. Check the explicit input option instead, retaining source hash guard."
+        },
+        {
+          "result": "pass",
+          "note": "D-84 targeted equivalence and drift guards pass after checking raw processEntities before its pinned normalization. Includes 10000 levels, repeated siblings, namespaces, CDATA, PI, malformed XML and dangerous names."
+        },
+        {
+          "result": "fail",
+          "note": "Coverage timed out when one test combined original and specialized 10000-level parses (7293ms). Split independent parser depth checks into separate tests; retain every assertion and the 5000ms timeout.",
+          "actual_result": "Coverage timed out when one test combined original and specialized 10000-level parses (7293ms). Split independent parser depth checks into separate tests; retain every assertion and the 5000ms timeout."
+        },
+        {
+          "result": "pass",
+          "note": "All four targeted parser equivalence/drift/depth tests pass under coverage instrumentation with unchanged per-test timeout. Scoped run is not an aggregate coverage gate; full suite follows."
+        },
+        {
+          "result": "pass",
+          "note": "T-23 final acceptance: 267 unit tests, 100% lines/97.81% branches; 15 browser tests; build, size (39.12 kB full / 33.81 kB parser), package, tooling, lint, types, docs, publint, attw and licences pass. D-84 guard retest rejects computed property names. Generated fixtures remain T-32."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": "docs/T23-BUNDLE-PROPOSAL.md",
       "retraction_reason": null
     }
   ]
