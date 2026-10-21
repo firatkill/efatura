@@ -757,6 +757,54 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-017",
+      "ac_reference": "FR-05–FR-16",
+      "milestone": "M1 Model + core parser",
+      "title": "Scalar value conventions",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "All 14 targeted value tests passed; integration lint flagged a normative Array<T> declaration and one shorthand void assertion. Preserving the normative type with a local documented style exception and fixing the test callback.",
+          "note": "All 14 targeted value tests passed; integration lint flagged a normative Array<T> declaration and one shorthand void assertion. Preserving the normative type with a local documented style exception and fixing the test callback."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Lint retest still flagged classificationCodes: the first style-exception edit targeted the wrong property name and changed nothing. Applying the exception to the exact normative field.",
+          "note": "Lint retest still flagged classificationCodes: the first style-exception edit targeted the wrong property name and changed nothing. Applying the exception to the exact normative field."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Final retest passed lint, strict typechecking and all 89 unit tests; 100% lines and 97.23% branches. Normative model fields remain unchanged; amount-like values are Decimal strings.",
+          "note": "Final retest passed lint, strict typechecking and all 89 unit tests; 100% lines and 97.23% branches. Normative model fields remain unchanged; amount-like values are Decimal strings."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-018",
+      "ac_reference": "FR-07, FR-15",
+      "milestone": "M1 Model + core parser",
+      "title": "Amount and quantity values",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Amount/quantity tests passed with exact raw values, currency normalization, missing-currency EF032, injected unit lookup, null conventions and shared issue sinks with isolated paths.",
+          "note": "Amount/quantity tests passed with exact raw values, currency normalization, missing-currency EF032, injected unit lookup, null conventions and shared issue sinks with isolated paths."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

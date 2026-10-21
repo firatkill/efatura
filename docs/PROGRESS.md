@@ -23,8 +23,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-05 | Configuration, errors and internal helpers                         | done   | 7fd18e8          |
 | T-06 | Decimal module and minor units                                     | done   | 7a413ed          |
 | T-07 | Input decoding and guard                                           | done   | 6032094          |
-| T-08 | Namespace-resolved XML tree, query, select and paths               | doing  | —                |
-| T-09 | Public model types and value conventions                           | todo   | —                |
+| T-08 | Namespace-resolved XML tree, query, select and paths               | done   | fbf42af          |
+| T-09 | Public model types and value conventions                           | doing  | —                |
 | T-10 | Code lists and their verification                                  | todo   | —                |
 | T-11 | Identity, references, exchange rate and due date mapping           | todo   | —                |
 | T-12 | Party mapping                                                      | todo   | —                |
@@ -83,4 +83,6 @@ T-06 local acceptance checks passed, including 100% decimal line/branch coverage
 
 T-07 local lint, typecheck, 56 unit tests, coverage, build/size/docs checks and browser decoding tests passed. D-57 records approved parser depth; full tree depth verification is T-08. CI run 39569202744 passed, including Node 20/22/24 encoding checks.
 
-T-08 local acceptance passed: 75 unit cases, strict lint/typecheck, 100% line and 96.82% branch coverage, browser suite, build/size/docs checks. Full 10,000-level tree test passed after D-57. CI verification follows the task push.
+T-08 local acceptance passed: 75 unit cases, strict lint/typecheck, 100% line and 96.82% branch coverage, browser suite, build/size/docs checks. Full 10,000-level tree test passed after D-57. CI run 39570029486 passed all jobs.
+
+T-09 local acceptance passed: 89 unit tests, lint/typecheck, 100% line and 97.23% branch coverage, browser suite and build/size/docs checks. Public numeric fields inspected: only size, position, line count, details and limits use number. Unit lookup is injected until T-10 supplies verified lists. CI verification follows the task push.
