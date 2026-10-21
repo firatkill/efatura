@@ -428,6 +428,82 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-001",
+      "ac_reference": "FR-04",
+      "milestone": "M1 Model + core parser",
+      "title": "Parse error contract",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-05 targeted Vitest run: all five error codes have byte-exact bilingual messages, details and prototype identity; default details checked.",
+          "note": "T-05 targeted Vitest run: all five error codes have byte-exact bilingual messages, details and prototype identity; default details checked."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-002",
+      "ac_reference": "FR-25, FR-26",
+      "milestone": "M1 Model + core parser",
+      "title": "Configuration is immutable",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-05 targeted Vitest run: public config matches constants and nested writes throw.",
+          "note": "T-05 targeted Vitest run: public config matches constants and nested writes throw."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-003",
+      "ac_reference": "FR-25",
+      "milestone": "M1 Model + core parser",
+      "title": "Cooperative yield budget",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-05 targeted Vitest run: injected clock budget, timer fallback, scheduler path and default clock passed.",
+          "note": "T-05 targeted Vitest run: injected clock budget, timer fallback, scheduler path and default clock passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-004",
+      "ac_reference": "FR-26",
+      "milestone": "M1 Model + core parser",
+      "title": "Abort propagates reason",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-05 targeted Vitest run: cancellation before and during yield preserves the exact reason.",
+          "note": "T-05 targeted Vitest run: cancellation before and during yield preserves the exact reason."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
