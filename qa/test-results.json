@@ -184,6 +184,82 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-008",
+      "ac_reference": "NFR-13, NFR-14",
+      "milestone": "M0 Setup",
+      "title": "Unit smoke and coverage pass",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Unit tests and V8 coverage passed with thresholds unchanged and autoUpdate false.",
+          "note": "Unit tests and V8 coverage passed with thresholds unchanged and autoUpdate false."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-010",
+      "ac_reference": "FR-38, NFR-14",
+      "milestone": "M0 Setup",
+      "title": "Built CLI version test passes",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Built CLI version test passed.",
+          "note": "Built CLI version test passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-011",
+      "ac_reference": "NFR-09",
+      "milestone": "M0 Setup",
+      "title": "Tests reject network access",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Permanent network-isolation test passed; a temporary fetch test failed with the exact required message and was removed.",
+          "note": "Permanent network-isolation test passed; a temporary fetch test failed with the exact required message and was removed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-009",
+      "ac_reference": "NFR-14",
+      "milestone": "M0 Setup",
+      "title": "Core smoke runs in three engines",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Browser smoke passed in Chromium, Firefox and WebKit (3 tests). Browser installer recovered from mirror DNS failures using its official fallback.",
+          "note": "Browser smoke passed in Chromium, Firefox and WebKit (3 tests). Browser installer recovered from mirror DNS failures using its official fallback."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

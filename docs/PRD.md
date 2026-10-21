@@ -770,6 +770,9 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 
 | D-50 | Until T-16 introduces parseInvoice, the 36 kB single-export size check imports VERSION. T-16 switches it to parseInvoice; core 40 kB and ZIP 50 kB limits stay active throughout. | T-02 has only placeholder exports, so the original import could not build. | Owner approval 2026-10-21 |
 
+| D-51 | tsup 8.5.1 supports define, dts and external options; output keeps the core self-reference. Vitest 4.1.12 supports the specified browser provider and projects APIs. | Verified against installed typings and running build/test smoke checks. | A-14, T-01–T-03, 2026-10-21 |
+| D-52 | Use actions/upload-artifact@v7 for coverage artifacts; name, path and retention-days inputs are supported. | Current action major verified from its official action.yml; follows the owner's approval to use current actions. | A-21, 2026-10-21; https://github.com/actions/upload-artifact/blob/main/action.yml |
+
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
 ## 16. Glossary (Türkçe ↔ English)
