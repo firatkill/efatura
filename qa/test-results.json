@@ -504,6 +504,92 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-005",
+      "ac_reference": "FR-15",
+      "milestone": "M1 Model + core parser",
+      "title": "Exact decimal vectors",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All normative §8.2 vectors and additional sign/scale cases passed, with independent scaled-bigint addition comparisons.",
+          "note": "All normative §8.2 vectors and additional sign/scale cases passed, with independent scaled-bigint addition comparisons."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Integration lint failed on inherited stylistic rules: interface-only conflicts with AGENTS type-alias preference, normative empty-string fallback requires ||, and number interpolation must use String. Runtime vectors passed.",
+          "note": "Integration lint failed on inherited stylistic rules: interface-only conflicts with AGENTS type-alias preference, normative empty-string fallback requires ||, and number interpolation must use String. Runtime vectors passed."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Retest after aligning lint with AGENTS and preserving normative empty-string handling: lint/typecheck and all 32 unit tests passed; coverage is 100% lines, branches, functions and statements, including src/decimal.",
+          "note": "Retest after aligning lint with AGENTS and preserving normative empty-string handling: lint/typecheck and all 32 unit tests passed; coverage is 100% lines, branches, functions and statements, including src/decimal."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-006",
+      "ac_reference": "FR-15",
+      "milestone": "M1 Model + core parser",
+      "title": "Decimal argument failures",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Invalid lexical values, precision arguments and zero division produced the required errors; unsigned zero normalization passed.",
+          "note": "Invalid lexical values, precision arguments and zero division produced the required errors; unsigned zero normalization passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-007",
+      "ac_reference": "FR-15",
+      "milestone": "M1 Model + core parser",
+      "title": "Minor units",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All §8.3 vectors, currency aliases, unknown currency and precision override boundaries passed.",
+          "note": "All §8.3 vectors, currency aliases, unknown currency and precision override boundaries passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-015",
+      "ac_reference": "FR-03, NFR-10",
+      "milestone": "M1 Model + core parser",
+      "title": "Deep XML",
+      "status": "open",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "A-14 spike: pinned fast-xml-parser 5.11.2 with normative options rejects 10000 nested elements with Maximum nested tags exceeded. Its default maxNestedTags is 100. Owner approval requested before changing the normative parser options.",
+          "note": "A-14 spike: pinned fast-xml-parser 5.11.2 with normative options rejects 10000 nested elements with Maximum nested tags exceeded. Its default maxNestedTags is 100. Owner approval requested before changing the normative parser options."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

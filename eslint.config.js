@@ -67,6 +67,8 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
+      // AGENTS prefers type aliases; normative TRD interfaces must also remain valid.
+      '@typescript-eslint/consistent-type-definitions': 'off',
       'no-console': 'error',
     },
   },
