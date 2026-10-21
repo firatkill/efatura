@@ -1966,12 +1966,17 @@
           "result": "pass",
           "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
           "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        },
+        {
+          "result": "pass",
+          "note": "Milestone review confirms the completed D-75 independent-source review and normative-vector evidence. Corrected case-design automation metadata to no: this is documented source research, not a CI network test. No source-verification requirement or test was removed."
         }
       ],
       "regression_of": null,
       "root_cause_group": null,
       "clickup_task": null,
-      "retraction_reason": null
+      "retraction_reason": null,
+      "automatable": false
     },
     {
       "tc_reference": "TC-M2-012",
