@@ -8,7 +8,7 @@
 - Hook checks passed: owner accepted, other author/committer rejected, attribution removed.
 - Codex configuration has no attribution override; commits use explicit messages through git and the repository hook.
 - GitHub repository created and initial commits pushed after explicit owner approval (D-46).
-- T-01–T-04 implementation and local/CI acceptance checks passed. M0 is complete; stop before T-05. The separate Dependabot alerts owner checklist remains open.
+- T-01–T-04 implementation and local/CI acceptance checks passed. M0 is complete; owner approved continuing into M1. The separate Dependabot alerts owner checklist remains open.
 
 ## Tasks
 
@@ -20,7 +20,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-02 | Build, exports map and package checks                              | done   | ce74eee          |
 | T-03 | Test runners and CI test jobs                                      | done   | 9f7ddf7          |
 | T-04 | Changesets, licence check, docs check, templates                   | done   | e5b5c4d          |
-| T-05 | Configuration, errors and internal helpers                         | todo   | —                |
+| T-05 | Configuration, errors and internal helpers                         | doing  | —                |
 | T-06 | Decimal module and minor units                                     | todo   | —                |
 | T-07 | Input decoding and guard                                           | todo   | —                |
 | T-08 | Namespace-resolved XML tree, query, select and paths               | todo   | —                |
@@ -68,9 +68,13 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 ## Verification limits
 
-- M0 is complete. D-53–D-55 record all three approved corrections. CI runs 39566277873 and 39566500555 passed; the QA ledger, milestone report and review are in qa/. Stop before T-05 for the owner milestone checkpoint.
+- M0 is complete. D-53–D-55 record all three approved corrections. CI runs 39566277873 and 39566500555 passed; the QA ledger, milestone report and review are in qa/. Owner approved continuing into M1.
 - Local aggregate checks passed: lint, typecheck, unit coverage, CLI, package compatibility, six tooling tests, size budgets, publint, attw, licences and docs parity. Chromium, Firefox and WebKit smoke tests passed separately.
 - Windows CLI Node 20 and 24 passed after the direct Node chmod callback correction.
 - Negative checks rejected network access, a temporary GPL dependency and missing export TSDoc. Temporary files and manifest changes were restored.
 - A-22 was verified after owner login; npm identity is firatkill and the package lookup returned 404. No publish was attempted.
 - Parser, validation, generated fixtures, playground and release checks belong to later milestones. M0 coverage measures the current placeholder exports only.
+
+### M1 current verification
+
+T-05 local lint, typecheck, unit coverage, three-browser smoke tests, build, size and package/docs checks passed. CI verification follows the implementation push. M1 case design is recorded before implementation in qa/test-cases.md.
