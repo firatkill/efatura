@@ -1011,6 +1011,63 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-028",
+      "ac_reference": "FR-08",
+      "milestone": "M1 Model + core parser",
+      "title": "Tax and withholding",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All tax fields, ordinary/withholding list selection, exact percent values, ratios and unknown/absent values pass UT-18; actual tax mapping also passes the T-13 line merge integration.",
+          "note": "All tax fields, ordinary/withholding list selection, exact percent values, ratios and unknown/absent values pass UT-18; actual tax mapping also passes the T-13 line merge integration."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-029",
+      "ac_reference": "FR-09, FR-10",
+      "milestone": "M1 Model + core parser",
+      "title": "Totals allowances payments",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All seven totals and all payment means/terms fields pass UT-19, preserving exact decimals and missing aggregates. Full local suite: 142 units, lint/typecheck, 100% lines/96.67% branches, browsers, build/size/docs.",
+          "note": "All seven totals and all payment means/terms fields pass UT-19, preserving exact decimals and missing aggregates. Full local suite: 142 units, lint/typecheck, 100% lines/96.67% branches, browsers, build/size/docs."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-030",
+      "ac_reference": "FR-08, FR-09",
+      "milestone": "M1 Model + core parser",
+      "title": "Computed totals",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "UT-21 passes exact computed sums, document withholding precedence and line fallback, unknown tax kinds, null amounts, TRY/TL/YTL and foreign conversion with valid/missing/invalid rate.",
+          "note": "UT-21 passes exact computed sums, document withholding precedence and line fallback, unknown tax kinds, null amounts, TRY/TL/YTL and foreign conversion with valid/missing/invalid rate."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

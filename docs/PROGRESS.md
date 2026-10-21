@@ -28,8 +28,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-10 | Code lists and their verification                                  | done   | 1a582d0          |
 | T-11 | Identity, references, exchange rate and due date mapping           | doing  | —                |
 | T-12 | Party mapping                                                      | done   | b2c6a5b          |
-| T-13 | Line, item, price, delivery and allowance mapping                  | doing  | —                |
-| T-14 | Taxes, withholding, totals, payment and computed totals            | todo   | —                |
+| T-13 | Line, item, price, delivery and allowance mapping                  | done   | 3c150f0          |
+| T-14 | Taxes, withholding, totals, payment and computed totals            | doing  | —                |
 | T-15 | Attachments and base64                                             | todo   | —                |
 | T-16 | `parseInvoice` orchestration                                       | todo   | —                |
 | T-17 | Issue framework, catalogue and messages                            | todo   | —                |
@@ -95,4 +95,6 @@ T-12 independent party/address/contact field mapping is implemented; targeted UT
 
 T-12 tax-ID resolution and approved EF015 details are complete. Local checks passed: 118 unit tests, 100% line and 97.60% branch coverage, lint/typecheck, browser suite and build/size/docs. CI run 39578422078 passed all jobs.
 
-T-13 local acceptance passed: 122 unit tests, 100% line and 96.26% branch coverage, lint/typecheck, browser suite and build/size/docs. Tax conversion is injected through the typed boundary until T-14. CI pending.
+T-13 local acceptance passed: 122 unit tests, 100% line and 96.26% branch coverage, lint/typecheck, browser suite and build/size/docs. Tax conversion is injected through the typed boundary until T-14. CI run 39578874259 passed all jobs.
+
+T-14 local acceptance passed: 142 unit tests, 100% lines and 96.67% branches, lint/typecheck, browser suite, build/size/docs. CI pending.

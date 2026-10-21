@@ -1,6 +1,6 @@
-import type { DueDate } from '../types';
+import type { DueDate, PaymentMeans, PaymentTerms } from '../types';
 import type { XmlElement } from '../xml/tree';
-import { children, text, textOf } from '../xml/query';
+import { child, children, text, textOf } from '../xml/query';
 import { at } from './context';
 import type { MappingContext } from './context';
 
@@ -53,4 +53,49 @@ export function mapDueDate(root: XmlElement, context: MappingContext): DueDate |
     }
   }
   return null;
+}
+
+import { amount, decimalValue } from './values';
+
+/** Map payment instructions and payee financial-account details (TRD §7.8.3).
+ * @example
+ * mapPaymentMeans(element, context).accountId;
+ */
+export function mapPaymentMeans(el: XmlElement, context: MappingContext): PaymentMeans {
+  const read = (name: string) => textOf(el, 'cbc', name, context);
+  const account = child(el, 'cac', 'PayeeFinancialAccount', context);
+  const accountContext = at(context, 'cac', 'PayeeFinancialAccount');
+  const branch = child(account, 'cac', 'FinancialInstitutionBranch', accountContext);
+  const branchContext = at(accountContext, 'cac', 'FinancialInstitutionBranch');
+  return {
+    code: read('PaymentMeansCode'),
+    dueDate: read('PaymentDueDate'),
+    channelCode: read('PaymentChannelCode'),
+    instructionNote: read('InstructionNote'),
+    accountId: textOf(account, 'cbc', 'ID', accountContext),
+    accountCurrency: textOf(account, 'cbc', 'CurrencyCode', accountContext),
+    paymentNote: textOf(account, 'cbc', 'PaymentNote', accountContext),
+    bankBranchName: textOf(branch, 'cbc', 'Name', branchContext),
+    bankName: textOf(
+      child(branch, 'cac', 'FinancialInstitution', branchContext),
+      'cbc',
+      'Name',
+      at(branchContext, 'cac', 'FinancialInstitution'),
+    ),
+  };
+}
+/** Map payment terms, preserving exact surcharge and amount values.
+ * @example
+ * mapPaymentTerms(element, context).penaltySurchargePercent;
+ */
+export function mapPaymentTerms(el: XmlElement, context: MappingContext): PaymentTerms {
+  const percent = child(el, 'cbc', 'PenaltySurchargePercent', context);
+  return {
+    note: textOf(el, 'cbc', 'Note', context),
+    penaltySurchargePercent: percent
+      ? decimalValue(text(percent) ?? '', at(context, 'cbc', 'PenaltySurchargePercent'))
+      : null,
+    amount: amount(child(el, 'cbc', 'Amount', context), at(context, 'cbc', 'Amount')),
+    dueDate: textOf(el, 'cbc', 'PaymentDueDate', context),
+  };
 }
