@@ -98,6 +98,25 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-003",
+      "ac_reference": "NFR-17",
+      "milestone": "M0 Setup",
+      "title": "Tooling CI is green",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "GitHub CI run 39562383817 passed lint and typecheck on Node 22.",
+          "note": "GitHub CI run 39562383817 passed lint and typecheck on Node 22."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
