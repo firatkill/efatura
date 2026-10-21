@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import {
   CODE_LISTS_VERIFIED,
@@ -106,4 +107,12 @@ describe('UT-13 verified code lists', () => {
     expect(CURRENCIES.get('AZN')?.label.tr).toBe('Azerbaycan manatı');
     expect(CURRENCIES.get('AUD')?.label.tr).toBe(CURRENCIES.get('AUD')?.label.en);
   });
+});
+
+it('TC-M1-019 / UT-13: currency storage preserves every verified record byte-for-byte', () => {
+  expect(
+    createHash('sha256')
+      .update(JSON.stringify([...CURRENCIES]))
+      .digest('hex'),
+  ).toBe('d41c542595c30774e0cc68b7818d5c067fbaaa1c95adc54497b3cb462e5fff8f');
 });

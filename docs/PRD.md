@@ -799,6 +799,7 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-77 | A-08/A-10 verified; retain the anonymous TCKN and 3-character prefix + 4-digit year + 9-digit sequence format. | GİB [e-Arşiv answer 21008](https://forum.efatura.gov.tr/view.php?id=21008) confirms the anonymous-consumer placeholder; UBL-TR Fatura guide §2.3.5 in the [official guide bundle](https://ebelge.gib.gov.tr/dosyalar/kilavuzlar/UBLTR_1.2.1_Kilavuzlar.zip) specifies the invoice-number structure. | Verified 2026-10-21, T-19 |
 | D-78 | Use `(none)` for absent EF025 currency and EF061 percent parameters when their rule predicates otherwise trigger. | Reuses the existing diagnostic missing-value convention without suppressing applicable rules. | Owner approved, 2026-10-21 |
 | D-79 | Specialize the bundled pinned parser for fixed false numeric/HTML-entity options and true preserveOrder, with version/source/option guards and output equivalence tests. | Removes unreachable modes to meet unchanged size limits; retains XML entities, decoder and all HTML/XML security checks. See docs/T20-BUNDLE-PROPOSAL.md. | Owner approved, 2026-10-21 |
+| D-80 | Continue behavior-preserving internal size optimization after the T-22 QA three-failure check-in. | Retain all size budgets, tests, messages and approved parser guards. | Owner approved, 2026-10-21 |
 
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
