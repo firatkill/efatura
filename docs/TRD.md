@@ -64,20 +64,20 @@ The core is a pure function pipeline: bytes → text → XML tree → model → 
 
 ### 1.2 Module dependency rules
 
-| Module (under `src/`) | May import | Must not import |
-|---|---|---|
-| `config.ts`, `errors.ts`, `internal/*` | nothing in `src/` except each other | everything else |
-| `decimal/*`, `ids/*` | `config`, `errors` | `xml`, `model`, any Node built-in |
-| `xml/*` | `config`, `errors`, `internal`, `fast-xml-parser` | `model`, `validate`, `fflate` |
-| `codes/*` | nothing | anything |
-| `model/*` | `xml`, `codes`, `decimal`, `ids`, `config`, `internal` | `validate`, `batch`, `zip`, `export` |
-| `validate/*` | `model` (types), `decimal`, `ids`, `codes`, `config` | `xml` (except `xml/path.ts` for path strings), `batch`, `zip` |
-| `attachments/*` | `config`, `errors`, `model` (types) | `xml`, `validate`, `batch`, `zip`, `export` |
-| `parse.ts` | `xml`, `model`, `validate` | `batch`, `zip`, `export` |
-| `batch/*` | `parse`, `validate` (catalogue and issue factory for EF090/EF091 and `rules` overrides), `errors`, `internal`, `config` | `fflate`, Node built-ins |
-| `export/*` | `model` (types), `decimal`, `codes` | `xml`, `batch` (runtime), `zip` |
-| `zip/*` (bundled into `dist/zip.*`) | `fflate`, and the core only through the package self-reference `@firatkill/efatura` | relative imports of core files |
-| `cli/*` (bundled into `dist/cli.js`) | Node built-ins (`node:*`), `@firatkill/efatura`, `@firatkill/efatura/zip` | relative imports of core or zip files |
+| Module (under `src/`)                  | May import                                                                                                              | Must not import                                               |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `config.ts`, `errors.ts`, `internal/*` | nothing in `src/` except each other                                                                                     | everything else                                               |
+| `decimal/*`, `ids/*`                   | `config`, `errors`                                                                                                      | `xml`, `model`, any Node built-in                             |
+| `xml/*`                                | `config`, `errors`, `internal`, `fast-xml-parser`                                                                       | `model`, `validate`, `fflate`                                 |
+| `codes/*`                              | nothing                                                                                                                 | anything                                                      |
+| `model/*`                              | `xml`, `codes`, `decimal`, `ids`, `config`, `internal`                                                                  | `validate`, `batch`, `zip`, `export`                          |
+| `validate/*`                           | `model` (types), `decimal`, `ids`, `codes`, `config`                                                                    | `xml` (except `xml/path.ts` for path strings), `batch`, `zip` |
+| `attachments/*`                        | `config`, `errors`, `model` (types)                                                                                     | `xml`, `validate`, `batch`, `zip`, `export`                   |
+| `parse.ts`                             | `xml`, `model`, `validate`                                                                                              | `batch`, `zip`, `export`                                      |
+| `batch/*`                              | `parse`, `validate` (catalogue and issue factory for EF090/EF091 and `rules` overrides), `errors`, `internal`, `config` | `fflate`, Node built-ins                                      |
+| `export/*`                             | `model` (types), `decimal`, `codes`                                                                                     | `xml`, `batch` (runtime), `zip`                               |
+| `zip/*` (bundled into `dist/zip.*`)    | `fflate`, and the core only through the package self-reference `@firatkill/efatura`                                     | relative imports of core files                                |
+| `cli/*` (bundled into `dist/cli.js`)   | Node built-ins (`node:*`), `@firatkill/efatura`, `@firatkill/efatura/zip`                                               | relative imports of core or zip files                         |
 
 Type-only imports (`import type`) from `src/types.ts` are allowed in every module (for example `export/*` uses the `BatchItem` type). ESLint enforces the Node built-in ban (section 17.3). The self-reference rule exists so that `dist/zip.*` and `dist/cli.js` share one copy of the core with the consumer (one `EfaturaParseError` class, no dual-package hazard).
 
@@ -96,27 +96,27 @@ Type-only imports (`import type`) from `src/types.ts` are allowed in every modul
 
 Pin every version at T-01 with `pnpm view <pkg> version` (latest stable of the major listed). The majors are expectations; if a newer major is current, use it only after checking the API used in this spec still exists, and record a decision (A-14).
 
-| Area | Package | Expected major | Scope |
-|---|---|---|---|
-| XML parsing | `fast-xml-parser` | 5 | runtime dependency |
-| ZIP | `fflate` | 0.8 | runtime dependency |
-| Language | `typescript` | 5 (latest stable) | dev |
-| Build | `tsup` | 8 | dev |
-| Script runner | `tsx` | 4 | dev |
-| Tests | `vitest`, `@vitest/coverage-v8`, `@vitest/browser-playwright` | 4 | dev |
-| Browsers for tests | `playwright` | 1 | dev |
-| Property tests | `fast-check` | 4 | dev |
-| Lint | `eslint`, `typescript-eslint`, `@eslint/js`, `eslint-config-prettier` | 9, 8, 9, 10 | dev |
-| Format | `prettier` | 3 | dev |
-| Versioning | `@changesets/cli`, `@changesets/changelog-github` | 2, 0 | dev |
-| Package checks | `size-limit`, `@size-limit/preset-small-lib`, `publint`, `@arethetypeswrong/cli` | 11, 11, 0, 0 | dev |
-| Playground build | `vite` | 7 | playground dev |
-| Playground E2E | `@playwright/test`, `@axe-core/playwright` | 1, 4 | playground dev |
-| Playground sanitiser | `dompurify` | 3 | playground dependency |
-| Playground Excel (lazy) | `write-excel-file` | 2 | playground dependency |
-| Playground fonts | `@fontsource/schibsted-grotesk`, `@fontsource/jetbrains-mono` | 5 | playground dependency |
-| Runtime | Node | 20, 22, 24 | `.nvmrc` = `22` |
-| Package manager | pnpm | 10 | `packageManager` field |
+| Area                    | Package                                                                          | Expected major    | Scope                  |
+| ----------------------- | -------------------------------------------------------------------------------- | ----------------- | ---------------------- |
+| XML parsing             | `fast-xml-parser`                                                                | 5                 | runtime dependency     |
+| ZIP                     | `fflate`                                                                         | 0.8               | runtime dependency     |
+| Language                | `typescript`                                                                     | 5 (latest stable) | dev                    |
+| Build                   | `tsup`                                                                           | 8                 | dev                    |
+| Script runner           | `tsx`                                                                            | 4                 | dev                    |
+| Tests                   | `vitest`, `@vitest/coverage-v8`, `@vitest/browser-playwright`                    | 4                 | dev                    |
+| Browsers for tests      | `playwright`                                                                     | 1                 | dev                    |
+| Property tests          | `fast-check`                                                                     | 4                 | dev                    |
+| Lint                    | `eslint`, `typescript-eslint`, `@eslint/js`, `eslint-config-prettier`            | 9, 8, 9, 10       | dev                    |
+| Format                  | `prettier`                                                                       | 3                 | dev                    |
+| Versioning              | `@changesets/cli`, `@changesets/changelog-github`                                | 2, 0              | dev                    |
+| Package checks          | `size-limit`, `@size-limit/preset-small-lib`, `publint`, `@arethetypeswrong/cli` | 11, 11, 0, 0      | dev                    |
+| Playground build        | `vite`                                                                           | 7                 | playground dev         |
+| Playground E2E          | `@playwright/test`, `@axe-core/playwright`                                       | 1, 4              | playground dev         |
+| Playground sanitiser    | `dompurify`                                                                      | 3                 | playground dependency  |
+| Playground Excel (lazy) | `write-excel-file`                                                               | 2                 | playground dependency  |
+| Playground fonts        | `@fontsource/schibsted-grotesk`, `@fontsource/jetbrains-mono`                    | 5                 | playground dependency  |
+| Runtime                 | Node                                                                             | 20, 22, 24        | `.nvmrc` = `22`        |
+| Package manager         | pnpm                                                                             | 10                | `packageManager` field |
 
 TypeScript compiler options (normative, `tsconfig.json`):
 
@@ -141,11 +141,11 @@ TypeScript compiler options (normative, `tsconfig.json`):
     "types": [],
     "paths": {
       "@firatkill/efatura": ["./src/index.ts"],
-      "@firatkill/efatura/zip": ["./src/zip.ts"]
-    }
+      "@firatkill/efatura/zip": ["./src/zip.ts"],
+    },
   },
   "include": ["src"],
-  "exclude": ["src/cli"]
+  "exclude": ["src/cli"],
 }
 ```
 
@@ -245,7 +245,22 @@ Replace `<exact>` with pinned versions at T-01.
   "name": "@firatkill/efatura",
   "version": "0.0.0",
   "description": "Parse Turkish e-invoices (UBL-TR e-Fatura and e-Arşiv) into typed data. Works in Node and the browser.",
-  "keywords": ["e-fatura", "efatura", "e-arsiv", "ubl-tr", "ubl", "gib", "invoice", "fatura", "turkey", "turkiye", "kdv", "tevkifat", "xml", "parser"],
+  "keywords": [
+    "e-fatura",
+    "efatura",
+    "e-arsiv",
+    "ubl-tr",
+    "ubl",
+    "gib",
+    "invoice",
+    "fatura",
+    "turkey",
+    "turkiye",
+    "kdv",
+    "tevkifat",
+    "xml",
+    "parser"
+  ],
   "license": "MIT",
   "author": "Fırat Kıl",
   "homepage": "https://efatura.firatkil.com",
@@ -457,7 +472,19 @@ export const ANONYMOUS_TCKN = '11111111111';
 export const TRY_ALIASES = ['TL', 'YTL'] as const;
 
 /** Supported declared encodings (FR-02), lower-case labels. */
-export const SUPPORTED_ENCODINGS = ['utf-8', 'utf8', 'utf-16', 'utf-16le', 'utf-16be', 'windows-1254', 'iso-8859-9', 'iso-8859-1', 'latin1', 'us-ascii', 'ascii'] as const;
+export const SUPPORTED_ENCODINGS = [
+  'utf-8',
+  'utf8',
+  'utf-16',
+  'utf-16le',
+  'utf-16be',
+  'windows-1254',
+  'iso-8859-9',
+  'iso-8859-1',
+  'latin1',
+  'us-ascii',
+  'ascii',
+] as const;
 
 /** Duplicate tracking in batches. */
 export const DEFAULT_DUPLICATES = 'flag' as const;
@@ -482,16 +509,16 @@ The playground imports `PLAYGROUND` through a dedicated export `efaturaConfig` (
 
 ### 4.1 Why these numbers
 
-| Constant | Reason |
-|---|---|
-| `MAX_XML_BYTES` 50 MB | The largest real invoices with embedded PDFs and XSLTs are a few MB; 50 MB stops accidental multi-GB inputs. |
-| Tolerance 0.01 | One kuruş/cent; issuers round per line and per subtotal. |
-| `LINE_TAX_TOLERANCE_STEP` 0.005 | Each line's tax can be off by half a minor unit after rounding; n lines can drift by n × 0.005. |
-| ZIP depth 3 | GİB and integrator exports nest at most two levels (archive → monthly ZIP → per-invoice ZIP); 3 leaves one spare. |
-| 5,000 entries, 500 MB | A mid-size company's full year of invoices fits; bombs do not. |
-| Ratio 100 above 1 MB | XML compresses 5–20×; base64 XSLT 1.3–4×; 100× above 1 MB is not a real invoice. Small files can legitimately exceed 100× (repetitive whitespace), so they are exempt; the size limits still bound them. |
-| Yield 50 ms | Keeps worker message latency (Cancel) and main-thread use (Node consumers) under the 100 ms responsiveness bar. |
-| Retain 256 MB | The worker keeps decompressed XML for fast detail views up to this budget; beyond it, detail re-reads the source. |
+| Constant                        | Reason                                                                                                                                                                                                   |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MAX_XML_BYTES` 50 MB           | The largest real invoices with embedded PDFs and XSLTs are a few MB; 50 MB stops accidental multi-GB inputs.                                                                                             |
+| Tolerance 0.01                  | One kuruş/cent; issuers round per line and per subtotal.                                                                                                                                                 |
+| `LINE_TAX_TOLERANCE_STEP` 0.005 | Each line's tax can be off by half a minor unit after rounding; n lines can drift by n × 0.005.                                                                                                          |
+| ZIP depth 3                     | GİB and integrator exports nest at most two levels (archive → monthly ZIP → per-invoice ZIP); 3 leaves one spare.                                                                                        |
+| 5,000 entries, 500 MB           | A mid-size company's full year of invoices fits; bombs do not.                                                                                                                                           |
+| Ratio 100 above 1 MB            | XML compresses 5–20×; base64 XSLT 1.3–4×; 100× above 1 MB is not a real invoice. Small files can legitimately exceed 100× (repetitive whitespace), so they are exempt; the size limits still bound them. |
+| Yield 50 ms                     | Keeps worker message latency (Cancel) and main-thread use (Node consumers) under the 100 ms responsiveness bar.                                                                                          |
+| Retain 256 MB                   | The worker keeps decompressed XML for fast detail views up to this budget; beyond it, detail re-reads the source.                                                                                        |
 
 ## 5. Public API
 
@@ -522,7 +549,16 @@ export { toRows, INVOICE_COLUMNS, LINE_COLUMNS } from './export/rows';
 export { toCsv } from './export/csv';
 
 // code lists
-export { PROFILES, INVOICE_TYPES, TAX_TYPES, WITHHOLDING_CODES, EXEMPTION_CODES, UNIT_CODES, CURRENCIES, CODE_LISTS_VERIFIED } from './codes';
+export {
+  PROFILES,
+  INVOICE_TYPES,
+  TAX_TYPES,
+  WITHHOLDING_CODES,
+  EXEMPTION_CODES,
+  UNIT_CODES,
+  CURRENCIES,
+  CODE_LISTS_VERIFIED,
+} from './codes';
 
 // errors and config
 export { EfaturaParseError } from './errors';
@@ -575,8 +611,8 @@ Behaviour:
 import { parseInvoice, decimal } from '@firatkill/efatura';
 
 const { invoice, issues } = parseInvoice(xmlText);
-invoice.totals.payableAmount?.value;           // "1200.00" (fixture S01)
-invoice.supplier?.taxId;                         // { scheme: 'VKN', value: '9990000013', ... }
+invoice.totals.payableAmount?.value; // "1200.00" (fixture S01)
+invoice.supplier?.taxId; // { scheme: 'VKN', value: '9990000013', ... }
 issues.filter((i) => i.severity === 'error');
 decimal.sum(invoice.lines.map((l) => l.lineExtensionAmount?.value ?? '0')); // "1000.00"
 ```
@@ -617,36 +653,51 @@ export interface SourceRef {
 }
 
 export type BatchItem =
-  | { kind: 'invoice'; source: SourceRef; invoice: Invoice; issues: Issue[]; encoding: string; bytes?: Uint8Array }
+  | {
+      kind: 'invoice';
+      source: SourceRef;
+      invoice: Invoice;
+      issues: Issue[];
+      encoding: string;
+      bytes?: Uint8Array;
+    }
   | { kind: 'duplicate'; source: SourceRef; uuid: string; firstSource: string }
   | { kind: 'error'; source: SourceRef; error: ItemError }
-  | { kind: 'skipped'; source: SourceRef; reason: 'unsupported-type' };   // junk entries (section 10.3) yield nothing
+  | { kind: 'skipped'; source: SourceRef; reason: 'unsupported-type' }; // junk entries (section 10.3) yield nothing
 
 export interface ItemError {
-  code: EfaturaParseErrorCode | ZipErrorCode | BatchErrorCode;   // BatchErrorCode = 'READ_FAILED' | 'ZIP_INPUT_REQUIRES_ZIP_ENTRY' (section 10.4)
+  code: EfaturaParseErrorCode | ZipErrorCode | BatchErrorCode; // BatchErrorCode = 'READ_FAILED' | 'ZIP_INPUT_REQUIRES_ZIP_ENTRY' (section 10.4)
   message: string;
   messageTr: string;
   details?: Record<string, string | number>;
 }
 
 export interface BatchProgress {
-  filesDone: number;          // items yielded so far (all kinds)
-  filesTotal: number | null;  // known only for plain XML inputs without archives
-  bytesDone: number;          // compressed bytes consumed from top-level inputs
-  bytesTotal: number | null;  // sum of top-level input sizes when known
+  filesDone: number; // items yielded so far (all kinds)
+  filesTotal: number | null; // known only for plain XML inputs without archives
+  bytesDone: number; // compressed bytes consumed from top-level inputs
+  bytesTotal: number | null; // sum of top-level input sizes when known
   invoices: number;
   failed: number;
   currentPath: string | null;
 }
 
 export interface BatchSummary {
-  files: number; archives: number; invoices: number; duplicates: number;
-  failed: number; skipped: number;
+  files: number;
+  archives: number;
+  invoices: number;
+  duplicates: number;
+  failed: number;
+  skipped: number;
   issues: { error: number; warning: number; info: number };
-  invoicesWithErrors: number; invoicesWithWarnings: number;
+  invoicesWithErrors: number;
+  invoicesWithWarnings: number;
 }
 
-export interface BatchResult { items: BatchItem[]; summary: BatchSummary }
+export interface BatchResult {
+  items: BatchItem[];
+  summary: BatchSummary;
+}
 
 export interface DuplicateTracker {
   /** Returns the first source path if the UUID was seen, else records it and returns null. */
@@ -656,8 +707,14 @@ export interface DuplicateTracker {
   reset(): void;
 }
 
-export function iterateMany(files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>, options?: BatchOptions): AsyncGenerator<BatchItem, BatchSummary, undefined>;
-export function parseMany(files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>, options?: BatchOptions): Promise<BatchResult>;
+export function iterateMany(
+  files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>,
+  options?: BatchOptions,
+): AsyncGenerator<BatchItem, BatchSummary, undefined>;
+export function parseMany(
+  files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>,
+  options?: BatchOptions,
+): Promise<BatchResult>;
 export function createDuplicateTracker(): DuplicateTracker;
 ```
 
@@ -667,8 +724,12 @@ export function createDuplicateTracker(): DuplicateTracker;
 
 ```ts
 export interface ZipLimits {
-  maxDepth: number; maxEntries: number; maxTotalBytes: number;
-  maxEntryBytes: number; maxRatio: number; ratioMinBytes: number;
+  maxDepth: number;
+  maxEntries: number;
+  maxTotalBytes: number;
+  maxEntryBytes: number;
+  maxRatio: number;
+  ratioMinBytes: number;
 }
 
 export interface ZipOptions extends BatchOptions {
@@ -680,10 +741,19 @@ export interface ZipOptions extends BatchOptions {
 }
 
 export function isZip(bytes: Uint8Array): boolean;
-export function iterateZip(input: Uint8Array | ArrayBuffer | Blob, options?: ZipOptions): AsyncGenerator<BatchItem, BatchSummary, undefined>;
+export function iterateZip(
+  input: Uint8Array | ArrayBuffer | Blob,
+  options?: ZipOptions,
+): AsyncGenerator<BatchItem, BatchSummary, undefined>;
 export function parseZip(input: Uint8Array | ArrayBuffer | Blob, options?: ZipOptions): Promise<BatchResult>;
-export function iterateAny(files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>, options?: ZipOptions): AsyncGenerator<BatchItem, BatchSummary, undefined>;
-export function parseAny(files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>, options?: ZipOptions): Promise<BatchResult>;
+export function iterateAny(
+  files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>,
+  options?: ZipOptions,
+): AsyncGenerator<BatchItem, BatchSummary, undefined>;
+export function parseAny(
+  files: Iterable<InputFile | File> | AsyncIterable<InputFile | File>,
+  options?: ZipOptions,
+): Promise<BatchResult>;
 export { DEFAULT_ZIP_LIMITS };
 ```
 
@@ -694,22 +764,38 @@ Algorithm and error codes: section 10.
 ```ts
 export type RowLevel = 'invoice' | 'line';
 export type ColumnType = 'string' | 'decimal' | 'integer' | 'date' | 'boolean';
-export interface ColumnDef { key: string; en: string; tr: string; type: ColumnType }
+export interface ColumnDef {
+  key: string;
+  en: string;
+  tr: string;
+  type: ColumnType;
+}
 export type RowValue = string | number | boolean | null;
 export type Row = Record<string, RowValue>;
-export interface RowSet { level: RowLevel; columns: readonly ColumnDef[]; rows: Row[] }
+export interface RowSet {
+  level: RowLevel;
+  columns: readonly ColumnDef[];
+  rows: Row[];
+}
 
-export interface RowInput { invoice: Invoice; issues?: Issue[]; source?: SourceRef }
+export interface RowInput {
+  invoice: Invoice;
+  issues?: Issue[];
+  source?: SourceRef;
+}
 
-export function toRows(invoices: Iterable<Invoice | RowInput | BatchItem>, options: { level: RowLevel; labels?: 'en' | 'tr' }): RowSet;   // labels: language of label-valued cells (unit_label), default 'en'
+export function toRows(
+  invoices: Iterable<Invoice | RowInput | BatchItem>,
+  options: { level: RowLevel; labels?: 'en' | 'tr' },
+): RowSet; // labels: language of label-valued cells (unit_label), default 'en'
 
 export interface CsvOptions {
-  delimiter?: ';' | ',';                     // default ';'
-  bom?: boolean;                              // default true
-  decimalSeparator?: '.' | ',';               // default ',' when delimiter is ';', else '.'
-  headers?: 'key' | 'en' | 'tr' | 'none';     // default 'key'
-  newline?: '\r\n' | '\n';                    // default '\r\n'
-  escapeFormulas?: boolean;                   // default true
+  delimiter?: ';' | ','; // default ';'
+  bom?: boolean; // default true
+  decimalSeparator?: '.' | ','; // default ',' when delimiter is ';', else '.'
+  headers?: 'key' | 'en' | 'tr' | 'none'; // default 'key'
+  newline?: '\r\n' | '\n'; // default '\r\n'
+  escapeFormulas?: boolean; // default true
 }
 export function toCsv(rowSet: RowSet, options?: CsvOptions): string;
 ```
@@ -719,7 +805,8 @@ export function toCsv(rowSet: RowSet, options?: CsvOptions): string;
 ### 5.6 Errors (normative)
 
 ```ts
-export type EfaturaParseErrorCode = 'EMPTY_INPUT' | 'INPUT_TOO_LARGE' | 'NOT_XML' | 'DOCTYPE_FORBIDDEN' | 'NOT_INVOICE';
+export type EfaturaParseErrorCode =
+  'EMPTY_INPUT' | 'INPUT_TOO_LARGE' | 'NOT_XML' | 'DOCTYPE_FORBIDDEN' | 'NOT_INVOICE';
 
 export class EfaturaParseError extends Error {
   override readonly name = 'EfaturaParseError';
@@ -732,13 +819,13 @@ export class EfaturaParseError extends Error {
 }
 ```
 
-| Code | When | `message` (English) | `messageTr` |
-|---|---|---|---|
-| `EMPTY_INPUT` | Input has 0 bytes, or only whitespace/BOM | `Input is empty.` | `Girdi boş.` |
-| `INPUT_TOO_LARGE` | Byte length > `maxBytes` | `Input is {size} bytes; the limit is {limit} bytes.` | `Girdi {size} bayt; sınır {limit} bayt.` |
-| `NOT_XML` | `XMLValidator.validate` fails, `XMLParser.parse` throws, or no root element | `Input is not well-formed XML (line {line}, column {column}): {reason}` | `Girdi geçerli bir XML değil (satır {line}, sütun {column}): {reason}` |
-| `DOCTYPE_FORBIDDEN` | `<!DOCTYPE` appears before the root element | `DOCTYPE declarations are not allowed.` | `DOCTYPE bildirimlerine izin verilmez.` |
-| `NOT_INVOICE` | Root local name is not `Invoice` | `Root element is {root}, not Invoice.` | `Kök eleman Invoice değil, {root}.` |
+| Code                | When                                                                        | `message` (English)                                                     | `messageTr`                                                            |
+| ------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `EMPTY_INPUT`       | Input has 0 bytes, or only whitespace/BOM                                   | `Input is empty.`                                                       | `Girdi boş.`                                                           |
+| `INPUT_TOO_LARGE`   | Byte length > `maxBytes`                                                    | `Input is {size} bytes; the limit is {limit} bytes.`                    | `Girdi {size} bayt; sınır {limit} bayt.`                               |
+| `NOT_XML`           | `XMLValidator.validate` fails, `XMLParser.parse` throws, or no root element | `Input is not well-formed XML (line {line}, column {column}): {reason}` | `Girdi geçerli bir XML değil (satır {line}, sütun {column}): {reason}` |
+| `DOCTYPE_FORBIDDEN` | `<!DOCTYPE` appears before the root element                                 | `DOCTYPE declarations are not allowed.`                                 | `DOCTYPE bildirimlerine izin verilmez.`                                |
+| `NOT_INVOICE`       | Root local name is not `Invoice`                                            | `Root element is {root}, not Invoice.`                                  | `Kök eleman Invoice değil, {root}.`                                    |
 
 `{reason}` is fast-xml-parser's English validator message (not translated). `instanceof EfaturaParseError` works across the core, zip and CLI bundles because of the self-reference rule (section 1.2). `Object.setPrototypeOf(this, new.target.prototype)` is called in the constructor for CJS consumers.
 
@@ -747,33 +834,41 @@ export class EfaturaParseError extends Error {
 ```ts
 export const decimal: {
   isDecimal(value: string): boolean;
-  normalize(value: string): Decimal;            // canonical form, keeps scale ("+1.50" → "1.50", "-0.00" → "0.00", ".5" → "0.5")
+  normalize(value: string): Decimal; // canonical form, keeps scale ("+1.50" → "1.50", "-0.00" → "0.00", ".5" → "0.5")
   add(a: Decimal, b: Decimal): Decimal;
   sub(a: Decimal, b: Decimal): Decimal;
   mul(a: Decimal, b: Decimal): Decimal;
   neg(a: Decimal): Decimal;
   abs(a: Decimal): Decimal;
   cmp(a: Decimal, b: Decimal): -1 | 0 | 1;
-  eq(a: Decimal, b: Decimal): boolean;          // numeric equality ("1.0" eq "1.00")
-  sum(values: Iterable<Decimal>): Decimal;      // "0" for empty input
+  eq(a: Decimal, b: Decimal): boolean; // numeric equality ("1.0" eq "1.00")
+  sum(values: Iterable<Decimal>): Decimal; // "0" for empty input
   round(a: Decimal, scale: number, mode?: 'half-away-from-zero' | 'half-even'): Decimal;
-  div(a: Decimal, b: Decimal, scale: number): Decimal;           // a / b rounded half away from zero to `scale`; RangeError when b is zero
-  movePoint(a: Decimal, places: number): Decimal;               // multiply by 10^places exactly (negative = divide), e.g. percent → fraction
-  within(a: Decimal, b: Decimal, tolerance: Decimal): boolean;   // |a − b| ≤ tolerance
+  div(a: Decimal, b: Decimal, scale: number): Decimal; // a / b rounded half away from zero to `scale`; RangeError when b is zero
+  movePoint(a: Decimal, places: number): Decimal; // multiply by 10^places exactly (negative = divide), e.g. percent → fraction
+  within(a: Decimal, b: Decimal, tolerance: Decimal): boolean; // |a − b| ≤ tolerance
   scale(a: Decimal): number;
 };
 
-export function toMinorUnits(amount: Decimal, currency: string, options?: { rounding?: 'half-away-from-zero' | 'throw'; minorUnits?: number }): bigint;
+export function toMinorUnits(
+  amount: Decimal,
+  currency: string,
+  options?: { rounding?: 'half-away-from-zero' | 'throw'; minorUnits?: number },
+): bigint;
 export function minorUnitsOf(currency: string): number | null;
 
 export function isValidVkn(value: string): boolean;
 export function isValidTckn(value: string): boolean;
 export function isValidUuid(value: string): boolean;
-export function classifyTaxId(value: string): { scheme: 'VKN' | 'TCKN' | null; valid: boolean; anonymous: boolean };
+export function classifyTaxId(value: string): {
+  scheme: 'VKN' | 'TCKN' | null;
+  valid: boolean;
+  anonymous: boolean;
+};
 
-export function decodeAttachment(attachment: Attachment): Uint8Array;   // throws TypeError if base64 is null or invalid
-export function attachmentText(attachment: Attachment): string;        // decodes bytes with characterSetCode (default UTF-8)
-export function findXslt(invoice: Invoice): Attachment | null;         // first attachment with isXslt === true
+export function decodeAttachment(attachment: Attachment): Uint8Array; // throws TypeError if base64 is null or invalid
+export function attachmentText(attachment: Attachment): string; // decodes bytes with characterSetCode (default UTF-8)
+export function findXslt(invoice: Invoice): Attachment | null; // first attachment with isXslt === true
 
 export function decodeXml(input: XmlInput): { text: string; encoding: string; issues: Issue[] };
 
@@ -894,30 +989,30 @@ Helpers (internal): `text(el)` returns `el.text.trim()` or `null` when empty; `a
 
 The parser must handle each of these without throwing. The fixture column names the scenario that proves it (section 15.4).
 
-| ID | Variation | Handling | Fixture |
-|---|---|---|---|
-| V-01 | Prefixes other than `cbc`/`cac` (`b:`, `a:`, `ns2:`), or default namespace redeclared on each element. | Resolved by URI (section 6.4). | S20, S21 |
-| V-02 | cbc/cac elements written without prefix inside the Invoice default namespace, or with undeclared prefixes. | Tolerant match + EF009. | S21 |
-| V-03 | UTF-8 BOM, UTF-16 with BOM, `encoding="windows-1254"` or `iso-8859-9`, missing XML declaration. | Section 6.1. | S22, S23, S24 |
-| V-04 | Whitespace, tabs and newlines around values; CRLF line ends. | All text values are trimmed. | S22 |
-| V-05 | Empty elements (`<cbc:CityName/>`). | Treated as absent (`null`). | S19 |
-| V-06 | Decimal comma in an amount (`1000,50`). | Normalised to a dot, EF031. | S22 |
-| V-07 | Exchange rate only in `TaxExchangeRate` or in a note (`Döviz Kuru: 40,6467`). | Section 7.4, EF023. | S03 |
-| V-08 | Due date only in a note (`Vade Tarihi : 29.11.2025`). | Section 7.4.2. | S03 |
-| V-09 | Withholding at line level, at invoice level, or both. | Both kept; computed totals prefer invoice level. | S06, S07 |
-| V-10 | `PayableAmount` not reduced by the withholding amount. | EF044 warning instead of EF043 error. | S08 |
-| V-11 | Several `PartyIdentification` elements (MERSISNO, TICARETSICILNO, HIZMETNO, MUSTERINO), lower-case `schemeID="vkn"`, or no `schemeID`. | Tax ID algorithm (section 7.5.1), EF015. | S19 |
-| V-12 | Individuals with `cac:Person` names and no `PartyName`, or both. | `displayName` rule (section 7.5). | S16 |
-| V-13 | e-Arşiv anonymous consumer TCKN `11111111111`. | EF016 info, no EF013. | S17 |
-| V-14 | `DocumentCurrencyCode` `TL` or `YTL`. | EF020 error; treated as TRY for EF022 (D-25). | S39 |
-| V-15 | Large `ext:UBLExtensions` with the XAdES signature. | Ignored except `signed: true`. | (unit test; fixtures never contain signatures) |
-| V-16 | Base64 with line breaks; MIME codes `application/xml`, `text/xml`, `application/xslt+xml`; missing filename. | Whitespace removed; XSLT detection rule (section 7.8.5). | S25 |
-| V-17 | Same invoice in two places of one archive (same UUID). | EF090 (section 10.2). | S37 |
-| V-18 | Nested ZIPs with year/month folders, `__MACOSX/`, `.DS_Store`, file names like `ABC2025000000001~1923523394.zip`. | Section 10. | S35 |
-| V-19 | Lower-case or mixed-case UUID. | Accepted; EF002 is case-insensitive. | S20 |
-| V-20 | `IssueTime` with fractions or offset (`14:30:00.0000000+03:00`). | EF005 accepts them. | S21 |
-| V-21 | More than 2 decimals on prices, quantities and rates (8 or more). | Exact decimals; no rounding in the model. | S12 |
-| V-22 | Amounts without `currencyID`. | EF032 warning; value still read. | S19 |
+| ID   | Variation                                                                                                                              | Handling                                                 | Fixture                                        |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
+| V-01 | Prefixes other than `cbc`/`cac` (`b:`, `a:`, `ns2:`), or default namespace redeclared on each element.                                 | Resolved by URI (section 6.4).                           | S20, S21                                       |
+| V-02 | cbc/cac elements written without prefix inside the Invoice default namespace, or with undeclared prefixes.                             | Tolerant match + EF009.                                  | S21                                            |
+| V-03 | UTF-8 BOM, UTF-16 with BOM, `encoding="windows-1254"` or `iso-8859-9`, missing XML declaration.                                        | Section 6.1.                                             | S22, S23, S24                                  |
+| V-04 | Whitespace, tabs and newlines around values; CRLF line ends.                                                                           | All text values are trimmed.                             | S22                                            |
+| V-05 | Empty elements (`<cbc:CityName/>`).                                                                                                    | Treated as absent (`null`).                              | S19                                            |
+| V-06 | Decimal comma in an amount (`1000,50`).                                                                                                | Normalised to a dot, EF031.                              | S22                                            |
+| V-07 | Exchange rate only in `TaxExchangeRate` or in a note (`Döviz Kuru: 40,6467`).                                                          | Section 7.4, EF023.                                      | S03                                            |
+| V-08 | Due date only in a note (`Vade Tarihi : 29.11.2025`).                                                                                  | Section 7.4.2.                                           | S03                                            |
+| V-09 | Withholding at line level, at invoice level, or both.                                                                                  | Both kept; computed totals prefer invoice level.         | S06, S07                                       |
+| V-10 | `PayableAmount` not reduced by the withholding amount.                                                                                 | EF044 warning instead of EF043 error.                    | S08                                            |
+| V-11 | Several `PartyIdentification` elements (MERSISNO, TICARETSICILNO, HIZMETNO, MUSTERINO), lower-case `schemeID="vkn"`, or no `schemeID`. | Tax ID algorithm (section 7.5.1), EF015.                 | S19                                            |
+| V-12 | Individuals with `cac:Person` names and no `PartyName`, or both.                                                                       | `displayName` rule (section 7.5).                        | S16                                            |
+| V-13 | e-Arşiv anonymous consumer TCKN `11111111111`.                                                                                         | EF016 info, no EF013.                                    | S17                                            |
+| V-14 | `DocumentCurrencyCode` `TL` or `YTL`.                                                                                                  | EF020 error; treated as TRY for EF022 (D-25).            | S39                                            |
+| V-15 | Large `ext:UBLExtensions` with the XAdES signature.                                                                                    | Ignored except `signed: true`.                           | (unit test; fixtures never contain signatures) |
+| V-16 | Base64 with line breaks; MIME codes `application/xml`, `text/xml`, `application/xslt+xml`; missing filename.                           | Whitespace removed; XSLT detection rule (section 7.8.5). | S25                                            |
+| V-17 | Same invoice in two places of one archive (same UUID).                                                                                 | EF090 (section 10.2).                                    | S37                                            |
+| V-18 | Nested ZIPs with year/month folders, `__MACOSX/`, `.DS_Store`, file names like `ABC2025000000001~1923523394.zip`.                      | Section 10.                                              | S35                                            |
+| V-19 | Lower-case or mixed-case UUID.                                                                                                         | Accepted; EF002 is case-insensitive.                     | S20                                            |
+| V-20 | `IssueTime` with fractions or offset (`14:30:00.0000000+03:00`).                                                                       | EF005 accepts them.                                      | S21                                            |
+| V-21 | More than 2 decimals on prices, quantities and rates (8 or more).                                                                      | Exact decimals; no rounding in the model.                | S12                                            |
+| V-22 | Amounts without `currencyID`.                                                                                                          | EF032 warning; value still read.                         | S19                                            |
 
 ## 7. Data model and mapping
 
@@ -925,18 +1020,18 @@ This section is the core of the specification. Every model field is listed with 
 
 ### 7.1 Value conventions (normative)
 
-| Kind | Rule |
-|---|---|
-| Text | `text(el)`: trimmed; empty → `null`. Internal whitespace is kept as written. |
-| Code | Text, then `toUpperCase()` (ASCII only, no locale) for code-list lookups; the `*Raw` field keeps the trimmed original. |
-| Date | Text as written (expected `YYYY-MM-DD`); only `issueDate` is validated (EF004). |
-| Boolean | Trimmed, lower-cased: `true`/`1` → `true`; `false`/`0` → `false`; otherwise `null`. |
-| Integer | `/^\d+$/` → `Number(text)` (safe up to `Number.MAX_SAFE_INTEGER`); otherwise `null` and EF030. |
-| Decimal | See `decimalValue` below. |
-| Amount | `{ value, raw, currency }`: `raw` is the trimmed text; `value = decimalValue(raw)`; `currency` is the trimmed, upper-cased `currencyID` attribute or `null` (EF032 when `null`). The whole Amount is `null` when the element is absent. |
-| Quantity | `{ value, raw, unitCode, unit }`: like Amount with the `unitCode` attribute (trimmed, upper-cased) and `unit` from the unit code list (`null` when unknown). |
-| Lists | Arrays in document order; `[]` when absent. |
-| Single aggregate | `null` when absent. |
+| Kind             | Rule                                                                                                                                                                                                                                    |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Text             | `text(el)`: trimmed; empty → `null`. Internal whitespace is kept as written.                                                                                                                                                            |
+| Code             | Text, then `toUpperCase()` (ASCII only, no locale) for code-list lookups; the `*Raw` field keeps the trimmed original.                                                                                                                  |
+| Date             | Text as written (expected `YYYY-MM-DD`); only `issueDate` is validated (EF004).                                                                                                                                                         |
+| Boolean          | Trimmed, lower-cased: `true`/`1` → `true`; `false`/`0` → `false`; otherwise `null`.                                                                                                                                                     |
+| Integer          | `/^\d+$/` → `Number(text)` (safe up to `Number.MAX_SAFE_INTEGER`); otherwise `null` and EF030.                                                                                                                                          |
+| Decimal          | See `decimalValue` below.                                                                                                                                                                                                               |
+| Amount           | `{ value, raw, currency }`: `raw` is the trimmed text; `value = decimalValue(raw)`; `currency` is the trimmed, upper-cased `currencyID` attribute or `null` (EF032 when `null`). The whole Amount is `null` when the element is absent. |
+| Quantity         | `{ value, raw, unitCode, unit }`: like Amount with the `unitCode` attribute (trimmed, upper-cased) and `unit` from the unit code list (`null` when unknown).                                                                            |
+| Lists            | Arrays in document order; `[]` when absent.                                                                                                                                                                                             |
+| Single aggregate | `null` when absent.                                                                                                                                                                                                                     |
 
 `decimalValue(raw)` (normative):
 
@@ -951,7 +1046,10 @@ This section is the core of the specification. Every model field is listed with 
 export type Decimal = string;
 export type Severity = 'error' | 'warning' | 'info';
 
-export interface Label { en: string; tr: string }
+export interface Label {
+  en: string;
+  tr: string;
+}
 
 export interface Amount {
   /** Decimal string as written (section 7.1); null when the text is not a decimal. */
@@ -962,7 +1060,10 @@ export interface Amount {
   currency: string | null;
 }
 
-export interface UnitInfo { code: string; label: Label }
+export interface UnitInfo {
+  code: string;
+  label: Label;
+}
 
 export interface Quantity {
   value: Decimal | null;
@@ -972,22 +1073,60 @@ export interface Quantity {
 }
 
 export type ProfileId =
-  | 'TEMELFATURA' | 'TICARIFATURA' | 'EARSIVFATURA' | 'IHRACAT' | 'YOLCUBERABERFATURA'
-  | 'KAMU' | 'HKS' | 'ENERJI' | 'ILAC_TIBBICIHAZ' | 'YATIRIMTESVIK' | 'OTHER';
+  | 'TEMELFATURA'
+  | 'TICARIFATURA'
+  | 'EARSIVFATURA'
+  | 'IHRACAT'
+  | 'YOLCUBERABERFATURA'
+  | 'KAMU'
+  | 'HKS'
+  | 'ENERJI'
+  | 'ILAC_TIBBICIHAZ'
+  | 'YATIRIMTESVIK'
+  | 'OTHER';
 
 export type InvoiceTypeCode =
-  | 'SATIS' | 'IADE' | 'TEVKIFAT' | 'TEVKIFATIADE' | 'ISTISNA' | 'OZELMATRAH' | 'IHRACKAYITLI'
-  | 'SGK' | 'KOMISYONCU' | 'HKSSATIS' | 'HKSKOMISYONCU' | 'KONAKLAMAVERGISI'
-  | 'SARJ' | 'SARJANLIK' | 'TEKNOLOJIDESTEK'
-  | 'YTBSATIS' | 'YTBIADE' | 'YTBISTISNA' | 'YTBTEVKIFAT' | 'YTBTEVKIFATIADE'
+  | 'SATIS'
+  | 'IADE'
+  | 'TEVKIFAT'
+  | 'TEVKIFATIADE'
+  | 'ISTISNA'
+  | 'OZELMATRAH'
+  | 'IHRACKAYITLI'
+  | 'SGK'
+  | 'KOMISYONCU'
+  | 'HKSSATIS'
+  | 'HKSKOMISYONCU'
+  | 'KONAKLAMAVERGISI'
+  | 'SARJ'
+  | 'SARJANLIK'
+  | 'TEKNOLOJIDESTEK'
+  | 'YTBSATIS'
+  | 'YTBIADE'
+  | 'YTBISTISNA'
+  | 'YTBTEVKIFAT'
+  | 'YTBTEVKIFATIADE'
   | 'OTHER';
 
 export type TaxKind = 'KDV' | 'OTV' | 'OIV' | 'DAMGA' | 'KONAKLAMA' | 'STOPAJ' | 'KDV_WITHHOLDING' | 'OTHER';
 
-export interface TaxTypeInfo { code: string; short: string; label: Label; kind: TaxKind }
-export interface CodeInfo { code: string; label: Label }
+export interface TaxTypeInfo {
+  code: string;
+  short: string;
+  label: Label;
+  kind: TaxKind;
+}
+export interface CodeInfo {
+  code: string;
+  label: Label;
+}
 
-export type ExchangeRateSource = 'PricingExchangeRate' | 'TaxExchangeRate' | 'PaymentExchangeRate' | 'PaymentAlternativeExchangeRate' | 'Note';
+export type ExchangeRateSource =
+  | 'PricingExchangeRate'
+  | 'TaxExchangeRate'
+  | 'PaymentExchangeRate'
+  | 'PaymentAlternativeExchangeRate'
+  | 'Note';
 
 export interface ExchangeRate {
   sourceCurrency: string | null;
@@ -998,9 +1137,16 @@ export interface ExchangeRate {
   source: ExchangeRateSource;
 }
 
-export interface DueDate { date: string; source: 'PaymentMeans' | 'PaymentTerms' | 'Note' }
+export interface DueDate {
+  date: string;
+  source: 'PaymentMeans' | 'PaymentTerms' | 'Note';
+}
 
-export interface InvoicePeriod { startDate: string | null; endDate: string | null; description: string | null }
+export interface InvoicePeriod {
+  startDate: string | null;
+  endDate: string | null;
+  description: string | null;
+}
 
 export interface DocumentReference {
   id: string | null;
@@ -1026,8 +1172,12 @@ export interface Attachment extends DocumentReference {
 }
 
 export interface PersonName {
-  firstName: string | null; middleName: string | null; familyName: string | null;
-  title: string | null; nameSuffix: string | null; nationalityId: string | null;
+  firstName: string | null;
+  middleName: string | null;
+  familyName: string | null;
+  title: string | null;
+  nameSuffix: string | null;
+  nationalityId: string | null;
   identityDocumentId: string | null;
 }
 
@@ -1040,21 +1190,34 @@ export interface TaxId {
   inferred: boolean;
 }
 
-export interface PartyIdentifier { schemeId: string | null; value: string }
+export interface PartyIdentifier {
+  schemeId: string | null;
+  value: string;
+}
 
 export interface Address {
-  id: string | null; postbox: string | null; room: string | null;
-  streetName: string | null; blockName: string | null; buildingName: string | null; buildingNumber: string | null;
-  district: string | null;            // cbc:District (mahalle/semt)
+  id: string | null;
+  postbox: string | null;
+  room: string | null;
+  streetName: string | null;
+  blockName: string | null;
+  buildingName: string | null;
+  buildingNumber: string | null;
+  district: string | null; // cbc:District (mahalle/semt)
   citySubdivisionName: string | null; // ilçe
-  cityName: string | null;            // il
-  postalZone: string | null; region: string | null;
-  countryCode: string | null; countryName: string | null;
+  cityName: string | null; // il
+  postalZone: string | null;
+  region: string | null;
+  countryCode: string | null;
+  countryName: string | null;
 }
 
 export interface Contact {
-  name: string | null; telephone: string | null; telefax: string | null;
-  email: string | null; note: string | null;
+  name: string | null;
+  telephone: string | null;
+  telefax: string | null;
+  email: string | null;
+  note: string | null;
 }
 
 export interface Party {
@@ -1098,7 +1261,10 @@ export interface TaxSubtotal {
   withholdingRatio: string | null;
 }
 
-export interface TaxTotal { taxAmount: Amount | null; subtotals: TaxSubtotal[] }
+export interface TaxTotal {
+  taxAmount: Amount | null;
+  subtotals: TaxSubtotal[];
+}
 
 export interface MonetaryTotals {
   lineExtensionAmount: Amount | null;
@@ -1121,18 +1287,26 @@ export interface ComputedTotals {
 }
 
 export interface Item {
-  name: string | null; description: string | null; keyword: string | null;
-  brandName: string | null; modelName: string | null;
-  buyersItemId: string | null; sellersItemId: string | null; manufacturersItemId: string | null;
+  name: string | null;
+  description: string | null;
+  keyword: string | null;
+  brandName: string | null;
+  modelName: string | null;
+  buyersItemId: string | null;
+  sellersItemId: string | null;
+  manufacturersItemId: string | null;
   classificationCodes: Array<{ listId: string | null; value: string }>;
   originCountryCode: string | null;
 }
 
-export interface Price { amount: Amount | null; baseQuantity: Quantity | null }
+export interface Price {
+  amount: Amount | null;
+  baseQuantity: Quantity | null;
+}
 
 export interface LineDelivery {
   incoterms: string | null;
-  customsTariffCode: string | null;   // GTİP
+  customsTariffCode: string | null; // GTİP
   transportModeCode: string | null;
   packagingTypeCode: string | null;
   deliveryAddress: Address | null;
@@ -1154,12 +1328,23 @@ export interface InvoiceLine {
 }
 
 export interface PaymentMeans {
-  code: string | null; dueDate: string | null; channelCode: string | null; instructionNote: string | null;
-  accountId: string | null; accountCurrency: string | null; paymentNote: string | null;
-  bankBranchName: string | null; bankName: string | null;
+  code: string | null;
+  dueDate: string | null;
+  channelCode: string | null;
+  instructionNote: string | null;
+  accountId: string | null;
+  accountCurrency: string | null;
+  paymentNote: string | null;
+  bankBranchName: string | null;
+  bankName: string | null;
 }
 
-export interface PaymentTerms { note: string | null; penaltySurchargePercent: Decimal | null; amount: Amount | null; dueDate: string | null }
+export interface PaymentTerms {
+  note: string | null;
+  penaltySurchargePercent: Decimal | null;
+  amount: Amount | null;
+  dueDate: string | null;
+}
 
 export interface Invoice {
   ublVersionId: string | null;
@@ -1201,7 +1386,7 @@ export interface Invoice {
   raw: XmlElement | null;
 }
 
-export type IssueCode = (typeof ISSUE_CODES)[number];   // 'EF001' | … | 'EF091' (section 9.3)
+export type IssueCode = (typeof ISSUE_CODES)[number]; // 'EF001' | … | 'EF091' (section 9.3)
 
 export interface Issue {
   code: IssueCode;
@@ -1220,75 +1405,76 @@ export interface Issue {
 
 All paths are children of the root `Invoice`.
 
-| Model field | Source path | UBL-TR cardinality | Transform | Issues |
-|---|---|---|---|---|
-| `ublVersionId` | `cbc:UBLVersionID` | 1 | text | EF001 (required), EF008 |
-| `customizationId` | `cbc:CustomizationID` | 1 | text | EF008 |
-| `profileIdRaw` | `cbc:ProfileID` | 1 | text | EF001 |
-| `profileId` | `cbc:ProfileID` | 1 | code lookup in `PROFILES`; unknown → `'OTHER'` | EF006 |
-| `number` | `cbc:ID` | 1 | text | EF001, EF003 |
-| `copyIndicator` | `cbc:CopyIndicator` | 1 | boolean | — |
-| `uuid` | `cbc:UUID` | 1 | text (case kept) | EF001, EF002 |
-| `issueDate` | `cbc:IssueDate` | 1 | text | EF001, EF004 |
-| `issueTime` | `cbc:IssueTime` | 0..1 | text | EF005 |
-| `typeCodeRaw` | `cbc:InvoiceTypeCode` | 1 | text | EF001 |
-| `typeCode` | `cbc:InvoiceTypeCode` | 1 | code lookup in `INVOICE_TYPES`; unknown → `'OTHER'` | EF007 |
-| `notes` | `cbc:Note` | 0..n | text each; `null` entries dropped | — |
-| `currency` | `cbc:DocumentCurrencyCode` | 1 | text, upper-case | EF001, EF020 |
-| `lineCountNumeric` | `cbc:LineCountNumeric` | 0..1 | integer | EF030, EF049 |
-| `period.startDate` | `cac:InvoicePeriod/cbc:StartDate` | 0..1 | text | — |
-| `period.endDate` | `cac:InvoicePeriod/cbc:EndDate` | 0..1 | text | — |
-| `period.description` | `cac:InvoicePeriod/cbc:Description` | 0..1 | text | — |
-| `orderReferences[]` | `cac:OrderReference` | 0..1 | DocumentReference (7.3.1) | — |
-| `billingReferences[]` | `cac:BillingReference/cac:InvoiceDocumentReference` | 0..n | DocumentReference | — |
-| `despatchReferences[]` | `cac:DespatchDocumentReference` | 0..n | DocumentReference | — |
-| `receiptReferences[]` | `cac:ReceiptDocumentReference` | 0..n | DocumentReference | — |
-| `contractReferences[]` | `cac:ContractDocumentReference` | 0..n | DocumentReference | — |
-| `additionalReferences[]` | `cac:AdditionalDocumentReference` without `cac:Attachment/cbc:EmbeddedDocumentBinaryObject` | 0..n | DocumentReference | — |
-| `attachments[]` | `cac:AdditionalDocumentReference` with `cac:Attachment/cbc:EmbeddedDocumentBinaryObject` | 0..n | section 7.8.5 | — |
-| `supplier` | `cac:AccountingSupplierParty/cac:Party` | 1 | Party (7.5) | EF001 |
-| `customer` | `cac:AccountingCustomerParty/cac:Party` | 1 | Party | EF001 |
-| `buyerCustomer` | `cac:BuyerCustomerParty/cac:Party` | 0..1 | Party | — |
-| `paymentMeans[]` | `cac:PaymentMeans` | 0..n | 7.8.3 | — |
-| `paymentTerms[]` | `cac:PaymentTerms` | 0..1 | 7.8.4 | — |
-| `allowanceCharges[]` | `cac:AllowanceCharge` | 0..n | 7.8.2 | — |
-| `exchangeRate` | see 7.4 | 0..1 | 7.4 | EF022–EF026 |
-| `dueDate` | see 7.4.2 | — | 7.4.2 | — |
-| `taxTotals[]` | `cac:TaxTotal` | 1..n | TaxTotal (7.7) | EF066 |
-| `withholdingTaxTotals[]` | `cac:WithholdingTaxTotal` | 0..n | TaxTotal (7.7) | — |
-| `totals` | `cac:LegalMonetaryTotal` | 1 | 7.8.1 | EF001 |
-| `lines[]` | `cac:InvoiceLine` | 1..n | 7.6 | EF050 |
-| `computed` | derived | — | 7.8.6 | — |
-| `signed` | any `ds:Signature` element below `ext:UBLExtensions` | — | boolean | — |
-| `raw` | the root element | — | `XmlElement` or `null` (`includeRaw: false`) | — |
+| Model field              | Source path                                                                                 | UBL-TR cardinality | Transform                                           | Issues                  |
+| ------------------------ | ------------------------------------------------------------------------------------------- | ------------------ | --------------------------------------------------- | ----------------------- |
+| `ublVersionId`           | `cbc:UBLVersionID`                                                                          | 1                  | text                                                | EF001 (required), EF008 |
+| `customizationId`        | `cbc:CustomizationID`                                                                       | 1                  | text                                                | EF008                   |
+| `profileIdRaw`           | `cbc:ProfileID`                                                                             | 1                  | text                                                | EF001                   |
+| `profileId`              | `cbc:ProfileID`                                                                             | 1                  | code lookup in `PROFILES`; unknown → `'OTHER'`      | EF006                   |
+| `number`                 | `cbc:ID`                                                                                    | 1                  | text                                                | EF001, EF003            |
+| `copyIndicator`          | `cbc:CopyIndicator`                                                                         | 1                  | boolean                                             | —                       |
+| `uuid`                   | `cbc:UUID`                                                                                  | 1                  | text (case kept)                                    | EF001, EF002            |
+| `issueDate`              | `cbc:IssueDate`                                                                             | 1                  | text                                                | EF001, EF004            |
+| `issueTime`              | `cbc:IssueTime`                                                                             | 0..1               | text                                                | EF005                   |
+| `typeCodeRaw`            | `cbc:InvoiceTypeCode`                                                                       | 1                  | text                                                | EF001                   |
+| `typeCode`               | `cbc:InvoiceTypeCode`                                                                       | 1                  | code lookup in `INVOICE_TYPES`; unknown → `'OTHER'` | EF007                   |
+| `notes`                  | `cbc:Note`                                                                                  | 0..n               | text each; `null` entries dropped                   | —                       |
+| `currency`               | `cbc:DocumentCurrencyCode`                                                                  | 1                  | text, upper-case                                    | EF001, EF020            |
+| `lineCountNumeric`       | `cbc:LineCountNumeric`                                                                      | 0..1               | integer                                             | EF030, EF049            |
+| `period.startDate`       | `cac:InvoicePeriod/cbc:StartDate`                                                           | 0..1               | text                                                | —                       |
+| `period.endDate`         | `cac:InvoicePeriod/cbc:EndDate`                                                             | 0..1               | text                                                | —                       |
+| `period.description`     | `cac:InvoicePeriod/cbc:Description`                                                         | 0..1               | text                                                | —                       |
+| `orderReferences[]`      | `cac:OrderReference`                                                                        | 0..1               | DocumentReference (7.3.1)                           | —                       |
+| `billingReferences[]`    | `cac:BillingReference/cac:InvoiceDocumentReference`                                         | 0..n               | DocumentReference                                   | —                       |
+| `despatchReferences[]`   | `cac:DespatchDocumentReference`                                                             | 0..n               | DocumentReference                                   | —                       |
+| `receiptReferences[]`    | `cac:ReceiptDocumentReference`                                                              | 0..n               | DocumentReference                                   | —                       |
+| `contractReferences[]`   | `cac:ContractDocumentReference`                                                             | 0..n               | DocumentReference                                   | —                       |
+| `additionalReferences[]` | `cac:AdditionalDocumentReference` without `cac:Attachment/cbc:EmbeddedDocumentBinaryObject` | 0..n               | DocumentReference                                   | —                       |
+| `attachments[]`          | `cac:AdditionalDocumentReference` with `cac:Attachment/cbc:EmbeddedDocumentBinaryObject`    | 0..n               | section 7.8.5                                       | —                       |
+| `supplier`               | `cac:AccountingSupplierParty/cac:Party`                                                     | 1                  | Party (7.5)                                         | EF001                   |
+| `customer`               | `cac:AccountingCustomerParty/cac:Party`                                                     | 1                  | Party                                               | EF001                   |
+| `buyerCustomer`          | `cac:BuyerCustomerParty/cac:Party`                                                          | 0..1               | Party                                               | —                       |
+| `paymentMeans[]`         | `cac:PaymentMeans`                                                                          | 0..n               | 7.8.3                                               | —                       |
+| `paymentTerms[]`         | `cac:PaymentTerms`                                                                          | 0..1               | 7.8.4                                               | —                       |
+| `allowanceCharges[]`     | `cac:AllowanceCharge`                                                                       | 0..n               | 7.8.2                                               | —                       |
+| `exchangeRate`           | see 7.4                                                                                     | 0..1               | 7.4                                                 | EF022–EF026             |
+| `dueDate`                | see 7.4.2                                                                                   | —                  | 7.4.2                                               | —                       |
+| `taxTotals[]`            | `cac:TaxTotal`                                                                              | 1..n               | TaxTotal (7.7)                                      | EF066                   |
+| `withholdingTaxTotals[]` | `cac:WithholdingTaxTotal`                                                                   | 0..n               | TaxTotal (7.7)                                      | —                       |
+| `totals`                 | `cac:LegalMonetaryTotal`                                                                    | 1                  | 7.8.1                                               | EF001                   |
+| `lines[]`                | `cac:InvoiceLine`                                                                           | 1..n               | 7.6                                                 | EF050                   |
+| `computed`               | derived                                                                                     | —                  | 7.8.6                                               | —                       |
+| `signed`                 | any `ds:Signature` element below `ext:UBLExtensions`                                        | —                  | boolean                                             | —                       |
+| `raw`                    | the root element                                                                            | —                  | `XmlElement` or `null` (`includeRaw: false`)        | —                       |
 
 #### 7.3.1 DocumentReference (normative)
 
-| Field | Path (relative to the reference element) | Transform |
-|---|---|---|
-| `id` | `cbc:ID` | text |
-| `issueDate` | `cbc:IssueDate` | text |
-| `documentTypeCode` | `cbc:DocumentTypeCode` | text |
-| `documentType` | `cbc:DocumentType` | text |
-| `descriptions` | `cbc:DocumentDescription` | text list |
+| Field              | Path (relative to the reference element) | Transform |
+| ------------------ | ---------------------------------------- | --------- |
+| `id`               | `cbc:ID`                                 | text      |
+| `issueDate`        | `cbc:IssueDate`                          | text      |
+| `documentTypeCode` | `cbc:DocumentTypeCode`                   | text      |
+| `documentType`     | `cbc:DocumentType`                       | text      |
+| `descriptions`     | `cbc:DocumentDescription`                | text list |
 
 ### 7.4 Exchange rate (normative)
 
 Candidates, in order: `cac:PricingExchangeRate`, `cac:TaxExchangeRate`, `cac:PaymentExchangeRate`, `cac:PaymentAlternativeExchangeRate`. Take the first candidate element whose `cbc:CalculationRate` text is non-empty:
 
-| Field | Path (relative to the candidate) | Transform |
-|---|---|---|
-| `sourceCurrency` | `cbc:SourceCurrencyCode` | text, upper-case |
-| `targetCurrency` | `cbc:TargetCurrencyCode` | text, upper-case |
-| `rateRaw` | `cbc:CalculationRate` | text |
-| `rate` | `cbc:CalculationRate` | `decimalValue` (EF030/EF031 possible) |
-| `date` | `cbc:Date` | text |
-| `source` | the candidate's local name | — |
+| Field            | Path (relative to the candidate) | Transform                             |
+| ---------------- | -------------------------------- | ------------------------------------- |
+| `sourceCurrency` | `cbc:SourceCurrencyCode`         | text, upper-case                      |
+| `targetCurrency` | `cbc:TargetCurrencyCode`         | text, upper-case                      |
+| `rateRaw`        | `cbc:CalculationRate`            | text                                  |
+| `rate`           | `cbc:CalculationRate`            | `decimalValue` (EF030/EF031 possible) |
+| `date`           | `cbc:Date`                       | text                                  |
+| `source`         | the candidate's local name       | —                                     |
 
 If no candidate qualifies, search `notes` in order with (normative):
 
 ```ts
-export const RATE_NOTE_PATTERN = /(?:d[öo]v[iıİ]z\s*kuru|exchange\s*rate|kur)\s*[:=]\s*([0-9]{1,6}(?:[.,][0-9]{1,10})?)/iu;
+export const RATE_NOTE_PATTERN =
+  /(?:d[öo]v[iıİ]z\s*kuru|exchange\s*rate|kur)\s*[:=]\s*([0-9]{1,6}(?:[.,][0-9]{1,10})?)/iu;
 ```
 
 The character class `[iıİ]` is required: JavaScript's `/iu` uses Unicode simple case folding, under which `İ` (U+0130) and `ı` (U+0131) do not match `i`, so the upper-case note `DÖVİZ KURU: 35,1` would otherwise fail.
@@ -1311,43 +1497,43 @@ The exchange rate is resolved for every invoice, including TRY invoices (EF026 r
 
 Applies to `cac:AccountingSupplierParty/cac:Party`, `cac:AccountingCustomerParty/cac:Party` and `cac:BuyerCustomerParty/cac:Party`. Paths are relative to `cac:Party`.
 
-| Model field | Path | Cardinality | Transform |
-|---|---|---|---|
-| `name` | `cac:PartyName/cbc:Name` | 0..1 | text |
-| `person.firstName` | `cac:Person/cbc:FirstName` | 0..1 | text |
-| `person.middleName` | `cac:Person/cbc:MiddleName` | 0..1 | text |
-| `person.familyName` | `cac:Person/cbc:FamilyName` | 0..1 | text |
-| `person.title` | `cac:Person/cbc:Title` | 0..1 | text |
-| `person.nameSuffix` | `cac:Person/cbc:NameSuffix` | 0..1 | text |
-| `person.nationalityId` | `cac:Person/cbc:NationalityID` | 0..1 | text |
-| `person.identityDocumentId` | `cac:Person/cac:IdentityDocumentReference/cbc:ID` | 0..1 | text (passport number in YOLCUBERABERFATURA) |
-| `person` | `cac:Person` | 0..1 | `null` when absent |
-| `displayName` | derived | — | `name`, else `[firstName, middleName, familyName]` non-null parts joined by one space, else `null` |
-| `identifiers[]` | `cac:PartyIdentification/cbc:ID` | 1..n | `{ schemeId: attr schemeID, value: text }`; entries with empty text dropped. Issue paths `…/cac:PartyIdentification[n]/cbc:ID` (EF012–EF016) use `n` = 1-based index of the identifier in this array, which can differ from the XML position only when empty identifiers were dropped. |
-| `taxId` | derived from `identifiers` | — | 7.5.1 |
-| `taxOffice` | `cac:PartyTaxScheme/cac:TaxScheme/cbc:Name` | 0..1 | text |
-| `websiteUri` | `cbc:WebsiteURI` | 0..1 | text |
-| `address` | `cac:PostalAddress` | 0..1 | Address (below); `null` when absent |
-| `contact` | `cac:Contact` | 0..1 | Contact (below); `null` when absent |
+| Model field                 | Path                                              | Cardinality | Transform                                                                                                                                                                                                                                                                              |
+| --------------------------- | ------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                      | `cac:PartyName/cbc:Name`                          | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.firstName`          | `cac:Person/cbc:FirstName`                        | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.middleName`         | `cac:Person/cbc:MiddleName`                       | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.familyName`         | `cac:Person/cbc:FamilyName`                       | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.title`              | `cac:Person/cbc:Title`                            | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.nameSuffix`         | `cac:Person/cbc:NameSuffix`                       | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.nationalityId`      | `cac:Person/cbc:NationalityID`                    | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `person.identityDocumentId` | `cac:Person/cac:IdentityDocumentReference/cbc:ID` | 0..1        | text (passport number in YOLCUBERABERFATURA)                                                                                                                                                                                                                                           |
+| `person`                    | `cac:Person`                                      | 0..1        | `null` when absent                                                                                                                                                                                                                                                                     |
+| `displayName`               | derived                                           | —           | `name`, else `[firstName, middleName, familyName]` non-null parts joined by one space, else `null`                                                                                                                                                                                     |
+| `identifiers[]`             | `cac:PartyIdentification/cbc:ID`                  | 1..n        | `{ schemeId: attr schemeID, value: text }`; entries with empty text dropped. Issue paths `…/cac:PartyIdentification[n]/cbc:ID` (EF012–EF016) use `n` = 1-based index of the identifier in this array, which can differ from the XML position only when empty identifiers were dropped. |
+| `taxId`                     | derived from `identifiers`                        | —           | 7.5.1                                                                                                                                                                                                                                                                                  |
+| `taxOffice`                 | `cac:PartyTaxScheme/cac:TaxScheme/cbc:Name`       | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `websiteUri`                | `cbc:WebsiteURI`                                  | 0..1        | text                                                                                                                                                                                                                                                                                   |
+| `address`                   | `cac:PostalAddress`                               | 0..1        | Address (below); `null` when absent                                                                                                                                                                                                                                                    |
+| `contact`                   | `cac:Contact`                                     | 0..1        | Contact (below); `null` when absent                                                                                                                                                                                                                                                    |
 
 Address fields (relative to `cac:PostalAddress`, or `cac:DeliveryLocation/cac:Address` and `cac:DeliveryAddress` where used):
 
-| Field | Path |
-|---|---|
-| `id` | `cbc:ID` |
-| `postbox` | `cbc:Postbox` |
-| `room` | `cbc:Room` |
-| `streetName` | `cbc:StreetName` |
-| `blockName` | `cbc:BlockName` |
-| `buildingName` | `cbc:BuildingName` |
-| `buildingNumber` | `cbc:BuildingNumber` |
-| `district` | `cbc:District` |
-| `citySubdivisionName` | `cbc:CitySubdivisionName` |
-| `cityName` | `cbc:CityName` |
-| `postalZone` | `cbc:PostalZone` |
-| `region` | `cbc:Region` |
-| `countryCode` | `cac:Country/cbc:IdentificationCode` (upper-case) |
-| `countryName` | `cac:Country/cbc:Name` |
+| Field                 | Path                                              |
+| --------------------- | ------------------------------------------------- |
+| `id`                  | `cbc:ID`                                          |
+| `postbox`             | `cbc:Postbox`                                     |
+| `room`                | `cbc:Room`                                        |
+| `streetName`          | `cbc:StreetName`                                  |
+| `blockName`           | `cbc:BlockName`                                   |
+| `buildingName`        | `cbc:BuildingName`                                |
+| `buildingNumber`      | `cbc:BuildingNumber`                              |
+| `district`            | `cbc:District`                                    |
+| `citySubdivisionName` | `cbc:CitySubdivisionName`                         |
+| `cityName`            | `cbc:CityName`                                    |
+| `postalZone`          | `cbc:PostalZone`                                  |
+| `region`              | `cbc:Region`                                      |
+| `countryCode`         | `cac:Country/cbc:IdentificationCode` (upper-case) |
+| `countryName`         | `cac:Country/cbc:Name`                            |
 
 Contact fields (relative to `cac:Contact`): `name` `cbc:Name`, `telephone` `cbc:Telephone`, `telefax` `cbc:Telefax`, `email` `cbc:ElectronicMail`, `note` `cbc:Note`.
 
@@ -1364,34 +1550,34 @@ Checksums are not applied here; they are validation rules EF012–EF016.
 
 Paths are relative to `cac:InvoiceLine`. `position` is the 1-based index among `cac:InvoiceLine` elements.
 
-| Model field | Path | Cardinality | Transform |
-|---|---|---|---|
-| `id` | `cbc:ID` | 1 | text (EF054 when missing) |
-| `notes` | `cbc:Note` | 0..n | text list |
-| `quantity` | `cbc:InvoicedQuantity` | 1 | Quantity |
-| `lineExtensionAmount` | `cbc:LineExtensionAmount` | 1 | Amount |
-| `allowanceCharges[]` | `cac:AllowanceCharge` | 0..n | 7.8.2 |
-| `taxTotal` | `cac:TaxTotal` | 0..1 | TaxTotal. If a line has more than one `cac:TaxTotal`, merge them: subtotals appended in document order, `taxAmount.value` = `decimal.sum` of the values, `raw` = the raw texts joined by `+`, `currency` of the first. |
-| `withholdingTaxTotals[]` | `cac:WithholdingTaxTotal` | 0..n | TaxTotal with withholding lookup |
-| `item.name` | `cac:Item/cbc:Name` | 1 | text (EF055 when missing) |
-| `item.description` | `cac:Item/cbc:Description` | 0..1 | text |
-| `item.keyword` | `cac:Item/cbc:Keyword` | 0..1 | text |
-| `item.brandName` | `cac:Item/cbc:BrandName` | 0..1 | text |
-| `item.modelName` | `cac:Item/cbc:ModelName` | 0..1 | text |
-| `item.buyersItemId` | `cac:Item/cac:BuyersItemIdentification/cbc:ID` | 0..1 | text |
-| `item.sellersItemId` | `cac:Item/cac:SellersItemIdentification/cbc:ID` | 0..1 | text |
-| `item.manufacturersItemId` | `cac:Item/cac:ManufacturersItemIdentification/cbc:ID` | 0..1 | text |
-| `item.classificationCodes[]` | `cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode` | 0..n | `{ listId: attr listID, value: text }` |
-| `item.originCountryCode` | `cac:Item/cac:OriginCountry/cbc:IdentificationCode` | 0..1 | text, upper-case |
-| `price.amount` | `cac:Price/cbc:PriceAmount` | 1 | Amount |
-| `price.baseQuantity` | `cac:Price/cbc:BaseQuantity` | 0..1 | Quantity |
-| `price` | `cac:Price` | 1 | `null` when absent |
-| `delivery.incoterms` | `cac:Delivery/cac:DeliveryTerms/cbc:ID` (prefer the one with `schemeID="INCOTERMS"`, else the first) | 0..1 | text |
-| `delivery.customsTariffCode` | `cac:Delivery/cac:Shipment/cac:GoodsItem/cbc:RequiredCustomsID` | 0..1 | text (GTİP) |
-| `delivery.transportModeCode` | `cac:Delivery/cac:Shipment/cac:ShipmentStage/cbc:TransportModeCode` | 0..1 | text |
-| `delivery.packagingTypeCode` | `cac:Delivery/cac:Shipment/cac:TransportHandlingUnit/cac:ActualPackage/cbc:PackagingTypeCode` | 0..1 | text |
-| `delivery.deliveryAddress` | `cac:Delivery/cac:DeliveryAddress` | 0..1 | Address |
-| `delivery` | `cac:Delivery` | 0..1 | `null` when absent; first element only |
+| Model field                  | Path                                                                                                 | Cardinality | Transform                                                                                                                                                                                                              |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                         | `cbc:ID`                                                                                             | 1           | text (EF054 when missing)                                                                                                                                                                                              |
+| `notes`                      | `cbc:Note`                                                                                           | 0..n        | text list                                                                                                                                                                                                              |
+| `quantity`                   | `cbc:InvoicedQuantity`                                                                               | 1           | Quantity                                                                                                                                                                                                               |
+| `lineExtensionAmount`        | `cbc:LineExtensionAmount`                                                                            | 1           | Amount                                                                                                                                                                                                                 |
+| `allowanceCharges[]`         | `cac:AllowanceCharge`                                                                                | 0..n        | 7.8.2                                                                                                                                                                                                                  |
+| `taxTotal`                   | `cac:TaxTotal`                                                                                       | 0..1        | TaxTotal. If a line has more than one `cac:TaxTotal`, merge them: subtotals appended in document order, `taxAmount.value` = `decimal.sum` of the values, `raw` = the raw texts joined by `+`, `currency` of the first. |
+| `withholdingTaxTotals[]`     | `cac:WithholdingTaxTotal`                                                                            | 0..n        | TaxTotal with withholding lookup                                                                                                                                                                                       |
+| `item.name`                  | `cac:Item/cbc:Name`                                                                                  | 1           | text (EF055 when missing)                                                                                                                                                                                              |
+| `item.description`           | `cac:Item/cbc:Description`                                                                           | 0..1        | text                                                                                                                                                                                                                   |
+| `item.keyword`               | `cac:Item/cbc:Keyword`                                                                               | 0..1        | text                                                                                                                                                                                                                   |
+| `item.brandName`             | `cac:Item/cbc:BrandName`                                                                             | 0..1        | text                                                                                                                                                                                                                   |
+| `item.modelName`             | `cac:Item/cbc:ModelName`                                                                             | 0..1        | text                                                                                                                                                                                                                   |
+| `item.buyersItemId`          | `cac:Item/cac:BuyersItemIdentification/cbc:ID`                                                       | 0..1        | text                                                                                                                                                                                                                   |
+| `item.sellersItemId`         | `cac:Item/cac:SellersItemIdentification/cbc:ID`                                                      | 0..1        | text                                                                                                                                                                                                                   |
+| `item.manufacturersItemId`   | `cac:Item/cac:ManufacturersItemIdentification/cbc:ID`                                                | 0..1        | text                                                                                                                                                                                                                   |
+| `item.classificationCodes[]` | `cac:Item/cac:CommodityClassification/cbc:ItemClassificationCode`                                    | 0..n        | `{ listId: attr listID, value: text }`                                                                                                                                                                                 |
+| `item.originCountryCode`     | `cac:Item/cac:OriginCountry/cbc:IdentificationCode`                                                  | 0..1        | text, upper-case                                                                                                                                                                                                       |
+| `price.amount`               | `cac:Price/cbc:PriceAmount`                                                                          | 1           | Amount                                                                                                                                                                                                                 |
+| `price.baseQuantity`         | `cac:Price/cbc:BaseQuantity`                                                                         | 0..1        | Quantity                                                                                                                                                                                                               |
+| `price`                      | `cac:Price`                                                                                          | 1           | `null` when absent                                                                                                                                                                                                     |
+| `delivery.incoterms`         | `cac:Delivery/cac:DeliveryTerms/cbc:ID` (prefer the one with `schemeID="INCOTERMS"`, else the first) | 0..1        | text                                                                                                                                                                                                                   |
+| `delivery.customsTariffCode` | `cac:Delivery/cac:Shipment/cac:GoodsItem/cbc:RequiredCustomsID`                                      | 0..1        | text (GTİP)                                                                                                                                                                                                            |
+| `delivery.transportModeCode` | `cac:Delivery/cac:Shipment/cac:ShipmentStage/cbc:TransportModeCode`                                  | 0..1        | text                                                                                                                                                                                                                   |
+| `delivery.packagingTypeCode` | `cac:Delivery/cac:Shipment/cac:TransportHandlingUnit/cac:ActualPackage/cbc:PackagingTypeCode`        | 0..1        | text                                                                                                                                                                                                                   |
+| `delivery.deliveryAddress`   | `cac:Delivery/cac:DeliveryAddress`                                                                   | 0..1        | Address                                                                                                                                                                                                                |
+| `delivery`                   | `cac:Delivery`                                                                                       | 0..1        | `null` when absent; first element only                                                                                                                                                                                 |
 
 `item` is always an object (all fields `null` and `classificationCodes: []` when `cac:Item` is absent).
 
@@ -1401,29 +1587,29 @@ Verify against GİB UBL-TR documentation (T-10, A-01): whether UBL-TR's `cac:Pri
 
 TaxTotal (relative to `cac:TaxTotal` or `cac:WithholdingTaxTotal`):
 
-| Field | Path | Transform |
-|---|---|---|
-| `taxAmount` | `cbc:TaxAmount` | Amount |
+| Field         | Path              | Transform           |
+| ------------- | ----------------- | ------------------- |
+| `taxAmount`   | `cbc:TaxAmount`   | Amount              |
 | `subtotals[]` | `cac:TaxSubtotal` | TaxSubtotal (below) |
 
 TaxSubtotal (relative to `cac:TaxSubtotal`):
 
-| Field | Path | Transform |
-|---|---|---|
-| `taxableAmount` | `cbc:TaxableAmount` | Amount |
-| `taxAmount` | `cbc:TaxAmount` | Amount |
-| `calculationSequence` | `cbc:CalculationSequenceNumeric` | text |
-| `percent` | `cbc:Percent` | `decimalValue` |
-| `baseUnitMeasure` | `cbc:BaseUnitMeasure` | Quantity |
-| `perUnitAmount` | `cbc:PerUnitAmount` | Amount |
-| `categoryName` | `cac:TaxCategory/cbc:Name` | text |
-| `exemptionReasonCode` | `cac:TaxCategory/cbc:TaxExemptionReasonCode` | text |
-| `exemptionReason` | `cac:TaxCategory/cbc:TaxExemptionReason` | text |
-| `exemption` | derived | lookup of `exemptionReasonCode` in `EXEMPTION_CODES`, else `null` |
-| `taxSchemeName` | `cac:TaxCategory/cac:TaxScheme/cbc:Name` | text |
-| `taxTypeCode` | `cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode` | text |
-| `taxType` | derived | `cac:TaxTotal`: `TAX_TYPES[taxTypeCode]`; `cac:WithholdingTaxTotal`: `WITHHOLDING_CODES[taxTypeCode]` (kind `KDV_WITHHOLDING`); else `null` |
-| `withholdingRatio` | derived | withholding totals only: if `percent` is numerically an integer `n` (scale ignored: `decimal.eq(percent, decimal.round(percent, 0))`, so `"50"` and `"50.00"` both give `n = 50`) with `n % 10 === 0` and `10 ≤ n ≤ 100`, `` `${n / 10}/10` ``; else `null` |
+| Field                 | Path                                            | Transform                                                                                                                                                                                                                                                   |
+| --------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `taxableAmount`       | `cbc:TaxableAmount`                             | Amount                                                                                                                                                                                                                                                      |
+| `taxAmount`           | `cbc:TaxAmount`                                 | Amount                                                                                                                                                                                                                                                      |
+| `calculationSequence` | `cbc:CalculationSequenceNumeric`                | text                                                                                                                                                                                                                                                        |
+| `percent`             | `cbc:Percent`                                   | `decimalValue`                                                                                                                                                                                                                                              |
+| `baseUnitMeasure`     | `cbc:BaseUnitMeasure`                           | Quantity                                                                                                                                                                                                                                                    |
+| `perUnitAmount`       | `cbc:PerUnitAmount`                             | Amount                                                                                                                                                                                                                                                      |
+| `categoryName`        | `cac:TaxCategory/cbc:Name`                      | text                                                                                                                                                                                                                                                        |
+| `exemptionReasonCode` | `cac:TaxCategory/cbc:TaxExemptionReasonCode`    | text                                                                                                                                                                                                                                                        |
+| `exemptionReason`     | `cac:TaxCategory/cbc:TaxExemptionReason`        | text                                                                                                                                                                                                                                                        |
+| `exemption`           | derived                                         | lookup of `exemptionReasonCode` in `EXEMPTION_CODES`, else `null`                                                                                                                                                                                           |
+| `taxSchemeName`       | `cac:TaxCategory/cac:TaxScheme/cbc:Name`        | text                                                                                                                                                                                                                                                        |
+| `taxTypeCode`         | `cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode` | text                                                                                                                                                                                                                                                        |
+| `taxType`             | derived                                         | `cac:TaxTotal`: `TAX_TYPES[taxTypeCode]`; `cac:WithholdingTaxTotal`: `WITHHOLDING_CODES[taxTypeCode]` (kind `KDV_WITHHOLDING`); else `null`                                                                                                                 |
+| `withholdingRatio`    | derived                                         | withholding totals only: if `percent` is numerically an integer `n` (scale ignored: `decimal.eq(percent, decimal.round(percent, 0))`, so `"50"` and `"50.00"` both give `n = 50`) with `n % 10 === 0` and `10 ≤ n ≤ 100`, `` `${n / 10}/10` ``; else `null` |
 
 Withholding is never mixed into `taxTotals`. In a TEVKIFAT invoice, `taxTotals` holds the full KDV and `withholdingTaxTotals` the withheld part (for example KDV 200.00, withholding 5/10 = 100.00).
 
@@ -1431,63 +1617,63 @@ Withholding is never mixed into `taxTotals`. In a TEVKIFAT invoice, `taxTotals` 
 
 #### 7.8.1 Monetary totals (relative to `cac:LegalMonetaryTotal`)
 
-| Field | Path | Transform |
-|---|---|---|
-| `lineExtensionAmount` | `cbc:LineExtensionAmount` | Amount |
-| `taxExclusiveAmount` | `cbc:TaxExclusiveAmount` | Amount |
-| `taxInclusiveAmount` | `cbc:TaxInclusiveAmount` | Amount |
-| `allowanceTotalAmount` | `cbc:AllowanceTotalAmount` | Amount |
-| `chargeTotalAmount` | `cbc:ChargeTotalAmount` | Amount |
-| `payableRoundingAmount` | `cbc:PayableRoundingAmount` | Amount |
-| `payableAmount` | `cbc:PayableAmount` | Amount |
+| Field                   | Path                        | Transform |
+| ----------------------- | --------------------------- | --------- |
+| `lineExtensionAmount`   | `cbc:LineExtensionAmount`   | Amount    |
+| `taxExclusiveAmount`    | `cbc:TaxExclusiveAmount`    | Amount    |
+| `taxInclusiveAmount`    | `cbc:TaxInclusiveAmount`    | Amount    |
+| `allowanceTotalAmount`  | `cbc:AllowanceTotalAmount`  | Amount    |
+| `chargeTotalAmount`     | `cbc:ChargeTotalAmount`     | Amount    |
+| `payableRoundingAmount` | `cbc:PayableRoundingAmount` | Amount    |
+| `payableAmount`         | `cbc:PayableAmount`         | Amount    |
 
 #### 7.8.2 AllowanceCharge (relative to `cac:AllowanceCharge`, invoice or line)
 
-| Field | Path | Transform |
-|---|---|---|
-| `isCharge` | `cbc:ChargeIndicator` | boolean (`true` = charge/artırım, `false` = allowance/iskonto) |
-| `reasonCode` | `cbc:AllowanceChargeReasonCode` | text |
-| `reason` | `cbc:AllowanceChargeReason` | text |
-| `multiplierFactor` | `cbc:MultiplierFactorNumeric` | `decimalValue` (UBL-TR uses a fraction, e.g. `0.1` for 10 %) |
-| `amount` | `cbc:Amount` | Amount |
-| `baseAmount` | `cbc:BaseAmount` | Amount |
+| Field              | Path                            | Transform                                                      |
+| ------------------ | ------------------------------- | -------------------------------------------------------------- |
+| `isCharge`         | `cbc:ChargeIndicator`           | boolean (`true` = charge/artırım, `false` = allowance/iskonto) |
+| `reasonCode`       | `cbc:AllowanceChargeReasonCode` | text                                                           |
+| `reason`           | `cbc:AllowanceChargeReason`     | text                                                           |
+| `multiplierFactor` | `cbc:MultiplierFactorNumeric`   | `decimalValue` (UBL-TR uses a fraction, e.g. `0.1` for 10 %)   |
+| `amount`           | `cbc:Amount`                    | Amount                                                         |
+| `baseAmount`       | `cbc:BaseAmount`                | Amount                                                         |
 
 #### 7.8.3 PaymentMeans (relative to `cac:PaymentMeans`)
 
-| Field | Path |
-|---|---|
-| `code` | `cbc:PaymentMeansCode` |
-| `dueDate` | `cbc:PaymentDueDate` |
-| `channelCode` | `cbc:PaymentChannelCode` |
-| `instructionNote` | `cbc:InstructionNote` |
-| `accountId` | `cac:PayeeFinancialAccount/cbc:ID` (IBAN) |
-| `accountCurrency` | `cac:PayeeFinancialAccount/cbc:CurrencyCode` |
-| `paymentNote` | `cac:PayeeFinancialAccount/cbc:PaymentNote` |
-| `bankBranchName` | `cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name` |
-| `bankName` | `cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:Name` |
+| Field             | Path                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------------------- |
+| `code`            | `cbc:PaymentMeansCode`                                                                       |
+| `dueDate`         | `cbc:PaymentDueDate`                                                                         |
+| `channelCode`     | `cbc:PaymentChannelCode`                                                                     |
+| `instructionNote` | `cbc:InstructionNote`                                                                        |
+| `accountId`       | `cac:PayeeFinancialAccount/cbc:ID` (IBAN)                                                    |
+| `accountCurrency` | `cac:PayeeFinancialAccount/cbc:CurrencyCode`                                                 |
+| `paymentNote`     | `cac:PayeeFinancialAccount/cbc:PaymentNote`                                                  |
+| `bankBranchName`  | `cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cbc:Name`                          |
+| `bankName`        | `cac:PayeeFinancialAccount/cac:FinancialInstitutionBranch/cac:FinancialInstitution/cbc:Name` |
 
 #### 7.8.4 PaymentTerms (relative to `cac:PaymentTerms`)
 
-| Field | Path | Transform |
-|---|---|---|
-| `note` | `cbc:Note` | text |
+| Field                     | Path                          | Transform      |
+| ------------------------- | ----------------------------- | -------------- |
+| `note`                    | `cbc:Note`                    | text           |
 | `penaltySurchargePercent` | `cbc:PenaltySurchargePercent` | `decimalValue` |
-| `amount` | `cbc:Amount` | Amount |
-| `dueDate` | `cbc:PaymentDueDate` | text |
+| `amount`                  | `cbc:Amount`                  | Amount         |
+| `dueDate`                 | `cbc:PaymentDueDate`          | text           |
 
 #### 7.8.5 Attachments (relative to `cac:AdditionalDocumentReference`)
 
-| Field | Path | Transform |
-|---|---|---|
-| DocumentReference fields | as 7.3.1 | |
-| `filename` | `cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename` | attr |
-| `mimeCode` | `…/@mimeCode` | attr, lower-case |
-| `encodingCode` | `…/@encodingCode` | attr |
-| `characterSetCode` | `…/@characterSetCode` | attr |
-| `base64` | `…/text()` | `text.replace(/\s+/g, '')`; `null` with `attachments: 'metadata'` |
-| `size` | derived | `(len * 3 - ((len * 3) % 4)) / 4 - padding` (that is ⌊3·len/4⌋ − padding, written without `Math.floor`, which ESLint bans in `src/`), where `len` is the stripped length and `padding` the number of trailing `=` (0–2) |
-| `externalUri` | `cac:Attachment/cac:ExternalReference/cbc:URI` | text |
-| `isXslt` | derived | rule below |
+| Field                    | Path                                                        | Transform                                                                                                                                                                                                               |
+| ------------------------ | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DocumentReference fields | as 7.3.1                                                    |                                                                                                                                                                                                                         |
+| `filename`               | `cac:Attachment/cbc:EmbeddedDocumentBinaryObject/@filename` | attr                                                                                                                                                                                                                    |
+| `mimeCode`               | `…/@mimeCode`                                               | attr, lower-case                                                                                                                                                                                                        |
+| `encodingCode`           | `…/@encodingCode`                                           | attr                                                                                                                                                                                                                    |
+| `characterSetCode`       | `…/@characterSetCode`                                       | attr                                                                                                                                                                                                                    |
+| `base64`                 | `…/text()`                                                  | `text.replace(/\s+/g, '')`; `null` with `attachments: 'metadata'`                                                                                                                                                       |
+| `size`                   | derived                                                     | `(len * 3 - ((len * 3) % 4)) / 4 - padding` (that is ⌊3·len/4⌋ − padding, written without `Math.floor`, which ESLint bans in `src/`), where `len` is the stripped length and `padding` the number of trailing `=` (0–2) |
+| `externalUri`            | `cac:Attachment/cac:ExternalReference/cbc:URI`              | text                                                                                                                                                                                                                    |
+| `isXslt`                 | derived                                                     | rule below                                                                                                                                                                                                              |
 
 `isXslt` (normative): `true` when `mimeCode` is not `application/pdf` and does not start with `image/`, and at least one holds: `filename` ends with `.xslt` or `.xsl` (case-insensitive); `documentType` upper-cased equals `XSLT`; `mimeCode` is `application/xslt+xml` or `text/xsl`.
 
@@ -1497,15 +1683,15 @@ Withholding is never mixed into `taxTotals`. In a TEVKIFAT invoice, `taxTotals` 
 
 All sums use `decimal.sum` over non-null values.
 
-| Field | Formula |
-|---|---|
-| `sumOfLines` | Σ `lines[].lineExtensionAmount.value`; `null` when there are no lines |
-| `taxTotal` | Σ `taxTotals[].taxAmount.value`; `null` when `taxTotals` is empty |
-| `kdvTotal` | Σ `taxTotals[].subtotals[]` with `taxTypeCode === '0015'`: `taxAmount.value`; `null` when none |
-| `otvTotal` | Σ subtotals with `taxType.kind === 'OTV'`; `null` when none |
-| `otherTaxTotal` | Σ subtotals whose kind is neither `KDV` nor `OTV` (unknown codes included); `null` when none |
-| `withholdingTotal` | Σ `withholdingTaxTotals[].taxAmount.value`; if there are none, Σ of all lines' `withholdingTaxTotals[].taxAmount.value`; `null` when neither exists |
-| `payableTry` | `currency` is `TRY` or in `TRY_ALIASES`: `payableAmount.value`; else if `exchangeRate.rate` is non-null: `decimal.round(decimal.mul(payable, rate), 2)`; else `null` |
+| Field              | Formula                                                                                                                                                              |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sumOfLines`       | Σ `lines[].lineExtensionAmount.value`; `null` when there are no lines                                                                                                |
+| `taxTotal`         | Σ `taxTotals[].taxAmount.value`; `null` when `taxTotals` is empty                                                                                                    |
+| `kdvTotal`         | Σ `taxTotals[].subtotals[]` with `taxTypeCode === '0015'`: `taxAmount.value`; `null` when none                                                                       |
+| `otvTotal`         | Σ subtotals with `taxType.kind === 'OTV'`; `null` when none                                                                                                          |
+| `otherTaxTotal`    | Σ subtotals whose kind is neither `KDV` nor `OTV` (unknown codes included); `null` when none                                                                         |
+| `withholdingTotal` | Σ `withholdingTaxTotals[].taxAmount.value`; if there are none, Σ of all lines' `withholdingTaxTotals[].taxAmount.value`; `null` when neither exists                  |
+| `payableTry`       | `currency` is `TRY` or in `TRY_ALIASES`: `payableAmount.value`; else if `exchangeRate.rate` is non-null: `decimal.round(decimal.mul(payable, rate), 2)`; else `null` |
 
 ### 7.9 Code lists (normative initial content)
 
@@ -1513,13 +1699,17 @@ Code lists live in `src/codes/*.ts` as `ReadonlyMap`-backed objects with lookup 
 
 ```ts
 export const CODE_LISTS_VERIFIED = {
-  profiles:     { source: 'UBL-TR Kod Listeleri', version: '<version from the document>', checkedOn: '<YYYY-MM-DD>' },
+  profiles: {
+    source: 'UBL-TR Kod Listeleri',
+    version: '<version from the document>',
+    checkedOn: '<YYYY-MM-DD>',
+  },
   invoiceTypes: { source: 'UBL-TR Kod Listeleri', version: '…', checkedOn: '…' },
-  taxTypes:     { source: 'UBL-TR Kod Listeleri (Vergi Kodları)', version: '…', checkedOn: '…' },
-  withholding:  { source: 'UBL-TR Kod Listeleri (Tevkifat Kodları)', version: '…', checkedOn: '…' },
-  exemptions:   { source: 'UBL-TR Kod Listeleri (İstisna Kodları)', version: '…', checkedOn: '…' },
-  units:        { source: 'UBL-TR Kod Listeleri (Birim Kodları) / UN/ECE Rec. 20', version: '…', checkedOn: '…' },
-  currencies:   { source: 'ISO 4217 List One (SIX)', version: '…', checkedOn: '…' },
+  taxTypes: { source: 'UBL-TR Kod Listeleri (Vergi Kodları)', version: '…', checkedOn: '…' },
+  withholding: { source: 'UBL-TR Kod Listeleri (Tevkifat Kodları)', version: '…', checkedOn: '…' },
+  exemptions: { source: 'UBL-TR Kod Listeleri (İstisna Kodları)', version: '…', checkedOn: '…' },
+  units: { source: 'UBL-TR Kod Listeleri (Birim Kodları) / UN/ECE Rec. 20', version: '…', checkedOn: '…' },
+  currencies: { source: 'ISO 4217 List One (SIX)', version: '…', checkedOn: '…' },
 } as const;
 ```
 
@@ -1527,141 +1717,141 @@ The tables below are the starting content. At T-10 the implementer compares each
 
 **Profiles** (`PROFILES`, A-02):
 
-| Code | English | Turkish |
-|---|---|---|
-| TEMELFATURA | Basic invoice | Temel fatura |
-| TICARIFATURA | Commercial invoice | Ticari fatura |
-| EARSIVFATURA | e-Archive invoice | e-Arşiv fatura |
-| IHRACAT | Export invoice | İhracat faturası |
-| YOLCUBERABERFATURA | Tax-free traveller invoice | Yolcu beraber fatura |
-| KAMU | Public administration invoice | Kamu faturası |
-| HKS | Produce market (HKS) invoice | HKS faturası |
-| ENERJI | Energy (EV charging) invoice | Enerji faturası |
-| ILAC_TIBBICIHAZ | Medicine and medical device invoice | İlaç ve tıbbi cihaz faturası |
-| YATIRIMTESVIK | Investment incentive invoice | Yatırım teşvik faturası |
+| Code               | English                             | Turkish                      |
+| ------------------ | ----------------------------------- | ---------------------------- |
+| TEMELFATURA        | Basic invoice                       | Temel fatura                 |
+| TICARIFATURA       | Commercial invoice                  | Ticari fatura                |
+| EARSIVFATURA       | e-Archive invoice                   | e-Arşiv fatura               |
+| IHRACAT            | Export invoice                      | İhracat faturası             |
+| YOLCUBERABERFATURA | Tax-free traveller invoice          | Yolcu beraber fatura         |
+| KAMU               | Public administration invoice       | Kamu faturası                |
+| HKS                | Produce market (HKS) invoice        | HKS faturası                 |
+| ENERJI             | Energy (EV charging) invoice        | Enerji faturası              |
+| ILAC_TIBBICIHAZ    | Medicine and medical device invoice | İlaç ve tıbbi cihaz faturası |
+| YATIRIMTESVIK      | Investment incentive invoice        | Yatırım teşvik faturası      |
 
 **Invoice types** (`INVOICE_TYPES`, A-03):
 
-| Code | English | Turkish |
-|---|---|---|
-| SATIS | Sale | Satış |
-| IADE | Return | İade |
-| TEVKIFAT | Withholding | Tevkifat |
-| TEVKIFATIADE | Withholding return | Tevkifat iade |
-| ISTISNA | Exempt | İstisna |
-| OZELMATRAH | Special tax base | Özel matrah |
-| IHRACKAYITLI | Export-registered sale | İhraç kayıtlı |
-| SGK | Social security (SGK) | SGK |
-| KOMISYONCU | Commission agent | Komisyoncu |
-| HKSSATIS | HKS sale | HKS satış |
-| HKSKOMISYONCU | HKS commission agent | HKS komisyoncu |
-| KONAKLAMAVERGISI | Accommodation tax | Konaklama vergisi |
-| SARJ | EV charging | Şarj |
-| SARJANLIK | Instant EV charging | Şarj anlık |
-| TEKNOLOJIDESTEK | Technology support | Teknoloji destek |
-| YTBSATIS | Investment incentive sale | YTB satış |
-| YTBIADE | Investment incentive return | YTB iade |
-| YTBISTISNA | Investment incentive exempt | YTB istisna |
-| YTBTEVKIFAT | Investment incentive withholding | YTB tevkifat |
-| YTBTEVKIFATIADE | Investment incentive withholding return | YTB tevkifat iade |
+| Code             | English                                 | Turkish           |
+| ---------------- | --------------------------------------- | ----------------- |
+| SATIS            | Sale                                    | Satış             |
+| IADE             | Return                                  | İade              |
+| TEVKIFAT         | Withholding                             | Tevkifat          |
+| TEVKIFATIADE     | Withholding return                      | Tevkifat iade     |
+| ISTISNA          | Exempt                                  | İstisna           |
+| OZELMATRAH       | Special tax base                        | Özel matrah       |
+| IHRACKAYITLI     | Export-registered sale                  | İhraç kayıtlı     |
+| SGK              | Social security (SGK)                   | SGK               |
+| KOMISYONCU       | Commission agent                        | Komisyoncu        |
+| HKSSATIS         | HKS sale                                | HKS satış         |
+| HKSKOMISYONCU    | HKS commission agent                    | HKS komisyoncu    |
+| KONAKLAMAVERGISI | Accommodation tax                       | Konaklama vergisi |
+| SARJ             | EV charging                             | Şarj              |
+| SARJANLIK        | Instant EV charging                     | Şarj anlık        |
+| TEKNOLOJIDESTEK  | Technology support                      | Teknoloji destek  |
+| YTBSATIS         | Investment incentive sale               | YTB satış         |
+| YTBIADE          | Investment incentive return             | YTB iade          |
+| YTBISTISNA       | Investment incentive exempt             | YTB istisna       |
+| YTBTEVKIFAT      | Investment incentive withholding        | YTB tevkifat      |
+| YTBTEVKIFATIADE  | Investment incentive withholding return | YTB tevkifat iade |
 
 If A-03 shows that a listed code does not exist, remove it from both the table and the `InvoiceTypeCode` union in the same change and record a decision.
 
 **Tax types** (`TAX_TYPES`, A-04). `short` is the abbreviation printed in the official list; replace with the exact official spelling at T-10.
 
-| Code | short | Kind | English | Turkish |
-|---|---|---|---|---|
-| 0003 | GV STOPAJI | STOPAJ | Income tax withholding | Gelir vergisi stopajı |
-| 0011 | KV STOPAJI | STOPAJ | Corporate tax withholding | Kurumlar vergisi stopajı |
-| 0015 | KDV | KDV | Value-added tax | Katma değer vergisi |
-| 0021 | BSMV | OTHER | Banking and insurance transactions tax | Banka ve sigorta muameleleri vergisi |
-| 0059 | KONAKLAMA V. | KONAKLAMA | Accommodation tax | Konaklama vergisi |
-| 0061 | KKDF | OTHER | Resource utilisation support fund | Kaynak kullanımı destekleme fonu |
-| 0071 | ÖTV 1. LİSTE | OTV | Special consumption tax, list I | ÖTV I sayılı liste |
-| 0072 | ÖTV 2. LİSTE | OTV | Special consumption tax, list II | ÖTV II sayılı liste |
-| 0073 | ÖTV 3. LİSTE | OTV | Special consumption tax, list III | ÖTV III sayılı liste |
-| 0074 | ÖTV 4. LİSTE | OTV | Special consumption tax, list IV | ÖTV IV sayılı liste |
-| 0075 | ÖTV 3A LİSTE | OTV | Special consumption tax, list III-A | ÖTV III-A sayılı liste |
-| 0076 | ÖTV 3B LİSTE | OTV | Special consumption tax, list III-B | ÖTV III-B sayılı liste |
-| 0077 | ÖTV 3C LİSTE | OTV | Special consumption tax, list III-C | ÖTV III-C sayılı liste |
-| 1047 | DAMGA V | DAMGA | Stamp duty | Damga vergisi |
-| 1048 | 5035SKDAMGAV | DAMGA | Stamp duty (Law 5035) | 5035 sayılı kanuna göre damga vergisi |
-| 4071 | ELK.HAV.GAZ.TÜK.VER. | OTHER | Electricity and gas consumption tax | Elektrik ve havagazı tüketim vergisi |
-| 4080 | Ö.İLETİŞİM V | OIV | Special communication tax | Özel iletişim vergisi |
-| 4081 | 5035ÖZİLETV. | OIV | Special communication tax (Law 5035) | 5035 sayılı kanuna göre özel iletişim vergisi |
-| 8001 | BORSA TES.ÜC. | OTHER | Commodity exchange registration fee | Borsa tescil ücreti |
-| 8002 | ENERJİ FONU | OTHER | Energy fund | Enerji fonu |
-| 8004 | TRT PAYI | OTHER | TRT share | TRT payı |
-| 8005 | ELK.TÜK.VER. | OTHER | Electricity consumption tax | Elektrik tüketim vergisi |
-| 8006 | TK KULLANIM | OTHER | Telecom usage fee | TK kullanım ücreti |
-| 8007 | TK RUHSAT | OTHER | Telecom licence fee | TK ruhsat ücreti |
-| 8008 | ÇEV. TEM .VER. | OTHER | Environmental cleaning tax | Çevre temizlik vergisi |
-| 9015 | KDV TEVKİFAT | KDV_WITHHOLDING | VAT withholding | KDV tevkifatı |
+| Code | short                | Kind            | English                                | Turkish                                       |
+| ---- | -------------------- | --------------- | -------------------------------------- | --------------------------------------------- |
+| 0003 | GV STOPAJI           | STOPAJ          | Income tax withholding                 | Gelir vergisi stopajı                         |
+| 0011 | KV STOPAJI           | STOPAJ          | Corporate tax withholding              | Kurumlar vergisi stopajı                      |
+| 0015 | KDV                  | KDV             | Value-added tax                        | Katma değer vergisi                           |
+| 0021 | BSMV                 | OTHER           | Banking and insurance transactions tax | Banka ve sigorta muameleleri vergisi          |
+| 0059 | KONAKLAMA V.         | KONAKLAMA       | Accommodation tax                      | Konaklama vergisi                             |
+| 0061 | KKDF                 | OTHER           | Resource utilisation support fund      | Kaynak kullanımı destekleme fonu              |
+| 0071 | ÖTV 1. LİSTE         | OTV             | Special consumption tax, list I        | ÖTV I sayılı liste                            |
+| 0072 | ÖTV 2. LİSTE         | OTV             | Special consumption tax, list II       | ÖTV II sayılı liste                           |
+| 0073 | ÖTV 3. LİSTE         | OTV             | Special consumption tax, list III      | ÖTV III sayılı liste                          |
+| 0074 | ÖTV 4. LİSTE         | OTV             | Special consumption tax, list IV       | ÖTV IV sayılı liste                           |
+| 0075 | ÖTV 3A LİSTE         | OTV             | Special consumption tax, list III-A    | ÖTV III-A sayılı liste                        |
+| 0076 | ÖTV 3B LİSTE         | OTV             | Special consumption tax, list III-B    | ÖTV III-B sayılı liste                        |
+| 0077 | ÖTV 3C LİSTE         | OTV             | Special consumption tax, list III-C    | ÖTV III-C sayılı liste                        |
+| 1047 | DAMGA V              | DAMGA           | Stamp duty                             | Damga vergisi                                 |
+| 1048 | 5035SKDAMGAV         | DAMGA           | Stamp duty (Law 5035)                  | 5035 sayılı kanuna göre damga vergisi         |
+| 4071 | ELK.HAV.GAZ.TÜK.VER. | OTHER           | Electricity and gas consumption tax    | Elektrik ve havagazı tüketim vergisi          |
+| 4080 | Ö.İLETİŞİM V         | OIV             | Special communication tax              | Özel iletişim vergisi                         |
+| 4081 | 5035ÖZİLETV.         | OIV             | Special communication tax (Law 5035)   | 5035 sayılı kanuna göre özel iletişim vergisi |
+| 8001 | BORSA TES.ÜC.        | OTHER           | Commodity exchange registration fee    | Borsa tescil ücreti                           |
+| 8002 | ENERJİ FONU          | OTHER           | Energy fund                            | Enerji fonu                                   |
+| 8004 | TRT PAYI             | OTHER           | TRT share                              | TRT payı                                      |
+| 8005 | ELK.TÜK.VER.         | OTHER           | Electricity consumption tax            | Elektrik tüketim vergisi                      |
+| 8006 | TK KULLANIM          | OTHER           | Telecom usage fee                      | TK kullanım ücreti                            |
+| 8007 | TK RUHSAT            | OTHER           | Telecom licence fee                    | TK ruhsat ücreti                              |
+| 8008 | ÇEV. TEM .VER.       | OTHER           | Environmental cleaning tax             | Çevre temizlik vergisi                        |
+| 9015 | KDV TEVKİFAT         | KDV_WITHHOLDING | VAT withholding                        | KDV tevkifatı                                 |
 
 **Withholding codes** (`WITHHOLDING_CODES`, A-05). Rates are not stored: they come from `cbc:Percent` and change by communiqué. Initial entries (all other codes in the official list, including 610, 611, 617–623, 650 and the 800-series full-withholding codes, are added at T-10):
 
-| Code | English | Turkish |
-|---|---|---|
-| 601 | Construction works and related engineering, architecture and survey-project services | Yapım işleri ile bu işlerle birlikte ifa edilen mühendislik-mimarlık ve etüt-proje hizmetleri |
-| 602 | Survey, planning, consultancy, audit and similar services | Etüt, plan-proje, danışmanlık, denetim ve benzeri hizmetler |
-| 603 | Repair and maintenance of machinery, equipment, fixtures and vehicles | Makine, teçhizat, demirbaş ve taşıtlara ait tadil, bakım ve onarım hizmetleri |
-| 604 | Catering services | Yemek servis hizmeti |
-| 605 | Event organisation services | Organizasyon hizmeti |
-| 606 | Labour supply services | İşgücü temin hizmetleri |
-| 607 | Private security services | Özel güvenlik hizmeti |
-| 608 | Building inspection services | Yapı denetim hizmetleri |
-| 609 | Contract textile, clothing, bag and shoe manufacturing | Fason olarak yaptırılan tekstil ve konfeksiyon işleri, çanta ve ayakkabı dikim işleri |
-| 612 | Cleaning services | Temizlik hizmeti |
-| 613 | Environment and garden maintenance | Çevre ve bahçe bakım hizmetleri |
-| 614 | Shuttle transport services | Servis taşımacılığı hizmeti |
-| 615 | Printing services | Her türlü baskı ve basım hizmetleri |
-| 616 | Other services | Diğer hizmetler |
-| 624 | Freight transport services | Yük taşımacılığı hizmeti |
-| 625 | Commercial advertising services | Ticari reklam hizmetleri |
-| 626 | Other deliveries | Diğer teslimler |
-| 627 | Iron and steel product deliveries | Demir-çelik ürünlerinin teslimi |
+| Code | English                                                                              | Turkish                                                                                       |
+| ---- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| 601  | Construction works and related engineering, architecture and survey-project services | Yapım işleri ile bu işlerle birlikte ifa edilen mühendislik-mimarlık ve etüt-proje hizmetleri |
+| 602  | Survey, planning, consultancy, audit and similar services                            | Etüt, plan-proje, danışmanlık, denetim ve benzeri hizmetler                                   |
+| 603  | Repair and maintenance of machinery, equipment, fixtures and vehicles                | Makine, teçhizat, demirbaş ve taşıtlara ait tadil, bakım ve onarım hizmetleri                 |
+| 604  | Catering services                                                                    | Yemek servis hizmeti                                                                          |
+| 605  | Event organisation services                                                          | Organizasyon hizmeti                                                                          |
+| 606  | Labour supply services                                                               | İşgücü temin hizmetleri                                                                       |
+| 607  | Private security services                                                            | Özel güvenlik hizmeti                                                                         |
+| 608  | Building inspection services                                                         | Yapı denetim hizmetleri                                                                       |
+| 609  | Contract textile, clothing, bag and shoe manufacturing                               | Fason olarak yaptırılan tekstil ve konfeksiyon işleri, çanta ve ayakkabı dikim işleri         |
+| 612  | Cleaning services                                                                    | Temizlik hizmeti                                                                              |
+| 613  | Environment and garden maintenance                                                   | Çevre ve bahçe bakım hizmetleri                                                               |
+| 614  | Shuttle transport services                                                           | Servis taşımacılığı hizmeti                                                                   |
+| 615  | Printing services                                                                    | Her türlü baskı ve basım hizmetleri                                                           |
+| 616  | Other services                                                                       | Diğer hizmetler                                                                               |
+| 624  | Freight transport services                                                           | Yük taşımacılığı hizmeti                                                                      |
+| 625  | Commercial advertising services                                                      | Ticari reklam hizmetleri                                                                      |
+| 626  | Other deliveries                                                                     | Diğer teslimler                                                                               |
+| 627  | Iron and steel product deliveries                                                    | Demir-çelik ürünlerinin teslimi                                                               |
 
 **Exemption codes** (`EXEMPTION_CODES`, A-06). Initial entries (the full 200-, 300-, 700- and 800-series lists are added at T-10):
 
-| Code | English | Turkish |
-|---|---|---|
-| 301 | Export of goods (Art. 11/1-a) | 11/1-a Mal ihracatı |
-| 302 | Export of services (Art. 11/1-a) | 11/1-a Hizmet ihracatı |
-| 350 | Other exemptions | Diğerleri |
-| 351 | Not exempt, other (zero VAT outside an exemption) | KDV - İstisna olmayan diğer |
+| Code | English                                           | Turkish                     |
+| ---- | ------------------------------------------------- | --------------------------- |
+| 301  | Export of goods (Art. 11/1-a)                     | 11/1-a Mal ihracatı         |
+| 302  | Export of services (Art. 11/1-a)                  | 11/1-a Hizmet ihracatı      |
+| 350  | Other exemptions                                  | Diğerleri                   |
+| 351  | Not exempt, other (zero VAT outside an exemption) | KDV - İstisna olmayan diğer |
 
 **Unit codes** (`UNIT_CODES`, A-07; UN/ECE Recommendation 20 subset):
 
-| Code | English | Turkish |
-|---|---|---|
-| C62 | piece | adet |
-| NIU | number of units | adet |
-| EA | each | adet |
-| PA | packet | paket |
-| BX | box | kutu |
-| SET | set | set |
-| PR | pair | çift |
-| KGM | kilogram | kilogram |
-| GRM | gram | gram |
-| MGM | milligram | miligram |
-| TNE | tonne | ton |
-| LTR | litre | litre |
-| MLT | millilitre | mililitre |
-| MTQ | cubic metre | metreküp |
-| MTK | square metre | metrekare |
-| MTR | metre | metre |
-| CMT | centimetre | santimetre |
-| MMT | millimetre | milimetre |
-| KMT | kilometre | kilometre |
-| HUR | hour | saat |
-| MIN | minute | dakika |
-| DAY | day | gün |
-| WEE | week | hafta |
-| MON | month | ay |
-| ANN | year | yıl |
-| KWH | kilowatt hour | kilovatsaat |
-| MWH | megawatt hour | megavatsaat |
-| KWT | kilowatt | kilovat |
+| Code | English         | Turkish     |
+| ---- | --------------- | ----------- |
+| C62  | piece           | adet        |
+| NIU  | number of units | adet        |
+| EA   | each            | adet        |
+| PA   | packet          | paket       |
+| BX   | box             | kutu        |
+| SET  | set             | set         |
+| PR   | pair            | çift        |
+| KGM  | kilogram        | kilogram    |
+| GRM  | gram            | gram        |
+| MGM  | milligram       | miligram    |
+| TNE  | tonne           | ton         |
+| LTR  | litre           | litre       |
+| MLT  | millilitre      | mililitre   |
+| MTQ  | cubic metre     | metreküp    |
+| MTK  | square metre    | metrekare   |
+| MTR  | metre           | metre       |
+| CMT  | centimetre      | santimetre  |
+| MMT  | millimetre      | milimetre   |
+| KMT  | kilometre       | kilometre   |
+| HUR  | hour            | saat        |
+| MIN  | minute          | dakika      |
+| DAY  | day             | gün         |
+| WEE  | week            | hafta       |
+| MON  | month           | ay          |
+| ANN  | year            | yıl         |
+| KWH  | kilowatt hour   | kilovatsaat |
+| MWH  | megawatt hour   | megavatsaat |
+| KWT  | kilowatt        | kilovat     |
 
 **Currencies** (`CURRENCIES`, A-11): every active alphabetic code in ISO 4217 List One with its minor-unit count (`null` for "N.A." codes such as XAU). Shape: `{ code: 'TRY', minorUnits: 2, label: { en: 'Turkish lira', tr: 'Türk lirası' } }`. Turkish labels are required for TRY, USD, EUR, GBP, CHF, JPY, RUB, CNY, SAR, AED, AZN, KWD; other codes use the English name in both fields. A-11 records the list date.
 
@@ -1698,49 +1888,52 @@ function format({ c, s }: { c: bigint; s: number }): string {
 }
 
 const pow10 = (n: number): bigint => 10n ** BigInt(n);
-function align(a, b) { const s = Math.max(a.s, b.s); return [a.c * pow10(s - a.s), b.c * pow10(s - b.s), s] as const; }
+function align(a, b) {
+  const s = Math.max(a.s, b.s);
+  return [a.c * pow10(s - a.s), b.c * pow10(s - b.s), s] as const;
+}
 ```
 
-| Operation | Algorithm |
-|---|---|
-| `normalize(v)` | `format(parse(v))` |
-| `add(a, b)` / `sub(a, b)` | `align`, then `ca ± cb` at scale `s` |
-| `mul(a, b)` | `{ c: ca × cb, s: sa + sb }` |
-| `neg`, `abs` | sign of `c` |
-| `cmp(a, b)` | `align`, compare `ca` and `cb` |
-| `eq(a, b)` | `cmp(a, b) === 0` |
-| `sum(values)` | fold `add` from `'0'` |
-| `movePoint(a, k)` | Exact `a × 10^k`. `k < 0`: `{ c, s: s + |k| }`. `k ≥ 0` and `k ≤ s`: `{ c, s: s − k }`. `k > s`: `{ c × 10^(k − s), s: 0 }`. |
-| `round(a, n, mode)` | If `s ≤ n`: `{ c: c × 10^(n − s), s: n }`. Else `d = 10^(s − n)`, `q = c / d` (truncating), `r = c % d`. Half away from zero: if `2|r| ≥ d`, `q += sign(c)`. Half even: if `2|r| > d`, or `2|r| = d` and `q` is odd, `q += sign(c)`. Result `{ c: q, s: n }`. Default mode: half away from zero. |
-| `div(a, b, n)` | `b = 0` → `RangeError`. `num = ca × 10^(sb + n)`, `den = cb × 10^(sa)`; `q = num / den`, `r = num % den`; if `2|r| ≥ |den|`, `q += sign(num) × sign(den)`; result `{ c: q, s: n }` (sign of `q` follows `num / den`). |
-| `within(a, b, t)` | `cmp(abs(sub(a, b)), t) ≤ 0` |
-| `scale(a)` | `parse(a).s` |
+| Operation                 | Algorithm                                                                                                                           |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `normalize(v)`            | `format(parse(v))`                                                                                                                  |
+| `add(a, b)` / `sub(a, b)` | `align`, then `ca ± cb` at scale `s`                                                                                                |
+| `mul(a, b)`               | `{ c: ca × cb, s: sa + sb }`                                                                                                        |
+| `neg`, `abs`              | sign of `c`                                                                                                                         |
+| `cmp(a, b)`               | `align`, compare `ca` and `cb`                                                                                                      |
+| `eq(a, b)`                | `cmp(a, b) === 0`                                                                                                                   |
+| `sum(values)`             | fold `add` from `'0'`                                                                                                               |
+| `movePoint(a, k)`         | Exact `a × 10^k`. `k < 0`: `{ c, s: s +                                                                                             | k   | }`. `k ≥ 0`and`k ≤ s`: `{ c, s: s − k }`. `k > s`: `{ c × 10^(k − s), s: 0 }`. |
+| `round(a, n, mode)`       | If `s ≤ n`: `{ c: c × 10^(n − s), s: n }`. Else `d = 10^(s − n)`, `q = c / d` (truncating), `r = c % d`. Half away from zero: if `2 | r   | ≥ d`, `q += sign(c)`. Half even: if `2                                         | r   | > d`, or `2                                                                             | r   | = d`and`q`is odd,`q += sign(c)`. Result `{ c: q, s: n }`. Default mode: half away from zero. |
+| `div(a, b, n)`            | `b = 0` → `RangeError`. `num = ca × 10^(sb + n)`, `den = cb × 10^(sa)`; `q = num / den`, `r = num % den`; if `2                     | r   | ≥                                                                              | den | `, `q += sign(num) × sign(den)`; result `{ c: q, s: n }`(sign of`q`follows`num / den`). |
+| `within(a, b, t)`         | `cmp(abs(sub(a, b)), t) ≤ 0`                                                                                                        |
+| `scale(a)`                | `parse(a).s`                                                                                                                        |
 
 Examples (normative test vectors, UT-01):
 
-| Call | Result |
-|---|---|
-| `add('100.50', '0.5')` | `'101.00'` |
-| `sub('0.1', '0.3')` | `'-0.2'` |
-| `mul('3', '33.333')` | `'99.999'` |
-| `mul('1180.00', '32.1234')` | `'37905.612000'` |
-| `round('37905.612000', 2)` | `'37905.61'` |
-| `round('2.345', 2)` | `'2.35'` |
-| `round('-2.345', 2)` | `'-2.35'` |
-| `round('2.345', 2, 'half-even')` | `'2.34'` |
-| `round('2.355', 2, 'half-even')` | `'2.36'` |
-| `round('7', 2)` | `'7.00'` |
-| `div('100', '3', 4)` | `'33.3333'` |
-| `div('-1', '8', 2)` | `'-0.13'` |
-| `movePoint('20', -2)` | `'0.20'` |
-| `normalize('+007.50')` | `'7.50'` |
-| `normalize('-0.00')` | `'0.00'` |
-| `normalize('.5')` | `'0.5'` |
-| `normalize('5.')` | `'5'` |
-| `sum([])` | `'0'` |
-| `within('100.00', '100.01', '0.01')` | `true` |
-| `within('100.00', '100.011', '0.01')` | `false` |
-| `cmp('1.0', '1.00')` | `0` |
+| Call                                  | Result           |
+| ------------------------------------- | ---------------- |
+| `add('100.50', '0.5')`                | `'101.00'`       |
+| `sub('0.1', '0.3')`                   | `'-0.2'`         |
+| `mul('3', '33.333')`                  | `'99.999'`       |
+| `mul('1180.00', '32.1234')`           | `'37905.612000'` |
+| `round('37905.612000', 2)`            | `'37905.61'`     |
+| `round('2.345', 2)`                   | `'2.35'`         |
+| `round('-2.345', 2)`                  | `'-2.35'`        |
+| `round('2.345', 2, 'half-even')`      | `'2.34'`         |
+| `round('2.355', 2, 'half-even')`      | `'2.36'`         |
+| `round('7', 2)`                       | `'7.00'`         |
+| `div('100', '3', 4)`                  | `'33.3333'`      |
+| `div('-1', '8', 2)`                   | `'-0.13'`        |
+| `movePoint('20', -2)`                 | `'0.20'`         |
+| `normalize('+007.50')`                | `'7.50'`         |
+| `normalize('-0.00')`                  | `'0.00'`         |
+| `normalize('.5')`                     | `'0.5'`          |
+| `normalize('5.')`                     | `'5'`            |
+| `sum([])`                             | `'0'`            |
+| `within('100.00', '100.01', '0.01')`  | `true`           |
+| `within('100.00', '100.011', '0.01')` | `false`          |
+| `cmp('1.0', '1.00')`                  | `0`              |
 
 Percent computations use `movePoint(mul(base, percent), -2)`, which is exact, then `round(…, 2)` where a 2-decimal amount is needed.
 
@@ -1749,7 +1942,11 @@ The `scale` argument of `round` and `div` and the `places` argument of `movePoin
 ### 8.3 `toMinorUnits` (normative)
 
 ```ts
-export function toMinorUnits(amount: Decimal, currency: string, options?: { rounding?: 'half-away-from-zero' | 'throw'; minorUnits?: number }): bigint
+export function toMinorUnits(
+  amount: Decimal,
+  currency: string,
+  options?: { rounding?: 'half-away-from-zero' | 'throw'; minorUnits?: number },
+): bigint;
 ```
 
 1. `digits = options.minorUnits ?? minorUnitsOf(currency.trim().toUpperCase())`. `minorUnitsOf` returns the ISO 4217 minor units; `TL` and `YTL` return 2; unknown codes and "N.A." codes return `null`. If `digits` is `null`, throw `RangeError('Unknown minor units for currency <code>; pass options.minorUnits')`. `minorUnits` must be an integer 0–6, else `TypeError`.
@@ -1757,17 +1954,17 @@ export function toMinorUnits(amount: Decimal, currency: string, options?: { roun
 3. If its scale is greater than `digits`: with `rounding: 'throw'`, throw `RangeError('<amount> has more than <digits> decimals for <code>')` when any dropped digit is non-zero; otherwise round half away from zero.
 4. Return the coefficient at scale `digits` as `bigint`.
 
-| Call | Result |
-|---|---|
-| `toMinorUnits('1180.5', 'TRY')` | `118050n` |
-| `toMinorUnits('0.005', 'TRY')` | `1n` |
-| `toMinorUnits('-0.005', 'TRY')` | `-1n` |
-| `toMinorUnits('100', 'JPY')` | `100n` |
-| `toMinorUnits('1.2345', 'KWD')` | `1235n` |
+| Call                                                  | Result              |
+| ----------------------------------------------------- | ------------------- |
+| `toMinorUnits('1180.5', 'TRY')`                       | `118050n`           |
+| `toMinorUnits('0.005', 'TRY')`                        | `1n`                |
+| `toMinorUnits('-0.005', 'TRY')`                       | `-1n`               |
+| `toMinorUnits('100', 'JPY')`                          | `100n`              |
+| `toMinorUnits('1.2345', 'KWD')`                       | `1235n`             |
 | `toMinorUnits('1.234', 'USD', { rounding: 'throw' })` | throws `RangeError` |
-| `toMinorUnits('1.230', 'USD', { rounding: 'throw' })` | `123n` |
-| `toMinorUnits('5', 'XAU')` | throws `RangeError` |
-| `toMinorUnits('5', 'XAU', { minorUnits: 3 })` | `5000n` |
+| `toMinorUnits('1.230', 'USD', { rounding: 'throw' })` | `123n`              |
+| `toMinorUnits('5', 'XAU')`                            | throws `RangeError` |
+| `toMinorUnits('5', 'XAU', { minorUnits: 3 })`         | `5000n`             |
 
 ### 8.4 Base64 decoding (`src/attachments/base64.ts`)
 
@@ -1809,34 +2006,34 @@ export function isValidVkn(value: string): boolean {
 Worked example for `9990000013` (check digit 3):
 
 | i+1 | digit | t = (digit + 9 − i) mod 10 | 2^(9−i) | t × 2^(9−i) | r (mod 9, 0→9 if t≠0) |
-|---|---|---|---|---|---|
-| 1 | 9 | 8 | 512 | 4096 | 1 |
-| 2 | 9 | 7 | 256 | 1792 | 1 |
-| 3 | 9 | 6 | 128 | 768 | 3 |
-| 4 | 0 | 6 | 64 | 384 | 6 |
-| 5 | 0 | 5 | 32 | 160 | 7 |
-| 6 | 0 | 4 | 16 | 64 | 1 |
-| 7 | 0 | 3 | 8 | 24 | 6 |
-| 8 | 0 | 2 | 4 | 8 | 8 |
-| 9 | 1 | 2 | 2 | 4 | 4 |
+| --- | ----- | -------------------------- | ------- | ----------- | --------------------- |
+| 1   | 9     | 8                          | 512     | 4096        | 1                     |
+| 2   | 9     | 7                          | 256     | 1792        | 1                     |
+| 3   | 9     | 6                          | 128     | 768         | 3                     |
+| 4   | 0     | 6                          | 64      | 384         | 6                     |
+| 5   | 0     | 5                          | 32      | 160         | 7                     |
+| 6   | 0     | 4                          | 16      | 64          | 1                     |
+| 7   | 0     | 3                          | 8       | 24          | 6                     |
+| 8   | 0     | 2                          | 4       | 8           | 8                     |
+| 9   | 1     | 2                          | 2       | 4           | 4                     |
 
 Sum = 37; check digit = (10 − 7) mod 10 = 3.
 
 Test vectors (UT-10):
 
-| Value | Valid | Note |
-|---|---|---|
-| `1234567890` | yes | |
-| `9876543217` | yes | |
-| `1111111114` | yes | |
-| `9990000013`, `9990000021`, `9990000039`, `9990000046`, `9990000054`, `9990000062` | yes | fixture identities |
-| `1460415308` | yes | public VKN of the customs administration used in IHRACAT invoices (A-09) |
-| `1234567891` | no | wrong check digit |
-| `9990000014` | no | wrong check digit (fixture S27) |
-| `999000001` | no | 9 digits |
-| `99900000130` | no | 11 digits |
-| `999000001A` | no | non-digit |
-| `''` | no | empty |
+| Value                                                                              | Valid | Note                                                                     |
+| ---------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------------ |
+| `1234567890`                                                                       | yes   |                                                                          |
+| `9876543217`                                                                       | yes   |                                                                          |
+| `1111111114`                                                                       | yes   |                                                                          |
+| `9990000013`, `9990000021`, `9990000039`, `9990000046`, `9990000054`, `9990000062` | yes   | fixture identities                                                       |
+| `1460415308`                                                                       | yes   | public VKN of the customs administration used in IHRACAT invoices (A-09) |
+| `1234567891`                                                                       | no    | wrong check digit                                                        |
+| `9990000014`                                                                       | no    | wrong check digit (fixture S27)                                          |
+| `999000001`                                                                        | no    | 9 digits                                                                 |
+| `99900000130`                                                                      | no    | 11 digits                                                                |
+| `999000001A`                                                                       | no    | non-digit                                                                |
+| `''`                                                                               | no    | empty                                                                    |
 
 #### TCKN (11 digits)
 
@@ -1847,7 +2044,7 @@ export function isValidTckn(value: string): boolean {
   const odd = d[0]! + d[2]! + d[4]! + d[6]! + d[8]!;
   const even = d[1]! + d[3]! + d[5]! + d[7]!;
   const d10 = (((odd * 7 - even) % 10) + 10) % 10;
-  const d11 = (d.slice(0, 10).reduce((a, b) => a + b, 0)) % 10;
+  const d11 = d.slice(0, 10).reduce((a, b) => a + b, 0) % 10;
   return d10 === d[9] && d11 === d[10];
 }
 ```
@@ -1858,19 +2055,19 @@ Worked example `50000000128`: odd sum 5+0+0+0+1 = 6, × 7 = 42; even sum 0; 42 m
 
 Test vectors (UT-11):
 
-| Value | Valid | Note |
-|---|---|---|
-| `10000000146` | yes | |
-| `12345678950` | yes | |
-| `98765432150` | yes | |
-| `50000000128`, `50000000296`, `50000000364` | yes | fixture identities |
-| `11111111110` | yes | |
-| `11111111111` | no | anonymous placeholder; `classifyTaxId` returns `anonymous: true` |
-| `10000000147` | no | wrong d11 |
-| `10000000156` | no | wrong d10 |
-| `50000000129` | no | wrong d11 (fixture S28) |
-| `01234567890` | no | starts with 0 |
-| `1000000014` | no | 10 digits |
+| Value                                       | Valid | Note                                                             |
+| ------------------------------------------- | ----- | ---------------------------------------------------------------- |
+| `10000000146`                               | yes   |                                                                  |
+| `12345678950`                               | yes   |                                                                  |
+| `98765432150`                               | yes   |                                                                  |
+| `50000000128`, `50000000296`, `50000000364` | yes   | fixture identities                                               |
+| `11111111110`                               | yes   |                                                                  |
+| `11111111111`                               | no    | anonymous placeholder; `classifyTaxId` returns `anonymous: true` |
+| `10000000147`                               | no    | wrong d11                                                        |
+| `10000000156`                               | no    | wrong d10                                                        |
+| `50000000129`                               | no    | wrong d11 (fixture S28)                                          |
+| `01234567890`                               | no    | starts with 0                                                    |
+| `1000000014`                                | no    | 10 digits                                                        |
 
 #### UUID
 
@@ -1884,125 +2081,125 @@ Notation: `T` = tolerance; `LEA`, `TEA`, `TIA`, `ATA`, `CTA`, `PRA`, `PA` = `tot
 
 #### 9.3.1 Rules
 
-| Code | Sev. | Kind | Check (issue raised when) | Path | Params / details |
-|---|---|---|---|---|---|
-| EF001 | error | V | For each required path absent or empty: `cbc:UBLVersionID`, `cbc:CustomizationID`, `cbc:ProfileID`, `cbc:ID`, `cbc:UUID`, `cbc:IssueDate`, `cbc:InvoiceTypeCode`, `cbc:DocumentCurrencyCode`, `cac:AccountingSupplierParty`, `cac:AccountingCustomerParty`, `cac:LegalMonetaryTotal`, `cac:LegalMonetaryTotal/cbc:LineExtensionAmount`, `cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount`, `cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount`, `cac:LegalMonetaryTotal/cbc:PayableAmount` (one issue each) | `/Invoice/<path>` | `field` = the path |
-| EF002 | error | V | `uuid ≠ null` and `!isValidUuid(uuid)` | `/Invoice/cbc:UUID` | `value` |
-| EF003 | warning | V | `number ≠ null` and not `/^[A-Z0-9]{3}\d{13}$/` (variant `pattern`); or the pattern holds, `issueDate` is valid and `number.slice(3, 7) ≠ issueDate.slice(0, 4)` (variant `year`) | `/Invoice/cbc:ID` | `value`; `numberYear`, `dateYear` |
-| EF004 | error | V | `issueDate ≠ null` and not `/^(\d{4})-(\d{2})-(\d{2})$/` with a real calendar date (Gregorian leap years) | `/Invoice/cbc:IssueDate` | `value` |
-| EF005 | warning | V | `issueTime ≠ null` and not `/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?(Z|[+-](0\d|1[0-4]):[0-5]\d)?$/` | `/Invoice/cbc:IssueTime` | `value` |
-| EF006 | warning | V | `profileIdRaw ≠ null` and `profileId === 'OTHER'` | `/Invoice/cbc:ProfileID` | `value` |
-| EF007 | warning | V | `typeCodeRaw ≠ null` and `typeCode === 'OTHER'` | `/Invoice/cbc:InvoiceTypeCode` | `value` |
-| EF008 | info | V | `ublVersionId ≠ null` and `≠ EXPECTED_UBL_VERSION`; or `customizationId ≠ null` and not in `EXPECTED_CUSTOMIZATION_IDS` (one issue each) | that element | `field`, `value`, `expected` |
-| EF009 | warning | M | Element matched tolerantly, or root not in `NS.inv` (section 6.4); one per distinct (expected, actual) pair | first occurrence | `expected`; details `actual` |
-| EF010 | error | V | `supplier ≠ null` and `supplier.taxId === null` | supplier party path | — |
-| EF011 | error | V | `customer ≠ null` and `customer.taxId === null` | customer party path | — |
-| EF012 | error | V | any party: `taxId.scheme === 'VKN'`, value matches `/^\d{10}$/`, `!isValidVkn` | `<party>/cac:PartyIdentification[n]/cbc:ID` | `value` |
-| EF013 | error | V | any party: `taxId.scheme === 'TCKN'`, value matches `/^[1-9]\d{10}$/`, value `≠ ANONYMOUS_TCKN`, `!isValidTckn` | same | `value` |
-| EF014 | error | V | `scheme === 'VKN'` and not `/^\d{10}$/`; or `scheme === 'TCKN'` and not `/^[1-9]\d{10}$/` | same | `scheme`, `value` |
-| EF015 | info | M | tax ID scheme inferred (`missing`) or schemeID not upper-case (`case`), section 7.5.1 | same | `value`, `scheme`, `schemeId` |
-| EF016 | info | V | `taxId.scheme === 'TCKN'` and value `=== ANONYMOUS_TCKN` | same | — |
-| EF017 | warning | V | party `≠ null` and `displayName === null` (supplier, customer, buyer) | party path | `role` (Label: supplier/satıcı, customer/alıcı, buyer/asıl alıcı) |
-| EF020 | error | V | `currency ≠ null` and not an active ISO 4217 code; variant `alias` when in `TRY_ALIASES` | `/Invoice/cbc:DocumentCurrencyCode` | `value` |
-| EF021 | warning | V | `currency ≠ null` and at least one Amount from `walkAmounts` has `amount.currency ≠ null` and `≠ currency`; one issue per invoice | path of the first such amount | `count`, `currency`, `first` (path) |
-| EF022 | error | V | `currency ≠ null`, `currency` not `TRY` and not in `TRY_ALIASES`, and (`exchangeRate === null` or `exchangeRate.rate === null`) | `/Invoice/cac:PricingExchangeRate` | `currency` |
-| EF023 | warning | M | `exchangeRate.source ≠ 'PricingExchangeRate'` | `/Invoice/cac:<source>` or `/Invoice/cbc:Note[n]` | `rate` (raw), `source` |
-| EF024 | error | V | `exchangeRate.rate ≠ null` and `cmp(rate, '0') ≤ 0` | rate element | `value` |
-| EF025 | warning | V | `source === 'PricingExchangeRate'` and (`sourceCurrency ≠ null` and `≠ currency`, or `targetCurrency ≠ null` and `≠ 'TRY'`) | `/Invoice/cac:PricingExchangeRate` | `source`, `target`, `currency` |
-| EF026 | info | V | `currency` is `TRY` or alias, `exchangeRate.rate ≠ null`, `!eq(rate, '1')` | rate element | `rate` |
-| EF030 | error | M | a decimal or integer field's text is not a number (section 7.1) | that element | `value` |
-| EF031 | warning | M | decimal comma normalised | that element | `value`, `normalized` |
-| EF032 | warning | M | an Amount element has no `currencyID` | that element | `value` |
-| EF035 | warning | M | encoding fallback (section 6.1); variants `unsupported`, `fallback` | `/Invoice` | `declared`, `used` |
-| EF040 | error | V | `lines.length > 0`, every line's `lineExtensionAmount.value ≠ null`, `LEA ≠ null`, and `!(Σ line LEA ≈ LEA)` | `/Invoice/cac:LegalMonetaryTotal/cbc:LineExtensionAmount` | `computed`, `declared` |
-| EF041 | warning | V | `LEA`, `TEA ≠ null`; `A` = Σ invoice-level allowances (`isCharge === false`) `amount.value`, `C` = Σ charges (`isCharge === true`); `c1 = LEA − A + C`; `c2 = LEA − (ATA ?? 0) + (CTA ?? 0)`; raised when `!(c1 ≈ TEA)` and `!(c2 ≈ TEA)` | `…/cbc:TaxExclusiveAmount` | `computed` = c1, `declared` |
-| EF042 | error | V | `TEA`, `TIA ≠ null`, `taxTotals` non-empty with all `taxAmount.value ≠ null`; `c = TEA + Σ taxTotals[].taxAmount`; `!(c ≈ TIA)` | `…/cbc:TaxInclusiveAmount` | `computed`, `declared` |
-| EF043 | error | V | `TIA`, `PA ≠ null`; `W = computed.withholdingTotal ?? 0`; `R = PRA ?? 0`; `c = TIA − W + R`; raised when `!(c ≈ PA)` and EF044 does not apply | `…/cbc:PayableAmount` | `computed`, `declared` |
-| EF044 | warning | V | as EF043, but `W > 0` and `TIA + R ≈ PA` (withholding not deducted) | `…/cbc:PayableAmount` | `declared`, `withholding` |
-| EF045 | error | V | for every TaxTotal (invoice `taxTotals[i]`, invoice `withholdingTaxTotals[i]`, each line's `taxTotal` and `withholdingTaxTotals[i]`) with `taxAmount.value ≠ null`, ≥ 1 subtotal, all subtotal `taxAmount.value ≠ null`: `!(Σ subtotal taxAmount ≈ taxAmount)` | that TaxTotal's `cbc:TaxAmount` | `computed`, `declared` |
-| EF046 | warning | V | for every subtotal (all four kinds) with `taxableAmount`, `percent`, `taxAmount ≠ null` and `perUnitAmount === null`: `c = round(movePoint(mul(taxable, percent), −2), 2)`; `!(c ≈ taxAmount)` | subtotal `cbc:TaxAmount` | `computed`, `declared` |
-| EF047 | warning | V | per line with `quantity.value`, `price.amount.value`, `lineExtensionAmount.value ≠ null`: `base = qty × price`; if `price.baseQuantity.value` is non-null and non-zero, `base = div(base, baseQty, max(scale(base), 8))`; `c = base − Σ line allowances + Σ line charges`; `!(c ≈ line LEA)` | `<line>/cbc:LineExtensionAmount` | `computed` = `round(c, 2)`, `declared` |
-| EF048 | warning | V | invoice-level `allowanceCharges` is empty, `computed.taxTotal ≠ null`, at least one line has `taxTotal`; `c = Σ lines[].taxTotal.taxAmount`; tolerance `T' = max(T, 0.005 × lines.length)`; `!within(c, computed.taxTotal, T')` | `/Invoice/cac:TaxTotal[1]/cbc:TaxAmount` | `computed`, `declared` |
-| EF049 | warning | V | `lineCountNumeric ≠ null` and `≠ lines.length` | `/Invoice/cbc:LineCountNumeric` | `declared`, `computed` |
-| EF050 | error | V | `lines.length === 0` | `/Invoice` | — |
-| EF051 | error | V | a line `id` (non-null) equal to an earlier line's `id`; one issue per repeat | `<line>/cbc:ID` | `value` |
-| EF052 | warning | V | `quantity.value ≠ null` and `cmp(quantity, '0') < 0` | `<line>/cbc:InvoicedQuantity` | `value` |
-| EF053 | info | V | `quantity.unitCode ≠ null` and `quantity.unit === null` | `<line>/cbc:InvoicedQuantity` | `value` = unit code |
-| EF054 | warning | V | line `id === null` | `<line>` | `position` |
-| EF055 | warning | V | `item.name === null` | `<line>/cac:Item` | `position` |
-| EF060 | warning | V | any subtotal in `taxTotals` or a line `taxTotal` with `taxTypeCode ≠ null` and `taxType === null` | subtotal `…/cbc:TaxTypeCode` | `value` |
-| EF061 | warning | V | invoice-level subtotal with `taxTypeCode === '0015'`, (`percent` is zero or `taxAmount.value` is zero), and `exemptionReasonCode === null` | subtotal path | `percent` |
-| EF062 | warning | V | (`typeCode` in `ISTISNA`, `IHRACKAYITLI`, `YTBISTISNA`, or `profileId === 'IHRACAT'`) and no invoice-level KDV subtotal has `exemptionReasonCode` | `/Invoice/cac:TaxTotal[1]` | `value` = type or profile |
-| EF063 | error | V | `typeCode` in `TEVKIFAT`, `TEVKIFATIADE`, `YTBTEVKIFAT`, `YTBTEVKIFATIADE` and `computed.withholdingTotal === null` | `/Invoice/cbc:InvoiceTypeCode` | `value` |
-| EF064 | warning | V | `computed.withholdingTotal ≠ null`, `typeCode` not in the EF063 set and not `'OTHER'` | `/Invoice/cbc:InvoiceTypeCode` | `value` |
-| EF065 | info | V | any withholding subtotal with `taxTypeCode ≠ null` and `taxType === null` | subtotal `…/cbc:TaxTypeCode` | `value` |
-| EF066 | warning | V | `taxTotals.length === 0` | `/Invoice` | — |
-| EF090 | warning | B | the UUID (compared lower-case) was already seen in this batch or tracker | `/Invoice/cbc:UUID` | `value`, `firstSource` |
-| EF091 | info | B | same supplier tax ID and invoice number already seen with a different UUID | `/Invoice/cbc:ID` | `number`, `firstUuid` |
+| Code  | Sev.    | Kind | Check (issue raised when)                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Path                                                      | Params / details                                                  |
+| ----- | ------- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ----------------------------------------------------------------- |
+| EF001 | error   | V    | For each required path absent or empty: `cbc:UBLVersionID`, `cbc:CustomizationID`, `cbc:ProfileID`, `cbc:ID`, `cbc:UUID`, `cbc:IssueDate`, `cbc:InvoiceTypeCode`, `cbc:DocumentCurrencyCode`, `cac:AccountingSupplierParty`, `cac:AccountingCustomerParty`, `cac:LegalMonetaryTotal`, `cac:LegalMonetaryTotal/cbc:LineExtensionAmount`, `cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount`, `cac:LegalMonetaryTotal/cbc:TaxInclusiveAmount`, `cac:LegalMonetaryTotal/cbc:PayableAmount` (one issue each) | `/Invoice/<path>`                                         | `field` = the path                                                |
+| EF002 | error   | V    | `uuid ≠ null` and `!isValidUuid(uuid)`                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `/Invoice/cbc:UUID`                                       | `value`                                                           |
+| EF003 | warning | V    | `number ≠ null` and not `/^[A-Z0-9]{3}\d{13}$/` (variant `pattern`); or the pattern holds, `issueDate` is valid and `number.slice(3, 7) ≠ issueDate.slice(0, 4)` (variant `year`)                                                                                                                                                                                                                                                                                                                     | `/Invoice/cbc:ID`                                         | `value`; `numberYear`, `dateYear`                                 |
+| EF004 | error   | V    | `issueDate ≠ null` and not `/^(\d{4})-(\d{2})-(\d{2})$/` with a real calendar date (Gregorian leap years)                                                                                                                                                                                                                                                                                                                                                                                             | `/Invoice/cbc:IssueDate`                                  | `value`                                                           |
+| EF005 | warning | V    | `issueTime ≠ null` and not `/^([01]\d                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?(Z                         | [+-](0\d                                                          | 1[0-4]):[0-5]\d)?$/` | `/Invoice/cbc:IssueTime` | `value` |
+| EF006 | warning | V    | `profileIdRaw ≠ null` and `profileId === 'OTHER'`                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `/Invoice/cbc:ProfileID`                                  | `value`                                                           |
+| EF007 | warning | V    | `typeCodeRaw ≠ null` and `typeCode === 'OTHER'`                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `/Invoice/cbc:InvoiceTypeCode`                            | `value`                                                           |
+| EF008 | info    | V    | `ublVersionId ≠ null` and `≠ EXPECTED_UBL_VERSION`; or `customizationId ≠ null` and not in `EXPECTED_CUSTOMIZATION_IDS` (one issue each)                                                                                                                                                                                                                                                                                                                                                              | that element                                              | `field`, `value`, `expected`                                      |
+| EF009 | warning | M    | Element matched tolerantly, or root not in `NS.inv` (section 6.4); one per distinct (expected, actual) pair                                                                                                                                                                                                                                                                                                                                                                                           | first occurrence                                          | `expected`; details `actual`                                      |
+| EF010 | error   | V    | `supplier ≠ null` and `supplier.taxId === null`                                                                                                                                                                                                                                                                                                                                                                                                                                                       | supplier party path                                       | —                                                                 |
+| EF011 | error   | V    | `customer ≠ null` and `customer.taxId === null`                                                                                                                                                                                                                                                                                                                                                                                                                                                       | customer party path                                       | —                                                                 |
+| EF012 | error   | V    | any party: `taxId.scheme === 'VKN'`, value matches `/^\d{10}$/`, `!isValidVkn`                                                                                                                                                                                                                                                                                                                                                                                                                        | `<party>/cac:PartyIdentification[n]/cbc:ID`               | `value`                                                           |
+| EF013 | error   | V    | any party: `taxId.scheme === 'TCKN'`, value matches `/^[1-9]\d{10}$/`, value `≠ ANONYMOUS_TCKN`, `!isValidTckn`                                                                                                                                                                                                                                                                                                                                                                                       | same                                                      | `value`                                                           |
+| EF014 | error   | V    | `scheme === 'VKN'` and not `/^\d{10}$/`; or `scheme === 'TCKN'` and not `/^[1-9]\d{10}$/`                                                                                                                                                                                                                                                                                                                                                                                                             | same                                                      | `scheme`, `value`                                                 |
+| EF015 | info    | M    | tax ID scheme inferred (`missing`) or schemeID not upper-case (`case`), section 7.5.1                                                                                                                                                                                                                                                                                                                                                                                                                 | same                                                      | `value`, `scheme`, `schemeId`                                     |
+| EF016 | info    | V    | `taxId.scheme === 'TCKN'` and value `=== ANONYMOUS_TCKN`                                                                                                                                                                                                                                                                                                                                                                                                                                              | same                                                      | —                                                                 |
+| EF017 | warning | V    | party `≠ null` and `displayName === null` (supplier, customer, buyer)                                                                                                                                                                                                                                                                                                                                                                                                                                 | party path                                                | `role` (Label: supplier/satıcı, customer/alıcı, buyer/asıl alıcı) |
+| EF020 | error   | V    | `currency ≠ null` and not an active ISO 4217 code; variant `alias` when in `TRY_ALIASES`                                                                                                                                                                                                                                                                                                                                                                                                              | `/Invoice/cbc:DocumentCurrencyCode`                       | `value`                                                           |
+| EF021 | warning | V    | `currency ≠ null` and at least one Amount from `walkAmounts` has `amount.currency ≠ null` and `≠ currency`; one issue per invoice                                                                                                                                                                                                                                                                                                                                                                     | path of the first such amount                             | `count`, `currency`, `first` (path)                               |
+| EF022 | error   | V    | `currency ≠ null`, `currency` not `TRY` and not in `TRY_ALIASES`, and (`exchangeRate === null` or `exchangeRate.rate === null`)                                                                                                                                                                                                                                                                                                                                                                       | `/Invoice/cac:PricingExchangeRate`                        | `currency`                                                        |
+| EF023 | warning | M    | `exchangeRate.source ≠ 'PricingExchangeRate'`                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `/Invoice/cac:<source>` or `/Invoice/cbc:Note[n]`         | `rate` (raw), `source`                                            |
+| EF024 | error   | V    | `exchangeRate.rate ≠ null` and `cmp(rate, '0') ≤ 0`                                                                                                                                                                                                                                                                                                                                                                                                                                                   | rate element                                              | `value`                                                           |
+| EF025 | warning | V    | `source === 'PricingExchangeRate'` and (`sourceCurrency ≠ null` and `≠ currency`, or `targetCurrency ≠ null` and `≠ 'TRY'`)                                                                                                                                                                                                                                                                                                                                                                           | `/Invoice/cac:PricingExchangeRate`                        | `source`, `target`, `currency`                                    |
+| EF026 | info    | V    | `currency` is `TRY` or alias, `exchangeRate.rate ≠ null`, `!eq(rate, '1')`                                                                                                                                                                                                                                                                                                                                                                                                                            | rate element                                              | `rate`                                                            |
+| EF030 | error   | M    | a decimal or integer field's text is not a number (section 7.1)                                                                                                                                                                                                                                                                                                                                                                                                                                       | that element                                              | `value`                                                           |
+| EF031 | warning | M    | decimal comma normalised                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | that element                                              | `value`, `normalized`                                             |
+| EF032 | warning | M    | an Amount element has no `currencyID`                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | that element                                              | `value`                                                           |
+| EF035 | warning | M    | encoding fallback (section 6.1); variants `unsupported`, `fallback`                                                                                                                                                                                                                                                                                                                                                                                                                                   | `/Invoice`                                                | `declared`, `used`                                                |
+| EF040 | error   | V    | `lines.length > 0`, every line's `lineExtensionAmount.value ≠ null`, `LEA ≠ null`, and `!(Σ line LEA ≈ LEA)`                                                                                                                                                                                                                                                                                                                                                                                          | `/Invoice/cac:LegalMonetaryTotal/cbc:LineExtensionAmount` | `computed`, `declared`                                            |
+| EF041 | warning | V    | `LEA`, `TEA ≠ null`; `A` = Σ invoice-level allowances (`isCharge === false`) `amount.value`, `C` = Σ charges (`isCharge === true`); `c1 = LEA − A + C`; `c2 = LEA − (ATA ?? 0) + (CTA ?? 0)`; raised when `!(c1 ≈ TEA)` and `!(c2 ≈ TEA)`                                                                                                                                                                                                                                                             | `…/cbc:TaxExclusiveAmount`                                | `computed` = c1, `declared`                                       |
+| EF042 | error   | V    | `TEA`, `TIA ≠ null`, `taxTotals` non-empty with all `taxAmount.value ≠ null`; `c = TEA + Σ taxTotals[].taxAmount`; `!(c ≈ TIA)`                                                                                                                                                                                                                                                                                                                                                                       | `…/cbc:TaxInclusiveAmount`                                | `computed`, `declared`                                            |
+| EF043 | error   | V    | `TIA`, `PA ≠ null`; `W = computed.withholdingTotal ?? 0`; `R = PRA ?? 0`; `c = TIA − W + R`; raised when `!(c ≈ PA)` and EF044 does not apply                                                                                                                                                                                                                                                                                                                                                         | `…/cbc:PayableAmount`                                     | `computed`, `declared`                                            |
+| EF044 | warning | V    | as EF043, but `W > 0` and `TIA + R ≈ PA` (withholding not deducted)                                                                                                                                                                                                                                                                                                                                                                                                                                   | `…/cbc:PayableAmount`                                     | `declared`, `withholding`                                         |
+| EF045 | error   | V    | for every TaxTotal (invoice `taxTotals[i]`, invoice `withholdingTaxTotals[i]`, each line's `taxTotal` and `withholdingTaxTotals[i]`) with `taxAmount.value ≠ null`, ≥ 1 subtotal, all subtotal `taxAmount.value ≠ null`: `!(Σ subtotal taxAmount ≈ taxAmount)`                                                                                                                                                                                                                                        | that TaxTotal's `cbc:TaxAmount`                           | `computed`, `declared`                                            |
+| EF046 | warning | V    | for every subtotal (all four kinds) with `taxableAmount`, `percent`, `taxAmount ≠ null` and `perUnitAmount === null`: `c = round(movePoint(mul(taxable, percent), −2), 2)`; `!(c ≈ taxAmount)`                                                                                                                                                                                                                                                                                                        | subtotal `cbc:TaxAmount`                                  | `computed`, `declared`                                            |
+| EF047 | warning | V    | per line with `quantity.value`, `price.amount.value`, `lineExtensionAmount.value ≠ null`: `base = qty × price`; if `price.baseQuantity.value` is non-null and non-zero, `base = div(base, baseQty, max(scale(base), 8))`; `c = base − Σ line allowances + Σ line charges`; `!(c ≈ line LEA)`                                                                                                                                                                                                          | `<line>/cbc:LineExtensionAmount`                          | `computed` = `round(c, 2)`, `declared`                            |
+| EF048 | warning | V    | invoice-level `allowanceCharges` is empty, `computed.taxTotal ≠ null`, at least one line has `taxTotal`; `c = Σ lines[].taxTotal.taxAmount`; tolerance `T' = max(T, 0.005 × lines.length)`; `!within(c, computed.taxTotal, T')`                                                                                                                                                                                                                                                                       | `/Invoice/cac:TaxTotal[1]/cbc:TaxAmount`                  | `computed`, `declared`                                            |
+| EF049 | warning | V    | `lineCountNumeric ≠ null` and `≠ lines.length`                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `/Invoice/cbc:LineCountNumeric`                           | `declared`, `computed`                                            |
+| EF050 | error   | V    | `lines.length === 0`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `/Invoice`                                                | —                                                                 |
+| EF051 | error   | V    | a line `id` (non-null) equal to an earlier line's `id`; one issue per repeat                                                                                                                                                                                                                                                                                                                                                                                                                          | `<line>/cbc:ID`                                           | `value`                                                           |
+| EF052 | warning | V    | `quantity.value ≠ null` and `cmp(quantity, '0') < 0`                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `<line>/cbc:InvoicedQuantity`                             | `value`                                                           |
+| EF053 | info    | V    | `quantity.unitCode ≠ null` and `quantity.unit === null`                                                                                                                                                                                                                                                                                                                                                                                                                                               | `<line>/cbc:InvoicedQuantity`                             | `value` = unit code                                               |
+| EF054 | warning | V    | line `id === null`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `<line>`                                                  | `position`                                                        |
+| EF055 | warning | V    | `item.name === null`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `<line>/cac:Item`                                         | `position`                                                        |
+| EF060 | warning | V    | any subtotal in `taxTotals` or a line `taxTotal` with `taxTypeCode ≠ null` and `taxType === null`                                                                                                                                                                                                                                                                                                                                                                                                     | subtotal `…/cbc:TaxTypeCode`                              | `value`                                                           |
+| EF061 | warning | V    | invoice-level subtotal with `taxTypeCode === '0015'`, (`percent` is zero or `taxAmount.value` is zero), and `exemptionReasonCode === null`                                                                                                                                                                                                                                                                                                                                                            | subtotal path                                             | `percent`                                                         |
+| EF062 | warning | V    | (`typeCode` in `ISTISNA`, `IHRACKAYITLI`, `YTBISTISNA`, or `profileId === 'IHRACAT'`) and no invoice-level KDV subtotal has `exemptionReasonCode`                                                                                                                                                                                                                                                                                                                                                     | `/Invoice/cac:TaxTotal[1]`                                | `value` = type or profile                                         |
+| EF063 | error   | V    | `typeCode` in `TEVKIFAT`, `TEVKIFATIADE`, `YTBTEVKIFAT`, `YTBTEVKIFATIADE` and `computed.withholdingTotal === null`                                                                                                                                                                                                                                                                                                                                                                                   | `/Invoice/cbc:InvoiceTypeCode`                            | `value`                                                           |
+| EF064 | warning | V    | `computed.withholdingTotal ≠ null`, `typeCode` not in the EF063 set and not `'OTHER'`                                                                                                                                                                                                                                                                                                                                                                                                                 | `/Invoice/cbc:InvoiceTypeCode`                            | `value`                                                           |
+| EF065 | info    | V    | any withholding subtotal with `taxTypeCode ≠ null` and `taxType === null`                                                                                                                                                                                                                                                                                                                                                                                                                             | subtotal `…/cbc:TaxTypeCode`                              | `value`                                                           |
+| EF066 | warning | V    | `taxTotals.length === 0`                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `/Invoice`                                                | —                                                                 |
+| EF090 | warning | B    | the UUID (compared lower-case) was already seen in this batch or tracker                                                                                                                                                                                                                                                                                                                                                                                                                              | `/Invoice/cbc:UUID`                                       | `value`, `firstSource`                                            |
+| EF091 | info    | B    | same supplier tax ID and invoice number already seen with a different UUID                                                                                                                                                                                                                                                                                                                                                                                                                            | `/Invoice/cbc:ID`                                         | `number`, `firstUuid`                                             |
 
 Rule order within a category follows the code order. Categories: identity (EF001–EF009), parties (EF010–EF017), currency (EF020–EF026), amounts (EF030–EF035), totals (EF040–EF049), lines (EF050–EF055), taxes (EF060–EF066), batch (EF090–EF091).
 
 #### 9.3.2 Messages (normative, byte-exact)
 
-| Code (variant) | English | Turkish |
-|---|---|---|
-| EF001 | Required field {field} is missing. | Zorunlu alan {field} eksik. |
-| EF002 | UUID {value} is not in the 8-4-4-4-12 hexadecimal format. | ETTN {value}, 8-4-4-4-12 onaltılık biçiminde değil. |
-| EF003 (pattern) | Invoice number {value} does not have the 16-character format (3 letters or digits, 4-digit year, 9-digit sequence). | Fatura numarası {value} 16 karakterlik biçimde değil (3 harf veya rakam, 4 haneli yıl, 9 haneli sıra numarası). |
-| EF003 (year) | Invoice number {value} contains the year {numberYear}, but the issue date is in {dateYear}. | Fatura numarası {value} {numberYear} yılını içeriyor, ancak düzenleme tarihi {dateYear} yılında. |
-| EF004 | Issue date {value} is not a valid date in YYYY-MM-DD format. | Düzenleme tarihi {value}, YYYY-AA-GG biçiminde geçerli bir tarih değil. |
-| EF005 | Issue time {value} is not a valid time in hh:mm:ss format. | Düzenleme saati {value}, ss:dd:sn biçiminde geçerli bir saat değil. |
-| EF006 | Profile {value} is not in the known profile list; it is reported as OTHER. | Senaryo {value} bilinen senaryo listesinde yok; OTHER olarak raporlandı. |
-| EF007 | Invoice type {value} is not in the known type list; it is reported as OTHER. | Fatura tipi {value} bilinen tip listesinde yok; OTHER olarak raporlandı. |
-| EF008 | {field} is {value}; expected {expected}. | {field} değeri {value}; beklenen {expected}. |
-| EF009 | Element is not in the expected namespace {expected}; it was matched by its local name. | Eleman beklenen {expected} ad alanında değil; yerel adıyla eşleştirildi. |
-| EF010 | The supplier has no VKN or TCKN. | Satıcının VKN veya TCKN bilgisi yok. |
-| EF011 | The customer has no VKN or TCKN. | Alıcının VKN veya TCKN bilgisi yok. |
-| EF012 | VKN {value} fails the checksum. | VKN {value} kontrol hanesi doğrulamasından geçmiyor. |
-| EF013 | TCKN {value} fails the checksum. | TCKN {value} kontrol hanesi doğrulamasından geçmiyor. |
-| EF014 | {scheme} {value} has the wrong format: a VKN has 10 digits; a TCKN has 11 digits and does not start with 0. | {scheme} {value} hatalı biçimde: VKN 10 haneli olmalı; TCKN 11 haneli olmalı ve 0 ile başlamamalı. |
-| EF015 (missing) | Identifier {value} has no schemeID; it was read as {scheme} from its length. | {value} tanımlayıcısında schemeID yok; uzunluğundan {scheme} olarak okundu. |
-| EF015 (case) | schemeID {schemeId} is not upper-case; it was read as {scheme}. | schemeID {schemeId} büyük harfle yazılmamış; {scheme} olarak okundu. |
-| EF016 | TCKN 11111111111 is the placeholder for an anonymous final consumer. | 11111111111 TCKN, kimliği belirtilmeyen nihai tüketici için kullanılan yer tutucudur. |
-| EF017 | The {role} has no name (neither PartyName nor Person). | {role} için ad yok (PartyName veya Person bulunmuyor). |
-| EF020 | Currency code {value} is not an active ISO 4217 code. | Döviz kodu {value} geçerli bir ISO 4217 kodu değil. |
-| EF020 (alias) | Currency code {value} is not valid; use TRY. | Döviz kodu {value} geçerli değil; TRY kullanılmalı. |
-| EF021 | {count} amounts use a currency other than the document currency {currency} (first at {first}). | {count} tutar, belge para birimi {currency} dışında bir para birimi kullanıyor (ilki: {first}). |
-| EF022 | The invoice is in {currency} but has no exchange rate. | Fatura {currency} cinsinden, ancak döviz kuru içermiyor. |
-| EF023 | Exchange rate {rate} was taken from {source}, not from PricingExchangeRate. | {rate} döviz kuru PricingExchangeRate yerine {source} kaynağından alındı. |
-| EF024 | Exchange rate {value} is not a positive number. | Döviz kuru {value} pozitif bir sayı değil. |
-| EF025 | PricingExchangeRate converts {source} to {target}; expected {currency} to TRY. | PricingExchangeRate {source} para biriminden {target} para birimine çeviriyor; beklenen {currency} → TRY. |
-| EF026 | The invoice is in TRY but has an exchange rate of {rate}. | Fatura TRY cinsinden, ancak {rate} döviz kuru içeriyor. |
-| EF030 | {value} is not a valid number. | {value} geçerli bir sayı değil. |
-| EF031 | {value} uses a decimal comma; it was read as {normalized}. | {value} ondalık ayırıcı olarak virgül kullanıyor; {normalized} olarak okundu. |
-| EF032 | Amount {value} has no currencyID. | {value} tutarında currencyID yok. |
-| EF035 (unsupported) | Declared encoding {declared} is not supported; the file was read as UTF-8. | Bildirilen {declared} kodlaması desteklenmiyor; dosya UTF-8 olarak okundu. |
-| EF035 (fallback) | The file is not valid UTF-8 and declares no encoding; it was read as windows-1254. | Dosya geçerli UTF-8 değil ve kodlama bildirmiyor; windows-1254 olarak okundu. |
-| EF040 | Sum of line amounts is {computed}, but LineExtensionAmount is {declared}. | Satır tutarlarının toplamı {computed}, ancak LineExtensionAmount {declared}. |
-| EF041 | LineExtensionAmount − allowances + charges is {computed}, but TaxExclusiveAmount is {declared}. | LineExtensionAmount − iskontolar + artırımlar {computed}, ancak TaxExclusiveAmount {declared}. |
-| EF042 | TaxExclusiveAmount + taxes is {computed}, but TaxInclusiveAmount is {declared}. | TaxExclusiveAmount + vergiler {computed}, ancak TaxInclusiveAmount {declared}. |
-| EF043 | TaxInclusiveAmount − withholding + rounding is {computed}, but PayableAmount is {declared}. | TaxInclusiveAmount − tevkifat + yuvarlama {computed}, ancak PayableAmount {declared}. |
-| EF044 | PayableAmount {declared} equals TaxInclusiveAmount + rounding; the withholding of {withholding} was not deducted. | PayableAmount {declared}, TaxInclusiveAmount + yuvarlama tutarına eşit; {withholding} tutarındaki tevkifat düşülmemiş. |
-| EF045 | Sum of tax subtotals is {computed}, but TaxAmount is {declared}. | Vergi alt toplamlarının toplamı {computed}, ancak TaxAmount {declared}. |
-| EF046 | TaxableAmount × Percent is {computed}, but TaxAmount is {declared}. | TaxableAmount × Percent {computed}, ancak TaxAmount {declared}. |
-| EF047 | Quantity × price − allowances + charges is {computed}, but the line amount is {declared}. | Miktar × fiyat − iskontolar + artırımlar {computed}, ancak satır tutarı {declared}. |
-| EF048 | Sum of line taxes is {computed}, but invoice taxes are {declared}. | Satır vergilerinin toplamı {computed}, ancak fatura vergileri {declared}. |
-| EF049 | LineCountNumeric is {declared}, but the invoice has {computed} lines. | LineCountNumeric {declared}, ancak faturada {computed} satır var. |
-| EF050 | The invoice has no lines. | Faturada satır yok. |
-| EF051 | Line ID {value} is used more than once. | {value} satır numarası birden fazla kullanılmış. |
-| EF052 | Quantity {value} is negative. | Miktar {value} negatif. |
-| EF053 | Unit code {value} is not in the known unit list. | Birim kodu {value} bilinen birim listesinde yok. |
-| EF054 | Line {position} has no ID. | {position}. satırın numarası yok. |
-| EF055 | Line {position} has no item name. | {position}. satırda mal/hizmet adı yok. |
-| EF060 | Tax type code {value} is not in the known tax list. | Vergi kodu {value} bilinen vergi listesinde yok. |
-| EF061 | VAT at {percent} % has no exemption reason code. | %{percent} oranlı KDV için istisna kodu yok. |
-| EF062 | {value} invoices need a VAT exemption reason code, but none is given. | {value} faturalarında KDV istisna kodu bulunmalı, ancak yok. |
-| EF063 | Invoice type {value} requires withholding (WithholdingTaxTotal), but none is given. | {value} tipindeki faturada tevkifat (WithholdingTaxTotal) bulunmalı, ancak yok. |
-| EF064 | The invoice has withholding, but its type is {value}. | Faturada tevkifat var, ancak tipi {value}. |
-| EF065 | Withholding code {value} is not in the known withholding list. | Tevkifat kodu {value} bilinen tevkifat listesinde yok. |
-| EF066 | The invoice has no invoice-level TaxTotal. | Faturada fatura düzeyinde TaxTotal yok. |
-| EF090 | UUID {value} also appears in {firstSource}. | {value} ETTN, {firstSource} dosyasında da var. |
-| EF091 | Invoice number {number} from this supplier also appears with a different UUID ({firstUuid}). | Bu satıcının {number} numaralı faturası farklı bir ETTN ile de var ({firstUuid}). |
+| Code (variant)      | English                                                                                                             | Turkish                                                                                                                |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| EF001               | Required field {field} is missing.                                                                                  | Zorunlu alan {field} eksik.                                                                                            |
+| EF002               | UUID {value} is not in the 8-4-4-4-12 hexadecimal format.                                                           | ETTN {value}, 8-4-4-4-12 onaltılık biçiminde değil.                                                                    |
+| EF003 (pattern)     | Invoice number {value} does not have the 16-character format (3 letters or digits, 4-digit year, 9-digit sequence). | Fatura numarası {value} 16 karakterlik biçimde değil (3 harf veya rakam, 4 haneli yıl, 9 haneli sıra numarası).        |
+| EF003 (year)        | Invoice number {value} contains the year {numberYear}, but the issue date is in {dateYear}.                         | Fatura numarası {value} {numberYear} yılını içeriyor, ancak düzenleme tarihi {dateYear} yılında.                       |
+| EF004               | Issue date {value} is not a valid date in YYYY-MM-DD format.                                                        | Düzenleme tarihi {value}, YYYY-AA-GG biçiminde geçerli bir tarih değil.                                                |
+| EF005               | Issue time {value} is not a valid time in hh:mm:ss format.                                                          | Düzenleme saati {value}, ss:dd:sn biçiminde geçerli bir saat değil.                                                    |
+| EF006               | Profile {value} is not in the known profile list; it is reported as OTHER.                                          | Senaryo {value} bilinen senaryo listesinde yok; OTHER olarak raporlandı.                                               |
+| EF007               | Invoice type {value} is not in the known type list; it is reported as OTHER.                                        | Fatura tipi {value} bilinen tip listesinde yok; OTHER olarak raporlandı.                                               |
+| EF008               | {field} is {value}; expected {expected}.                                                                            | {field} değeri {value}; beklenen {expected}.                                                                           |
+| EF009               | Element is not in the expected namespace {expected}; it was matched by its local name.                              | Eleman beklenen {expected} ad alanında değil; yerel adıyla eşleştirildi.                                               |
+| EF010               | The supplier has no VKN or TCKN.                                                                                    | Satıcının VKN veya TCKN bilgisi yok.                                                                                   |
+| EF011               | The customer has no VKN or TCKN.                                                                                    | Alıcının VKN veya TCKN bilgisi yok.                                                                                    |
+| EF012               | VKN {value} fails the checksum.                                                                                     | VKN {value} kontrol hanesi doğrulamasından geçmiyor.                                                                   |
+| EF013               | TCKN {value} fails the checksum.                                                                                    | TCKN {value} kontrol hanesi doğrulamasından geçmiyor.                                                                  |
+| EF014               | {scheme} {value} has the wrong format: a VKN has 10 digits; a TCKN has 11 digits and does not start with 0.         | {scheme} {value} hatalı biçimde: VKN 10 haneli olmalı; TCKN 11 haneli olmalı ve 0 ile başlamamalı.                     |
+| EF015 (missing)     | Identifier {value} has no schemeID; it was read as {scheme} from its length.                                        | {value} tanımlayıcısında schemeID yok; uzunluğundan {scheme} olarak okundu.                                            |
+| EF015 (case)        | schemeID {schemeId} is not upper-case; it was read as {scheme}.                                                     | schemeID {schemeId} büyük harfle yazılmamış; {scheme} olarak okundu.                                                   |
+| EF016               | TCKN 11111111111 is the placeholder for an anonymous final consumer.                                                | 11111111111 TCKN, kimliği belirtilmeyen nihai tüketici için kullanılan yer tutucudur.                                  |
+| EF017               | The {role} has no name (neither PartyName nor Person).                                                              | {role} için ad yok (PartyName veya Person bulunmuyor).                                                                 |
+| EF020               | Currency code {value} is not an active ISO 4217 code.                                                               | Döviz kodu {value} geçerli bir ISO 4217 kodu değil.                                                                    |
+| EF020 (alias)       | Currency code {value} is not valid; use TRY.                                                                        | Döviz kodu {value} geçerli değil; TRY kullanılmalı.                                                                    |
+| EF021               | {count} amounts use a currency other than the document currency {currency} (first at {first}).                      | {count} tutar, belge para birimi {currency} dışında bir para birimi kullanıyor (ilki: {first}).                        |
+| EF022               | The invoice is in {currency} but has no exchange rate.                                                              | Fatura {currency} cinsinden, ancak döviz kuru içermiyor.                                                               |
+| EF023               | Exchange rate {rate} was taken from {source}, not from PricingExchangeRate.                                         | {rate} döviz kuru PricingExchangeRate yerine {source} kaynağından alındı.                                              |
+| EF024               | Exchange rate {value} is not a positive number.                                                                     | Döviz kuru {value} pozitif bir sayı değil.                                                                             |
+| EF025               | PricingExchangeRate converts {source} to {target}; expected {currency} to TRY.                                      | PricingExchangeRate {source} para biriminden {target} para birimine çeviriyor; beklenen {currency} → TRY.              |
+| EF026               | The invoice is in TRY but has an exchange rate of {rate}.                                                           | Fatura TRY cinsinden, ancak {rate} döviz kuru içeriyor.                                                                |
+| EF030               | {value} is not a valid number.                                                                                      | {value} geçerli bir sayı değil.                                                                                        |
+| EF031               | {value} uses a decimal comma; it was read as {normalized}.                                                          | {value} ondalık ayırıcı olarak virgül kullanıyor; {normalized} olarak okundu.                                          |
+| EF032               | Amount {value} has no currencyID.                                                                                   | {value} tutarında currencyID yok.                                                                                      |
+| EF035 (unsupported) | Declared encoding {declared} is not supported; the file was read as UTF-8.                                          | Bildirilen {declared} kodlaması desteklenmiyor; dosya UTF-8 olarak okundu.                                             |
+| EF035 (fallback)    | The file is not valid UTF-8 and declares no encoding; it was read as windows-1254.                                  | Dosya geçerli UTF-8 değil ve kodlama bildirmiyor; windows-1254 olarak okundu.                                          |
+| EF040               | Sum of line amounts is {computed}, but LineExtensionAmount is {declared}.                                           | Satır tutarlarının toplamı {computed}, ancak LineExtensionAmount {declared}.                                           |
+| EF041               | LineExtensionAmount − allowances + charges is {computed}, but TaxExclusiveAmount is {declared}.                     | LineExtensionAmount − iskontolar + artırımlar {computed}, ancak TaxExclusiveAmount {declared}.                         |
+| EF042               | TaxExclusiveAmount + taxes is {computed}, but TaxInclusiveAmount is {declared}.                                     | TaxExclusiveAmount + vergiler {computed}, ancak TaxInclusiveAmount {declared}.                                         |
+| EF043               | TaxInclusiveAmount − withholding + rounding is {computed}, but PayableAmount is {declared}.                         | TaxInclusiveAmount − tevkifat + yuvarlama {computed}, ancak PayableAmount {declared}.                                  |
+| EF044               | PayableAmount {declared} equals TaxInclusiveAmount + rounding; the withholding of {withholding} was not deducted.   | PayableAmount {declared}, TaxInclusiveAmount + yuvarlama tutarına eşit; {withholding} tutarındaki tevkifat düşülmemiş. |
+| EF045               | Sum of tax subtotals is {computed}, but TaxAmount is {declared}.                                                    | Vergi alt toplamlarının toplamı {computed}, ancak TaxAmount {declared}.                                                |
+| EF046               | TaxableAmount × Percent is {computed}, but TaxAmount is {declared}.                                                 | TaxableAmount × Percent {computed}, ancak TaxAmount {declared}.                                                        |
+| EF047               | Quantity × price − allowances + charges is {computed}, but the line amount is {declared}.                           | Miktar × fiyat − iskontolar + artırımlar {computed}, ancak satır tutarı {declared}.                                    |
+| EF048               | Sum of line taxes is {computed}, but invoice taxes are {declared}.                                                  | Satır vergilerinin toplamı {computed}, ancak fatura vergileri {declared}.                                              |
+| EF049               | LineCountNumeric is {declared}, but the invoice has {computed} lines.                                               | LineCountNumeric {declared}, ancak faturada {computed} satır var.                                                      |
+| EF050               | The invoice has no lines.                                                                                           | Faturada satır yok.                                                                                                    |
+| EF051               | Line ID {value} is used more than once.                                                                             | {value} satır numarası birden fazla kullanılmış.                                                                       |
+| EF052               | Quantity {value} is negative.                                                                                       | Miktar {value} negatif.                                                                                                |
+| EF053               | Unit code {value} is not in the known unit list.                                                                    | Birim kodu {value} bilinen birim listesinde yok.                                                                       |
+| EF054               | Line {position} has no ID.                                                                                          | {position}. satırın numarası yok.                                                                                      |
+| EF055               | Line {position} has no item name.                                                                                   | {position}. satırda mal/hizmet adı yok.                                                                                |
+| EF060               | Tax type code {value} is not in the known tax list.                                                                 | Vergi kodu {value} bilinen vergi listesinde yok.                                                                       |
+| EF061               | VAT at {percent} % has no exemption reason code.                                                                    | %{percent} oranlı KDV için istisna kodu yok.                                                                           |
+| EF062               | {value} invoices need a VAT exemption reason code, but none is given.                                               | {value} faturalarında KDV istisna kodu bulunmalı, ancak yok.                                                           |
+| EF063               | Invoice type {value} requires withholding (WithholdingTaxTotal), but none is given.                                 | {value} tipindeki faturada tevkifat (WithholdingTaxTotal) bulunmalı, ancak yok.                                        |
+| EF064               | The invoice has withholding, but its type is {value}.                                                               | Faturada tevkifat var, ancak tipi {value}.                                                                             |
+| EF065               | Withholding code {value} is not in the known withholding list.                                                      | Tevkifat kodu {value} bilinen tevkifat listesinde yok.                                                                 |
+| EF066               | The invoice has no invoice-level TaxTotal.                                                                          | Faturada fatura düzeyinde TaxTotal yok.                                                                                |
+| EF090               | UUID {value} also appears in {firstSource}.                                                                         | {value} ETTN, {firstSource} dosyasında da var.                                                                         |
+| EF091               | Invoice number {number} from this supplier also appears with a different UUID ({firstUuid}).                        | Bu satıcının {number} numaralı faturası farklı bir ETTN ile de var ({firstUuid}).                                      |
 
 `role` Label values for EF017: supplier → `{ en: 'supplier', tr: 'Satıcı' }`, customer → `{ en: 'customer', tr: 'Alıcı' }`, buyer → `{ en: 'buyer', tr: 'Asıl alıcı' }`.
 
@@ -2118,7 +2315,7 @@ Notes:
 - `classifyByName`: lower-cased basename ending `.xml` → `xml`; `.zip` → `zip`; no `.` in the basename → `sniff`; anything else (`.pdf`, `.html`, `.xslt`, `.txt`, …) → `other` (yielded as `skipped`, never decompressed).
 - `isJunk(name)`: any path segment equal to `__MACOSX`; basename `.DS_Store`, `Thumbs.db` or `desktop.ini`; basename starting with `._`. Junk yields nothing and does not count towards `maxEntries`.
 - `stop(code, path)` sets `stopped = true` and records the error; the walk returns after the current push. Already yielded items stay valid.
-- When the compressed size is unknown (data descriptor entries), the ratio is estimated as `out / (pushEnd − entryStart)`, where both bounds include the whole chunk being pushed. This over-estimates the compressed bytes by at most one chunk (1 MB), so it can only make the ratio check more lenient, never flag a normal entry; the size limits still apply. (Using bytes pushed *before* the current chunk would give 0 for an entry that starts and inflates within one chunk and flag every such entry above 1 MB.)
+- When the compressed size is unknown (data descriptor entries), the ratio is estimated as `out / (pushEnd − entryStart)`, where both bounds include the whole chunk being pushed. This over-estimates the compressed bytes by at most one chunk (1 MB), so it can only make the ratio check more lenient, never flag a normal entry; the size limits still apply. (Using bytes pushed _before_ the current chunk would give 0 for an entry that starts and inflates within one chunk and flag every such entry above 1 MB.)
 - A rejected entry (ratio, entry size, decompression error) keeps being inflated by fflate until its data ends, because `terminate()` cannot stop `UnzipInflate`. Its output is discarded but still added to `totalBytes`, so a bomb entry costs at most `maxTotalBytes` of inflation work before the archive stops with `ZIP_TOO_LARGE`.
 - Encryption (`src/zip/encryption.ts`): fflate's streaming `Unzip` does not report encrypted entries (confirm at A-14; if the pinned version reports them, use that and drop this pre-read). Before streaming an archive, read its end-of-central-directory record (search backwards for `50 4B 05 06` in the last 65,557 bytes; for a `Blob`, `blob.slice()` reads only that tail and then the central-directory range) and collect the names of central-directory entries whose general-purpose flag has bit 0 set. Zip64 or an EOCD that cannot be read gives an empty set; encrypted entries then fail decompression and surface as `ZIP_INVALID`. The pre-read is bounded by `maxEntries` records.
 - Entry names are used only as labels. Nothing is ever written to disk, so path traversal names (`../`) are harmless; they are shown as-is.
@@ -2132,22 +2329,28 @@ Notes:
 ```ts
 export type BatchErrorCode = 'READ_FAILED' | 'ZIP_INPUT_REQUIRES_ZIP_ENTRY';
 export type ZipErrorCode =
-  | 'ZIP_INVALID' | 'ZIP_ENCRYPTED' | 'ZIP_UNSUPPORTED_METHOD' | 'ZIP_DEPTH_EXCEEDED'
-  | 'ZIP_TOO_MANY_ENTRIES' | 'ZIP_TOO_LARGE' | 'ZIP_ENTRY_TOO_LARGE' | 'ZIP_RATIO_EXCEEDED';
+  | 'ZIP_INVALID'
+  | 'ZIP_ENCRYPTED'
+  | 'ZIP_UNSUPPORTED_METHOD'
+  | 'ZIP_DEPTH_EXCEEDED'
+  | 'ZIP_TOO_MANY_ENTRIES'
+  | 'ZIP_TOO_LARGE'
+  | 'ZIP_ENTRY_TOO_LARGE'
+  | 'ZIP_RATIO_EXCEEDED';
 ```
 
-| Code | Effect | English | Turkish | details |
-|---|---|---|---|---|
-| `READ_FAILED` | item skipped | `The file could not be read: {reason}` | `Dosya okunamadı: {reason}` | `reason` |
-| `ZIP_INPUT_REQUIRES_ZIP_ENTRY` | item skipped | `This is a ZIP archive; use parseZip or parseAny from @firatkill/efatura/zip.` | `Bu bir ZIP arşivi; @firatkill/efatura/zip içindeki parseZip veya parseAny kullanılmalı.` | — |
-| `ZIP_INVALID` | archive or entry skipped | `The ZIP archive is damaged or not a ZIP archive.` | `ZIP arşivi bozuk veya ZIP arşivi değil.` | `reason` |
-| `ZIP_ENCRYPTED` | entry skipped | `Encrypted ZIP entries are not supported.` | `Şifreli ZIP girdileri desteklenmiyor.` | — |
-| `ZIP_UNSUPPORTED_METHOD` | entry skipped | `ZIP compression method {method} is not supported.` | `{method} ZIP sıkıştırma yöntemi desteklenmiyor.` | `method` |
-| `ZIP_DEPTH_EXCEEDED` | nested archive skipped | `Archives are nested more than {max} levels deep.` | `Arşivler {max} seviyeden fazla iç içe.` | `max` |
-| `ZIP_TOO_MANY_ENTRIES` | top-level archive stops | `The archive has more than {max} entries; reading stopped.` | `Arşivde {max} girdiden fazlası var; okuma durduruldu.` | `max` |
-| `ZIP_TOO_LARGE` | top-level archive stops | `The archive unpacks to more than {max} bytes; reading stopped.` | `Arşiv açıldığında {max} baytı aşıyor; okuma durduruldu.` | `max` |
-| `ZIP_ENTRY_TOO_LARGE` | entry skipped | `The entry unpacks to more than {max} bytes.` | `Girdi açıldığında {max} baytı aşıyor.` | `max` |
-| `ZIP_RATIO_EXCEEDED` | entry skipped | `The entry is compressed more than {max} to 1, which suggests a zip bomb.` | `Girdi {max}'e 1'den fazla sıkıştırılmış; bu bir zip bombasına işaret ediyor.` | `max` |
+| Code                           | Effect                   | English                                                                        | Turkish                                                                                   | details  |
+| ------------------------------ | ------------------------ | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- | -------- |
+| `READ_FAILED`                  | item skipped             | `The file could not be read: {reason}`                                         | `Dosya okunamadı: {reason}`                                                               | `reason` |
+| `ZIP_INPUT_REQUIRES_ZIP_ENTRY` | item skipped             | `This is a ZIP archive; use parseZip or parseAny from @firatkill/efatura/zip.` | `Bu bir ZIP arşivi; @firatkill/efatura/zip içindeki parseZip veya parseAny kullanılmalı.` | —        |
+| `ZIP_INVALID`                  | archive or entry skipped | `The ZIP archive is damaged or not a ZIP archive.`                             | `ZIP arşivi bozuk veya ZIP arşivi değil.`                                                 | `reason` |
+| `ZIP_ENCRYPTED`                | entry skipped            | `Encrypted ZIP entries are not supported.`                                     | `Şifreli ZIP girdileri desteklenmiyor.`                                                   | —        |
+| `ZIP_UNSUPPORTED_METHOD`       | entry skipped            | `ZIP compression method {method} is not supported.`                            | `{method} ZIP sıkıştırma yöntemi desteklenmiyor.`                                         | `method` |
+| `ZIP_DEPTH_EXCEEDED`           | nested archive skipped   | `Archives are nested more than {max} levels deep.`                             | `Arşivler {max} seviyeden fazla iç içe.`                                                  | `max`    |
+| `ZIP_TOO_MANY_ENTRIES`         | top-level archive stops  | `The archive has more than {max} entries; reading stopped.`                    | `Arşivde {max} girdiden fazlası var; okuma durduruldu.`                                   | `max`    |
+| `ZIP_TOO_LARGE`                | top-level archive stops  | `The archive unpacks to more than {max} bytes; reading stopped.`               | `Arşiv açıldığında {max} baytı aşıyor; okuma durduruldu.`                                 | `max`    |
+| `ZIP_ENTRY_TOO_LARGE`          | entry skipped            | `The entry unpacks to more than {max} bytes.`                                  | `Girdi açıldığında {max} baytı aşıyor.`                                                   | `max`    |
+| `ZIP_RATIO_EXCEEDED`           | entry skipped            | `The entry is compressed more than {max} to 1, which suggests a zip bomb.`     | `Girdi {max}'e 1'den fazla sıkıştırılmış; bu bir zip bombasına işaret ediyor.`            | `max`    |
 
 The playground maps codes to its own copy (PRD §9.10); the library messages above are for the CLI and API consumers.
 
@@ -2157,93 +2360,93 @@ The playground maps codes to its own copy (PRD §9.10); the library messages abo
 
 Sources refer to the model; `Σ` sums use `decimal.sum`. "issues" are those given in `RowInput.issues` or the batch item; for bare invoices, issue columns are `null`.
 
-| # | key | type | English | Turkish | Value |
-|---|---|---|---|---|---|
-| 1 | source_path | string | Source file | Kaynak dosya | `source.path` or null |
-| 2 | uuid | string | UUID | ETTN | `uuid` |
-| 3 | number | string | Invoice number | Fatura no | `number` |
-| 4 | issue_date | date | Issue date | Düzenleme tarihi | `issueDate` |
-| 5 | issue_time | string | Issue time | Düzenleme saati | `issueTime` |
-| 6 | profile_id | string | Profile | Senaryo | `profileIdRaw` |
-| 7 | invoice_type_code | string | Invoice type | Fatura tipi | `typeCodeRaw` |
-| 8 | currency | string | Currency | Döviz cinsi | `currency` |
-| 9 | exchange_rate | decimal | Exchange rate | Döviz kuru | `exchangeRate.rate` |
-| 10 | exchange_rate_date | date | Exchange rate date | Kur tarihi | `exchangeRate.date` |
-| 11 | exchange_rate_source | string | Exchange rate source | Kur kaynağı | `exchangeRate.source` |
-| 12 | supplier_name | string | Supplier | Satıcı | `supplier.displayName` |
-| 13 | supplier_tax_id | string | Supplier tax ID | Satıcı VKN/TCKN | `supplier.taxId.value` |
-| 14 | supplier_tax_scheme | string | Supplier ID type | Satıcı kimlik türü | `supplier.taxId.scheme` |
-| 15 | supplier_tax_office | string | Supplier tax office | Satıcı vergi dairesi | `supplier.taxOffice` |
-| 16 | supplier_city | string | Supplier city | Satıcı il | `supplier.address.cityName` |
-| 17 | customer_name | string | Customer | Alıcı | `customer.displayName` |
-| 18 | customer_tax_id | string | Customer tax ID | Alıcı VKN/TCKN | `customer.taxId.value` |
-| 19 | customer_tax_scheme | string | Customer ID type | Alıcı kimlik türü | `customer.taxId.scheme` |
-| 20 | customer_tax_office | string | Customer tax office | Alıcı vergi dairesi | `customer.taxOffice` |
-| 21 | customer_city | string | Customer city | Alıcı il | `customer.address.cityName` |
-| 22 | line_count | integer | Lines | Satır sayısı | `lines.length` |
-| 23 | line_extension_amount | decimal | Sum of lines | Mal/hizmet toplamı | `totals.lineExtensionAmount.value` |
-| 24 | allowance_total_amount | decimal | Total discount | Toplam iskonto | `totals.allowanceTotalAmount.value` |
-| 25 | charge_total_amount | decimal | Total charge | Toplam artırım | `totals.chargeTotalAmount.value` |
-| 26 | tax_exclusive_amount | decimal | Total excl. tax | Vergiler hariç tutar | `totals.taxExclusiveAmount.value` |
-| 27 | kdv_amount | decimal | VAT | KDV | `computed.kdvTotal` |
-| 28 | otv_amount | decimal | Special consumption tax | ÖTV | `computed.otvTotal` |
-| 29 | other_tax_amount | decimal | Other taxes | Diğer vergiler | `computed.otherTaxTotal` |
-| 30 | tax_total_amount | decimal | Total tax | Toplam vergi | `computed.taxTotal` |
-| 31 | tax_inclusive_amount | decimal | Total incl. tax | Vergiler dahil tutar | `totals.taxInclusiveAmount.value` |
-| 32 | withholding_amount | decimal | Withholding | Tevkifat | `computed.withholdingTotal` |
-| 33 | payable_rounding_amount | decimal | Rounding | Yuvarlama | `totals.payableRoundingAmount.value` |
-| 34 | payable_amount | decimal | Payable | Ödenecek tutar | `totals.payableAmount.value` |
-| 35 | payable_amount_try | decimal | Payable in TRY | Ödenecek TL | `computed.payableTry` |
-| 36 | due_date | date | Due date | Vade tarihi | `dueDate.date` |
-| 37 | order_ids | string | Order references | Sipariş no | `orderReferences[].id` joined |
-| 38 | despatch_ids | string | Despatch references | İrsaliye no | `despatchReferences[].id` joined |
-| 39 | billing_ids | string | Original invoices | İlgili faturalar | `billingReferences[].id` joined |
-| 40 | notes | string | Notes | Notlar | `notes` joined |
-| 41 | has_xslt | boolean | Official view | Resmî görünüm | `attachments.some(a => a.isXslt)` |
-| 42 | error_count | integer | Errors | Hata | count of `severity === 'error'` |
-| 43 | warning_count | integer | Warnings | Uyarı | count of `severity === 'warning'` |
-| 44 | issue_codes | string | Issue codes | Sorun kodları | unique codes, sorted, joined with `,` |
+| #   | key                     | type    | English                 | Turkish              | Value                                 |
+| --- | ----------------------- | ------- | ----------------------- | -------------------- | ------------------------------------- |
+| 1   | source_path             | string  | Source file             | Kaynak dosya         | `source.path` or null                 |
+| 2   | uuid                    | string  | UUID                    | ETTN                 | `uuid`                                |
+| 3   | number                  | string  | Invoice number          | Fatura no            | `number`                              |
+| 4   | issue_date              | date    | Issue date              | Düzenleme tarihi     | `issueDate`                           |
+| 5   | issue_time              | string  | Issue time              | Düzenleme saati      | `issueTime`                           |
+| 6   | profile_id              | string  | Profile                 | Senaryo              | `profileIdRaw`                        |
+| 7   | invoice_type_code       | string  | Invoice type            | Fatura tipi          | `typeCodeRaw`                         |
+| 8   | currency                | string  | Currency                | Döviz cinsi          | `currency`                            |
+| 9   | exchange_rate           | decimal | Exchange rate           | Döviz kuru           | `exchangeRate.rate`                   |
+| 10  | exchange_rate_date      | date    | Exchange rate date      | Kur tarihi           | `exchangeRate.date`                   |
+| 11  | exchange_rate_source    | string  | Exchange rate source    | Kur kaynağı          | `exchangeRate.source`                 |
+| 12  | supplier_name           | string  | Supplier                | Satıcı               | `supplier.displayName`                |
+| 13  | supplier_tax_id         | string  | Supplier tax ID         | Satıcı VKN/TCKN      | `supplier.taxId.value`                |
+| 14  | supplier_tax_scheme     | string  | Supplier ID type        | Satıcı kimlik türü   | `supplier.taxId.scheme`               |
+| 15  | supplier_tax_office     | string  | Supplier tax office     | Satıcı vergi dairesi | `supplier.taxOffice`                  |
+| 16  | supplier_city           | string  | Supplier city           | Satıcı il            | `supplier.address.cityName`           |
+| 17  | customer_name           | string  | Customer                | Alıcı                | `customer.displayName`                |
+| 18  | customer_tax_id         | string  | Customer tax ID         | Alıcı VKN/TCKN       | `customer.taxId.value`                |
+| 19  | customer_tax_scheme     | string  | Customer ID type        | Alıcı kimlik türü    | `customer.taxId.scheme`               |
+| 20  | customer_tax_office     | string  | Customer tax office     | Alıcı vergi dairesi  | `customer.taxOffice`                  |
+| 21  | customer_city           | string  | Customer city           | Alıcı il             | `customer.address.cityName`           |
+| 22  | line_count              | integer | Lines                   | Satır sayısı         | `lines.length`                        |
+| 23  | line_extension_amount   | decimal | Sum of lines            | Mal/hizmet toplamı   | `totals.lineExtensionAmount.value`    |
+| 24  | allowance_total_amount  | decimal | Total discount          | Toplam iskonto       | `totals.allowanceTotalAmount.value`   |
+| 25  | charge_total_amount     | decimal | Total charge            | Toplam artırım       | `totals.chargeTotalAmount.value`      |
+| 26  | tax_exclusive_amount    | decimal | Total excl. tax         | Vergiler hariç tutar | `totals.taxExclusiveAmount.value`     |
+| 27  | kdv_amount              | decimal | VAT                     | KDV                  | `computed.kdvTotal`                   |
+| 28  | otv_amount              | decimal | Special consumption tax | ÖTV                  | `computed.otvTotal`                   |
+| 29  | other_tax_amount        | decimal | Other taxes             | Diğer vergiler       | `computed.otherTaxTotal`              |
+| 30  | tax_total_amount        | decimal | Total tax               | Toplam vergi         | `computed.taxTotal`                   |
+| 31  | tax_inclusive_amount    | decimal | Total incl. tax         | Vergiler dahil tutar | `totals.taxInclusiveAmount.value`     |
+| 32  | withholding_amount      | decimal | Withholding             | Tevkifat             | `computed.withholdingTotal`           |
+| 33  | payable_rounding_amount | decimal | Rounding                | Yuvarlama            | `totals.payableRoundingAmount.value`  |
+| 34  | payable_amount          | decimal | Payable                 | Ödenecek tutar       | `totals.payableAmount.value`          |
+| 35  | payable_amount_try      | decimal | Payable in TRY          | Ödenecek TL          | `computed.payableTry`                 |
+| 36  | due_date                | date    | Due date                | Vade tarihi          | `dueDate.date`                        |
+| 37  | order_ids               | string  | Order references        | Sipariş no           | `orderReferences[].id` joined         |
+| 38  | despatch_ids            | string  | Despatch references     | İrsaliye no          | `despatchReferences[].id` joined      |
+| 39  | billing_ids             | string  | Original invoices       | İlgili faturalar     | `billingReferences[].id` joined       |
+| 40  | notes                   | string  | Notes                   | Notlar               | `notes` joined                        |
+| 41  | has_xslt                | boolean | Official view           | Resmî görünüm        | `attachments.some(a => a.isXslt)`     |
+| 42  | error_count             | integer | Errors                  | Hata                 | count of `severity === 'error'`       |
+| 43  | warning_count           | integer | Warnings                | Uyarı                | count of `severity === 'warning'`     |
+| 44  | issue_codes             | string  | Issue codes             | Sorun kodları        | unique codes, sorted, joined with `,` |
 
 ### 11.2 Line-level columns (normative order, 36 columns)
 
-| # | key | type | English | Turkish | Value |
-|---|---|---|---|---|---|
-| 1 | source_path | string | Source file | Kaynak dosya | `source.path` |
-| 2 | invoice_uuid | string | Invoice UUID | Fatura ETTN | `uuid` |
-| 3 | invoice_number | string | Invoice number | Fatura no | `number` |
-| 4 | issue_date | date | Issue date | Düzenleme tarihi | `issueDate` |
-| 5 | invoice_type_code | string | Invoice type | Fatura tipi | `typeCodeRaw` |
-| 6 | currency | string | Currency | Döviz cinsi | `currency` |
-| 7 | exchange_rate | decimal | Exchange rate | Döviz kuru | `exchangeRate.rate` |
-| 8 | supplier_name | string | Supplier | Satıcı | `supplier.displayName` |
-| 9 | supplier_tax_id | string | Supplier tax ID | Satıcı VKN/TCKN | `supplier.taxId.value` |
-| 10 | customer_name | string | Customer | Alıcı | `customer.displayName` |
-| 11 | customer_tax_id | string | Customer tax ID | Alıcı VKN/TCKN | `customer.taxId.value` |
-| 12 | line_position | integer | Line | Sıra | `position` |
-| 13 | line_id | string | Line ID | Satır no | `id` |
-| 14 | item_name | string | Item | Mal/hizmet | `item.name` |
-| 15 | item_description | string | Description | Açıklama | `item.description` |
-| 16 | sellers_item_id | string | Seller item code | Satıcı ürün kodu | `item.sellersItemId` |
-| 17 | buyers_item_id | string | Buyer item code | Alıcı ürün kodu | `item.buyersItemId` |
-| 18 | quantity | decimal | Quantity | Miktar | `quantity.value` |
-| 19 | unit_code | string | Unit code | Birim kodu | `quantity.unitCode` |
-| 20 | unit_label | string | Unit | Birim | `quantity.unit.label[labels]` |
-| 21 | unit_price | decimal | Unit price | Birim fiyat | `price.amount.value` |
-| 22 | allowance_amount | decimal | Discount | İskonto | Σ line allowances (`isCharge === false`) |
-| 23 | charge_amount | decimal | Charge | Artırım | Σ line charges |
-| 24 | line_extension_amount | decimal | Line amount | Satır tutarı | `lineExtensionAmount.value` |
-| 25 | kdv_percent | decimal | VAT % | KDV % | `percent` of the first line subtotal with code `0015` |
-| 26 | kdv_amount | decimal | VAT | KDV | Σ line subtotals with code `0015` |
-| 27 | otv_amount | decimal | Special consumption tax | ÖTV | Σ line subtotals with kind `OTV` |
-| 28 | other_tax_amount | decimal | Other taxes | Diğer vergiler | Σ other line subtotals |
-| 29 | withholding_code | string | Withholding code | Tevkifat kodu | `taxTypeCode` of the first line withholding subtotal, else of the first invoice-level withholding subtotal when the invoice has exactly one line |
-| 30 | withholding_percent | decimal | Withholding % | Tevkifat % | `percent` from the same subtotal |
-| 31 | withholding_amount | decimal | Withholding | Tevkifat | Σ line `withholdingTaxTotals[].taxAmount` |
-| 32 | tax_exemption_code | string | Exemption code | İstisna kodu | first line subtotal `exemptionReasonCode` |
-| 33 | tax_exemption_reason | string | Exemption reason | İstisna sebebi | same subtotal `exemptionReason` |
-| 34 | gtip | string | Customs tariff code | GTİP | `delivery.customsTariffCode` |
-| 35 | line_notes | string | Line notes | Satır notları | `notes` joined |
-| 36 | line_issue_codes | string | Line issue codes | Satır sorun kodları | codes of issues whose path starts with `/Invoice/cac:InvoiceLine[<position>]` (followed by `/` or end), unique, sorted, joined with `,` |
+| #   | key                   | type    | English                 | Turkish             | Value                                                                                                                                            |
+| --- | --------------------- | ------- | ----------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | source_path           | string  | Source file             | Kaynak dosya        | `source.path`                                                                                                                                    |
+| 2   | invoice_uuid          | string  | Invoice UUID            | Fatura ETTN         | `uuid`                                                                                                                                           |
+| 3   | invoice_number        | string  | Invoice number          | Fatura no           | `number`                                                                                                                                         |
+| 4   | issue_date            | date    | Issue date              | Düzenleme tarihi    | `issueDate`                                                                                                                                      |
+| 5   | invoice_type_code     | string  | Invoice type            | Fatura tipi         | `typeCodeRaw`                                                                                                                                    |
+| 6   | currency              | string  | Currency                | Döviz cinsi         | `currency`                                                                                                                                       |
+| 7   | exchange_rate         | decimal | Exchange rate           | Döviz kuru          | `exchangeRate.rate`                                                                                                                              |
+| 8   | supplier_name         | string  | Supplier                | Satıcı              | `supplier.displayName`                                                                                                                           |
+| 9   | supplier_tax_id       | string  | Supplier tax ID         | Satıcı VKN/TCKN     | `supplier.taxId.value`                                                                                                                           |
+| 10  | customer_name         | string  | Customer                | Alıcı               | `customer.displayName`                                                                                                                           |
+| 11  | customer_tax_id       | string  | Customer tax ID         | Alıcı VKN/TCKN      | `customer.taxId.value`                                                                                                                           |
+| 12  | line_position         | integer | Line                    | Sıra                | `position`                                                                                                                                       |
+| 13  | line_id               | string  | Line ID                 | Satır no            | `id`                                                                                                                                             |
+| 14  | item_name             | string  | Item                    | Mal/hizmet          | `item.name`                                                                                                                                      |
+| 15  | item_description      | string  | Description             | Açıklama            | `item.description`                                                                                                                               |
+| 16  | sellers_item_id       | string  | Seller item code        | Satıcı ürün kodu    | `item.sellersItemId`                                                                                                                             |
+| 17  | buyers_item_id        | string  | Buyer item code         | Alıcı ürün kodu     | `item.buyersItemId`                                                                                                                              |
+| 18  | quantity              | decimal | Quantity                | Miktar              | `quantity.value`                                                                                                                                 |
+| 19  | unit_code             | string  | Unit code               | Birim kodu          | `quantity.unitCode`                                                                                                                              |
+| 20  | unit_label            | string  | Unit                    | Birim               | `quantity.unit.label[labels]`                                                                                                                    |
+| 21  | unit_price            | decimal | Unit price              | Birim fiyat         | `price.amount.value`                                                                                                                             |
+| 22  | allowance_amount      | decimal | Discount                | İskonto             | Σ line allowances (`isCharge === false`)                                                                                                         |
+| 23  | charge_amount         | decimal | Charge                  | Artırım             | Σ line charges                                                                                                                                   |
+| 24  | line_extension_amount | decimal | Line amount             | Satır tutarı        | `lineExtensionAmount.value`                                                                                                                      |
+| 25  | kdv_percent           | decimal | VAT %                   | KDV %               | `percent` of the first line subtotal with code `0015`                                                                                            |
+| 26  | kdv_amount            | decimal | VAT                     | KDV                 | Σ line subtotals with code `0015`                                                                                                                |
+| 27  | otv_amount            | decimal | Special consumption tax | ÖTV                 | Σ line subtotals with kind `OTV`                                                                                                                 |
+| 28  | other_tax_amount      | decimal | Other taxes             | Diğer vergiler      | Σ other line subtotals                                                                                                                           |
+| 29  | withholding_code      | string  | Withholding code        | Tevkifat kodu       | `taxTypeCode` of the first line withholding subtotal, else of the first invoice-level withholding subtotal when the invoice has exactly one line |
+| 30  | withholding_percent   | decimal | Withholding %           | Tevkifat %          | `percent` from the same subtotal                                                                                                                 |
+| 31  | withholding_amount    | decimal | Withholding             | Tevkifat            | Σ line `withholdingTaxTotals[].taxAmount`                                                                                                        |
+| 32  | tax_exemption_code    | string  | Exemption code          | İstisna kodu        | first line subtotal `exemptionReasonCode`                                                                                                        |
+| 33  | tax_exemption_reason  | string  | Exemption reason        | İstisna sebebi      | same subtotal `exemptionReason`                                                                                                                  |
+| 34  | gtip                  | string  | Customs tariff code     | GTİP                | `delivery.customsTariffCode`                                                                                                                     |
+| 35  | line_notes            | string  | Line notes              | Satır notları       | `notes` joined                                                                                                                                   |
+| 36  | line_issue_codes      | string  | Line issue codes        | Satır sorun kodları | codes of issues whose path starts with `/Invoice/cac:InvoiceLine[<position>]` (followed by `/` or end), unique, sorted, joined with `,`          |
 
 Value rules: missing → `null`; lists joined with `' | '`; Σ over an empty set → `null`; decimals are model strings (dot separator); integers are `number`; booleans are `boolean`. `labels` (`'en'` default or `'tr'`) selects `unit_label`. Rows are emitted in input order, lines in position order.
 
@@ -2275,23 +2478,23 @@ s01-plain-sale-try/invoice.xml;fea70000-0000-4000-8000-000000001001;ORN202500000
 
 `efatura parse <inputs...> [options]` with options parsed by `node:util` `parseArgs` (`strict: true`, `allowPositionals: true`). `--no-bom` and `--no-validate` are declared as their own boolean options named `no-bom` and `no-validate`; do not use `allowNegative`, which exists only from Node 20.16/22.4 while `engines` allows Node 20.0:
 
-| Option | Type | Default | Meaning |
-|---|---|---|---|
-| `--json` | boolean | | Write JSON (full model; rows with `--level`) |
-| `--csv` | boolean | | Write CSV rows |
-| `--level <invoice\|line>` | string | `invoice` for `--csv` | Row level; requires `--csv` or `--json` |
-| `-o, --out <file>` | string | stdout | Output file (written atomically: temp file in the same directory, then rename) |
-| `--delimiter <;\|,>` | string | `;` | CSV only |
-| `--no-bom` | boolean | | CSV only |
-| `--headers <key\|en\|tr>` | string | `key` | CSV only |
-| `--strict` | boolean | | Exit 1 if any error-severity issue or failed item |
-| `--no-validate` | boolean | | `validate: false` |
-| `--tolerance <decimal>` | string | `0.01` | Totals tolerance |
-| `--rules <list>` | string | | Comma-separated `CODE=error\|warning\|info\|off` |
-| `--with-attachments` | boolean | | JSON includes attachment base64 (`attachments: 'data'`) |
-| `--lang <en\|tr>` | string | `en` | Language of the summary and stderr messages |
-| `-q, --quiet` | boolean | | No progress on stderr |
-| `-h, --help` | boolean | | Help |
+| Option                    | Type    | Default               | Meaning                                                                        |
+| ------------------------- | ------- | --------------------- | ------------------------------------------------------------------------------ |
+| `--json`                  | boolean |                       | Write JSON (full model; rows with `--level`)                                   |
+| `--csv`                   | boolean |                       | Write CSV rows                                                                 |
+| `--level <invoice\|line>` | string  | `invoice` for `--csv` | Row level; requires `--csv` or `--json`                                        |
+| `-o, --out <file>`        | string  | stdout                | Output file (written atomically: temp file in the same directory, then rename) |
+| `--delimiter <;\|,>`      | string  | `;`                   | CSV only                                                                       |
+| `--no-bom`                | boolean |                       | CSV only                                                                       |
+| `--headers <key\|en\|tr>` | string  | `key`                 | CSV only                                                                       |
+| `--strict`                | boolean |                       | Exit 1 if any error-severity issue or failed item                              |
+| `--no-validate`           | boolean |                       | `validate: false`                                                              |
+| `--tolerance <decimal>`   | string  | `0.01`                | Totals tolerance                                                               |
+| `--rules <list>`          | string  |                       | Comma-separated `CODE=error\|warning\|info\|off`                               |
+| `--with-attachments`      | boolean |                       | JSON includes attachment base64 (`attachments: 'data'`)                        |
+| `--lang <en\|tr>`         | string  | `en`                  | Language of the summary and stderr messages                                    |
+| `-q, --quiet`             | boolean |                       | No progress on stderr                                                          |
+| `-h, --help`              | boolean |                       | Help                                                                           |
 
 Inputs: a file path (XML or ZIP, detected by content), a directory (read recursively; files ending `.xml` or `.zip`, case-insensitive; dot-directories and `node_modules` skipped; directory symlinks not followed), or a glob pattern (any input containing `*` or `?`). The internal matcher (`src/cli/glob.ts`) supports `*` (any characters except `/`), `?` (one character except `/`) and `**` (zero or more directories); patterns use `/` on all platforms; matching starts from the longest literal directory prefix. All resolved files are de-duplicated and sorted by their POSIX relative path (code-point order) for deterministic output. Paths in output are relative to the working directory with `/` separators.
 
@@ -2299,12 +2502,12 @@ Files are read one at a time (`fs.promises.readFile`) and passed to `iterateAny`
 
 ### 12.2 Exit codes (normative)
 
-| Code | When |
-|---|---|
-| 0 | Completed. Without `--strict`, also when issues or failed items exist. |
-| 1 | `--strict` and at least one issue with severity `error` (after `--rules`) or at least one `error` item. |
-| 2 | Usage error (unknown command or option, invalid value, conflicting options, no inputs), an input path that does not exist, a glob matching nothing, a read error, or an output write error. |
-| 130 | Interrupted by SIGINT (Ctrl+C); the run is aborted through an `AbortController`, partial output is not written. |
+| Code | When                                                                                                                                                                                        |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0    | Completed. Without `--strict`, also when issues or failed items exist.                                                                                                                      |
+| 1    | `--strict` and at least one issue with severity `error` (after `--rules`) or at least one `error` item.                                                                                     |
+| 2    | Usage error (unknown command or option, invalid value, conflicting options, no inputs), an input path that does not exist, a glob matching nothing, a read error, or an output write error. |
+| 130  | Interrupted by SIGINT (Ctrl+C); the run is aborted through an `AbortController`, partial output is not written.                                                                             |
 
 ### 12.3 Help and messages (normative texts)
 
@@ -2363,25 +2566,25 @@ Exit codes: 0 success, 1 errors found (with --strict), 2 usage or I/O error.
 
 Usage and I/O errors go to stderr, prefixed `efatura: `:
 
-| Situation | Message |
-|---|---|
-| Unknown command | `efatura: unknown command "{name}". Run "efatura --help".` |
-| Unknown option | `efatura: unknown option "{option}". Run "efatura parse --help".` |
-| Both formats | `efatura: --json and --csv cannot be used together.` |
-| Level without format | `efatura: --level requires --csv or --json.` |
-| CSV option without `--csv` | `efatura: {option} requires --csv.` |
-| Bad level | `efatura: --level must be "invoice" or "line".` |
-| Bad delimiter | `efatura: --delimiter must be ";" or ",".` |
-| Bad headers | `efatura: --headers must be "key", "en" or "tr".` |
-| Bad tolerance | `efatura: --tolerance must be a non-negative decimal such as 0.01.` |
-| Bad rules | `efatura: --rules has an invalid entry "{entry}". Use CODE=error, warning, info or off.` |
-| Bad lang | `efatura: --lang must be "en" or "tr".` |
-| No inputs | `efatura: no inputs. Run "efatura parse --help".` |
-| Missing path | `efatura: "{input}" does not exist.` |
-| Empty glob | `efatura: no files match "{pattern}".` |
-| Read error | `efatura: cannot read "{path}": {reason}` |
-| Write error | `efatura: cannot write "{path}": {reason}` |
-| Interrupted | `efatura: cancelled.` |
+| Situation                  | Message                                                                                  |
+| -------------------------- | ---------------------------------------------------------------------------------------- |
+| Unknown command            | `efatura: unknown command "{name}". Run "efatura --help".`                               |
+| Unknown option             | `efatura: unknown option "{option}". Run "efatura parse --help".`                        |
+| Both formats               | `efatura: --json and --csv cannot be used together.`                                     |
+| Level without format       | `efatura: --level requires --csv or --json.`                                             |
+| CSV option without `--csv` | `efatura: {option} requires --csv.`                                                      |
+| Bad level                  | `efatura: --level must be "invoice" or "line".`                                          |
+| Bad delimiter              | `efatura: --delimiter must be ";" or ",".`                                               |
+| Bad headers                | `efatura: --headers must be "key", "en" or "tr".`                                        |
+| Bad tolerance              | `efatura: --tolerance must be a non-negative decimal such as 0.01.`                      |
+| Bad rules                  | `efatura: --rules has an invalid entry "{entry}". Use CODE=error, warning, info or off.` |
+| Bad lang                   | `efatura: --lang must be "en" or "tr".`                                                  |
+| No inputs                  | `efatura: no inputs. Run "efatura parse --help".`                                        |
+| Missing path               | `efatura: "{input}" does not exist.`                                                     |
+| Empty glob                 | `efatura: no files match "{pattern}".`                                                   |
+| Read error                 | `efatura: cannot read "{path}": {reason}`                                                |
+| Write error                | `efatura: cannot write "{path}": {reason}`                                               |
+| Interrupted                | `efatura: cancelled.`                                                                    |
 
 With `--lang tr` the same messages are printed in Turkish from `src/cli/texts.ts` (for example `efatura: bilinmeyen seçenek "{option}". "efatura parse --help" komutunu çalıştırın.`); the Turkish texts are written at T-29 and covered by CT-08.
 
@@ -2397,11 +2600,35 @@ JSON (full model), written as `JSON.stringify(value, null, 2) + '\n'`:
 {
   "format": "efatura.parse.v1",
   "generator": "efatura 0.1.0",
-  "summary": { "files": 3, "archives": 1, "invoices": 2, "duplicates": 0, "failed": 1, "skipped": 0,
-               "issues": { "error": 1, "warning": 0, "info": 0 }, "invoicesWithErrors": 1, "invoicesWithWarnings": 0 },
+  "summary": {
+    "files": 3,
+    "archives": 1,
+    "invoices": 2,
+    "duplicates": 0,
+    "failed": 1,
+    "skipped": 0,
+    "issues": { "error": 1, "warning": 0, "info": 0 },
+    "invoicesWithErrors": 1,
+    "invoicesWithWarnings": 0
+  },
   "items": [
-    { "kind": "invoice", "source": { "path": "a.xml", "name": "a.xml", "bytes": 4210, "depth": 0 }, "encoding": "utf-8", "invoice": { "…": "…" }, "issues": [] },
-    { "kind": "error", "source": { "…": "…" }, "error": { "code": "NOT_XML", "message": "…", "messageTr": "…", "details": { "line": 1, "column": 1, "reason": "…" } } }
+    {
+      "kind": "invoice",
+      "source": { "path": "a.xml", "name": "a.xml", "bytes": 4210, "depth": 0 },
+      "encoding": "utf-8",
+      "invoice": { "…": "…" },
+      "issues": []
+    },
+    {
+      "kind": "error",
+      "source": { "…": "…" },
+      "error": {
+        "code": "NOT_XML",
+        "message": "…",
+        "messageTr": "…",
+        "details": { "line": 1, "column": 1, "reason": "…" }
+      }
+    }
   ]
 }
 ```
@@ -2452,7 +2679,12 @@ Vite + vanilla TypeScript (D-15). The UI is a handful of views over one store; a
 ```ts
 export function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,
-  props?: { class?: string; attrs?: Record<string, string | boolean | null>; on?: Partial<{ [E in keyof HTMLElementEventMap]: (e: HTMLElementEventMap[E]) => void }>; text?: string },
+  props?: {
+    class?: string;
+    attrs?: Record<string, string | boolean | null>;
+    on?: Partial<{ [E in keyof HTMLElementEventMap]: (e: HTMLElementEventMap[E]) => void }>;
+    text?: string;
+  },
   children?: Array<Node | string | null | false>,
 ): HTMLElementTagNameMap[K];
 ```
@@ -2468,18 +2700,35 @@ export interface AppState {
   phase: 'empty' | 'processing' | 'cancelled' | 'results' | 'none' | 'crashed' | 'unsupported';
   route: { name: 'home' } | { name: 'invoice'; id: string } | { name: 'privacy' } | { name: 'notFound' };
   job: { id: number; progress: BatchProgress; cancelling: boolean } | null;
-  invoices: InvoiceEntry[];            // arrival order
-  failed: FileEntry[];                 // error items
+  invoices: InvoiceEntry[]; // arrival order
+  failed: FileEntry[]; // error items
   skipped: FileEntry[];
-  summary: BatchSummary;               // accumulated over all jobs since the last reset
-  filters: { search: string; supplier: string | null; type: string | null; from: string | null; to: string | null; onlyIssues: boolean };
+  summary: BatchSummary; // accumulated over all jobs since the last reset
+  filters: {
+    search: string;
+    supplier: string | null;
+    type: string | null;
+    from: string | null;
+    to: string | null;
+    onlyIssues: boolean;
+  };
   tab: 'invoices' | 'lines' | 'issues';
   sort: { key: 'date' | 'number' | 'supplier' | 'payable'; dir: 'asc' | 'desc' } | null;
   page: { invoices: number; lines: number; issues: number };
   severities: { error: boolean; warning: boolean; info: boolean };
 }
-export interface InvoiceEntry { id: string; source: SourceRef; invoice: Invoice; issues: Issue[] }
-export interface FileEntry { id: string; source: SourceRef; error?: ItemError; reason?: 'unsupported-type' }
+export interface InvoiceEntry {
+  id: string;
+  source: SourceRef;
+  invoice: Invoice;
+  issues: Issue[];
+}
+export interface FileEntry {
+  id: string;
+  source: SourceRef;
+  error?: ItemError;
+  reason?: 'unsupported-type';
+}
 ```
 
 `createStore(initial)` returns `{ get(), set(patch | updater), subscribe(fn) }`; `set` batches notifications with `queueMicrotask`. Views re-render their region from state; tables render only the current page (100 rows).
@@ -2513,7 +2762,16 @@ export type FromWorker =
   | { type: 'done'; jobId: number; summary: BatchSummary }
   | { type: 'cancelled'; jobId: number; summary: BatchSummary }
   | { type: 'failed'; jobId: number; message: string }
-  | { type: 'detail'; requestId: number; itemId: string; invoice: Invoice; issues: Issue[]; xml: ArrayBuffer; xslt: ArrayBuffer | null; xsltFilename: string | null }
+  | {
+      type: 'detail';
+      requestId: number;
+      itemId: string;
+      invoice: Invoice;
+      issues: Issue[];
+      xml: ArrayBuffer;
+      xslt: ArrayBuffer | null;
+      xsltFilename: string | null;
+    }
   | { type: 'detailFailed'; requestId: number; itemId: string; message: string };
 ```
 
@@ -2534,20 +2792,20 @@ Main-thread client (`src/worker/client.ts`): wraps `postMessage`, keeps `pending
 
 ### 14.1 Views and components
 
-| View / component | File | Content (copy keys in PRD §9) |
-|---|---|---|
-| Header | `components/header.ts` | `header.*`, skip link `skip.link` |
-| Privacy banner | `components/privacy-banner.ts` | `privacy.banner.*`, link to `#/privacy` |
-| Home (empty) | `views/home.ts` | `home.*`, dropzone, samples |
-| Dropzone | `components/dropzone.ts` | A `<section>` with a visible `<label>` button for a hidden-but-focusable `<input type="file" multiple accept=".xml,.zip,application/xml,text/xml,application/zip">`; drag events on the section; `drop.*` |
-| Samples | `components/samples.ts` | One button per sample; fetches `samples/<file>` (same origin) into a `File` and starts a job; `sampleFailed` on fetch error |
-| Processing | `views/processing.ts` | `progress.*`, `<progress>`, live region, Cancel |
-| Cancelled / none / crash / unsupported | `views/*.ts` | PRD §9.7, §9.8, §9.15 |
-| Results | `views/results.ts` | summary, action bar, filter bar, tabs, tables or cards, pager, issues |
-| Detail | `views/detail.ts` | PRD §9.12 sections; requests `detail` from the worker on open for the official view and attachments |
-| Official view | `components/official-view.ts` | PRD §9.13, section 14.6 |
-| Privacy | `views/privacy.ts` | PRD §9.14 |
-| Not found | `views/not-found.ts` | `notFound.*` |
+| View / component                       | File                           | Content (copy keys in PRD §9)                                                                                                                                                                             |
+| -------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Header                                 | `components/header.ts`         | `header.*`, skip link `skip.link`                                                                                                                                                                         |
+| Privacy banner                         | `components/privacy-banner.ts` | `privacy.banner.*`, link to `#/privacy`                                                                                                                                                                   |
+| Home (empty)                           | `views/home.ts`                | `home.*`, dropzone, samples                                                                                                                                                                               |
+| Dropzone                               | `components/dropzone.ts`       | A `<section>` with a visible `<label>` button for a hidden-but-focusable `<input type="file" multiple accept=".xml,.zip,application/xml,text/xml,application/zip">`; drag events on the section; `drop.*` |
+| Samples                                | `components/samples.ts`        | One button per sample; fetches `samples/<file>` (same origin) into a `File` and starts a job; `sampleFailed` on fetch error                                                                               |
+| Processing                             | `views/processing.ts`          | `progress.*`, `<progress>`, live region, Cancel                                                                                                                                                           |
+| Cancelled / none / crash / unsupported | `views/*.ts`                   | PRD §9.7, §9.8, §9.15                                                                                                                                                                                     |
+| Results                                | `views/results.ts`             | summary, action bar, filter bar, tabs, tables or cards, pager, issues                                                                                                                                     |
+| Detail                                 | `views/detail.ts`              | PRD §9.12 sections; requests `detail` from the worker on open for the official view and attachments                                                                                                       |
+| Official view                          | `components/official-view.ts`  | PRD §9.13, section 14.6                                                                                                                                                                                   |
+| Privacy                                | `views/privacy.ts`             | PRD §9.14                                                                                                                                                                                                 |
+| Not found                              | `views/not-found.ts`           | `notFound.*`                                                                                                                                                                                              |
 
 Cards replace tables when `matchMedia('(max-width: 639.98px)')` matches (listener updates on change).
 
@@ -2581,20 +2839,47 @@ Visual direction follows firatkil.com: near-white ground, ink text, one cobalt a
   --max: 1200px;
   color-scheme: light;
 }
-@media (min-width: 640px) { :root { --gutter: 24px; } }
-@media (min-width: 1024px) { :root { --gutter: 40px; } }
+@media (min-width: 640px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 40px;
+  }
+}
 
 :root[data-theme='dark'] {
-  --ground: #111111; --surface: #181817; --ink: #efeee9; --ink-2: #b4b3ad; --ink-3: #93928c;
-  --rule: #2a2a28; --rule-strong: #3a3a37; --accent: #8ea2ff; --accent-ink: #111111;
-  --error: #ff8a7a; --error-bg: #2a1512; --warning: #f5a36b; --warning-bg: #2a1c10;
-  --info: #b4b3ad; --info-bg: #1f1f1d; --ok: #5cc28f; --focus: #8ea2ff;
+  --ground: #111111;
+  --surface: #181817;
+  --ink: #efeee9;
+  --ink-2: #b4b3ad;
+  --ink-3: #93928c;
+  --rule: #2a2a28;
+  --rule-strong: #3a3a37;
+  --accent: #8ea2ff;
+  --accent-ink: #111111;
+  --error: #ff8a7a;
+  --error-bg: #2a1512;
+  --warning: #f5a36b;
+  --warning-bg: #2a1c10;
+  --info: #b4b3ad;
+  --info-bg: #1f1f1d;
+  --ok: #5cc28f;
+  --focus: #8ea2ff;
   color-scheme: dark;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']):not([data-theme='dark']) { /* same values as [data-theme='dark'] */ }
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    /* same values as [data-theme='dark'] */
+  }
 }
-body { background: var(--ground); color: var(--ink); font: 400 16px/1.5 var(--sans); }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--sans);
+}
 ```
 
 (The dark block inside the media query repeats the dark values in full; the comment above is only for brevity in this document.)
@@ -2646,7 +2931,29 @@ Steps when the user clicks `official.show`:
    const clean = DOMPurify.sanitize(html, {
      WHOLE_DOCUMENT: true,
      ADD_TAGS: ['style'],
-     FORBID_TAGS: ['script', 'iframe', 'frame', 'frameset', 'object', 'embed', 'applet', 'form', 'input', 'button', 'textarea', 'select', 'option', 'base', 'link', 'meta', 'audio', 'video', 'source', 'track', 'portal'],
+     FORBID_TAGS: [
+       'script',
+       'iframe',
+       'frame',
+       'frameset',
+       'object',
+       'embed',
+       'applet',
+       'form',
+       'input',
+       'button',
+       'textarea',
+       'select',
+       'option',
+       'base',
+       'link',
+       'meta',
+       'audio',
+       'video',
+       'source',
+       'track',
+       'portal',
+     ],
      FORBID_ATTR: ['srcset', 'ping', 'formaction', 'action', 'background', 'poster', 'xlink:href'],
      ALLOW_DATA_ATTR: false,
      ALLOWED_URI_REGEXP: /^(?:data:image\/(?:png|jpe?g|gif|webp);base64,|#)/i,
@@ -2678,10 +2985,16 @@ The repository root holds `vercel.json`. It carries the Vercel build settings (s
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'none'; script-src 'self'; worker-src 'self'; connect-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'none'; script-src 'self'; worker-src 'self'; connect-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+        },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "no-referrer" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()" },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+        },
         { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
         { "key": "Cross-Origin-Resource-Policy", "value": "same-origin" },
         { "key": "X-Frame-Options", "value": "DENY" },
@@ -2735,15 +3048,15 @@ Amounts use `minFraction = 2` and are followed by a space and the currency code 
 
 `playground/scripts/copy-samples.mjs` copies the scenario files listed below from `fixtures/generated/` to `playground/public/samples/` (git-ignored) and writes `samples.json`. It reads `fixtures/manifest.json` and refuses to copy any file that is not in the manifest or whose SHA-256 differs.
 
-| Sample key | Scenario | File |
-|---|---|---|
-| `plainSale` | S01 | `invoice.xml` |
-| `usdSale` | S02 | `invoice.xml` |
-| `withholding` | S06 | `invoice.xml` |
-| `earsiv` | S16 | `invoice.xml` |
-| `xslt` | S25 | `invoice.xml` |
-| `brokenTotals` | S26 | `invoice.xml` |
-| `nestedZip` | S35 | `archive.zip` |
+| Sample key     | Scenario | File          |
+| -------------- | -------- | ------------- |
+| `plainSale`    | S01      | `invoice.xml` |
+| `usdSale`      | S02      | `invoice.xml` |
+| `withholding`  | S06      | `invoice.xml` |
+| `earsiv`       | S16      | `invoice.xml` |
+| `xslt`         | S25      | `invoice.xml` |
+| `brokenTotals` | S26      | `invoice.xml` |
+| `nestedZip`    | S35      | `archive.zip` |
 
 "Load all samples" starts one job with all seven files. E2E tests also load S40 and S41 by URL through a test-only route that serves files from `fixtures/generated` (Playwright `page.route`), not from the deployed site.
 
@@ -2760,22 +3073,22 @@ Amounts use `minFraction = 2` and are followed by a space and the currency code 
 
 All names are fictitious ("Örnek", "Deneme", "Kurgu", "Hayali", "Sanal" mean example, trial, fiction, imaginary, virtual). E-mail and web addresses use the reserved `.invalid` top-level domain (RFC 2606). Phone numbers are `+90 000 000 00 0N`. Addresses use the street "Örnek Sokak" with real city names only as city labels.
 
-| Key | Role | Name | Tax ID | Scheme |
-|---|---|---|---|---|
-| `SUP_A` | supplier | Örnek Yazılım Anonim Şirketi | 9990000013 | VKN |
-| `SUP_B` | supplier | Deneme Gıda Ticaret Limited Şirketi | 9990000021 | VKN |
-| `SUP_C` | supplier | Örnek Lojistik Anonim Şirketi | 9990000039 | VKN |
-| `CUS_A` | customer | Kurgu Danışmanlık Anonim Şirketi | 9990000046 | VKN |
-| `CUS_B` | customer | Hayali İnşaat Limited Şirketi | 9990000054 | VKN |
-| `CUS_C` | customer | Sanal Tekstil Sanayi ve Ticaret Anonim Şirketi | 9990000062 | VKN |
-| `PER_A` | individual | Ayşe Örnek | 50000000128 | TCKN |
-| `PER_B` | individual | Mehmet Deneme | 50000000296 | TCKN |
-| `PER_C` | individual | Zeynep Kurgu | 50000000364 | TCKN |
-| `ANON` | anonymous consumer | Nihai Tüketici | 11111111111 | TCKN |
-| `CUSTOMS` | IHRACAT customer | name per A-09 (customs administration) | 1460415308 | VKN |
-| `FOREIGN` | export buyer | Example Trading GmbH (fictitious) | none (`PartyIdentification` with `schemeID="MUSTERINO"` value `F-0001`) | — |
-| `BAD_VKN` | supplier (S27) | Örnek Hatalı Anonim Şirketi | 9990000014 | VKN (invalid) |
-| `BAD_TCKN` | individual (S28) | Ali Hatalı | 50000000129 | TCKN (invalid) |
+| Key        | Role               | Name                                           | Tax ID                                                                  | Scheme         |
+| ---------- | ------------------ | ---------------------------------------------- | ----------------------------------------------------------------------- | -------------- |
+| `SUP_A`    | supplier           | Örnek Yazılım Anonim Şirketi                   | 9990000013                                                              | VKN            |
+| `SUP_B`    | supplier           | Deneme Gıda Ticaret Limited Şirketi            | 9990000021                                                              | VKN            |
+| `SUP_C`    | supplier           | Örnek Lojistik Anonim Şirketi                  | 9990000039                                                              | VKN            |
+| `CUS_A`    | customer           | Kurgu Danışmanlık Anonim Şirketi               | 9990000046                                                              | VKN            |
+| `CUS_B`    | customer           | Hayali İnşaat Limited Şirketi                  | 9990000054                                                              | VKN            |
+| `CUS_C`    | customer           | Sanal Tekstil Sanayi ve Ticaret Anonim Şirketi | 9990000062                                                              | VKN            |
+| `PER_A`    | individual         | Ayşe Örnek                                     | 50000000128                                                             | TCKN           |
+| `PER_B`    | individual         | Mehmet Deneme                                  | 50000000296                                                             | TCKN           |
+| `PER_C`    | individual         | Zeynep Kurgu                                   | 50000000364                                                             | TCKN           |
+| `ANON`     | anonymous consumer | Nihai Tüketici                                 | 11111111111                                                             | TCKN           |
+| `CUSTOMS`  | IHRACAT customer   | name per A-09 (customs administration)         | 1460415308                                                              | VKN            |
+| `FOREIGN`  | export buyer       | Example Trading GmbH (fictitious)              | none (`PartyIdentification` with `schemeID="MUSTERINO"` value `F-0001`) | —              |
+| `BAD_VKN`  | supplier (S27)     | Örnek Hatalı Anonim Şirketi                    | 9990000014                                                              | VKN (invalid)  |
+| `BAD_TCKN` | individual (S28)   | Ali Hatalı                                     | 50000000129                                                             | TCKN (invalid) |
 
 `SYNTHETIC_TAX_IDS` is the set of the tax IDs above. `1460415308` is a public identifier of a public body, published in GİB's UBL-TR guide for export invoices; it is not personal data.
 
@@ -2791,12 +3104,28 @@ UUIDs: `fea70000-0000-4000-8000-0000000SSFFF` where `SS` is the two-digit scenar
 ### 15.3 Definitions and builder (normative types, `fixtures/builder/*`)
 
 ```ts
-export interface FixtureParty { key: keyof typeof IDENTITIES; withAddress?: boolean; withContact?: boolean; withTaxOffice?: boolean; schemeIdStyle?: 'upper' | 'lower' | 'missing' }
+export interface FixtureParty {
+  key: keyof typeof IDENTITIES;
+  withAddress?: boolean;
+  withContact?: boolean;
+  withTaxOffice?: boolean;
+  schemeIdStyle?: 'upper' | 'lower' | 'missing';
+}
 
-export interface FixtureTax { code: string; percent?: string; perUnit?: { amount: string; unitCode: string }; exemption?: { code: string; reason: string } }
+export interface FixtureTax {
+  code: string;
+  percent?: string;
+  perUnit?: { amount: string; unitCode: string };
+  exemption?: { code: string; reason: string };
+}
 
 export interface FixtureLine {
-  id: string; name: string; quantity: string; unitCode: string; price: string; baseQuantity?: string;
+  id: string;
+  name: string;
+  quantity: string;
+  unitCode: string;
+  price: string;
+  baseQuantity?: string;
   allowances?: Array<{ percent?: string; amount?: string; reason: string }>;
   charges?: Array<{ amount: string; reason: string }>;
   taxes: FixtureTax[];
@@ -2805,29 +3134,48 @@ export interface FixtureLine {
 }
 
 export interface FixtureInvoice {
-  scenario: number; file: number;
-  profileId: string; typeCode: string; currency: string;
-  issueDate?: string; issueTime?: string | null;
+  scenario: number;
+  file: number;
+  profileId: string;
+  typeCode: string;
+  currency: string;
+  issueDate?: string;
+  issueTime?: string | null;
   exchangeRate?: { rate: string; date: string; element?: 'PricingExchangeRate' | 'TaxExchangeRate' };
   notes?: string[];
-  supplier: FixtureParty; customer: FixtureParty; buyerCustomer?: FixtureParty;
+  supplier: FixtureParty;
+  customer: FixtureParty;
+  buyerCustomer?: FixtureParty;
   lines: FixtureLine[];
   allowances?: Array<{ amount: string; reason: string }>;
-  withholdingLevel?: 'invoice' | 'line' | 'both';      // default 'both' when any line has withholding
+  withholdingLevel?: 'invoice' | 'line' | 'both'; // default 'both' when any line has withholding
   rounding?: string;
-  payableMode?: 'deduct-withholding' | 'ignore-withholding';  // default deduct
-  attachments?: Array<{ kind: 'dummy-xslt' | 'import-xslt' | 'hostile-xslt'; filename: string; padToBytes?: number }>;
+  payableMode?: 'deduct-withholding' | 'ignore-withholding'; // default deduct
+  attachments?: Array<{
+    kind: 'dummy-xslt' | 'import-xslt' | 'hostile-xslt';
+    filename: string;
+    padToBytes?: number;
+  }>;
   billingReference?: { id: string; issueDate: string };
   orderReference?: { id: string; issueDate: string };
   despatchReference?: { id: string; issueDate: string };
   overrides?: {
-    totals?: Partial<Record<'lineExtension' | 'taxExclusive' | 'taxInclusive' | 'allowanceTotal' | 'chargeTotal' | 'payable', string>>;
-    uuid?: string; number?: string; issueDate?: string; profileId?: string; typeCode?: string;
+    totals?: Partial<
+      Record<
+        'lineExtension' | 'taxExclusive' | 'taxInclusive' | 'allowanceTotal' | 'chargeTotal' | 'payable',
+        string
+      >
+    >;
+    uuid?: string;
+    number?: string;
+    issueDate?: string;
+    profileId?: string;
+    typeCode?: string;
     omitCurrencyIdOn?: Array<'payable'>;
     decimalCommaOn?: Array<'payable'>;
     /** Applied in order to the final XML text (before encoding); each `find` must occur exactly once or generation fails. */
     textReplacements?: Array<{ find: string; replace: string }>;
-    omitElements?: string[];   // canonical paths, e.g. '/Invoice/cbc:UUID'
+    omitElements?: string[]; // canonical paths, e.g. '/Invoice/cbc:UUID'
   };
 }
 
@@ -2836,25 +3184,39 @@ export interface XmlStyle {
   bom: 'none' | 'utf-8' | 'utf-16le';
   encoding: 'utf-8' | 'utf-16' | 'windows-1254';
   newline: '\n' | '\r\n';
-  indent: string;          // '  ' default; '\t' for S22
-  padValues: boolean;      // surround text values with spaces/newlines (S22)
+  indent: string; // '  ' default; '\t' for S22
+  padValues: boolean; // surround text values with spaces/newlines (S22)
   declaration: boolean;
 }
 
 export interface ScenarioFile {
-  name: string;                                   // e.g. 'invoice.xml', 'archive.zip'
+  name: string; // e.g. 'invoice.xml', 'archive.zip'
   content:
     | { type: 'invoice'; invoice: FixtureInvoice; style?: Partial<XmlStyle> }
-    | { type: 'raw'; text: string }               // for S32–S34
-    | { type: 'zip'; entries: Array<{ path: string; from: ScenarioFile | { type: 'bytes'; bytes: 'zeros' | 'spaces-in-comment'; size: number } }> };
+    | { type: 'raw'; text: string } // for S32–S34
+    | {
+        type: 'zip';
+        entries: Array<{
+          path: string;
+          from: ScenarioFile | { type: 'bytes'; bytes: 'zeros' | 'spaces-in-comment'; size: number };
+        }>;
+      };
   expect:
-    | { kind: 'invoice'; issues: string[] }        // 'EF023:warning' entries, sorted
+    | { kind: 'invoice'; issues: string[] } // 'EF023:warning' entries, sorted
     | { kind: 'throws'; code: EfaturaParseErrorCode }
-    | { kind: 'items'; items: Array<{ path: string; kind: BatchItem['kind']; code?: string; issues?: string[] }> };
+    | {
+        kind: 'items';
+        items: Array<{ path: string; kind: BatchItem['kind']; code?: string; issues?: string[] }>;
+      };
   playground?: { officialView: 'renders' | 'blocked' | 'sanitised' };
 }
 
-export interface Scenario { id: string; dir: string; title: string; files: ScenarioFile[] }
+export interface Scenario {
+  id: string;
+  dir: string;
+  title: string;
+  files: ScenarioFile[];
+}
 ```
 
 Computation in `fixtures/builder/compute.ts` (normative, all with the core `decimal` module):
@@ -2879,51 +3241,51 @@ XSLT texts (`fixtures/xslt.ts`):
 
 Unless stated: supplier `SUP_A`, customer `CUS_A`, TEMELFATURA, SATIS, TRY, KDV 20 % (`0015`), unit `C62`, style default (prefixes `cbc`/`cac`/`ext`, UTF-8 without BOM, LF, two-space indent). Expected issues are exact (no other issue may appear).
 
-| ID | Dir | Files | Content | Expected |
-|---|---|---|---|---|
-| S01 | `s01-plain-sale-try` | `invoice.xml` | 3 lines (2 × 250.00, 1 × 500.00) | no issues |
-| S02 | `s02-sale-usd-rate` | `invoice.xml` | TICARIFATURA, USD, `PricingExchangeRate` USD→TRY 32.1234 dated 2025-07-14, 2 lines | no issues |
-| S03 | `s03-sale-eur-rate-in-note` | `invoice.xml` | EUR, no exchange-rate element, notes `Döviz Kuru: 35,4321` and `Vade Tarihi : 29.11.2025` | EF023:warning; `dueDate` 2025-11-29 from Note |
-| S04 | `s04-sale-usd-no-rate` | `invoice.xml` | USD, no rate anywhere | EF022:error |
-| S05 | `s05-return-iade` | `invoice.xml` | IADE, `BillingReference` to `ORN2025000001001` | no issues |
-| S06 | `s06-withholding-5-10` | `invoice.xml` | TEVKIFAT, 1 line 10,000.00, KDV 2,000.00, withholding `604` 50 % = 1,000.00 at line and invoice level, payable 11,000.00 | no issues |
-| S07 | `s07-withholding-9-10` | `invoice.xml` | TICARIFATURA, TEVKIFAT, 2 lines, withholding `612` 90 % at invoice level only | no issues |
-| S08 | `s08-withholding-not-deducted` | `invoice.xml` | as S06 with `payableMode: 'ignore-withholding'` | EF044:warning |
-| S09 | `s09-exemption-istisna` | `invoice.xml` | ISTISNA, KDV 0 % with exemption `350` "Diğerleri" | no issues |
-| S10 | `s10-istisna-missing-code` | `invoice.xml` | ISTISNA, KDV 0 %, no exemption code | EF061:warning, EF062:warning |
-| S11 | `s11-multi-vat-rates` | `invoice.xml` | 3 lines at 1 %, 10 %, 20 % | no issues |
-| S12 | `s12-line-allowance-charge` | `invoice.xml` | line 1: 10 % allowance; line 2: charge 15.00; price `12.34567891` (8 decimals) | no issues |
-| S13 | `s13-invoice-discount` | `invoice.xml` | 2 lines, invoice-level allowance 100.00 | no issues |
-| S14 | `s14-payable-rounding` | `invoice.xml` | rounding `0.02` | no issues |
-| S15 | `s15-otv-fuel` | `invoice.xml` | `LTR`, ÖTV `0071` per unit 2.5000 per LTR, KDV 20 % on base incl. ÖTV | no issues |
-| S16 | `s16-earsiv-individual` | `invoice.xml` | EARSIVFATURA, customer `PER_A` (Person name, no PartyName) | no issues |
-| S17 | `s17-earsiv-anonymous` | `invoice.xml` | EARSIVFATURA, customer `ANON` | EF016:info |
-| S18 | `s18-export-ihracat` | `invoice.xml` | IHRACAT, ISTISNA, USD 32.1234, customer `CUSTOMS`, buyer `FOREIGN`, KDV 0 % exemption `301`, line delivery FOB, GTİP `847130000000`, transport mode `1` | no issues |
-| S19 | `s19-minimal-optional` | `invoice.xml` | no notes, no IssueTime, no addresses, contacts or tax offices, an empty `<cbc:CityName/>`, supplier identifier without `schemeID`, `PayableAmount` without `currencyID` | EF015:info, EF032:warning |
-| S20 | `s20-alt-prefixes` | `invoice.xml` | prefixes `b` (cbc), `a` (cac), `e` (ext); lower-case UUID | no issues |
-| S21 | `s21-default-namespaces` | `redeclared.xml`, `unqualified.xml` | `redeclared.xml`: every cbc/cac element in its own default namespace declaration, IssueTime `10:00:00.0000000+03:00`. `unqualified.xml`: cbc/cac elements without prefix inside the Invoice default namespace | `redeclared.xml`: no issues; `unqualified.xml`: EF009:warning (two issues: expected cbc, expected cac) |
-| S22 | `s22-bom-whitespace-crlf` | `invoice.xml` | UTF-8 BOM, CRLF, tab indent, padded values, `PayableAmount` with a decimal comma | EF031:warning |
-| S23 | `s23-utf16` | `invoice.xml` | UTF-16LE with BOM, Turkish characters in names | no issues |
-| S24 | `s24-windows-1254` | `invoice.xml` | `encoding="windows-1254"`, Turkish characters encoded as windows-1254 | no issues |
-| S25 | `s25-embedded-xslt` | `invoice.xml` | `dummy-xslt` attachment `ornek.xslt` | no issues; playground: renders |
-| S26 | `s26-broken-totals` | `invoice.xml` | lines sum 1000.00; overrides LEA 1000.50, TEA 1000.50, TIA 1210.50, payable 1210.50; taxes 200.00 | EF040:error, EF042:error |
-| S27 | `s27-invalid-vkn` | `invoice.xml` | supplier `BAD_VKN` | EF012:error |
-| S28 | `s28-invalid-tckn` | `invoice.xml` | EARSIVFATURA, customer `BAD_TCKN` | EF013:error |
-| S29 | `s29-invalid-identity` | `invoice.xml` | UUID `not-a-uuid`, number `ABC123`, issue date `2025-02-30` | EF002:error, EF003:warning, EF004:error |
-| S30 | `s30-duplicate-line-ids` | `invoice.xml` | lines 1 and 2 both id `1`; line 2 quantity `-2` with negative amount | EF051:error, EF052:warning |
-| S31 | `s31-unknown-codes` | `invoice.xml` | profile `YENIPROFIL`, type `YENITIP`, unit `XYZ`, an extra tax `9999` 1 % | EF006:warning, EF007:warning, EF053:info, EF060:warning |
-| S32 | `s32-not-invoice` | `despatch.xml` | raw `DespatchAdvice` root (UBL DespatchAdvice-2 namespace) | throws NOT_INVOICE |
-| S33 | `s33-not-xml` | `notes.xml` | raw text `this is not an invoice` | throws NOT_XML |
-| S34 | `s34-doctype` | `doctype.xml` | raw XML with `<!DOCTYPE Invoice [<!ENTITY a "x">]>` before an Invoice root | throws DOCTYPE_FORBIDDEN |
-| S35 | `s35-nested-zip` | `archive.zip` | `2025/07/ORN2025000035001~1001.zip` (2 invoices), `2025/08/ORN2025000035003~1003.zip` (2 invoices, plus `__MACOSX/._x.xml` and `.DS_Store`), `2025/09/a.xml`, `2025/09/b.xml`, `readme.pdf` (bytes) | items: 6 invoices (no issues), 1 skipped (`readme.pdf`) |
-| S36 | `s36-zip-too-deep` | `deep.zip` | archive → `l2.zip` → `l3.zip` → `l4.zip` → `x.xml`; `l3.zip` also has `ok.xml` | items: `ok.xml` invoice, error ZIP_DEPTH_EXCEEDED at `deep.zip!/l2.zip!/l3.zip!/l4.zip` |
-| S37 | `s37-duplicate-uuid` | `archive.zip` | `a.xml`; `copy/a.xml` (same bytes); `c.xml` (same supplier and number as `a.xml`, different UUID) | items: `a.xml` no issues; `copy/a.xml` EF090:warning; `c.xml` EF091:info |
-| S38 | `s38-zip-bomb` | `bomb.zip` | `bomb.xml`: 20 MiB of spaces inside a comment in an Invoice skeleton; `ok.xml` normal | items: error ZIP_RATIO_EXCEEDED for `bomb.xml`; `ok.xml` invoice |
-| S39 | `s39-currency-tl` | `invoice.xml` | `DocumentCurrencyCode` and all `currencyID` = `TL` | EF020:error (variant alias) |
-| S40 | `s40-xslt-with-import` | `invoice.xml` | `import-xslt` attachment | no issues; playground: blocked |
-| S41 | `s41-xslt-hostile-output` | `invoice.xml` | `hostile-xslt` attachment | no issues; playground: sanitised |
-| S42 | `s42-many-lines` | `invoice.xml` | 260 lines, alternating KDV 10 % and 20 % | no issues |
-| S43 | `s43-rule-coverage` | `ef001.xml`, `ef005.xml`, `ef008.xml`, `ef010.xml`, `ef011.xml`, `ef014.xml`, `ef017.xml`, `ef021.xml`, `ef024.xml`, `ef025.xml`, `ef026.xml`, `ef030.xml`, `ef035.xml`, `ef041.xml`, `ef043.xml`, `ef045.xml`, `ef046.xml`, `ef047.xml`, `ef048.xml`, `ef049.xml`, `ef050.xml`, `ef054.xml`, `ef055.xml`, `ef063.xml`, `ef064.xml`, `ef065.xml`, `ef066.xml` | One file per code not expected by S01–S42. Each starts from the S01 definition and introduces only that defect (via `overrides`, usually `textReplacements` or `omitElements`), for example `ef001.xml` omits `cbc:UUID`, `ef035.xml` declares `encoding="x-unknown"`, `ef050.xml` has no lines. | Each file: exactly its own code with its default severity. If a defect necessarily causes another code, the scenario file lists it with a comment explaining why. |
+| ID  | Dir                            | Files                                                                                                                                                                                                                                                                                                                                                         | Content                                                                                                                                                                                                                                                                                          | Expected                                                                                                                                                          |
+| --- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| S01 | `s01-plain-sale-try`           | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | 3 lines (2 × 250.00, 1 × 500.00)                                                                                                                                                                                                                                                                 | no issues                                                                                                                                                         |
+| S02 | `s02-sale-usd-rate`            | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | TICARIFATURA, USD, `PricingExchangeRate` USD→TRY 32.1234 dated 2025-07-14, 2 lines                                                                                                                                                                                                               | no issues                                                                                                                                                         |
+| S03 | `s03-sale-eur-rate-in-note`    | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | EUR, no exchange-rate element, notes `Döviz Kuru: 35,4321` and `Vade Tarihi : 29.11.2025`                                                                                                                                                                                                        | EF023:warning; `dueDate` 2025-11-29 from Note                                                                                                                     |
+| S04 | `s04-sale-usd-no-rate`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | USD, no rate anywhere                                                                                                                                                                                                                                                                            | EF022:error                                                                                                                                                       |
+| S05 | `s05-return-iade`              | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | IADE, `BillingReference` to `ORN2025000001001`                                                                                                                                                                                                                                                   | no issues                                                                                                                                                         |
+| S06 | `s06-withholding-5-10`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | TEVKIFAT, 1 line 10,000.00, KDV 2,000.00, withholding `604` 50 % = 1,000.00 at line and invoice level, payable 11,000.00                                                                                                                                                                         | no issues                                                                                                                                                         |
+| S07 | `s07-withholding-9-10`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | TICARIFATURA, TEVKIFAT, 2 lines, withholding `612` 90 % at invoice level only                                                                                                                                                                                                                    | no issues                                                                                                                                                         |
+| S08 | `s08-withholding-not-deducted` | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | as S06 with `payableMode: 'ignore-withholding'`                                                                                                                                                                                                                                                  | EF044:warning                                                                                                                                                     |
+| S09 | `s09-exemption-istisna`        | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | ISTISNA, KDV 0 % with exemption `350` "Diğerleri"                                                                                                                                                                                                                                                | no issues                                                                                                                                                         |
+| S10 | `s10-istisna-missing-code`     | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | ISTISNA, KDV 0 %, no exemption code                                                                                                                                                                                                                                                              | EF061:warning, EF062:warning                                                                                                                                      |
+| S11 | `s11-multi-vat-rates`          | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | 3 lines at 1 %, 10 %, 20 %                                                                                                                                                                                                                                                                       | no issues                                                                                                                                                         |
+| S12 | `s12-line-allowance-charge`    | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | line 1: 10 % allowance; line 2: charge 15.00; price `12.34567891` (8 decimals)                                                                                                                                                                                                                   | no issues                                                                                                                                                         |
+| S13 | `s13-invoice-discount`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | 2 lines, invoice-level allowance 100.00                                                                                                                                                                                                                                                          | no issues                                                                                                                                                         |
+| S14 | `s14-payable-rounding`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | rounding `0.02`                                                                                                                                                                                                                                                                                  | no issues                                                                                                                                                         |
+| S15 | `s15-otv-fuel`                 | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | `LTR`, ÖTV `0071` per unit 2.5000 per LTR, KDV 20 % on base incl. ÖTV                                                                                                                                                                                                                            | no issues                                                                                                                                                         |
+| S16 | `s16-earsiv-individual`        | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | EARSIVFATURA, customer `PER_A` (Person name, no PartyName)                                                                                                                                                                                                                                       | no issues                                                                                                                                                         |
+| S17 | `s17-earsiv-anonymous`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | EARSIVFATURA, customer `ANON`                                                                                                                                                                                                                                                                    | EF016:info                                                                                                                                                        |
+| S18 | `s18-export-ihracat`           | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | IHRACAT, ISTISNA, USD 32.1234, customer `CUSTOMS`, buyer `FOREIGN`, KDV 0 % exemption `301`, line delivery FOB, GTİP `847130000000`, transport mode `1`                                                                                                                                          | no issues                                                                                                                                                         |
+| S19 | `s19-minimal-optional`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | no notes, no IssueTime, no addresses, contacts or tax offices, an empty `<cbc:CityName/>`, supplier identifier without `schemeID`, `PayableAmount` without `currencyID`                                                                                                                          | EF015:info, EF032:warning                                                                                                                                         |
+| S20 | `s20-alt-prefixes`             | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | prefixes `b` (cbc), `a` (cac), `e` (ext); lower-case UUID                                                                                                                                                                                                                                        | no issues                                                                                                                                                         |
+| S21 | `s21-default-namespaces`       | `redeclared.xml`, `unqualified.xml`                                                                                                                                                                                                                                                                                                                           | `redeclared.xml`: every cbc/cac element in its own default namespace declaration, IssueTime `10:00:00.0000000+03:00`. `unqualified.xml`: cbc/cac elements without prefix inside the Invoice default namespace                                                                                    | `redeclared.xml`: no issues; `unqualified.xml`: EF009:warning (two issues: expected cbc, expected cac)                                                            |
+| S22 | `s22-bom-whitespace-crlf`      | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | UTF-8 BOM, CRLF, tab indent, padded values, `PayableAmount` with a decimal comma                                                                                                                                                                                                                 | EF031:warning                                                                                                                                                     |
+| S23 | `s23-utf16`                    | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | UTF-16LE with BOM, Turkish characters in names                                                                                                                                                                                                                                                   | no issues                                                                                                                                                         |
+| S24 | `s24-windows-1254`             | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | `encoding="windows-1254"`, Turkish characters encoded as windows-1254                                                                                                                                                                                                                            | no issues                                                                                                                                                         |
+| S25 | `s25-embedded-xslt`            | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | `dummy-xslt` attachment `ornek.xslt`                                                                                                                                                                                                                                                             | no issues; playground: renders                                                                                                                                    |
+| S26 | `s26-broken-totals`            | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | lines sum 1000.00; overrides LEA 1000.50, TEA 1000.50, TIA 1210.50, payable 1210.50; taxes 200.00                                                                                                                                                                                                | EF040:error, EF042:error                                                                                                                                          |
+| S27 | `s27-invalid-vkn`              | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | supplier `BAD_VKN`                                                                                                                                                                                                                                                                               | EF012:error                                                                                                                                                       |
+| S28 | `s28-invalid-tckn`             | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | EARSIVFATURA, customer `BAD_TCKN`                                                                                                                                                                                                                                                                | EF013:error                                                                                                                                                       |
+| S29 | `s29-invalid-identity`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | UUID `not-a-uuid`, number `ABC123`, issue date `2025-02-30`                                                                                                                                                                                                                                      | EF002:error, EF003:warning, EF004:error                                                                                                                           |
+| S30 | `s30-duplicate-line-ids`       | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | lines 1 and 2 both id `1`; line 2 quantity `-2` with negative amount                                                                                                                                                                                                                             | EF051:error, EF052:warning                                                                                                                                        |
+| S31 | `s31-unknown-codes`            | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | profile `YENIPROFIL`, type `YENITIP`, unit `XYZ`, an extra tax `9999` 1 %                                                                                                                                                                                                                        | EF006:warning, EF007:warning, EF053:info, EF060:warning                                                                                                           |
+| S32 | `s32-not-invoice`              | `despatch.xml`                                                                                                                                                                                                                                                                                                                                                | raw `DespatchAdvice` root (UBL DespatchAdvice-2 namespace)                                                                                                                                                                                                                                       | throws NOT_INVOICE                                                                                                                                                |
+| S33 | `s33-not-xml`                  | `notes.xml`                                                                                                                                                                                                                                                                                                                                                   | raw text `this is not an invoice`                                                                                                                                                                                                                                                                | throws NOT_XML                                                                                                                                                    |
+| S34 | `s34-doctype`                  | `doctype.xml`                                                                                                                                                                                                                                                                                                                                                 | raw XML with `<!DOCTYPE Invoice [<!ENTITY a "x">]>` before an Invoice root                                                                                                                                                                                                                       | throws DOCTYPE_FORBIDDEN                                                                                                                                          |
+| S35 | `s35-nested-zip`               | `archive.zip`                                                                                                                                                                                                                                                                                                                                                 | `2025/07/ORN2025000035001~1001.zip` (2 invoices), `2025/08/ORN2025000035003~1003.zip` (2 invoices, plus `__MACOSX/._x.xml` and `.DS_Store`), `2025/09/a.xml`, `2025/09/b.xml`, `readme.pdf` (bytes)                                                                                              | items: 6 invoices (no issues), 1 skipped (`readme.pdf`)                                                                                                           |
+| S36 | `s36-zip-too-deep`             | `deep.zip`                                                                                                                                                                                                                                                                                                                                                    | archive → `l2.zip` → `l3.zip` → `l4.zip` → `x.xml`; `l3.zip` also has `ok.xml`                                                                                                                                                                                                                   | items: `ok.xml` invoice, error ZIP_DEPTH_EXCEEDED at `deep.zip!/l2.zip!/l3.zip!/l4.zip`                                                                           |
+| S37 | `s37-duplicate-uuid`           | `archive.zip`                                                                                                                                                                                                                                                                                                                                                 | `a.xml`; `copy/a.xml` (same bytes); `c.xml` (same supplier and number as `a.xml`, different UUID)                                                                                                                                                                                                | items: `a.xml` no issues; `copy/a.xml` EF090:warning; `c.xml` EF091:info                                                                                          |
+| S38 | `s38-zip-bomb`                 | `bomb.zip`                                                                                                                                                                                                                                                                                                                                                    | `bomb.xml`: 20 MiB of spaces inside a comment in an Invoice skeleton; `ok.xml` normal                                                                                                                                                                                                            | items: error ZIP_RATIO_EXCEEDED for `bomb.xml`; `ok.xml` invoice                                                                                                  |
+| S39 | `s39-currency-tl`              | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | `DocumentCurrencyCode` and all `currencyID` = `TL`                                                                                                                                                                                                                                               | EF020:error (variant alias)                                                                                                                                       |
+| S40 | `s40-xslt-with-import`         | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | `import-xslt` attachment                                                                                                                                                                                                                                                                         | no issues; playground: blocked                                                                                                                                    |
+| S41 | `s41-xslt-hostile-output`      | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | `hostile-xslt` attachment                                                                                                                                                                                                                                                                        | no issues; playground: sanitised                                                                                                                                  |
+| S42 | `s42-many-lines`               | `invoice.xml`                                                                                                                                                                                                                                                                                                                                                 | 260 lines, alternating KDV 10 % and 20 %                                                                                                                                                                                                                                                         | no issues                                                                                                                                                         |
+| S43 | `s43-rule-coverage`            | `ef001.xml`, `ef005.xml`, `ef008.xml`, `ef010.xml`, `ef011.xml`, `ef014.xml`, `ef017.xml`, `ef021.xml`, `ef024.xml`, `ef025.xml`, `ef026.xml`, `ef030.xml`, `ef035.xml`, `ef041.xml`, `ef043.xml`, `ef045.xml`, `ef046.xml`, `ef047.xml`, `ef048.xml`, `ef049.xml`, `ef050.xml`, `ef054.xml`, `ef055.xml`, `ef063.xml`, `ef064.xml`, `ef065.xml`, `ef066.xml` | One file per code not expected by S01–S42. Each starts from the S01 definition and introduces only that defect (via `overrides`, usually `textReplacements` or `omitElements`), for example `ef001.xml` omits `cbc:UUID`, `ef035.xml` declares `encoding="x-unknown"`, `ef050.xml` has no lines. | Each file: exactly its own code with its default severity. If a defect necessarily causes another code, the scenario file lists it with a comment explaining why. |
 
 ### 15.5 Manifest and check (normative)
 
@@ -2933,7 +3295,12 @@ Unless stated: supplier `SUP_A`, customer `CUS_A`, TEMELFATURA, SATIS, TRY, KDV 
 {
   "generator": "efatura-fixtures@1",
   "files": [
-    { "path": "fixtures/generated/s01-plain-sale-try/invoice.xml", "scenario": "S01", "bytes": 4210, "sha256": "…" }
+    {
+      "path": "fixtures/generated/s01-plain-sale-try/invoice.xml",
+      "scenario": "S01",
+      "bytes": 4210,
+      "sha256": "…"
+    }
   ]
 }
 ```
@@ -2960,15 +3327,15 @@ Files are sorted by path. `generate.ts` writes `fixtures/generated/` from scratc
 
 ### 16.1 Layers
 
-| Layer | Tool | Location | Command | Runs in CI job |
-|---|---|---|---|---|
-| Unit | Vitest (Node) | `test/unit/**` | `pnpm test` | `unit` (Node 20, 22, 24) |
-| Snapshot | Vitest (Node) | `test/snapshot/**` | `pnpm test` | `unit` |
-| Property | Vitest + fast-check | `test/property/**` | `pnpm test` | `unit` |
-| Browser (core) | Vitest browser mode, Playwright provider, Chromium + Firefox + WebKit | `test/browser/**` | `pnpm test:browser` | `browser` |
-| CLI | Vitest spawning `node dist/cli.js` | `test/cli/**` | `pnpm test:cli` | `cli` (ubuntu and windows) |
-| Playground E2E | Playwright Test | `playground/e2e/**` | `pnpm test:e2e` | `e2e` |
-| Benchmark | tsx script | `scripts/bench.ts` | `pnpm bench --ci` | `bench` |
+| Layer          | Tool                                                                  | Location            | Command             | Runs in CI job             |
+| -------------- | --------------------------------------------------------------------- | ------------------- | ------------------- | -------------------------- |
+| Unit           | Vitest (Node)                                                         | `test/unit/**`      | `pnpm test`         | `unit` (Node 20, 22, 24)   |
+| Snapshot       | Vitest (Node)                                                         | `test/snapshot/**`  | `pnpm test`         | `unit`                     |
+| Property       | Vitest + fast-check                                                   | `test/property/**`  | `pnpm test`         | `unit`                     |
+| Browser (core) | Vitest browser mode, Playwright provider, Chromium + Firefox + WebKit | `test/browser/**`   | `pnpm test:browser` | `browser`                  |
+| CLI            | Vitest spawning `node dist/cli.js`                                    | `test/cli/**`       | `pnpm test:cli`     | `cli` (ubuntu and windows) |
+| Playground E2E | Playwright Test                                                       | `playground/e2e/**` | `pnpm test:e2e`     | `e2e`                      |
+| Benchmark      | tsx script                                                            | `scripts/bench.ts`  | `pnpm bench --ci`   | `bench`                    |
 
 Unit, snapshot and property tests make no network calls; `test/setup.ts` replaces `globalThis.fetch` with a function that throws. In the browser project (detected with `typeof window !== 'undefined'`), the replacement lets through only same-origin requests (the Vitest server serving fixture files imported with `?url`) and throws for every other URL.
 
@@ -2995,16 +3362,48 @@ export default defineConfig({
       include: ['src/**'],
       exclude: ['src/cli/**', 'src/types.ts'],
       thresholds: {
-        lines: 95, branches: 90, functions: 95, statements: 95,
-        'src/decimal/**': { lines: 100 }, 'src/ids/**': { lines: 100 },
-        'src/validate/**': { lines: 100 }, 'src/export/csv.ts': { lines: 100 },
+        lines: 95,
+        branches: 90,
+        functions: 95,
+        statements: 95,
+        'src/decimal/**': { lines: 100 },
+        'src/ids/**': { lines: 100 },
+        'src/validate/**': { lines: 100 },
+        'src/export/csv.ts': { lines: 100 },
       },
     },
     projects: [
-      { extends: true, test: { name: 'unit', include: ['test/unit/**/*.test.ts', 'test/snapshot/**/*.test.ts', 'test/property/**/*.test.ts', 'playground/src/**/*.test.ts'], exclude: ['**/*.browser.test.ts'], environment: 'node' } },
-      { extends: true, test: { name: 'browser', include: ['test/browser/**/*.browser.test.ts', 'playground/src/**/*.browser.test.ts'],
-          browser: { enabled: true, headless: true, provider: playwright(), instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }] } } },
-      { extends: true, test: { name: 'cli', include: ['test/cli/**/*.test.ts'], environment: 'node', testTimeout: 30_000 } },
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          include: [
+            'test/unit/**/*.test.ts',
+            'test/snapshot/**/*.test.ts',
+            'test/property/**/*.test.ts',
+            'playground/src/**/*.test.ts',
+          ],
+          exclude: ['**/*.browser.test.ts'],
+          environment: 'node',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'browser',
+          include: ['test/browser/**/*.browser.test.ts', 'playground/src/**/*.browser.test.ts'],
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright(),
+            instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }],
+          },
+        },
+      },
+      {
+        extends: true,
+        test: { name: 'cli', include: ['test/cli/**/*.test.ts'], environment: 'node', testTimeout: 30_000 },
+      },
     ],
   },
 });
@@ -3016,121 +3415,121 @@ A-14 confirms the Vitest 4 browser provider import and the `projects` option nam
 
 Unit tests (UT):
 
-| ID | Covers |
-|---|---|
-| UT-01 | Decimal vectors (section 8.2 table) |
-| UT-02 | Decimal invalid inputs (`TypeError`), `div` by zero (`RangeError`), `-0` normalisation |
-| UT-03 | `toMinorUnits` vectors (section 8.3), `minorUnitsOf` for TRY, JPY, KWD, XAU, `TL` |
-| UT-04 | Base64 decoder: padding variants, missing padding, invalid character position, empty |
-| UT-05 | Decoding: UTF-8 BOM, UTF-16 LE/BE with and without BOM, `windows-1254`, `iso-8859-9`, unsupported label (EF035 unsupported), invalid UTF-8 without declaration (EF035 fallback), size limit, empty input |
-| UT-06 | Guard: DOCTYPE after comments and PIs, DOCTYPE case-insensitive, DOCTYPE or ENTITY after the root start, `<!DOCTYPE` inside a comment or CDATA allowed, `NOT_XML` line and column, whitespace-only |
+| ID    | Covers                                                                                                                                                                                                                                                                                                                |
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UT-01 | Decimal vectors (section 8.2 table)                                                                                                                                                                                                                                                                                   |
+| UT-02 | Decimal invalid inputs (`TypeError`), `div` by zero (`RangeError`), `-0` normalisation                                                                                                                                                                                                                                |
+| UT-03 | `toMinorUnits` vectors (section 8.3), `minorUnitsOf` for TRY, JPY, KWD, XAU, `TL`                                                                                                                                                                                                                                     |
+| UT-04 | Base64 decoder: padding variants, missing padding, invalid character position, empty                                                                                                                                                                                                                                  |
+| UT-05 | Decoding: UTF-8 BOM, UTF-16 LE/BE with and without BOM, `windows-1254`, `iso-8859-9`, unsupported label (EF035 unsupported), invalid UTF-8 without declaration (EF035 fallback), size limit, empty input                                                                                                              |
+| UT-06 | Guard: DOCTYPE after comments and PIs, DOCTYPE case-insensitive, DOCTYPE or ENTITY after the root start, `<!DOCTYPE` inside a comment or CDATA allowed, `NOT_XML` line and column, whitespace-only                                                                                                                    |
 | UT-07 | Tree: prefixes, default namespace, redeclaration, undeclared prefix (EF009), other URI fallback, strict-before-tolerant rule, `xmlns` excluded from attrs, CDATA (not entity-decoded), entities (`&amp;lt;` → `&lt;`, `&#231;` and `&#xE7;` → `ç`, unknown `&foo;` kept), 10,000-level nesting without stack overflow |
-| UT-08 | `select`, `selectAll`, `selectText`: grammar, `[n]`, `*:`, `/Invoice/` prefix, invalid path `TypeError` |
-| UT-09 | Value conventions: `decimalValue` four branches, booleans, integers |
-| UT-10 | VKN vectors (section 9.2) |
-| UT-11 | TCKN vectors |
-| UT-12 | UUID and `classifyTaxId` |
-| UT-13 | Code lists: every entry has `en` and `tr` labels; lookup case handling; unknown → `OTHER`; `CODE_LISTS_VERIFIED` has no placeholder `…` values (fails until T-10 fills them) |
-| UT-14 | Identity mapping (section 7.3), every field |
-| UT-15 | Exchange rate order, note pattern variants (`Döviz Kuru:40,6467`, `DÖVİZ KURU = 35.1`, `Exchange rate: 1.5`, `Kur: 30`), no false match on `Kurum: 12`; due date rules, including `VADE TARİHİ: 01.12.2025` |
-| UT-16 | Party mapping and tax ID resolution (section 7.5.1, all four branches) |
-| UT-17 | Lines: item, price, base quantity, delivery, several line TaxTotals merged |
-| UT-18 | Taxes and withholding; `withholdingRatio` for 50, 90, 25, 100, `50.00` |
-| UT-19 | Totals, allowances, payment means, payment terms, references |
-| UT-20 | Attachments: size formula, `isXslt` truth table, metadata mode, `decodeAttachment`, `attachmentText`, `findXslt` |
-| UT-21 | Computed totals (section 7.8.6), including aliases for `payableTry` |
-| UT-22 | `parseInvoice` options: `validate: false` keeps mapping issues; `rules` off and overrides; tolerance; `includeRaw`; `maxBytes`; invalid options `TypeError`; issue sort and de-duplication |
-| UT-23 | Determinism and JSON safety: `JSON.parse(JSON.stringify(r))` deep-equals `r`; `structuredClone(r)` deep-equals `r` |
-| UT-24 | Validation identity EF001–EF009 (positive and negative per code) |
-| UT-25 | Validation parties EF010–EF017 |
-| UT-26 | Validation currency EF020–EF026 |
-| UT-27 | Mapping amounts EF030–EF035 |
-| UT-28 | Validation totals EF040–EF049, including both EF041 formulas and EF043/EF044 split |
-| UT-29 | Validation lines EF050–EF055 |
-| UT-30 | Validation taxes EF060–EF066 |
-| UT-31 | Batch issues EF090–EF091 |
-| UT-32 | `iterateMany`: order, skipped, `ZIP_INPUT_REQUIRES_ZIP_ENTRY`, `READ_FAILED`, duplicates flag/skip, shared tracker, progress throttling (fake timers), abort before and during, yielding (spy on `setTimeout`) |
-| UT-33 | `iterateZip`: nesting, junk, classification, `entryFilter`, each limit with small custom limits, invalid archive, unsupported method (hand-built entry with method 12), encrypted entry (flag bit 0), Blob stream input, abort mid-archive |
-| UT-34 | `iterateAny` and `parseAny` with mixed inputs; summary arithmetic |
-| UT-35 | `toRows` invoice level: keys, order, labels and types equal section 11.1; values for S06 and S02 |
-| UT-36 | `toRows` line level: section 11.2; `line_issue_codes` prefix rule (`[1]` does not match `[10]`) |
-| UT-37 | `toCsv`: BOM, delimiters, decimal separator default and override, quoting, formula escaping, booleans with Turkish headers, newline, `headers: 'none'` |
-| UT-38 | `EfaturaParseError`: codes, messages, `messageTr`, details, `instanceof` across the self-reference |
-| UT-39 | `efaturaConfig` frozen and equal to `src/config.ts` |
+| UT-08 | `select`, `selectAll`, `selectText`: grammar, `[n]`, `*:`, `/Invoice/` prefix, invalid path `TypeError`                                                                                                                                                                                                               |
+| UT-09 | Value conventions: `decimalValue` four branches, booleans, integers                                                                                                                                                                                                                                                   |
+| UT-10 | VKN vectors (section 9.2)                                                                                                                                                                                                                                                                                             |
+| UT-11 | TCKN vectors                                                                                                                                                                                                                                                                                                          |
+| UT-12 | UUID and `classifyTaxId`                                                                                                                                                                                                                                                                                              |
+| UT-13 | Code lists: every entry has `en` and `tr` labels; lookup case handling; unknown → `OTHER`; `CODE_LISTS_VERIFIED` has no placeholder `…` values (fails until T-10 fills them)                                                                                                                                          |
+| UT-14 | Identity mapping (section 7.3), every field                                                                                                                                                                                                                                                                           |
+| UT-15 | Exchange rate order, note pattern variants (`Döviz Kuru:40,6467`, `DÖVİZ KURU = 35.1`, `Exchange rate: 1.5`, `Kur: 30`), no false match on `Kurum: 12`; due date rules, including `VADE TARİHİ: 01.12.2025`                                                                                                           |
+| UT-16 | Party mapping and tax ID resolution (section 7.5.1, all four branches)                                                                                                                                                                                                                                                |
+| UT-17 | Lines: item, price, base quantity, delivery, several line TaxTotals merged                                                                                                                                                                                                                                            |
+| UT-18 | Taxes and withholding; `withholdingRatio` for 50, 90, 25, 100, `50.00`                                                                                                                                                                                                                                                |
+| UT-19 | Totals, allowances, payment means, payment terms, references                                                                                                                                                                                                                                                          |
+| UT-20 | Attachments: size formula, `isXslt` truth table, metadata mode, `decodeAttachment`, `attachmentText`, `findXslt`                                                                                                                                                                                                      |
+| UT-21 | Computed totals (section 7.8.6), including aliases for `payableTry`                                                                                                                                                                                                                                                   |
+| UT-22 | `parseInvoice` options: `validate: false` keeps mapping issues; `rules` off and overrides; tolerance; `includeRaw`; `maxBytes`; invalid options `TypeError`; issue sort and de-duplication                                                                                                                            |
+| UT-23 | Determinism and JSON safety: `JSON.parse(JSON.stringify(r))` deep-equals `r`; `structuredClone(r)` deep-equals `r`                                                                                                                                                                                                    |
+| UT-24 | Validation identity EF001–EF009 (positive and negative per code)                                                                                                                                                                                                                                                      |
+| UT-25 | Validation parties EF010–EF017                                                                                                                                                                                                                                                                                        |
+| UT-26 | Validation currency EF020–EF026                                                                                                                                                                                                                                                                                       |
+| UT-27 | Mapping amounts EF030–EF035                                                                                                                                                                                                                                                                                           |
+| UT-28 | Validation totals EF040–EF049, including both EF041 formulas and EF043/EF044 split                                                                                                                                                                                                                                    |
+| UT-29 | Validation lines EF050–EF055                                                                                                                                                                                                                                                                                          |
+| UT-30 | Validation taxes EF060–EF066                                                                                                                                                                                                                                                                                          |
+| UT-31 | Batch issues EF090–EF091                                                                                                                                                                                                                                                                                              |
+| UT-32 | `iterateMany`: order, skipped, `ZIP_INPUT_REQUIRES_ZIP_ENTRY`, `READ_FAILED`, duplicates flag/skip, shared tracker, progress throttling (fake timers), abort before and during, yielding (spy on `setTimeout`)                                                                                                        |
+| UT-33 | `iterateZip`: nesting, junk, classification, `entryFilter`, each limit with small custom limits, invalid archive, unsupported method (hand-built entry with method 12), encrypted entry (flag bit 0), Blob stream input, abort mid-archive                                                                            |
+| UT-34 | `iterateAny` and `parseAny` with mixed inputs; summary arithmetic                                                                                                                                                                                                                                                     |
+| UT-35 | `toRows` invoice level: keys, order, labels and types equal section 11.1; values for S06 and S02                                                                                                                                                                                                                      |
+| UT-36 | `toRows` line level: section 11.2; `line_issue_codes` prefix rule (`[1]` does not match `[10]`)                                                                                                                                                                                                                       |
+| UT-37 | `toCsv`: BOM, delimiters, decimal separator default and override, quoting, formula escaping, booleans with Turkish headers, newline, `headers: 'none'`                                                                                                                                                                |
+| UT-38 | `EfaturaParseError`: codes, messages, `messageTr`, details, `instanceof` across the self-reference                                                                                                                                                                                                                    |
+| UT-39 | `efaturaConfig` frozen and equal to `src/config.ts`                                                                                                                                                                                                                                                                   |
 
 Snapshot tests (ST):
 
-| ID | Covers |
-|---|---|
+| ID    | Covers                                                                                                                                                                                                                                |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ST-01 | For every manifest file: XML → `parseInvoice`; ZIP → `parseAny`; result serialised with `raw` removed and attachment `base64` replaced by `"<base64:LENGTH>"`, compared with `toMatchFileSnapshot('__snapshots__/<dir>/<file>.json')` |
-| ST-02 | Expected issues per scenario (section 15.4) exactly: sorted `code:severity` lists, thrown codes, item kinds and codes |
-| ST-03 | S20 and S21 with `includeRaw: true`: the raw tree's resolved namespaces |
+| ST-02 | Expected issues per scenario (section 15.4) exactly: sorted `code:severity` lists, thrown codes, item kinds and codes                                                                                                                 |
+| ST-03 | S20 and S21 with `includeRaw: true`: the raw tree's resolved namespaces                                                                                                                                                               |
 
 Property tests (PT, fast-check; `numRuns` 1,000 locally, 10,000 when `CI=true` for PT-05):
 
-| ID | Property |
-|---|---|
-| PT-01 | `add`/`sub` agree with an independent reference implementation (scaled bigint in `test/helpers`); commutativity, associativity, `x + 0 = x` |
-| PT-02 | `round(x, n)` differs from `x` by at most half a unit in the last place; `round(−x) = −round(x)` (half away from zero) |
-| PT-03 | `normalize` is idempotent; `eq(normalize(x), x)` |
-| PT-04 | `toMinorUnits(x, 'TRY') === coefficient(round(x, 2))` |
-| PT-05 | Robustness: for arbitrary byte arrays and for fixtures mutated by byte flips, truncation and insertion, `parseInvoice` returns or throws `EfaturaParseError` only (NFR-10) |
+| ID    | Property                                                                                                                                                                                               |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PT-01 | `add`/`sub` agree with an independent reference implementation (scaled bigint in `test/helpers`); commutativity, associativity, `x + 0 = x`                                                            |
+| PT-02 | `round(x, n)` differs from `x` by at most half a unit in the last place; `round(−x) = −round(x)` (half away from zero)                                                                                 |
+| PT-03 | `normalize` is idempotent; `eq(normalize(x), x)`                                                                                                                                                       |
+| PT-04 | `toMinorUnits(x, 'TRY') === coefficient(round(x, 2))`                                                                                                                                                  |
+| PT-05 | Robustness: for arbitrary byte arrays and for fixtures mutated by byte flips, truncation and insertion, `parseInvoice` returns or throws `EfaturaParseError` only (NFR-10)                             |
 | PT-06 | CSV round trip: arbitrary string tables (Unicode, quotes, delimiters, CR, LF, leading `=+-@`) through `toCsv` and the reference parser give the original cells (with the formula prefix accounted for) |
-| PT-07 | `decimal.sum` is independent of input order |
+| PT-07 | `decimal.sum` is independent of input order                                                                                                                                                            |
 
 Browser tests (BT, all three engines):
 
-| ID | Covers |
-|---|---|
+| ID    | Covers                                                                                      |
+| ----- | ------------------------------------------------------------------------------------------- |
 | BT-01 | `parseInvoice` on S01, S20, S22, S23, S24 deep-equals the Node snapshots (imported as JSON) |
-| BT-02 | `iterateZip` on S35 from a `File` (stream path) |
-| BT-03 | Decimal and `toMinorUnits` (bigint) |
-| BT-04 | `TextDecoder` for `windows-1254` and `utf-16le` through `decodeXml` |
-| BT-05 | Abort after the first item; iterator rejects with the abort reason |
-| BT-06 | `toCsv` output in a `Blob` starts with bytes `EF BB BF` |
+| BT-02 | `iterateZip` on S35 from a `File` (stream path)                                             |
+| BT-03 | Decimal and `toMinorUnits` (bigint)                                                         |
+| BT-04 | `TextDecoder` for `windows-1254` and `utf-16le` through `decodeXml`                         |
+| BT-05 | Abort after the first item; iterator rejects with the abort reason                          |
+| BT-06 | `toCsv` output in a `Blob` starts with bytes `EF BB BF`                                     |
 
 CLI tests (CT):
 
-| ID | Covers |
-|---|---|
-| CT-01 | `--help` text exact, exit 0; no arguments → help on stderr, exit 2 |
-| CT-02 | `--version` |
-| CT-03 | Summary for S01 exact |
-| CT-04 | `--json` structure; two runs byte-identical |
-| CT-05 | `--csv --level line --headers tr`: BOM, `;`, decimal comma, Turkish headers |
-| CT-06 | Directory and glob inputs, sorted order, POSIX paths on Windows |
+| ID    | Covers                                                                               |
+| ----- | ------------------------------------------------------------------------------------ |
+| CT-01 | `--help` text exact, exit 0; no arguments → help on stderr, exit 2                   |
+| CT-02 | `--version`                                                                          |
+| CT-03 | Summary for S01 exact                                                                |
+| CT-04 | `--json` structure; two runs byte-identical                                          |
+| CT-05 | `--csv --level line --headers tr`: BOM, `;`, decimal comma, Turkish headers          |
+| CT-06 | Directory and glob inputs, sorted order, POSIX paths on Windows                      |
 | CT-07 | `--strict` exits 1 on S26, 0 without; `--rules EF040=off,EF042=off --strict` exits 0 |
-| CT-08 | Every usage error message (section 12.3) and exit 2; `--lang tr` messages |
-| CT-09 | `--out` writes atomically; unwritable path → exit 2 |
-| CT-10 | `--version` median of 5 runs ≤ 300 ms |
-| CT-11 | Progress lines on non-TTY stderr; `--quiet` prints none |
-| CT-12 | ZIP inputs S35, S36, S38: summary counts and error lines |
-| CT-13 | SIGINT during a large run exits 130 (skipped on Windows) |
+| CT-08 | Every usage error message (section 12.3) and exit 2; `--lang tr` messages            |
+| CT-09 | `--out` writes atomically; unwritable path → exit 2                                  |
+| CT-10 | `--version` median of 5 runs ≤ 300 ms                                                |
+| CT-11 | Progress lines on non-TTY stderr; `--quiet` prints none                              |
+| CT-12 | ZIP inputs S35, S36, S38: summary counts and error lines                             |
+| CT-13 | SIGINT during a large run exits 130 (skipped on Windows)                             |
 
 Playground E2E (E2E):
 
-| ID | Covers | Project |
-|---|---|---|
-| E2E-01 | Home renders; privacy banner; copy in both languages matches `en.ts`/`tr.ts` | parallel, cross |
-| E2E-02 | Sample `plainSale` → results with 1 invoice; values formatted per language | parallel, cross |
-| E2E-03 | File picker with several XML files (`setInputFiles`); counts | parallel |
-| E2E-04 | `nestedZip` sample → 6 invoices, 1 skipped file listed | parallel |
-| E2E-05 | Filters (supplier, type, dates, search, only issues, invalid range) and counts; exports reflect filters | parallel |
-| E2E-06 | S42 → Lines tab pagination (3 pages), page reset on filter change | parallel |
-| E2E-07 | Detail view: sections, previous/next, back restores focus; unknown id → not found | parallel |
+| ID     | Covers                                                                                                                                                                                                                                                                                                                                                                                                                | Project         |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| E2E-01 | Home renders; privacy banner; copy in both languages matches `en.ts`/`tr.ts`                                                                                                                                                                                                                                                                                                                                          | parallel, cross |
+| E2E-02 | Sample `plainSale` → results with 1 invoice; values formatted per language                                                                                                                                                                                                                                                                                                                                            | parallel, cross |
+| E2E-03 | File picker with several XML files (`setInputFiles`); counts                                                                                                                                                                                                                                                                                                                                                          | parallel        |
+| E2E-04 | `nestedZip` sample → 6 invoices, 1 skipped file listed                                                                                                                                                                                                                                                                                                                                                                | parallel        |
+| E2E-05 | Filters (supplier, type, dates, search, only issues, invalid range) and counts; exports reflect filters                                                                                                                                                                                                                                                                                                               | parallel        |
+| E2E-06 | S42 → Lines tab pagination (3 pages), page reset on filter change                                                                                                                                                                                                                                                                                                                                                     | parallel        |
+| E2E-07 | Detail view: sections, previous/next, back restores focus; unknown id → not found                                                                                                                                                                                                                                                                                                                                     | parallel        |
 | E2E-08 | S25 official view renders inside `iframe[sandbox=""]`; S41: frame `srcdoc` contains no `<script`, `on*=`, `javascript:`, `https://` or `@import`; no request leaves the origin. The test reads `typeof XSLTProcessor` in the page: where neither the engine nor the chosen fallback (14.6.1) is available it asserts `official.unsupported` with both downloads instead, and logs which path ran; it is never skipped | parallel, cross |
-| E2E-09 | S40 shows `official.blocked` with `xsl:import` (in an engine with XSLT or the fallback; otherwise `official.unsupported`, as in E2E-08). `xslt/guard.ts` and `xslt/sanitize.ts` are additionally covered by browser unit tests that do not need `XSLTProcessor` | parallel, cross |
-| E2E-10 | axe-core: 0 violations on every view and state, light and dark | parallel |
-| E2E-11 | Keyboard-only: samples, tabs (arrows), sort, export menu, dialog, detail navigation | parallel |
-| E2E-12 | Privacy: all requests same-origin; no cookies; `localStorage` keys ⊆ {`efatura.lang`, `efatura.theme`}; CSP header present on `/` | parallel |
-| E2E-13 | No horizontal scroll at 360, 768, 1280 px on every view | parallel |
-| E2E-14 | Responsiveness while parsing 200 typical invoices: no long task > 100 ms (PerformanceObserver `longtask`, Chromium); Cancel → cancelled state within 200 ms | isolated |
-| E2E-15 | Exports: Turkish CSV (BOM, `;`, decimal comma, Turkish headers), comma CSV, JSON shape, `.xlsx` starts with `PK` | parallel |
-| E2E-16 | Cancel during processing; "Show what was read" | parallel |
-| E2E-17 | Error files: S32, S33, S34, S38, S36 in the failed list with the right `fileError.*` copy | parallel |
-| E2E-18 | Language and theme persist across reload | parallel |
-| E2E-19 | Start over confirmation; Add files detects a duplicate across jobs (EF090) | parallel |
-| E2E-20 | `@bench` `@isolated`: 1,000 typical invoices end to end; prints the time (not gating; NFR-01 is checked manually on the reference laptop); skipped unless `BENCH=1` (section 3.3) | isolated |
+| E2E-09 | S40 shows `official.blocked` with `xsl:import` (in an engine with XSLT or the fallback; otherwise `official.unsupported`, as in E2E-08). `xslt/guard.ts` and `xslt/sanitize.ts` are additionally covered by browser unit tests that do not need `XSLTProcessor`                                                                                                                                                       | parallel, cross |
+| E2E-10 | axe-core: 0 violations on every view and state, light and dark                                                                                                                                                                                                                                                                                                                                                        | parallel        |
+| E2E-11 | Keyboard-only: samples, tabs (arrows), sort, export menu, dialog, detail navigation                                                                                                                                                                                                                                                                                                                                   | parallel        |
+| E2E-12 | Privacy: all requests same-origin; no cookies; `localStorage` keys ⊆ {`efatura.lang`, `efatura.theme`}; CSP header present on `/`                                                                                                                                                                                                                                                                                     | parallel        |
+| E2E-13 | No horizontal scroll at 360, 768, 1280 px on every view                                                                                                                                                                                                                                                                                                                                                               | parallel        |
+| E2E-14 | Responsiveness while parsing 200 typical invoices: no long task > 100 ms (PerformanceObserver `longtask`, Chromium); Cancel → cancelled state within 200 ms                                                                                                                                                                                                                                                           | isolated        |
+| E2E-15 | Exports: Turkish CSV (BOM, `;`, decimal comma, Turkish headers), comma CSV, JSON shape, `.xlsx` starts with `PK`                                                                                                                                                                                                                                                                                                      | parallel        |
+| E2E-16 | Cancel during processing; "Show what was read"                                                                                                                                                                                                                                                                                                                                                                        | parallel        |
+| E2E-17 | Error files: S32, S33, S34, S38, S36 in the failed list with the right `fileError.*` copy                                                                                                                                                                                                                                                                                                                             | parallel        |
+| E2E-18 | Language and theme persist across reload                                                                                                                                                                                                                                                                                                                                                                              | parallel        |
+| E2E-19 | Start over confirmation; Add files detects a duplicate across jobs (EF090)                                                                                                                                                                                                                                                                                                                                            | parallel        |
+| E2E-20 | `@bench` `@isolated`: 1,000 typical invoices end to end; prints the time (not gating; NFR-01 is checked manually on the reference laptop); skipped unless `BENCH=1` (section 3.3)                                                                                                                                                                                                                                     | isolated        |
 
 ### 16.4 Playwright configuration (normative, `playground/playwright.config.ts`)
 
@@ -3146,12 +3545,44 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : [['list']],
   use: { baseURL: 'http://localhost:4173', trace: 'retain-on-failure' },
-  webServer: { command: 'pnpm preview', url: 'http://localhost:4173', reuseExistingServer: !process.env.CI, timeout: 60_000 },
+  webServer: {
+    command: 'pnpm preview',
+    url: 'http://localhost:4173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 60_000,
+  },
   projects: [
-    { name: 'parallel', grepInvert: /@isolated/, fullyParallel: true, workers: 4, use: { ...devices['Desktop Chrome'] } },
-    { name: 'cross-firefox', grep: /@cross/, grepInvert: /@isolated/, fullyParallel: true, workers: 4, use: { ...devices['Desktop Firefox'] } },
-    { name: 'cross-webkit', grep: /@cross/, grepInvert: /@isolated/, fullyParallel: true, workers: 4, use: { ...devices['Desktop Safari'] } },
-    { name: 'isolated', grep: /@isolated/, fullyParallel: false, workers: 1, dependencies: ['parallel', 'cross-firefox', 'cross-webkit'], use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'parallel',
+      grepInvert: /@isolated/,
+      fullyParallel: true,
+      workers: 4,
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'cross-firefox',
+      grep: /@cross/,
+      grepInvert: /@isolated/,
+      fullyParallel: true,
+      workers: 4,
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'cross-webkit',
+      grep: /@cross/,
+      grepInvert: /@isolated/,
+      fullyParallel: true,
+      workers: 4,
+      use: { ...devices['Desktop Safari'] },
+    },
+    {
+      name: 'isolated',
+      grep: /@isolated/,
+      fullyParallel: false,
+      workers: 1,
+      dependencies: ['parallel', 'cross-firefox', 'cross-webkit'],
+      use: { ...devices['Desktop Chrome'] },
+    },
   ],
 });
 ```
@@ -3178,20 +3609,22 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
 
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
 
@@ -3202,10 +3635,11 @@ jobs:
       matrix:
         node: [20, 22, 24]
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: '${{ matrix.node }}', cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: '${{ matrix.node }}' }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - name: Unit, snapshot and property tests
         run: pnpm ${{ matrix.node == 22 && 'test:coverage' || 'test' }}
@@ -3217,20 +3651,22 @@ jobs:
   fixtures:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm fixtures:check
 
   browser:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium firefox webkit
       - run: pnpm test:browser
@@ -3238,10 +3674,11 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm size
@@ -3258,30 +3695,33 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         node: [20, 24]
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: '${{ matrix.node }}', cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: '${{ matrix.node }}' }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:cli
 
   bench:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm bench --ci
 
   e2e:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with: { node-version: 22, cache: pnpm }
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter playground exec playwright install --with-deps chromium firefox webkit
       - run: pnpm playground:build
@@ -3293,7 +3733,7 @@ jobs:
         with: { name: playwright-report, path: playground/playwright-report, retention-days: 7 }
 ```
 
-Action majors are expectations (A-21). Dependabot (`.github/dependabot.yml`) updates `npm` (directories `/` and `/playground`) and `github-actions` weekly, grouping minor and patch updates.
+Action majors are checked at T-01 (A-21, D-48); pnpm/action-setup owns pnpm caching because setup-node no longer accepts cache. Source: https://github.com/actions/setup-node/blob/main/action.yml and https://github.com/pnpm/action-setup/blob/master/action.yml. Future release/artifact actions are rechecked when introduced. Dependabot (`.github/dependabot.yml`) updates `npm` (directories `/` and `/playground`) and `github-actions` weekly, grouping minor and patch updates.
 
 ### 17.2 Branch protection (owner, manual)
 
@@ -3315,7 +3755,12 @@ Prettier: `{ "singleQuote": true, "trailingComma": "all", "printWidth": 110 }`; 
 ```json
 [
   { "name": "core: full import", "path": "dist/index.js", "import": "*", "limit": "40 kB" },
-  { "name": "core: parseInvoice only", "path": "dist/index.js", "import": "{ parseInvoice }", "limit": "36 kB" },
+  {
+    "name": "core: parseInvoice only",
+    "path": "dist/index.js",
+    "import": "{ parseInvoice }",
+    "limit": "36 kB"
+  },
   { "name": "zip: full import (includes core)", "path": "dist/zip.js", "import": "*", "limit": "50 kB" }
 ]
 ```
@@ -3352,9 +3797,11 @@ Fails when:
 ## What and why
 
 ## IDs
+
 Implements T-xx, FR-xx. Tests: UT-xx.
 
 ## Checklist
+
 - [ ] `pnpm check` passes locally
 - [ ] Tests added or updated
 - [ ] No real invoices, real tax IDs, real names, addresses or other personal or company data. New fixtures come from `pnpm fixtures:generate`.
@@ -3383,13 +3830,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
-          cache: pnpm
           registry-url: https://registry.npmjs.org
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
       - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint && pnpm typecheck && pnpm test && pnpm fixtures:check
@@ -3403,7 +3850,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}   # first publish only (D-27); remove after trusted publishing is configured
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # first publish only (D-27); remove after trusted publishing is configured
 ```
 
 `.changeset/config.json`: `{ "changelog": ["@changesets/changelog-github", { "repo": "firatkill/efatura" }], "commit": false, "access": "public", "baseBranch": "main", "updateInternalDependencies": "patch", "ignore": ["playground"] }`.
@@ -3421,22 +3868,22 @@ The playground is hosted on Vercel (Hobby plan) as a static site. Vercel's Git i
 
 Vercel project settings (project `efatura`, connected to the GitHub repository `firatkill/efatura`):
 
-| Setting | Value |
-|---|---|
-| Root Directory | the repository root (empty). The playground imports the library from `../src` (section 3.3) and the lockfile and `packageManager` field live at the root, so the build runs from the workspace root. |
-| Framework Preset | Other (`"framework": null` in `vercel.json`) |
-| Install Command | `pnpm install --frozen-lockfile` (from `vercel.json`) |
-| Build Command | `pnpm playground:build` (from `vercel.json`) |
-| Output Directory | `playground/dist` (from `vercel.json`) |
-| Node.js Version | 22.x (matches `.nvmrc`) |
-| Environment variable | `ENABLE_EXPERIMENTAL_COREPACK=1`, so the build uses the pnpm version pinned in `packageManager` |
-| Production Branch | `main` |
-| Preview deployments | on, one per pull request and branch push |
-| Git fork protection | on (the default): a fork PR deploys only after the owner approves it |
-| Deployment Protection (Vercel Authentication) | off, so preview URLs can be checked with `curl -sI` and Lighthouse; the site is public and the build holds no secrets |
-| Web Analytics | off (D-19) |
-| Speed Insights | off (D-19) |
-| Vercel Toolbar | off for preview and production deployments (it would load a script from another origin) |
+| Setting                                       | Value                                                                                                                                                                                                |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Root Directory                                | the repository root (empty). The playground imports the library from `../src` (section 3.3) and the lockfile and `packageManager` field live at the root, so the build runs from the workspace root. |
+| Framework Preset                              | Other (`"framework": null` in `vercel.json`)                                                                                                                                                         |
+| Install Command                               | `pnpm install --frozen-lockfile` (from `vercel.json`)                                                                                                                                                |
+| Build Command                                 | `pnpm playground:build` (from `vercel.json`)                                                                                                                                                         |
+| Output Directory                              | `playground/dist` (from `vercel.json`)                                                                                                                                                               |
+| Node.js Version                               | 22.x (matches `.nvmrc`)                                                                                                                                                                              |
+| Environment variable                          | `ENABLE_EXPERIMENTAL_COREPACK=1`, so the build uses the pnpm version pinned in `packageManager`                                                                                                      |
+| Production Branch                             | `main`                                                                                                                                                                                               |
+| Preview deployments                           | on, one per pull request and branch push                                                                                                                                                             |
+| Git fork protection                           | on (the default): a fork PR deploys only after the owner approves it                                                                                                                                 |
+| Deployment Protection (Vercel Authentication) | off, so preview URLs can be checked with `curl -sI` and Lighthouse; the site is public and the build holds no secrets                                                                                |
+| Web Analytics                                 | off (D-19)                                                                                                                                                                                           |
+| Speed Insights                                | off (D-19)                                                                                                                                                                                           |
+| Vercel Toolbar                                | off for preview and production deployments (it would load a script from another origin)                                                                                                              |
 
 Privacy check (D-19): Vercel Web Analytics and Speed Insights stay off, no `@vercel/analytics` or `@vercel/speed-insights` package is installed, and the Vercel Toolbar is off. The network-privacy test (section 16) and the release checklist confirm that a deployed page makes only same-origin requests.
 
@@ -3463,57 +3910,57 @@ Owner setup (once, manual):
 
 Each assumption is checked in the task named; the result is recorded as a decisions log row in PRD §15.
 
-| ID | Assumption | How to verify | If different | Task |
-|---|---|---|---|---|
-| A-01 | The current format is UBL-TR 1.2: `UBLVersionID` `2.1`, `CustomizationID` `TR1.2`; the UBL-TR Invoice element order follows the UBL 2.1 XSD sequence. | Download the current "UBL-TR Fatura" guide and the e-Fatura XSD/schematron package from GİB's e-Belge technical documents page (section 21); read the version table and the `CustomizationID` rule; open `UBL-TR-Invoice` XSD sequence. | Add accepted values to `EXPECTED_CUSTOMIZATION_IDS`; adjust the builder order. | T-10 |
-| A-02 | Profile list in section 7.9. | "UBL-TR Kod Listeleri" document, senaryo (ProfileID) table. | Add or remove codes in `PROFILES` and the `ProfileId` union. | T-10 |
-| A-03 | Invoice type list in section 7.9 (the codes after KONAKLAMAVERGISI are the most likely to differ). | Same document, fatura tipi (InvoiceTypeCode) table. | Same for `INVOICE_TYPES` and `InvoiceTypeCode`. | T-10 |
-| A-04 | Tax type codes and short names in section 7.9. | Same document, vergi kodları table. | Correct names; add codes. | T-10 |
-| A-05 | Withholding codes (600-series partial, 800-series full). | Same document, tevkifat kodları table; cross-check with the current KDV Genel Uygulama Tebliği for names. | Add all codes and official names. | T-10 |
-| A-06 | Exemption codes, including 301, 302, 350, 351. | Same document, istisna (TaxExemptionReasonCode) tables. | Add codes; correct names. | T-10 |
-| A-07 | Unit codes in section 7.9 are in GİB's unit list. | Same document, birim kodları; UN/ECE Rec. 20 for English names. | Remove or add codes. | T-10 |
-| A-08 | `11111111111` is the documented placeholder TCKN for anonymous final consumers in e-Arşiv. | e-Arşiv Fatura technical guide / UBL-TR guide sections on e-Arşiv customers. | Change `ANONYMOUS_TCKN` or make EF016 a list. | T-19 |
-| A-09 | IHRACAT invoices name the customs administration as `AccountingCustomerParty` with VKN `1460415308`, and the foreign buyer as `BuyerCustomerParty`. | UBL-TR guide, İhracat senaryosu section; copy the official party name for `CUSTOMS`. | Adjust S18 and the identity. | T-31 |
-| A-10 | Invoice numbers are 16 characters: 3 alphanumeric + 4-digit year + 9-digit sequence. | UBL-TR guide, `cbc:ID` rule. | Adjust EF003 pattern. | T-19 |
-| A-11 | ISO 4217 active list and minor units. | SIX "List One" (current) XML/XLS; record its publication date. | Update `CURRENCIES`. | T-10 |
-| A-12 | The VKN algorithm in section 9.2 is the one used by GİB. | No official public specification exists; compare with at least two independent open-source implementations and confirm that public VKNs of public bodies (for example `1460415308`) validate. | Fix the algorithm and vectors; record sources. | T-18 |
-| A-13 | The TCKN algorithm in section 9.2. | Compare with two independent implementations; the rule is widely published by NVİ-related sources. | Same. | T-18 |
-| A-14 | Package APIs: fast-xml-parser v5 option names (section 6.3), `XMLValidator` return shape, and that `processEntities: false` leaves entity references undecoded; fflate `Unzip`/`UnzipInflate` callbacks and fields (section 10.3), synchronous `ondata`, no-op `terminate()` for `UnzipInflate`, and encrypted-entry behaviour; tsup 8 options (`define`, dts externals); Vitest 4 browser provider package and `projects`. | Read the pinned versions' READMEs/typings; write a 10-line spike test for each before the real code. | Adapt the code, keep behaviour; record the difference. | T-01, T-07, T-25, T-03 |
-| A-15 | npm trusted publishing works with `changeset publish` → `pnpm publish`. | Check npm's trusted-publishing docs for supported clients and the minimum npm/pnpm versions; dry-run on 0.1.1. | Use the fallback in section 18.2 step 3. | T-44 |
-| A-16 | Vercel Hobby fits the playground: `vercel.json` `headers` limits (rule count, header length); the custom headers of section 14.7 replace Vercel's default `Cache-Control` and `Strict-Transport-Security`; Corepack picks the pinned pnpm; Hobby limits (build minutes, bandwidth, deployments per day) and the Hobby terms (non-commercial personal use) cover the playground; custom domain setup on `firatkil.com` with a CNAME to `cname.vercel-dns.com`. | Vercel docs "Project configuration", "Limits", "Fair use guidelines" and "Custom domains"; `curl -sI` on the first preview URL; check where `firatkil.com` DNS is hosted. | Shorten headers; set the pnpm version another way and record it; if a limit or term does not fit, the owner decides; follow the DNS host's CNAME steps. | T-38, T-44 |
-| A-17 | Chrome's XSLT removal timeline and the availability of a permissively licensed browser XSLT 1.0 engine (for example a libxslt WebAssembly polyfill). | Chrome Platform Status entry for XSLT deprecation; npm search; check licence, size and last release of candidates. | Choose per section 14.6.1 or ship the unsupported state. | T-41 |
-| A-18 | `srcdoc` frames inherit the page CSP and are allowed by `frame-src 'self'`. | E2E-08 in Chromium, Firefox and WebKit. | Adjust `frame-src`; record. | T-41 |
-| A-19 | `write-excel-file` is MIT, works in the browser, returns a `Blob` without a file name, and fits 120 kB. | Read its README/licence; build the chunk and run size-limit. | Use `exceljs` (MIT) lazily and raise the Excel chunk budget with a decision, or drop Excel (Should). | T-42 |
-| A-20 | Fontsource packages for Schibsted Grotesk and JetBrains Mono exist with latin-ext subsets under OFL-1.1. | npm view; check `LICENSE`. | Self-host the woff2 files from the official repositories with their OFL text. | T-37 |
-| A-21 | Action majors (`actions/checkout@v5`, `actions/setup-node@v5`, `pnpm/action-setup@v4`, `actions/upload-artifact@v4`, `changesets/action@v1`) and Playwright project-level `workers`. | Each action's README/releases; Playwright `TestProject` docs. | Use current majors; use the two-invocation fallback (section 16.4). | T-01, T-43 |
-| A-22 | The npm scope `@firatkill` exists and the owner can publish to it; the name `@firatkill/efatura` is free. | `npm whoami`; `npm view @firatkill/efatura` (404 expected); `npm org ls firatkil` or user scope. | Create the scope (user scopes exist automatically) or choose a name with the owner. | T-01 |
-| A-23 | The tolerant rules produce ≤ 1 % false-positive errors on real invoices (SM-07). | Run `pnpm corpus:private private/` on the owner's local corpus; read aggregate counts only. | Adjust rule formulas or severities with a decision. | T-45 |
-| A-24 | `TextDecoder` supports `windows-1254` and `iso-8859-9` in Node 20+ (full ICU) and all target browsers. | UT-05 in Node; BT-04 in browsers. | Ship a small windows-1254 decoding table in `src/xml/decode.ts`. | T-07 |
-| A-25 | `IssueTime` values in the wild include fractions and offsets (V-20) and nothing else exotic. | Private corpus run (A-23). | Widen EF005's pattern. | T-45 |
-| A-26 | None of the synthetic VKNs in section 15.2 belongs to a registered taxpayer, and no official reserved test range exists for VKN/TCKN. | Owner, manually: GİB's public taxpayer (VKN) lookup for each of the six `99900000xx` values (the agent never automates it: it is behind a CAPTCHA); search the UBL-TR and e-Arşiv guides for a documented test range. | Replace the affected ID in `fixtures/identities.ts`, the vectors in section 9.2 and the scenarios, regenerate; if a reserved range exists, move all synthetic IDs into it. | T-31, T-45 |
+| ID   | Assumption                                                                                                                                                                                                                                                                                                                                                                                                                                                    | How to verify                                                                                                                                                                                                                           | If different                                                                                                                                                               | Task                   |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| A-01 | The current format is UBL-TR 1.2: `UBLVersionID` `2.1`, `CustomizationID` `TR1.2`; the UBL-TR Invoice element order follows the UBL 2.1 XSD sequence.                                                                                                                                                                                                                                                                                                         | Download the current "UBL-TR Fatura" guide and the e-Fatura XSD/schematron package from GİB's e-Belge technical documents page (section 21); read the version table and the `CustomizationID` rule; open `UBL-TR-Invoice` XSD sequence. | Add accepted values to `EXPECTED_CUSTOMIZATION_IDS`; adjust the builder order.                                                                                             | T-10                   |
+| A-02 | Profile list in section 7.9.                                                                                                                                                                                                                                                                                                                                                                                                                                  | "UBL-TR Kod Listeleri" document, senaryo (ProfileID) table.                                                                                                                                                                             | Add or remove codes in `PROFILES` and the `ProfileId` union.                                                                                                               | T-10                   |
+| A-03 | Invoice type list in section 7.9 (the codes after KONAKLAMAVERGISI are the most likely to differ).                                                                                                                                                                                                                                                                                                                                                            | Same document, fatura tipi (InvoiceTypeCode) table.                                                                                                                                                                                     | Same for `INVOICE_TYPES` and `InvoiceTypeCode`.                                                                                                                            | T-10                   |
+| A-04 | Tax type codes and short names in section 7.9.                                                                                                                                                                                                                                                                                                                                                                                                                | Same document, vergi kodları table.                                                                                                                                                                                                     | Correct names; add codes.                                                                                                                                                  | T-10                   |
+| A-05 | Withholding codes (600-series partial, 800-series full).                                                                                                                                                                                                                                                                                                                                                                                                      | Same document, tevkifat kodları table; cross-check with the current KDV Genel Uygulama Tebliği for names.                                                                                                                               | Add all codes and official names.                                                                                                                                          | T-10                   |
+| A-06 | Exemption codes, including 301, 302, 350, 351.                                                                                                                                                                                                                                                                                                                                                                                                                | Same document, istisna (TaxExemptionReasonCode) tables.                                                                                                                                                                                 | Add codes; correct names.                                                                                                                                                  | T-10                   |
+| A-07 | Unit codes in section 7.9 are in GİB's unit list.                                                                                                                                                                                                                                                                                                                                                                                                             | Same document, birim kodları; UN/ECE Rec. 20 for English names.                                                                                                                                                                         | Remove or add codes.                                                                                                                                                       | T-10                   |
+| A-08 | `11111111111` is the documented placeholder TCKN for anonymous final consumers in e-Arşiv.                                                                                                                                                                                                                                                                                                                                                                    | e-Arşiv Fatura technical guide / UBL-TR guide sections on e-Arşiv customers.                                                                                                                                                            | Change `ANONYMOUS_TCKN` or make EF016 a list.                                                                                                                              | T-19                   |
+| A-09 | IHRACAT invoices name the customs administration as `AccountingCustomerParty` with VKN `1460415308`, and the foreign buyer as `BuyerCustomerParty`.                                                                                                                                                                                                                                                                                                           | UBL-TR guide, İhracat senaryosu section; copy the official party name for `CUSTOMS`.                                                                                                                                                    | Adjust S18 and the identity.                                                                                                                                               | T-31                   |
+| A-10 | Invoice numbers are 16 characters: 3 alphanumeric + 4-digit year + 9-digit sequence.                                                                                                                                                                                                                                                                                                                                                                          | UBL-TR guide, `cbc:ID` rule.                                                                                                                                                                                                            | Adjust EF003 pattern.                                                                                                                                                      | T-19                   |
+| A-11 | ISO 4217 active list and minor units.                                                                                                                                                                                                                                                                                                                                                                                                                         | SIX "List One" (current) XML/XLS; record its publication date.                                                                                                                                                                          | Update `CURRENCIES`.                                                                                                                                                       | T-10                   |
+| A-12 | The VKN algorithm in section 9.2 is the one used by GİB.                                                                                                                                                                                                                                                                                                                                                                                                      | No official public specification exists; compare with at least two independent open-source implementations and confirm that public VKNs of public bodies (for example `1460415308`) validate.                                           | Fix the algorithm and vectors; record sources.                                                                                                                             | T-18                   |
+| A-13 | The TCKN algorithm in section 9.2.                                                                                                                                                                                                                                                                                                                                                                                                                            | Compare with two independent implementations; the rule is widely published by NVİ-related sources.                                                                                                                                      | Same.                                                                                                                                                                      | T-18                   |
+| A-14 | Package APIs: fast-xml-parser v5 option names (section 6.3), `XMLValidator` return shape, and that `processEntities: false` leaves entity references undecoded; fflate `Unzip`/`UnzipInflate` callbacks and fields (section 10.3), synchronous `ondata`, no-op `terminate()` for `UnzipInflate`, and encrypted-entry behaviour; tsup 8 options (`define`, dts externals); Vitest 4 browser provider package and `projects`.                                   | Read the pinned versions' READMEs/typings; write a 10-line spike test for each before the real code.                                                                                                                                    | Adapt the code, keep behaviour; record the difference.                                                                                                                     | T-01, T-07, T-25, T-03 |
+| A-15 | npm trusted publishing works with `changeset publish` → `pnpm publish`.                                                                                                                                                                                                                                                                                                                                                                                       | Check npm's trusted-publishing docs for supported clients and the minimum npm/pnpm versions; dry-run on 0.1.1.                                                                                                                          | Use the fallback in section 18.2 step 3.                                                                                                                                   | T-44                   |
+| A-16 | Vercel Hobby fits the playground: `vercel.json` `headers` limits (rule count, header length); the custom headers of section 14.7 replace Vercel's default `Cache-Control` and `Strict-Transport-Security`; Corepack picks the pinned pnpm; Hobby limits (build minutes, bandwidth, deployments per day) and the Hobby terms (non-commercial personal use) cover the playground; custom domain setup on `firatkil.com` with a CNAME to `cname.vercel-dns.com`. | Vercel docs "Project configuration", "Limits", "Fair use guidelines" and "Custom domains"; `curl -sI` on the first preview URL; check where `firatkil.com` DNS is hosted.                                                               | Shorten headers; set the pnpm version another way and record it; if a limit or term does not fit, the owner decides; follow the DNS host's CNAME steps.                    | T-38, T-44             |
+| A-17 | Chrome's XSLT removal timeline and the availability of a permissively licensed browser XSLT 1.0 engine (for example a libxslt WebAssembly polyfill).                                                                                                                                                                                                                                                                                                          | Chrome Platform Status entry for XSLT deprecation; npm search; check licence, size and last release of candidates.                                                                                                                      | Choose per section 14.6.1 or ship the unsupported state.                                                                                                                   | T-41                   |
+| A-18 | `srcdoc` frames inherit the page CSP and are allowed by `frame-src 'self'`.                                                                                                                                                                                                                                                                                                                                                                                   | E2E-08 in Chromium, Firefox and WebKit.                                                                                                                                                                                                 | Adjust `frame-src`; record.                                                                                                                                                | T-41                   |
+| A-19 | `write-excel-file` is MIT, works in the browser, returns a `Blob` without a file name, and fits 120 kB.                                                                                                                                                                                                                                                                                                                                                       | Read its README/licence; build the chunk and run size-limit.                                                                                                                                                                            | Use `exceljs` (MIT) lazily and raise the Excel chunk budget with a decision, or drop Excel (Should).                                                                       | T-42                   |
+| A-20 | Fontsource packages for Schibsted Grotesk and JetBrains Mono exist with latin-ext subsets under OFL-1.1.                                                                                                                                                                                                                                                                                                                                                      | npm view; check `LICENSE`.                                                                                                                                                                                                              | Self-host the woff2 files from the official repositories with their OFL text.                                                                                              | T-37                   |
+| A-21 | Action majors (`actions/checkout@v7`, `actions/setup-node@v7`, `pnpm/action-setup@v6`, `actions/upload-artifact@v4`, `changesets/action@v1`) and Playwright project-level `workers`.                                                                                                                                                                                                                                                                          | Each action's README/releases; Playwright `TestProject` docs.                                                                                                                                                                           | Use current majors; use the two-invocation fallback (section 16.4).                                                                                                        | T-01, T-43             |
+| A-22 | The npm scope `@firatkill` exists and the owner can publish to it; the name `@firatkill/efatura` is free.                                                                                                                                                                                                                                                                                                                                                     | `npm whoami`; `npm view @firatkill/efatura` (404 expected); `npm org ls firatkil` or user scope.                                                                                                                                        | Create the scope (user scopes exist automatically) or choose a name with the owner.                                                                                        | T-01                   |
+| A-23 | The tolerant rules produce ≤ 1 % false-positive errors on real invoices (SM-07).                                                                                                                                                                                                                                                                                                                                                                              | Run `pnpm corpus:private private/` on the owner's local corpus; read aggregate counts only.                                                                                                                                             | Adjust rule formulas or severities with a decision.                                                                                                                        | T-45                   |
+| A-24 | `TextDecoder` supports `windows-1254` and `iso-8859-9` in Node 20+ (full ICU) and all target browsers.                                                                                                                                                                                                                                                                                                                                                        | UT-05 in Node; BT-04 in browsers.                                                                                                                                                                                                       | Ship a small windows-1254 decoding table in `src/xml/decode.ts`.                                                                                                           | T-07                   |
+| A-25 | `IssueTime` values in the wild include fractions and offsets (V-20) and nothing else exotic.                                                                                                                                                                                                                                                                                                                                                                  | Private corpus run (A-23).                                                                                                                                                                                                              | Widen EF005's pattern.                                                                                                                                                     | T-45                   |
+| A-26 | None of the synthetic VKNs in section 15.2 belongs to a registered taxpayer, and no official reserved test range exists for VKN/TCKN.                                                                                                                                                                                                                                                                                                                         | Owner, manually: GİB's public taxpayer (VKN) lookup for each of the six `99900000xx` values (the agent never automates it: it is behind a CAPTCHA); search the UBL-TR and e-Arşiv guides for a documented test range.                   | Replace the affected ID in `fixtures/identities.ts`, the vectors in section 9.2 and the scenarios, regenerate; if a reserved range exists, move all synthetic IDs into it. | T-31, T-45             |
 
 ## 21. Sources
 
 The implementer must consult these documents. Names are given as published; URLs move often, so find each by name from the starting points and record the URL and version used in `CODE_LISTS_VERIFIED` or the decisions log.
 
-| Source | Use | Starting point (verify) |
-|---|---|---|
-| GİB e-Belge portal, e-Fatura "Teknik Kılavuzlar" / technical documents | Entry to all UBL-TR documents | `https://ebelge.gib.gov.tr` (e-Fatura → Teknik Kılavuzlar) |
-| "UBL-TR Fatura" guide (UBL-TR Fatura Kılavuzu) | Element rules, cardinalities, profiles, IHRACAT and e-Arşiv specifics | same |
-| "UBL-TR Ortak Elemanlar" guide | Party, address, tax, amount elements | same |
-| "UBL-TR Kod Listeleri" | Profiles, invoice types, tax codes, withholding codes, exemption codes, unit codes | same |
-| e-Fatura UBL-TR package (XSD and schematron) | Element order (A-01); not shipped in the repo | same (download package) |
-| e-Arşiv Fatura technical guide (e-Arşiv Fatura Uygulaması Teknik Kılavuzu) | e-Arşiv rules, anonymous consumer placeholder (A-08) | same (e-Arşiv section) |
-| e-Fatura Uygulaması Kılavuzu (application guide) | Scenarios and processes (context) | same |
-| KDV Genel Uygulama Tebliği (current consolidated text) | Withholding categories and rates (context for A-05) | `https://www.gib.gov.tr` (Mevzuat) |
-| OASIS UBL 2.1 specification | Base element semantics and XSD sequence | `https://docs.oasis-open.org/ubl/` |
-| UN/ECE Recommendation 20 | Unit code names | UNECE trade facilitation recommendations |
-| ISO 4217 List One (SIX) | Currency codes and minor units | SIX Financial Information "currency code lists" |
-| RFC 4180 | CSV format | `https://www.rfc-editor.org/rfc/rfc4180` |
-| OWASP "CSV Injection" | Formula escaping | OWASP community pages |
-| npm "Trusted publishing" and "Generating provenance statements" | Release workflow | `https://docs.npmjs.com` |
-| Vercel "Project configuration (vercel.json)", "Limits", "Custom domains" and "Deployment Protection" | `vercel.json`, headers, deploy (A-16) | `https://vercel.com/docs` |
-| Chrome Platform Status: XSLT deprecation | A-17 | `https://chromestatus.com` |
+| Source                                                                                               | Use                                                                                | Starting point (verify)                                    |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| GİB e-Belge portal, e-Fatura "Teknik Kılavuzlar" / technical documents                               | Entry to all UBL-TR documents                                                      | `https://ebelge.gib.gov.tr` (e-Fatura → Teknik Kılavuzlar) |
+| "UBL-TR Fatura" guide (UBL-TR Fatura Kılavuzu)                                                       | Element rules, cardinalities, profiles, IHRACAT and e-Arşiv specifics              | same                                                       |
+| "UBL-TR Ortak Elemanlar" guide                                                                       | Party, address, tax, amount elements                                               | same                                                       |
+| "UBL-TR Kod Listeleri"                                                                               | Profiles, invoice types, tax codes, withholding codes, exemption codes, unit codes | same                                                       |
+| e-Fatura UBL-TR package (XSD and schematron)                                                         | Element order (A-01); not shipped in the repo                                      | same (download package)                                    |
+| e-Arşiv Fatura technical guide (e-Arşiv Fatura Uygulaması Teknik Kılavuzu)                           | e-Arşiv rules, anonymous consumer placeholder (A-08)                               | same (e-Arşiv section)                                     |
+| e-Fatura Uygulaması Kılavuzu (application guide)                                                     | Scenarios and processes (context)                                                  | same                                                       |
+| KDV Genel Uygulama Tebliği (current consolidated text)                                               | Withholding categories and rates (context for A-05)                                | `https://www.gib.gov.tr` (Mevzuat)                         |
+| OASIS UBL 2.1 specification                                                                          | Base element semantics and XSD sequence                                            | `https://docs.oasis-open.org/ubl/`                         |
+| UN/ECE Recommendation 20                                                                             | Unit code names                                                                    | UNECE trade facilitation recommendations                   |
+| ISO 4217 List One (SIX)                                                                              | Currency codes and minor units                                                     | SIX Financial Information "currency code lists"            |
+| RFC 4180                                                                                             | CSV format                                                                         | `https://www.rfc-editor.org/rfc/rfc4180`                   |
+| OWASP "CSV Injection"                                                                                | Formula escaping                                                                   | OWASP community pages                                      |
+| npm "Trusted publishing" and "Generating provenance statements"                                      | Release workflow                                                                   | `https://docs.npmjs.com`                                   |
+| Vercel "Project configuration (vercel.json)", "Limits", "Custom domains" and "Deployment Protection" | `vercel.json`, headers, deploy (A-16)                                              | `https://vercel.com/docs`                                  |
+| Chrome Platform Status: XSLT deprecation                                                             | A-17                                                                               | `https://chromestatus.com`                                 |
 
 ## 22. README plan
 

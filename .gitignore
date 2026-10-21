@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+private/
+bench/.cache/
+playground/dist/
+playground/public/samples/
+playwright-report/
+test-results/
+.DS_Store
+*.tsbuildinfo

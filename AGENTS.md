@@ -10,13 +10,13 @@ TypeScript strict, pnpm workspace (root = the published library, `playground/` =
 
 ## 2. Where the specs live
 
-| Document | Use it for |
-|---|---|
-| `docs/PRD.md` | Behaviour, requirements (US-, FR-, NFR-), every playground page and state with exact EN/TR copy, decisions log (D-), glossary (§16) |
-| `docs/TRD.md` | Architecture, public API, model types, field-by-field XML mapping (§7), decimal algorithms, validation rules and messages (§9), ZIP algorithm, CSV columns, CLI texts, playground security, fixtures, tests, CI YAML, assumptions to verify (A-) |
-| `docs/OWNER-DECISIONS.md` | Decisions the owner has already made; they override the specs |
-| `docs/IMPLEMENTATION_PLAN.md` | Ordered tasks (T-), files, acceptance criteria, traceability, release checklist |
-| `fixtures/README.md` | How to add a synthetic fixture scenario |
+| Document                      | Use it for                                                                                                                                                                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `docs/PRD.md`                 | Behaviour, requirements (US-, FR-, NFR-), every playground page and state with exact EN/TR copy, decisions log (D-), glossary (§16)                                                                                                              |
+| `docs/TRD.md`                 | Architecture, public API, model types, field-by-field XML mapping (§7), decimal algorithms, validation rules and messages (§9), ZIP algorithm, CSV columns, CLI texts, playground security, fixtures, tests, CI YAML, assumptions to verify (A-) |
+| `docs/OWNER-DECISIONS.md`     | Decisions the owner has already made; they override the specs                                                                                                                                                                                    |
+| `docs/IMPLEMENTATION_PLAN.md` | Ordered tasks (T-), files, acceptance criteria, traceability, release checklist                                                                                                                                                                  |
+| `fixtures/README.md`          | How to add a synthetic fixture scenario                                                                                                                                                                                                          |
 
 Rules for the specs:
 
@@ -27,31 +27,31 @@ Rules for the specs:
 
 ## 3. Commands
 
-| Task | Command |
-|---|---|
-| Install | `pnpm install --frozen-lockfile` |
-| Build library and CLI | `pnpm build` |
-| Lint and format check | `pnpm lint` |
-| Format | `pnpm format` |
-| Typecheck (library, CLI, playground) | `pnpm typecheck` |
-| Unit, snapshot and property tests | `pnpm test` |
-| Coverage | `pnpm test:coverage` |
-| Core in Chromium, Firefox, WebKit | `pnpm test:browser` (first time: `pnpm exec playwright install chromium firefox webkit`) |
-| CLI tests (builds first) | `pnpm test:cli` |
-| Generate fixtures | `pnpm fixtures:generate` |
-| Check fixtures and repository for non-generated data | `pnpm fixtures:check` |
-| Node benchmark | `pnpm bench` (`--ci` to enforce the budget) |
-| Size budgets | `pnpm size` |
-| Package checks | `pnpm publint && pnpm attw` |
-| Licence allowlist | `pnpm licenses:check` |
-| Docs, copy and message parity | `pnpm docs:check` |
-| Playground dev server | `pnpm playground:dev` |
-| Playground build | `pnpm playground:build` |
-| Playground E2E (serves the existing build through the preview server; run `pnpm playground:build` first) | `pnpm test:e2e` |
-| Browser benchmark (reference laptop) | `pnpm bench:browser` |
-| Aggregate check on a local real-invoice folder | `pnpm corpus:private private/` |
-| Add a changeset | `pnpm changeset` |
-| Everything CI runs except browsers and E2E | `pnpm check` |
+| Task                                                                                                     | Command                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Install                                                                                                  | `pnpm install --frozen-lockfile`                                                         |
+| Build library and CLI                                                                                    | `pnpm build`                                                                             |
+| Lint and format check                                                                                    | `pnpm lint`                                                                              |
+| Format                                                                                                   | `pnpm format`                                                                            |
+| Typecheck (library, CLI, playground)                                                                     | `pnpm typecheck`                                                                         |
+| Unit, snapshot and property tests                                                                        | `pnpm test`                                                                              |
+| Coverage                                                                                                 | `pnpm test:coverage`                                                                     |
+| Core in Chromium, Firefox, WebKit                                                                        | `pnpm test:browser` (first time: `pnpm exec playwright install chromium firefox webkit`) |
+| CLI tests (builds first)                                                                                 | `pnpm test:cli`                                                                          |
+| Generate fixtures                                                                                        | `pnpm fixtures:generate`                                                                 |
+| Check fixtures and repository for non-generated data                                                     | `pnpm fixtures:check`                                                                    |
+| Node benchmark                                                                                           | `pnpm bench` (`--ci` to enforce the budget)                                              |
+| Size budgets                                                                                             | `pnpm size`                                                                              |
+| Package checks                                                                                           | `pnpm publint && pnpm attw`                                                              |
+| Licence allowlist                                                                                        | `pnpm licenses:check`                                                                    |
+| Docs, copy and message parity                                                                            | `pnpm docs:check`                                                                        |
+| Playground dev server                                                                                    | `pnpm playground:dev`                                                                    |
+| Playground build                                                                                         | `pnpm playground:build`                                                                  |
+| Playground E2E (serves the existing build through the preview server; run `pnpm playground:build` first) | `pnpm test:e2e`                                                                          |
+| Browser benchmark (reference laptop)                                                                     | `pnpm bench:browser`                                                                     |
+| Aggregate check on a local real-invoice folder                                                           | `pnpm corpus:private private/`                                                           |
+| Add a changeset                                                                                          | `pnpm changeset`                                                                         |
+| Everything CI runs except browsers and E2E                                                               | `pnpm check`                                                                             |
 
 ## 4. Code conventions
 
@@ -153,14 +153,14 @@ Tests are written from the specs, never from the code. Every test traces to a re
 
 Use the QA skills throughout the build, not only at the end. They exist as the `vizio-qa-loop` plugin in Claude Code and as skills in `~/.codex/skills/qa-*` for Codex. With any other tool, open the matching `~/.codex/skills/<name>/SKILL.md` and follow it.
 
-| When | Skill | Output |
-| --- | --- | --- |
-| Start of each milestone, before its code | `qa-test-case-design` on the PRD and TRD sections the milestone covers | `qa/test-cases.md`: TC IDs, each with its PRD reference (AC/FR/NFR) and TRD test ID, steps, expected result, priority, automatable yes/no |
-| Writing the tests of a task | `qa-case-to-playwright` for the playground; the library is tested with Vitest as TRD §16 prescribes | Tests in the layout and naming the TRD prescribes |
-| After every task, before its commit | `qa-test-run-loop` | Runs the suite, logs every result to `qa/test-results.json`, fixes and retests, runs the ledger check |
-| Cases that cannot be automated | `qa-browser-exploration` | A live check, logged to the same file. Here: the official invoice view, the exported Excel file opened in Excel or LibreOffice, and drag-and-drop on a real archive of synthetic invoices |
-| End of each milestone | `qa-milestone-docs`, then `qa-milestone-review` | Milestone report in `qa/`, quality check |
-| End of the project | `qa-project-report` | One PDF covering the whole project |
+| When                                     | Skill                                                                                               | Output                                                                                                                                                                                    |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Start of each milestone, before its code | `qa-test-case-design` on the PRD and TRD sections the milestone covers                              | `qa/test-cases.md`: TC IDs, each with its PRD reference (AC/FR/NFR) and TRD test ID, steps, expected result, priority, automatable yes/no                                                 |
+| Writing the tests of a task              | `qa-case-to-playwright` for the playground; the library is tested with Vitest as TRD §16 prescribes | Tests in the layout and naming the TRD prescribes                                                                                                                                         |
+| After every task, before its commit      | `qa-test-run-loop`                                                                                  | Runs the suite, logs every result to `qa/test-results.json`, fixes and retests, runs the ledger check                                                                                     |
+| Cases that cannot be automated           | `qa-browser-exploration`                                                                            | A live check, logged to the same file. Here: the official invoice view, the exported Excel file opened in Excel or LibreOffice, and drag-and-drop on a real archive of synthetic invoices |
+| End of each milestone                    | `qa-milestone-docs`, then `qa-milestone-review`                                                     | Milestone report in `qa/`, quality check                                                                                                                                                  |
+| End of the project                       | `qa-project-report`                                                                                 | One PDF covering the whole project                                                                                                                                                        |
 
 `qa-bug-standards` is the shared reference for the log fields; read it first.
 

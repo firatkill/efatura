@@ -1,0 +1,7 @@
+dist
+coverage
+fixtures/generated
+test/snapshot/__snapshots__
+pnpm-lock.yaml
+CHANGELOG.md
+playground/dist
