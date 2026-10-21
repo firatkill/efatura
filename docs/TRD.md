@@ -2158,6 +2158,8 @@ An own decoder (no `atob`, no `Buffer`): a 256-entry lookup table for the standa
 
 D-74 build exception: the library bundles pinned `fast-xml-parser` and its transitive dependencies instead of externalizing the parser. `scripts/xml-parser-bundle.ts` accepts only `is-unsafe` 2.0.2 with the expected source shape, relocates each unchanged context label to its defining module, and marks the aggregate registry freeze pure. All predicates and labels remain unchanged. A guard failure requires reviewing the new dependency source; never silently bypass the transform or relax size/security limits. The published bundle contains the transformed code, so consumer builds receive the same measured implementation. `fflate` and the package self-reference remain external.
 
+D-79 extends the guarded build transform to omit numeric/boolean coercion, HTML named-entity table selection and unordered-object conversion, which the normative parser options disable. Exact pinned-source hashes, dependency version and parser-option checks guard this specialization; unexpected modes fail closed. XML entity handling and all security predicates remain unchanged.
+
 ### 9.1 Framework
 
 - `src/validate/catalogue.ts` holds `ISSUE_CATALOGUE`: for each code its default severity, category, whether it is a mapping issue or a validation rule, and its message templates (section 9.3). `ISSUE_CODES` is the tuple of all codes, in catalogue order.
@@ -2268,6 +2270,8 @@ Test vectors (UT-11):
 Notation: `T` = tolerance; `LEA`, `TEA`, `TIA`, `ATA`, `CTA`, `PRA`, `PA` = `totals.lineExtensionAmount.value`, `taxExclusiveAmount`, `taxInclusiveAmount`, `allowanceTotalAmount`, `chargeTotalAmount`, `payableRoundingAmount`, `payableAmount` (all Decimals); `≈` means `decimal.within(x, y, T)`; `Σ` is `decimal.sum` over non-null values. "M" in the Kind column marks a mapping issue (produced while reading, kept when `validate: false`); "V" a validation rule; "B" a batch issue.
 
 D-76: EF001 detects an absent/empty `cac:LegalMonetaryTotal` when all seven `invoice.totals` fields are null. This is model-based and independent of `includeRaw`. A present Amount object with invalid numeric text is not absent (EF030 handles it).
+
+D-78: when EF025 triggers with a missing source or target currency, or EF061 triggers on zero VAT with a missing percent, render that missing message parameter as `(none)`. A missing document currency is still a missing prerequisite for EF025.
 
 #### 9.3.1 Rules
 

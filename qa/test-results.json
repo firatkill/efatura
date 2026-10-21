@@ -628,6 +628,20 @@
           "result": "pass",
           "actual_result": "Affected tree suite passes all 5 tests in 1.83s, unchanged timeout and assertions.",
           "note": "CPU contention cleared; full coverage rerun follows."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Final T-20 coverage under host CPU contention: 10000-level tree exceeded unchanged 5000ms timeout (8345ms).",
+          "note": "Rerun affected test in isolation, then full coverage with one worker; no timeout or threshold change."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Affected tree suite passed all five tests in isolation; unchanged 10000-level test completed below 5000ms.",
+          "note": "Host contention timeout resolved on isolated retest; full single-worker coverage follows."
+        },
+        {
+          "result": "pass",
+          "note": "Final full T-20 coverage passed 227 tests with one worker: 100% lines, 97.40% branches; no threshold/timeout changes."
         }
       ],
       "regression_of": "TC-M1-015",
@@ -1505,6 +1519,26 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "fail",
+          "actual_result": "T-20 actual published size exceeds unchanged limits: full core 40.64 kB / 40 kB, parser-only 36.31 kB / 36 kB. Isolated fixed-option build specialization measures 38,871/34,465 bytes; production implementation awaits checkpoint-2 approval in docs/T20-BUNDLE-PROPOSAL.md.",
+          "note": "T-20 actual published size exceeds unchanged limits: full core 40.64 kB / 40 kB, parser-only 36.31 kB / 36 kB. Isolated fixed-option build specialization measures 38,871/34,465 bytes; production implementation awaits checkpoint-2 approval in docs/T20-BUNDLE-PROPOSAL.md."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-79 targeted parser equivalence and source/version/option guards passed; actual published size is 38.77 kB full / 34.4 kB parser.",
+          "note": "D-79 targeted parser equivalence and source/version/option guards passed; actual published size is 38.77 kB full / 34.4 kB parser."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Build test options initially widened false to boolean; corrected with literal types. Lint identified AST visitor closure narrowing and void callbacks; licence expectation still listed the removed numeric-conversion dependencies. Test-only/build-tool corrections preserve D-79 behavior.",
+          "note": "Build test options initially widened false to boolean; corrected with literal types. Lint identified AST visitor closure narrowing and void callbacks; licence expectation still listed the removed numeric-conversion dependencies. Test-only/build-tool corrections preserve D-79 behavior."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-79 equivalence, drift guards, lint/typecheck, browser (12), ESM/CJS package (5), docs, licences, publint and attw passed. Removed numeric-conversion modules no longer require bundled licence notices; remaining notices retained.",
+          "note": "D-79 equivalence, drift guards, lint/typecheck, browser (12), ESM/CJS package (5), docs, licences, publint and attw passed. Removed numeric-conversion modules no longer require bundled licence notices; remaining notices retained."
         }
       ],
       "regression_of": null,
@@ -1587,6 +1621,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
         }
       ],
       "regression_of": null,
@@ -1611,6 +1650,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
         }
       ],
       "regression_of": null,
@@ -1635,6 +1679,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
         }
       ],
       "regression_of": null,
@@ -1659,6 +1708,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
         }
       ],
       "regression_of": null,
@@ -1683,6 +1737,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
         }
       ],
       "regression_of": null,
@@ -2084,6 +2143,135 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-030",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF021 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Targeted behavior tests pass, but typecheck found missing penaltySurchargePercent in the PaymentTerms test fixture.",
+          "note": "Targeted behavior tests pass, but typecheck found missing penaltySurchargePercent in the PaymentTerms test fixture."
+        },
+        {
+          "result": "fail",
+          "actual_result": "First text replacement did not match the formatted test fixture; typecheck reported the same missing field. Corrected the exact object literal.",
+          "note": "First text replacement did not match the formatted test fixture; typecheck reported the same missing field. Corrected the exact object literal."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Corrected required nullable PaymentTerms field; targeted currency/amount tests and typecheck passed.",
+          "note": "Corrected required nullable PaymentTerms field; targeted currency/amount tests and typecheck passed."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-029",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF020 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-031",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF022 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-033",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF024 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-034",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF025 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-035",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF026 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
+          "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
         }
       ],
       "regression_of": null,
