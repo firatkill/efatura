@@ -577,13 +577,18 @@
       "ac_reference": "FR-03, NFR-10",
       "milestone": "M1 Model + core parser",
       "title": "Deep XML",
-      "status": "open",
+      "status": "resolved",
       "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
       "attempts": [
         {
           "result": "fail",
           "actual_result": "A-14 spike: pinned fast-xml-parser 5.11.2 with normative options rejects 10000 nested elements with Maximum nested tags exceeded. Its default maxNestedTags is 100. Owner approval requested before changing the normative parser options.",
           "note": "A-14 spike: pinned fast-xml-parser 5.11.2 with normative options rejects 10000 nested elements with Maximum nested tags exceeded. Its default maxNestedTags is 100. Owner approval requested before changing the normative parser options."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Approved option and iterative tree builder passed the full 10000-level tree test without RangeError.",
+          "note": "Approved option and iterative tree builder passed the full 10000-level tree test without RangeError."
         }
       ],
       "regression_of": null,
@@ -665,6 +670,87 @@
           "result": "pass",
           "actual_result": "Empty byte input, string and byte size boundaries and too-large details passed.",
           "note": "Empty byte input, string and byte size boundaries and too-large details passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-012",
+      "ac_reference": "FR-03",
+      "milestone": "M1 Model + core parser",
+      "title": "Namespace scopes",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted tree tests passed for canonical/renamed/default namespaces, scoped redeclarations and excluded xmlns attributes.",
+          "note": "Targeted tree tests passed for canonical/renamed/default namespaces, scoped redeclarations and excluded xmlns attributes."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-013",
+      "ac_reference": "FR-03",
+      "milestone": "M1 Model + core parser",
+      "title": "Tolerant matching",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Strict-before-tolerant matching and EF009 pair deduplication with exact bilingual messages passed.",
+          "note": "Strict-before-tolerant matching and EF009 pair deduplication with exact bilingual messages passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-014",
+      "ac_reference": "FR-03",
+      "milestone": "M1 Model + core parser",
+      "title": "Text and entities",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Single-pass entities, CDATA, mixed direct text and attributes passed.",
+          "note": "Single-pass entities, CDATA, mixed direct text and attributes passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-016",
+      "ac_reference": "FR-13",
+      "milestone": "M1 Model + core parser",
+      "title": "Path selection",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "All targeted selector cases passed, but integration lint flagged empty-string handling and the bare-Node path ban incorrectly matched the required local ./path module. Correcting import configuration to distinguish bare imports from relative files.",
+          "note": "All targeted selector cases passed, but integration lint flagged empty-string handling and the bare-Node path ban incorrectly matched the required local ./path module. Correcting import configuration to distinguish bare imports from relative files."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Retest passed lint/typecheck and all 75 unit cases; 100% overall line coverage and 96.82% branch coverage. Bare Node imports remain rejected while local ./path is allowed, verified by the targeted tooling regression test.",
+          "note": "Retest passed lint/typecheck and all 75 unit cases; 100% overall line coverage and 96.82% branch coverage. Bare Node imports remain rejected while local ./path is allowed, verified by the targeted tooling regression test."
         }
       ],
       "regression_of": null,
