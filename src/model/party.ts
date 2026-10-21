@@ -93,3 +93,46 @@ export function mapPartyFields(el: XmlElement | null, context: MappingContext): 
     contact: contact(child(el, 'cac', 'Contact', context), at(context, 'cac', 'Contact')),
   };
 }
+
+/** Resolve a party's tax identifier without applying checksum validation (TRD §7.5.1).
+ * @example
+ * mapParty(partyElement, context)?.taxId?.scheme; // 'VKN'
+ */
+export function mapParty(el: XmlElement | null, context: MappingContext): Party | null {
+  const fields = mapPartyFields(el, context);
+  if (!fields) return null;
+  for (const [i, identifier] of fields.identifiers.entries()) {
+    const schemeId = identifier.schemeId;
+    if (schemeId === null) continue;
+    const scheme = schemeId.toUpperCase();
+    if (scheme !== 'VKN' && scheme !== 'TCKN') continue;
+    const value = identifier.value.replace(/\s+/g, '');
+    if (identifier.schemeId !== scheme) {
+      context.issues.push({
+        code: 'EF015',
+        severity: 'info',
+        path: at(at(context, 'cac', 'PartyIdentification', i + 1), 'cbc', 'ID').path,
+        message: `schemeID ${schemeId} is not upper-case; it was read as ${scheme}.`,
+        messageTr: `schemeID ${schemeId} büyük harfle yazılmamış; ${scheme} olarak okundu.`,
+        details: { reason: 'case', value, scheme, schemeId },
+      });
+    }
+    return { ...fields, taxId: { scheme, value, schemeRaw: identifier.schemeId, inferred: false } };
+  }
+  for (const [i, identifier] of fields.identifiers.entries()) {
+    if (identifier.schemeId !== null) continue;
+    const value = identifier.value.replace(/\s+/g, '');
+    const scheme = /^\d{10}$/.test(value) ? 'VKN' : /^\d{11}$/.test(value) ? 'TCKN' : null;
+    if (scheme === null) continue;
+    context.issues.push({
+      code: 'EF015',
+      severity: 'info',
+      path: at(at(context, 'cac', 'PartyIdentification', i + 1), 'cbc', 'ID').path,
+      message: `Identifier ${value} has no schemeID; it was read as ${scheme} from its length.`,
+      messageTr: `${value} tanımlayıcısında schemeID yok; uzunluğundan ${scheme} olarak okundu.`,
+      details: { reason: 'missing', value, scheme },
+    });
+    return { ...fields, taxId: { scheme, value, schemeRaw: null, inferred: true } };
+  }
+  return { ...fields, taxId: null };
+}

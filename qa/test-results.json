@@ -950,13 +950,23 @@
       "ac_reference": "FR-06",
       "milestone": "M1 Model + core parser",
       "title": "Tax identifier resolution",
-      "status": "pending_decision",
+      "status": "resolved",
       "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
       "attempts": [
         {
           "result": "blocked",
           "actual_result": "Tax-ID diagnostic checks are not run: awaiting the owner decision on conflicting EF015 details in TRD sections 7.5.1 and 9.3. Escalated to the owner in docs/PROGRESS.md under the repository override; no ClickUp is used.",
           "note": "Tax-ID diagnostic checks are not run: awaiting the owner decision on conflicting EF015 details in TRD sections 7.5.1 and 9.3. Escalated to the owner in docs/PROGRESS.md under the repository override; no ClickUp is used."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Targeted tax-ID tests passed, but lint rejected a non-null assertion despite a preceding scheme check. Replacing it with explicit null narrowing; diagnostic behavior unchanged.",
+          "note": "Targeted tax-ID tests passed, but lint rejected a non-null assertion despite a preceding scheme check. Replacing it with explicit null narrowing; diagnostic behavior unchanged."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Owner approved combined EF015 details (D-69). All four resolution branches and exact EN/TR diagnostics pass; full checks: 118 unit tests, 100% lines/97.60% branches, lint/typecheck, browsers, build/size/docs. Non-null assertion replaced by explicit narrowing.",
+          "note": "Owner approved combined EF015 details (D-69). All four resolution branches and exact EN/TR diagnostics pass; full checks: 118 unit tests, 100% lines/97.60% branches, lint/typecheck, browsers, build/size/docs. Non-null assertion replaced by explicit narrowing."
         }
       ],
       "regression_of": null,

@@ -64,8 +64,6 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 ## Open questions for the owner
 
-- T-12: reconcile EF015 details between TRD §7.5.1 and §9.3; combined reason and message parameters proposed, awaiting owner answer.
-
 - T-01 owner checklist: enable Dependabot alerts in GitHub settings. Secret scanning and push protection were verified enabled; vulnerability alerts returned disabled.
 
 ## Verification limits
@@ -91,6 +89,8 @@ T-09 local acceptance passed: 89 unit tests, lint/typecheck, 100% line and 97.23
 
 T-10 membership reconciliation and abbreviation exceptions approved (D-59/D-60). Source verification and code lists implemented. Local checks passed: 94 unit tests, lint/typecheck, 100% line and 97.30% branch coverage, browser suite, build, size, docs parity, publint and attw. CI run 39573480868 passed all jobs.
 
-T-11 local acceptance passed: 113 unit tests, lint/typecheck, 100% line and 97.36% branch coverage, browser suite, build/size and docs parity. CI pending.
+T-11 local acceptance passed: 113 unit tests, lint/typecheck, 100% line and 97.36% branch coverage, browser suite, build/size and docs parity. CI run 39574280830 passed all jobs.
 
-T-12 independent party/address/contact field mapping is implemented; targeted UT-16 field tests and full local checks pass: 115 unit tests, lint/typecheck, 100% lines and 97.47% branches, nine browser cases, build/size/docs. The prescribed synthetic identity subset is introduced now for these tests; T-31 completes the generator identities. Tax-ID diagnostic implementation awaits the EF015 owner decision.
+T-12 independent party/address/contact field mapping is implemented; targeted UT-16 field tests and full local checks pass: 115 unit tests, lint/typecheck, 100% lines and 97.47% branches, nine browser cases, build/size/docs. The prescribed synthetic identity subset is introduced now for these tests; T-31 completes the generator identities. EF015 combined details approved in D-69; completing tax-ID resolution.
+
+T-12 tax-ID resolution and approved EF015 details are complete. Local checks passed: 118 unit tests, 100% line and 97.60% branch coverage, lint/typecheck, browser suite and build/size/docs. CI pending.
