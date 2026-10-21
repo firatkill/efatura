@@ -57,15 +57,14 @@ test('TC-M2-063 / D-74, UT-05–UT-07: bundled parser preserves XML guards, dept
 
 test('TC-M2-063 / D-74: published dist retains bundled dependency licence notices', () => {
   const notices = readFileSync('dist/THIRD_PARTY_LICENSES.txt', 'utf8');
-  for (const name of [
-    '@nodable/entities',
-    'fast-xml-parser',
-    'xml-naming',
-    'path-expression-matcher',
-    'is-unsafe',
-  ]) {
+  for (const name of ['@nodable/entities', 'fast-xml-parser', 'xml-naming', 'is-unsafe']) {
     assert.ok(notices.includes(`${name}@`), `Missing licence for ${name}`);
   }
+  const sources = JSON.parse(readFileSync('dist/index.js.map', 'utf8')).sources;
+  assert.ok(
+    !sources.some((source) => source.includes('/path-expression-matcher/')),
+    'Unused matcher must not be bundled',
+  );
   assert.ok(notices.includes('Permission is hereby granted'));
 });
 

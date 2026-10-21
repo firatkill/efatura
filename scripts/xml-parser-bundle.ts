@@ -58,7 +58,10 @@ export function xmlParserBundlePlugin(): Plugin {
     setup(build) {
       assertParserOptions(readFileSync('src/xml/fxp.ts', 'utf8'));
       build.onLoad(
-        { filter: /[\\/]fast-xml-parser[\\/]src[\\/]xmlparser[\\/](?:OrderedObjParser|XMLParser)\.js$/ },
+        {
+          filter:
+            /[\\/]fast-xml-parser[\\/]src[\\/]xmlparser[\\/](?:OrderedObjParser|XMLParser|OptionsBuilder)\.js$/,
+        },
         ({ path }) => {
           const normalized = path.replaceAll('\\', '/');
           const root = normalized.slice(0, normalized.lastIndexOf('/src/'));
@@ -131,6 +134,8 @@ export function assertParserOptions(source: string): void {
     ['parseAttributeValue', ts.SyntaxKind.FalseKeyword],
     ['htmlEntities', ts.SyntaxKind.FalseKeyword],
     ['preserveOrder', ts.SyntaxKind.TrueKeyword],
+    ['ignoreAttributes', ts.SyntaxKind.FalseKeyword],
+    ['processEntities', ts.SyntaxKind.FalseKeyword],
   ]);
   const file = ts.createSourceFile('fxp.ts', source, ts.ScriptTarget.Latest, true);
   const found: ts.Node[] = [];
@@ -146,7 +151,19 @@ export function assertParserOptions(source: string): void {
       const entries = new Map<string, ts.SyntaxKind>();
       for (const property of options.properties) {
         if (!ts.isPropertyAssignment(property)) throw new Error('Review fixed parser options');
-        const key = property.name.getText(file);
+        if (!ts.isIdentifier(property.name) && !ts.isStringLiteral(property.name))
+          throw new Error('Review fixed parser options');
+        const key = property.name.text;
+        if (
+          [
+            'stopNodes',
+            'tagValueProcessor',
+            'attributeValueProcessor',
+            'updateTag',
+            'entityDecoder',
+          ].includes(key)
+        )
+          throw new Error(`Review fixed parser option ${key}`);
         if (entries.has(key)) throw new Error('Review duplicate parser options');
         entries.set(key, property.initializer.kind);
       }
@@ -167,6 +184,7 @@ export function assertParserOptions(source: string): void {
 export function transformParserSource(path: string, source: string, version: unknown): string {
   const file = path.replaceAll('\\', '/').split('/').at(-1);
   const hashes: Record<string, string> = {
+    'OptionsBuilder.js': '4f177e43f1ac36dc25b2b6a44970c97918091416bd15722b65ac938256bda687',
     'OrderedObjParser.js': 'd1d5d64ecfb3df9b07ba3bd5ee020d166eaecbf569ebce67be692aa5892a21b5',
     'XMLParser.js': 'e3280436ad479a240fa6b9034327efe12c97eb9dbd5d541800ebd74a6420c023',
   };
@@ -176,17 +194,37 @@ export function transformParserSource(path: string, source: string, version: unk
     createHash('sha256').update(source).digest('hex') !== hashes[file]
   )
     throw new Error('Review pinned parser source before specialization');
+  if (file === 'OptionsBuilder.js') return source;
   if (file === 'XMLParser.js')
     return source
       .replace("import prettify from './node2json.js';", '')
       .replace(
         'this.options = buildOptions(options);',
-        "this.options = buildOptions(options); if (this.options.preserveOrder !== true || this.options.parseTagValue !== false || this.options.parseAttributeValue !== false || this.options.htmlEntities !== false) throw new Error('Unsupported parser modes');",
+        "this.options = buildOptions(options); if (this.options.preserveOrder !== true || this.options.parseTagValue !== false || this.options.parseAttributeValue !== false || this.options.htmlEntities !== false || this.options.ignoreAttributes !== false || options.processEntities !== false || ['stopNodes', 'tagValueProcessor', 'attributeValueProcessor', 'updateTag', 'entityDecoder'].some(key => Object.prototype.hasOwnProperty.call(options, key))) throw new Error('Unsupported parser modes');",
       )
       .replace(
         'if (this.options.preserveOrder || orderedResult === undefined) return orderedResult;\n        else return prettify(orderedResult, this.options, orderedObjParser.matcher, orderedObjParser.readonlyMatcher);',
         'return orderedResult;',
       );
+  source = source
+    .replace(
+      "import { Expression, Matcher } from 'path-expression-matcher';",
+      `class Matcher {
+      constructor() { this.tags = []; }
+      readOnly() { return this; }
+      reset() { this.tags.length = 0; }
+      push(tag) { this.tags.push(tag); }
+      pop() { this.tags.pop(); }
+      getCurrentTag() { return this.tags[this.tags.length - 1]; }
+      toString() { return this.tags.join('.'); }
+    }`,
+    )
+    .replace("import { ExpressionSet } from 'path-expression-matcher';", '')
+    .replace(
+      / {4}this.stopNodeExpressionsSet = new ExpressionSet\(\);[\s\S]*?this.stopNodeExpressionsSet.seal\(\);\n {4}}/,
+      "    if (this.options.stopNodes?.length) throw new Error('Stop nodes are disabled');",
+    )
+    .replace(/function isItStopNode\(\) \{[\s\S]*?\n}/, 'function isItStopNode() { return false; }');
   return source
     .replace('import toNumber from "strnum";', '')
     .replace('XML, CURRENCY, COMMON_HTML, ENTITY_ACTION', 'XML, ENTITY_ACTION')

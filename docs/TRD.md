@@ -581,7 +581,7 @@ export { efaturaConfig } from './config-public';
 export type * from './types';
 ```
 
-`efaturaConfig` is a frozen object `{ maxXmlBytes, defaultTolerance, zipLimits: DEFAULT_ZIP_LIMITS, playground: PLAYGROUND }`.
+`efaturaConfig` is a frozen object `{ maxXmlBytes, defaultTolerance, zipLimits: DEFAULT_ZIP_LIMITS, playground: PLAYGROUND, yieldBudgetMs: YIELD_BUDGET_MS, progressIntervalMs: PROGRESS_INTERVAL_MS, zipPushChunkBytes: ZIP_PUSH_CHUNK_BYTES }`.
 
 ### 5.2 `parseInvoice` (normative signature)
 
@@ -731,7 +731,7 @@ export function parseMany(
 export function createDuplicateTracker(): DuplicateTracker;
 ```
 
-`iterateMany` processes XML only. A ZIP input (magic bytes `50 4B 03 04`) yields an `error` item with code `ZIP_INPUT_REQUIRES_ZIP_ENTRY` ("ZIP input: use @firatkill/efatura/zip") so core users get a clear message. A file whose name does not end in `.xml` and whose content does not start like XML (`looksLikeXml`, section 10.1) yields `skipped` (`unsupported-type`); anything else is parsed and fails as `NOT_XML` if it is not XML.
+`File` is accepted directly; `Blob` requires `{ name, data }` (D-81). `iterateMany` processes XML only. A ZIP input (magic bytes `50 4B 03 04`) yields an `error` item with code `ZIP_INPUT_REQUIRES_ZIP_ENTRY` ("ZIP input: use @firatkill/efatura/zip") so core users get a clear message. A file whose name does not end in `.xml` and whose content does not start like XML (`looksLikeXml`, section 10.1) yields `skipped` (`unsupported-type`); anything else is parsed and fails as `NOT_XML` if it is not XML.
 
 ### 5.4 ZIP entry `@firatkill/efatura/zip` (normative)
 
@@ -2416,7 +2416,7 @@ for await (file of files):
            (readBlob failure → yield { kind: 'error', code: 'READ_FAILED' }; continue)
   if bytes is Uint8Array and isZipMagic(bytes):
        yield error ZIP_INPUT_REQUIRES_ZIP_ENTRY; continue
-  if bytes is Uint8Array and !name.toLowerCase().endsWith('.xml') and !looksLikeXml(bytes):
+  if !name.toLowerCase().endsWith('.xml') and !looksLikeXml(bytes):
        yield { kind: 'skipped', reason: 'unsupported-type' }; continue
   yield* parseOne(bytes, source(depth 0))
   await maybeYield()
@@ -2428,9 +2428,9 @@ return summary
 1. `parseInvoice(bytes, { ...options, includeRaw: options.includeRaw ?? false, attachments: options.attachments ?? 'metadata' })`. `EfaturaParseError` → `error` item with its code, message, messageTr and details. Any other exception is a bug and propagates.
 2. If `invoice.uuid ≠ null`: `first = tracker.check(uuid.toLowerCase(), source.path)`. If `first ≠ null`: with `duplicates: 'skip'` yield `{ kind: 'duplicate', uuid, firstSource: first }` and stop; otherwise add EF090 (`details: { firstSource: first }`).
 3. If `supplier.taxId` and `number` are non-null: `firstUuid = tracker.checkNumber(taxId.value, number, uuid ?? '')`; if non-null add EF091.
-4. Apply `options.rules` to the batch issues, re-sort, yield the invoice item (with `bytes` when `keepBytes`).
+4. Merge parser and batch issues at default severity, sort by default severity/path/code, then apply `options.rules` once (D-82, §1.3). Yield the invoice item (with UTF-8 encoded bytes for string input when `keepBytes`).
 
-`looksLikeXml(bytes)`: after skipping a UTF-8/UTF-16 BOM and ASCII whitespace in the first 64 bytes, the next byte is `<` (`3C`), or the bytes are `3C 00` / `00 3C`.
+`looksLikeXml(bytes)`: strings use their UTF-8 representation for this check (D-81); after skipping a UTF-8/UTF-16 BOM and ASCII whitespace in the first 64 bytes, the next byte is `<` (`3C`), or the bytes are `3C 00` / `00 3C`.
 
 `maybeYield()`: if `performance.now() − lastYield ≥ YIELD_BUDGET_MS`, `await yieldToEventLoop()` and check `signal`. `yieldToEventLoop` uses `globalThis.scheduler?.yield()` when available, else `new Promise((r) => setTimeout(r, 0))`.
 
@@ -2440,7 +2440,7 @@ Progress: `onProgress` is called after an item when at least `PROGRESS_INTERVAL_
 
 `parseMany` = collect all items from `iterateMany` and return `{ items, summary }`.
 
-Summary counting (normative, shared by `iterateMany`, `iterateZip` and `iterateAny`): `files` = every leaf item yielded (kinds `invoice`, `duplicate`, `error`, `skipped`; archives themselves are not files, but an archive-level error such as `ZIP_INVALID` or `ZIP_DEPTH_EXCEEDED` is an `error` item and counts); `archives` = archives walked (top-level and nested); `invoices` = `invoice` items; `duplicates` = invoices that received EF090 (`'flag'`) plus `duplicate` items (`'skip'`); `failed` = `error` items; `skipped` = `skipped` items; `issues` = counts by severity over all invoice items after `rules`; `invoicesWithErrors`/`invoicesWithWarnings` = invoice items with at least one issue of that severity. `SourceRef.bytes` is the byte length for byte input and `string.length` for string input.
+Summary counting (normative, shared by `iterateMany`, `iterateZip` and `iterateAny`): `files` = every leaf item yielded (kinds `invoice`, `duplicate`, `error`, `skipped`; archives themselves are not files, but an archive-level error such as `ZIP_INVALID` or `ZIP_DEPTH_EXCEEDED` is an `error` item and counts); `archives` = archives walked (top-level and nested); `invoices` = `invoice` items; `duplicates` = detected repeated UUIDs in invoice items (`'flag'`, including when EF090 is off) plus `duplicate` items (`'skip'`) (D-82); `failed` = `error` items; `skipped` = `skipped` items; `issues` = counts by severity over all invoice items after `rules`; `invoicesWithErrors`/`invoicesWithWarnings` = invoice items with at least one issue of that severity. `SourceRef.bytes` is the byte length for byte input and `string.length` for string input.
 
 ### 10.2 Duplicate tracker
 
@@ -4175,3 +4175,7 @@ The implementer must consult these documents. Names are given as published; URLs
 11. Playground link.
 12. Contributing: `pnpm install`, `pnpm check`, the fixture rules (never real invoices), changesets.
 13. Disclaimer: not affiliated with GİB; not tax advice; licence MIT.
+
+### T-23 bundled path specialization (D-84)
+
+The pinned parser build replaces the unused stop-node/path-expression matcher with a private tag stack preserving current-tag lookup and dot-separated paths. The build verifies exact OrderedObjParser.js, XMLParser.js and OptionsBuilder.js source hashes and rejects stopNodes, custom value processors, updateTag and entityDecoder options; ignoreAttributes and processEntities must remain false. The existing entity, prototype-pollution and XML safety checks remain unchanged. Original/specialized parser equivalence and actual bundle licence checks are required. See docs/T23-BUNDLE-PROPOSAL.md.

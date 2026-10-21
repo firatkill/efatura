@@ -1,3 +1,4 @@
+import type { EfaturaParseErrorCode } from './errors';
 import type { XmlElement } from './xml/tree';
 
 /** Decimal public data contract (TRD §§5 and 7).
@@ -594,3 +595,145 @@ export interface ParseResult {
   /** Encoding used to decode bytes ('utf-8' for string input). */
   encoding: string;
 }
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { InputFile } from '@firatkill/efatura';
+ */
+export interface InputFile {
+  /** Display path; used in SourceRef.path. */
+  name: string;
+  data: XmlInput | Blob;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { BatchOptions } from '@firatkill/efatura';
+ */
+export interface BatchOptions extends Omit<ParseOptions, 'includeRaw' | 'attachments'> {
+  /** Default false in batches (D-22). */
+  includeRaw?: boolean;
+  /** Default 'metadata' in batches (D-22). */
+  attachments?: 'data' | 'metadata';
+  /** 'flag' adds EF090 and keeps the invoice; 'skip' yields a `duplicate` item. Default 'flag'. */
+  duplicates?: 'flag' | 'skip';
+  /** Share duplicate state across several batch calls (playground "Add files"). */
+  duplicateTracker?: DuplicateTracker;
+  signal?: AbortSignal;
+  onProgress?: (progress: BatchProgress) => void;
+  /** Keep decompressed XML bytes on each invoice item (`item.bytes`). Default false. Used by the playground worker. */
+  keepBytes?: boolean;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { SourceRef } from '@firatkill/efatura';
+ */
+export interface SourceRef {
+  /** Path; archive boundaries are written as "!/", e.g. "2025.zip!/07/a.zip!/x.xml". */
+  path: string;
+  /** Last path segment. */
+  name: string;
+  /** Size of this file's bytes (decompressed for archive entries). */
+  bytes: number;
+  /** 0 for top-level inputs, 1 for entries of a top-level archive, and so on. */
+  depth: number;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { BatchItem } from '@firatkill/efatura';
+ */
+export type BatchItem =
+  | {
+      kind: 'invoice';
+      source: SourceRef;
+      invoice: Invoice;
+      issues: Issue[];
+      encoding: string;
+      bytes?: Uint8Array;
+    }
+  | { kind: 'duplicate'; source: SourceRef; uuid: string; firstSource: string }
+  | { kind: 'error'; source: SourceRef; error: ItemError }
+  | { kind: 'skipped'; source: SourceRef; reason: 'unsupported-type' }; // junk entries (section 10.3) yield nothing
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { ItemError } from '@firatkill/efatura';
+ */
+export interface ItemError {
+  code: EfaturaParseErrorCode | ZipErrorCode | BatchErrorCode; // BatchErrorCode = 'READ_FAILED' | 'ZIP_INPUT_REQUIRES_ZIP_ENTRY' (section 10.4)
+  message: string;
+  messageTr: string;
+  details?: Record<string, string | number>;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { BatchProgress } from '@firatkill/efatura';
+ */
+export interface BatchProgress {
+  filesDone: number; // items yielded so far (all kinds)
+  filesTotal: number | null; // known only for plain XML inputs without archives
+  bytesDone: number; // compressed bytes consumed from top-level inputs
+  bytesTotal: number | null; // sum of top-level input sizes when known
+  invoices: number;
+  failed: number;
+  currentPath: string | null;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { BatchSummary } from '@firatkill/efatura';
+ */
+export interface BatchSummary {
+  files: number;
+  archives: number;
+  invoices: number;
+  duplicates: number;
+  failed: number;
+  skipped: number;
+  issues: { error: number; warning: number; info: number };
+  invoicesWithErrors: number;
+  invoicesWithWarnings: number;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { BatchResult } from '@firatkill/efatura';
+ */
+export interface BatchResult {
+  items: BatchItem[];
+  summary: BatchSummary;
+}
+
+/** Public batch contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { DuplicateTracker } from '@firatkill/efatura';
+ */
+export interface DuplicateTracker {
+  /** Returns the first source path if the UUID was seen, else records it and returns null. */
+  check(uuid: string, path: string): string | null;
+  /** Same for supplier tax ID + invoice number (EF091). Returns the first UUID if seen with a different UUID. */
+  checkNumber(supplierTaxId: string, number: string, uuid: string): string | null;
+  reset(): void;
+}
+
+/** Public error contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { BatchErrorCode } from '@firatkill/efatura';
+ */
+export type BatchErrorCode = 'READ_FAILED' | 'ZIP_INPUT_REQUIRES_ZIP_ENTRY';
+/** Public error contract (TRD §5.3 / §10.4).
+ * @example
+ * import type { ZipErrorCode } from '@firatkill/efatura';
+ */
+export type ZipErrorCode =
+  | 'ZIP_INVALID'
+  | 'ZIP_ENCRYPTED'
+  | 'ZIP_UNSUPPORTED_METHOD'
+  | 'ZIP_DEPTH_EXCEEDED'
+  | 'ZIP_TOO_MANY_ENTRIES'
+  | 'ZIP_TOO_LARGE'
+  | 'ZIP_ENTRY_TOO_LARGE'
+  | 'ZIP_RATIO_EXCEEDED';
