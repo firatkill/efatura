@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { IDENTITIES } from '../../fixtures/identities';
 import { NS } from '../../src/config';
 import { createContext } from '../../src/model/context';
-import { mapPartyFields } from '../../src/model/party';
+import { mapParty, mapPartyFields } from '../../src/model/party';
 import { parseXmlTree } from '../../src/xml/tree';
 const party = (body: string) =>
   parseXmlTree(`<cac:Party xmlns:cbc="${NS.cbc}" xmlns:cac="${NS.cac}">${body}</cac:Party>`);
@@ -91,4 +91,85 @@ it('TC-M1-024 / UT-16: handles person-only names and absent or empty sections', 
   expect(Object.values(empty?.address ?? {})).toEqual(Array.from({ length: 14 }, () => null));
   expect(Object.values(empty?.contact ?? {})).toEqual(Array.from({ length: 5 }, () => null));
   expect(empty?.identifiers).toEqual([{ schemeId: null, value: 'F-0001' }]);
+});
+
+const identifier = (value: string, scheme?: string) =>
+  `<cac:PartyIdentification><cbc:ID${scheme === undefined ? '' : ` schemeID="${scheme}"`}>${value}</cbc:ID></cac:PartyIdentification>`;
+it('TC-M1-025 / FR-06 / UT-16: explicit schemes win in document order, without checksum validation', () => {
+  expect(mapParty(null, createContext())).toBeNull();
+  const context = createContext();
+  const result = mapParty(
+    party(
+      identifier(IDENTITIES.PER_A.taxId) +
+        identifier('F-0001', 'MUSTERINO') +
+        identifier(IDENTITIES.BAD_VKN.taxId, 'VKN') +
+        identifier(IDENTITIES.PER_A.taxId, 'TCKN'),
+    ),
+    context,
+  );
+  expect(result?.taxId).toEqual({
+    scheme: 'VKN',
+    value: IDENTITIES.BAD_VKN.taxId,
+    schemeRaw: 'VKN',
+    inferred: false,
+  });
+  expect(context.issues).toEqual([]);
+  expect(mapParty(party(identifier(IDENTITIES.BAD_TCKN.taxId, 'TCKN')), createContext())?.taxId).toEqual({
+    scheme: 'TCKN',
+    value: IDENTITIES.BAD_TCKN.taxId,
+    schemeRaw: 'TCKN',
+    inferred: false,
+  });
+});
+it('TC-M1-025 / UT-16: lower-case diagnostics use the filtered identifier index and combined details', () => {
+  const context = createContext();
+  context.path = '/Invoice/cac:AccountingSupplierParty/cac:Party';
+  const value = IDENTITIES.SUP_A.taxId;
+  const result = mapParty(
+    party(
+      identifier(' ') +
+        identifier('F-0001', 'MUSTERINO') +
+        identifier(`${value.slice(0, 3)} ${value.slice(3)}`, 'vkn'),
+    ),
+    context,
+  );
+  expect(result?.taxId).toEqual({ scheme: 'VKN', value, schemeRaw: 'vkn', inferred: false });
+  expect(context.issues).toEqual([
+    {
+      code: 'EF015',
+      severity: 'info',
+      path: '/Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification[2]/cbc:ID',
+      message: 'schemeID vkn is not upper-case; it was read as VKN.',
+      messageTr: 'schemeID vkn büyük harfle yazılmamış; VKN olarak okundu.',
+      details: { reason: 'case', value, scheme: 'VKN', schemeId: 'vkn' },
+    },
+  ]);
+});
+it('TC-M1-025 / UT-16: missing schemes infer by length only, and unknown schemes are never inferred', () => {
+  for (const [value, scheme] of [
+    [IDENTITIES.SUP_A.taxId, 'VKN'],
+    [IDENTITIES.PER_A.taxId, 'TCKN'],
+  ] as const) {
+    const context = createContext();
+    expect(
+      mapParty(party(identifier(value, 'MUSTERINO') + identifier('F-0001') + identifier(value)), context)
+        ?.taxId,
+    ).toEqual({ scheme, value, schemeRaw: null, inferred: true });
+    expect(context.issues).toEqual([
+      {
+        code: 'EF015',
+        severity: 'info',
+        path: '/Invoice/cac:PartyIdentification[3]/cbc:ID',
+        message: `Identifier ${value} has no schemeID; it was read as ${scheme} from its length.`,
+        messageTr: `${value} tanımlayıcısında schemeID yok; uzunluğundan ${scheme} olarak okundu.`,
+        details: { reason: 'missing', value, scheme },
+      },
+    ]);
+  }
+  const context = createContext();
+  expect(
+    mapParty(party(identifier(IDENTITIES.SUP_A.taxId, 'OTHER') + identifier('F-0001')), context)?.taxId,
+  ).toBeNull();
+  expect(mapParty(party(''), context)?.taxId).toBeNull();
+  expect(context.issues).toEqual([]);
 });

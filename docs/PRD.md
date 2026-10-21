@@ -788,6 +788,7 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-66 | A-06: 113 exemption codes verified from the general and investment-incentive membership union. | Turkish labels from V1.43. Code 501 is absent from its table; descriptive label supported by KDV communiqué II/A-5.11. English labels are literal translations. | T-10, checked 2026-10-21; source links in docs/CODE-LIST-VERIFICATION.md |
 | D-67 | A-07: All 28 specified unit codes occur in current GİB executable membership. | English labels checked against UN/ECE Rec. 20 revision 8e as distributed by OASIS UBL 2.1. Direct UNECE revision 17e access returned 403; no claim of verifying that revision. Correct C62 to one and NIU to number of international units. | T-10, checked 2026-10-21; source links in docs/CODE-LIST-VERIFICATION.md |
 | D-68 | A-11: 178 active alphabetic currency codes and precisions verified against SIX List One, published 2026-09-17. | N.A. maps to null; required 12 Turkish labels supplied and remaining English labels retained in both languages. | T-10, checked 2026-10-21; source links in docs/CODE-LIST-VERIFICATION.md |
+| D-69 | Owner approved combined EF015 diagnostic details: reason, value and resolved scheme, plus original schemeId for the case-normalization variant. | Reconciles §7.5.1 with §9.3 without changing tax-ID selection or severity. | T-12, owner approval 2026-10-21 |
 
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
