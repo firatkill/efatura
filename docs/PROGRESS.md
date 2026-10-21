@@ -8,7 +8,7 @@
 - Hook checks passed: owner accepted, other author/committer rejected, attribution removed.
 - Codex configuration has no attribution override; commits use explicit messages through git and the repository hook.
 - GitHub repository created and initial commits pushed after explicit owner approval (D-46).
-- T-01 and T-02 implementation and local/CI acceptance checks passed. T-03 and T-04 remain open pending the owner decisions below. No milestone is complete.
+- T-01–T-04 implementation and local/CI acceptance checks passed. M0 is complete; stop before T-05. The separate Dependabot alerts owner checklist remains open.
 
 ## Tasks
 
