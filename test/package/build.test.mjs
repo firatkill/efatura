@@ -61,8 +61,6 @@ test('TC-M2-063 / D-74: published dist retains bundled dependency licence notice
     '@nodable/entities',
     'fast-xml-parser',
     'xml-naming',
-    'anynum',
-    'strnum',
     'path-expression-matcher',
     'is-unsafe',
   ]) {

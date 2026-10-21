@@ -33,9 +33,9 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-15 | Attachments and base64                                             | done   | 1b40f4a          |
 | T-16 | `parseInvoice` orchestration                                       | done   | f983667          |
 | T-17 | Issue framework, catalogue and messages                            | done   | 940a803          |
-| T-18 | Identifier algorithms                                              | done   | HEAD             |
-| T-19 | Identity and party rules (EF001–EF017)                             | done   | HEAD             |
-| T-20 | Currency and amount rules (EF020–EF035)                            | todo   | —                |
+| T-18 | Identifier algorithms                                              | done   | ee82cde          |
+| T-19 | Identity and party rules (EF001–EF017)                             | done   | 29e3607          |
+| T-20 | Currency and amount rules (EF020–EF035)                            | done   | HEAD             |
 | T-21 | Totals rules (EF040–EF049)                                         | todo   | —                |
 | T-22 | Line and tax rules (EF050–EF066)                                   | todo   | —                |
 | T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                |
@@ -118,3 +118,9 @@ T-18 local acceptance passed: 202 unit tests, 100% lines / 97% branches and iden
 Owner approved the EF001 model-based interpretation (D-76). T-18 CI 39589212977 passed all jobs. T-19 is in progress; A-08/A-10 findings are recorded in D-77.
 
 T-19 local acceptance passed: 217 unit tests, 100% lines / 97.23% branches, validation lines 100%; 12 browser cases and five package cases; lint/typecheck/docs/build/size. Full core 39.8 kB; parser-only 35.41 kB. D-76 records the approved EF001 interpretation and D-77 verifies A-08/A-10. Earlier M1 mapping-only test assumptions were updated to explicitly isolate mapping; failure/retest history retained. CI verification follows push.
+
+T-19 completed in 29e3607; CI 39592462877 passed all jobs. T-20 targeted currency/amount tests are in progress. Owner approved missing diagnostic parameters (D-78) and fixed-option parser specialization (D-79); implementation and acceptance checks are in progress.
+
+T-20 local acceptance passed: 227 unit tests, 100% lines / 97.40% branches, validation lines 100%; 12 browser and five package cases; lint/typecheck, docs, licences, publint and attw. D-78 records missing message parameters; D-79 records approved parser specialization with equivalence/source/version/option guards. Full core 38.77 kB / 40 kB, parser 34.41 kB / 36 kB. CI verification follows push.
+
+Final T-20 coverage passed all 227 tests with one local worker after a host-contention deep-tree timeout; isolated retest also passed. Timeout and coverage thresholds are unchanged, and failure/retest history is retained.

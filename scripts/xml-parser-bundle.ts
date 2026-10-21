@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+import ts from 'typescript';
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import type { Options } from 'tsup';
@@ -54,6 +56,19 @@ export function xmlParserBundlePlugin(): Plugin {
   return {
     name: 'xml-safety-context-tree-shaking',
     setup(build) {
+      assertParserOptions(readFileSync('src/xml/fxp.ts', 'utf8'));
+      build.onLoad(
+        { filter: /[\\/]fast-xml-parser[\\/]src[\\/]xmlparser[\\/](?:OrderedObjParser|XMLParser)\.js$/ },
+        ({ path }) => {
+          const normalized = path.replaceAll('\\', '/');
+          const root = normalized.slice(0, normalized.lastIndexOf('/src/'));
+          const metadata = JSON.parse(readFileSync(`${root}/package.json`, 'utf8')) as { version: unknown };
+          return {
+            contents: transformParserSource(path, readFileSync(path, 'utf8'), metadata.version),
+            loader: 'js',
+          };
+        },
+      );
       build.onLoad({ filter: /[\\/]is-unsafe[\\/]src[\\/].*\.js$/ }, ({ path }) => {
         const normalized = path.replaceAll('\\', '/');
         const packageRoot = normalized.slice(0, normalized.lastIndexOf('/src/'));
@@ -104,4 +119,83 @@ export function writeBundledLicenses(mapPath: string): void {
       .map(([name, license]) => `${name}\n\n${license}`)
       .join('\n\n'),
   );
+}
+
+/** Require the normative fixed modes before specializing the bundled parser.
+ * @example
+ * assertParserOptions(readFileSync('src/xml/fxp.ts', 'utf8'));
+ */
+export function assertParserOptions(source: string): void {
+  const required = new Map<string, ts.SyntaxKind>([
+    ['parseTagValue', ts.SyntaxKind.FalseKeyword],
+    ['parseAttributeValue', ts.SyntaxKind.FalseKeyword],
+    ['htmlEntities', ts.SyntaxKind.FalseKeyword],
+    ['preserveOrder', ts.SyntaxKind.TrueKeyword],
+  ]);
+  const file = ts.createSourceFile('fxp.ts', source, ts.ScriptTarget.Latest, true);
+  const found: ts.Node[] = [];
+  function visit(node: ts.Node): void {
+    if (
+      ts.isVariableDeclaration(node) &&
+      node.name.getText(file) === 'xmlParser' &&
+      node.initializer &&
+      ts.isNewExpression(node.initializer)
+    ) {
+      const options = node.initializer.arguments?.[0];
+      if (!options || !ts.isObjectLiteralExpression(options)) throw new Error('Review fixed parser options');
+      const entries = new Map<string, ts.SyntaxKind>();
+      for (const property of options.properties) {
+        if (!ts.isPropertyAssignment(property)) throw new Error('Review fixed parser options');
+        const key = property.name.getText(file);
+        if (entries.has(key)) throw new Error('Review duplicate parser options');
+        entries.set(key, property.initializer.kind);
+      }
+      for (const [key, kind] of required)
+        if (entries.get(key) !== kind) throw new Error(`Review fixed parser option ${key}`);
+      found.push(node);
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(file);
+  if (found.length === 0) throw new Error('Review fixed parser options');
+}
+
+/** Omit only modes disabled by the fixed parser options, with exact source guards.
+ * @example
+ * transformParserSource(path, original, '5.11.2');
+ */
+export function transformParserSource(path: string, source: string, version: unknown): string {
+  const file = path.replaceAll('\\', '/').split('/').at(-1);
+  const hashes: Record<string, string> = {
+    'OrderedObjParser.js': 'd1d5d64ecfb3df9b07ba3bd5ee020d166eaecbf569ebce67be692aa5892a21b5',
+    'XMLParser.js': 'e3280436ad479a240fa6b9034327efe12c97eb9dbd5d541800ebd74a6420c023',
+  };
+  if (
+    version !== '5.11.2' ||
+    file === undefined ||
+    createHash('sha256').update(source).digest('hex') !== hashes[file]
+  )
+    throw new Error('Review pinned parser source before specialization');
+  if (file === 'XMLParser.js')
+    return source
+      .replace("import prettify from './node2json.js';", '')
+      .replace(
+        'this.options = buildOptions(options);',
+        "this.options = buildOptions(options); if (this.options.preserveOrder !== true || this.options.parseTagValue !== false || this.options.parseAttributeValue !== false || this.options.htmlEntities !== false) throw new Error('Unsupported parser modes');",
+      )
+      .replace(
+        'if (this.options.preserveOrder || orderedResult === undefined) return orderedResult;\n        else return prettify(orderedResult, this.options, orderedObjParser.matcher, orderedObjParser.readonlyMatcher);',
+        'return orderedResult;',
+      );
+  return source
+    .replace('import toNumber from "strnum";', '')
+    .replace('XML, CURRENCY, COMMON_HTML, ENTITY_ACTION', 'XML, ENTITY_ACTION')
+    .replace(
+      'else if (this.options.htmlEntities === true) namedEntities = { ...COMMON_HTML, ...CURRENCY };',
+      "else if (this.options.htmlEntities === true) throw new Error('HTML entities are disabled');",
+    )
+    .replace(
+      /function parseValue\(val, shouldParse, options\) \{[\s\S]*?\n\}\n\nfunction fromCodePoint/,
+      "function parseValue(val, shouldParse, options) { if (shouldParse) throw new Error('Numeric coercion is disabled'); return isExist(val) ? val : ''; }\n\nfunction fromCodePoint",
+    );
 }
