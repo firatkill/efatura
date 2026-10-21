@@ -589,6 +589,21 @@
           "result": "pass",
           "actual_result": "Approved option and iterative tree builder passed the full 10000-level tree test without RangeError.",
           "note": "Approved option and iterative tree builder passed the full 10000-level tree test without RangeError."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Coverage run overlapped lint and exceeded the existing 5 s timeout for the 10000-level stress case. No parser assertion failed; rerun sequentially without changing limits.",
+          "note": "Coverage run overlapped lint and exceeded the existing 5 s timeout for the 10000-level stress case. No parser assertion failed; rerun sequentially without changing limits."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Sequential targeted coverage rerun still timed out at 5 s on the 10000-level tree case. Investigating parser and traversal performance before another attempt; thresholds unchanged.",
+          "note": "Sequential targeted coverage rerun still timed out at 5 s on the 10000-level tree case. Investigating parser and traversal performance before another attempt; thresholds unchanged."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Sequential complete coverage suite passed with the unchanged 5 s timeout; 10000-level tree remains correct. Earlier timeout attempts occurred under heavy local load.",
+          "note": "Sequential complete coverage suite passed with the unchanged 5 s timeout; 10000-level tree remains correct. Earlier timeout attempts occurred under heavy local load."
         }
       ],
       "regression_of": null,
@@ -799,6 +814,35 @@
           "result": "pass",
           "actual_result": "Amount/quantity tests passed with exact raw values, currency normalization, missing-currency EF032, injected unit lookup, null conventions and shared issue sinks with isolated paths.",
           "note": "Amount/quantity tests passed with exact raw values, currency normalization, missing-currency EF032, injected unit lookup, null conventions and shared issue sinks with isolated paths."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-019",
+      "ac_reference": "FR-14",
+      "milestone": "M1 Model + core parser",
+      "title": "Official code lists",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Local verification orchestration failed: Prettier scanned a transient tooling-test probe that was removed concurrently; source-comparison helper initially treated comma-delimited schematron values as single codes. Correct the helper and run lint separately from tests.",
+          "note": "Local verification orchestration failed: Prettier scanned a transient tooling-test probe that was removed concurrently; source-comparison helper initially treated comma-delimited schematron values as single codes. Correct the helper and run lint separately from tests."
+        },
+        {
+          "result": "pass",
+          "actual_result": "UT-13: all 94 unit tests passed in the complete coverage run; 100% lines and 97.30% branches. Official executable membership matches all five complete code sets and all 28 subset units. Lint/typecheck passed sequentially. D-59/D-60 approvals and D-61–68 assumption findings recorded.",
+          "note": "UT-13: all 94 unit tests passed in the complete coverage run; 100% lines and 97.30% branches. Official executable membership matches all five complete code sets and all 28 subset units. Lint/typecheck passed sequentially. D-59/D-60 approvals and D-61–68 assumption findings recorded."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Task acceptance complete locally: nine browser cases across Chromium/Firefox/WebKit, build, all size budgets, docs parity, publint and attw passed. Initial concurrent-run failures are retained in the ledger; no limits or tests weakened.",
+          "note": "Task acceptance complete locally: nine browser cases across Chromium/Firefox/WebKit, build, all size budgets, docs parity, publint and attw passed. Initial concurrent-run failures are retained in the ledger; no limits or tests weakened."
         }
       ],
       "regression_of": null,

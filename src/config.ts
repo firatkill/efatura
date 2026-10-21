@@ -38,7 +38,7 @@ export const NS = {
 
 /** Expected UBL-TR identifiers (A-01). */
 export const EXPECTED_UBL_VERSION = '2.1';
-export const EXPECTED_CUSTOMIZATION_IDS = ['TR1.2'] as const;
+export const EXPECTED_CUSTOMIZATION_IDS = ['TR1.2', 'TR1.2.1'] as const;
 
 /** Placeholder TCKN used for anonymous final consumers in e-Arşiv (A-08, D-24). */
 export const ANONYMOUS_TCKN = '11111111111';
