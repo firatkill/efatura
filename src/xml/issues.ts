@@ -1,15 +1,10 @@
+import type { Issue } from '../types';
+
 /** Temporary mapping issue shape; T-09 adopts the public Issue type and T-17 the catalogue.
  * @example
  * const issue: MappingIssue = { code: 'EF035', severity: 'warning', path: '/Invoice', message: '', messageTr: '' };
  */
-export type MappingIssue = {
-  code: 'EF035';
-  severity: 'warning';
-  path: string;
-  message: string;
-  messageTr: string;
-  details?: Readonly<Record<string, string | number>>;
-};
+export type MappingIssue = Issue;
 
 /** Encoding issue factory prescribed for the pre-catalogue T-07 implementation.
  * @example
