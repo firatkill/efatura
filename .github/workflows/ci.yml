@@ -43,6 +43,9 @@ jobs:
       - run: pnpm size
       - run: pnpm publint
       - run: pnpm attw
+      - run: pnpm licenses:check
+      - run: pnpm docs:check
+      - run: pnpm test:tooling
 
   unit:
     runs-on: ubuntu-latest

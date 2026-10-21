@@ -161,7 +161,7 @@ efatura/
 ├── LICENSE                        # MIT, "Copyright (c) 2026 Fırat Kıl"
 ├── CHANGELOG.md                   # written by Changesets
 ├── package.json                   # the library package (section 3.1)
-├── pnpm-workspace.yaml            # packages: ["playground"]
+├── pnpm-workspace.yaml            # packages: [".", "playground"]
 ├── pnpm-lock.yaml
 ├── .nvmrc                         # 22
 ├── .gitignore                     # node_modules, dist, coverage, private/, bench/.cache/, playground/dist, playground/public/samples/, playwright-report, test-results
@@ -399,6 +399,7 @@ tsup runs the two configs in parallel, so neither uses `clean: true` (one build'
 
 ```yaml
 packages:
+  - .
   - playground
 ```
 
@@ -3778,7 +3779,7 @@ Until T-16, the 36 kB entry above imports `{ VERSION }` and is named `core: VERS
 ### 17.6 Licence check (normative, `scripts/check-licenses.mjs`)
 
 1. Run `pnpm licenses list --prod --json` at the root and `pnpm --filter playground licenses list --prod --json`.
-2. Allowlist: `MIT`, `ISC`, `BSD-2-Clause`, `BSD-3-Clause`, `Apache-2.0`, `0BSD`, `CC0-1.0`, `BlueOak-1.0.0`, `OFL-1.1` (fonts only).
+2. Allowlist: `MIT`, `Zlib`, `ISC`, `BSD-2-Clause`, `BSD-3-Clause`, `Apache-2.0`, `0BSD`, `CC0-1.0`, `BlueOak-1.0.0`, `OFL-1.1` (fonts only).
 3. Evaluate each package's SPDX expression: `A OR B` passes if any side passes; `A AND B` passes if both pass; parentheses are respected. `UNLICENSED`, `UNKNOWN`, missing or anything else fails. (DOMPurify's `(MPL-2.0 OR Apache-2.0)` passes through Apache-2.0.)
 4. Fail if the root package's production dependencies are not exactly `fast-xml-parser` and `fflate`.
 5. `playground/scripts/third-party-licenses.mjs` writes `playground/dist/third-party-licenses.txt` with each shipped package's name, version, licence and licence text (from its `LICENSE*` file), including the OFL texts of the fonts.

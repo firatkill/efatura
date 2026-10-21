@@ -50,7 +50,10 @@ export default tseslint.config(
     ],
   },
   js.configs.recommended,
-  { files: ['test/package/*.mjs'], languageOptions: { globals: { process: 'readonly' } } },
+  {
+    files: ['test/package/*.mjs', 'test/tooling/*.mjs', 'scripts/*.mjs'],
+    languageOptions: { globals: { process: 'readonly', console: 'readonly' } },
+  },
   {
     files: ['**/*.ts'],
     extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],

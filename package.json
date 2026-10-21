@@ -94,7 +94,12 @@
     "test:package": "node --test test/package/*.test.mjs",
     "test:coverage": "vitest run --project unit --coverage",
     "test:browser": "vitest run --project browser",
-    "test:cli": "pnpm build && vitest run --project cli"
+    "test:cli": "pnpm build && vitest run --project cli",
+    "licenses:check": "node scripts/check-licenses.mjs",
+    "docs:check": "tsx scripts/check-docs.ts",
+    "changeset": "changeset",
+    "test:tooling": "node --test test/tooling/*.test.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm test:cli && pnpm test:package && pnpm test:tooling && pnpm size && pnpm publint && pnpm attw && pnpm licenses:check && pnpm docs:check"
   },
   "dependencies": {
     "fast-xml-parser": "5.11.2",

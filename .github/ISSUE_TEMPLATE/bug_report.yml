@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a problem using synthetic data only.
+body:
+  - type: input
+    id: version
+    attributes: { label: efatura version }
+    validations: { required: true }
+  - type: input
+    id: environment
+    attributes: { label: Environment (Node version or browser) }
+    validations: { required: true }
+  - type: textarea
+    id: actual
+    attributes: { label: What happened }
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: What you expected }
+    validations: { required: true }
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Synthetic reproduction
+      description: Do not attach real invoices. They contain personal and company data. Describe the structure, or write a minimal XML with fake names and the test tax IDs from fixtures/README.md.
+    validations: { required: true }
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This issue contains no real invoice data.
+          required: true
