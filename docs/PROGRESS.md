@@ -37,7 +37,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-19 | Identity and party rules (EF001–EF017)                             | done   | 29e3607          |
 | T-20 | Currency and amount rules (EF020–EF035)                            | done   | 6f32db8          |
 | T-21 | Totals rules (EF040–EF049)                                         | done   | f65f3b4          |
-| T-22 | Line and tax rules (EF050–EF066)                                   | done   | HEAD             |
+| T-22 | Line and tax rules (EF050–EF066)                                   | done   | b3d7697          |
 | T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                |
 | T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                |
 | T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                |
@@ -103,7 +103,7 @@ T-16 completed in f983667. Final `pnpm check` and three-browser suite passed: 18
 
 M1 is complete: all 37 cases resolved, ledger integrity passed, and qa/M1-report.md and qa/M1-review.md document coverage, historical failures and verification limits. Validation, functional ZIP/CLI processing, generated fixtures, snapshots/fuzzing, benchmarks, private-corpus acceptance, playground manual checks and release remain later work. The ZIP entry is intentionally empty until T-25; its functional behavior and shared-core identity are not yet verified. No publish/deployment occurred. Stopped at the milestone boundary; T-17 has not started.
 
-## M2 in progress
+## M2 completed verification
 
 Owner authorized continuing after M1. M2 case design is recorded in qa/test-cases.md before implementation. D-73 records the approved staged coverage gates and shared issue-infrastructure imports. T-17 is being implemented with catalogue parity enforced immediately.
 
@@ -136,3 +136,5 @@ T-22 implementation and functional verification pass: 250 unit tests, 100% lines
 Owner approved continuing size optimization (D-80). Currency membership now has one stored code sequence shared with its metadata, with all 178 prior verified records protected by a byte-for-byte digest regression test. Acceptance checks are in progress.
 
 T-22 final local acceptance passed: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; 12 browser tests, CLI baseline, five package and six tooling tests; lint/typecheck/build/size/publint/attw/licences/docs parity. D-80 authorizes continued internal optimization; shared currency membership preserves every prior record. Full core 39.56 kB and parser 35.84 kB meet unchanged limits. All M2 cases are resolved; T-22 CI and milestone review follow the push.
+
+M2 is complete. T-22 finished in b3d7697; CI run 39616305268 reports success and all acceptance steps passed (lint/typecheck job headers temporarily lagged their successful completed steps). All 63 designed M2 cases are resolved; qa/M2-report.md and qa/M2-review.md record the evidence, retained failures and deferred verification. TC-M2-011 is correctly marked as completed source research, with automated checksum vectors retained. Generated fixtures, batch/ZIP/exports/CLI processing, broad fuzzing, benchmarks, private-corpus and playground/manual acceptance remain later tasks. Stopped at the milestone boundary; T-23 has not started.
