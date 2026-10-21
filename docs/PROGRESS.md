@@ -40,7 +40,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-22 | Line and tax rules (EF050–EF066)                                   | done   | b3d7697          |
 | T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | done   | 730d9bb          |
 | T-24 | ZIP helpers: classification, junk, limits, errors                  | done   | 0baee55          |
-| T-25 | Streaming ZIP reader and `iterateAny`                              | done   | HEAD             |
+| T-25 | Streaming ZIP reader and `iterateAny`                              | done   | f7f8bbd          |
 | T-26 | Rows                                                               | todo   | —                |
 | T-27 | CSV                                                                | todo   | —                |
 | T-28 | CLI arguments, inputs and glob                                     | todo   | —                |
@@ -162,3 +162,7 @@ Open owner check-in for T-25: qa-test-run-loop requires a check-in after three c
 Owner approved continuing T-25 tooling fixes and retests (D-86). The callback error state now uses an object so TypeScript recognizes mutations inside the synchronous ZIP callback. Acceptance checks resumed.
 
 T-25 local acceptance complete: 290 unit tests, 99.02% lines / 96.24% branches, 15 browser tests; lint/typecheck/build/docs, five package tests, six tooling tests, publint/attw/licences pass. Core 39.10 kB, parser 33.81 kB, ZIP 49.12 kB. D-85 records bounded inflation/discard decoders; D-86 records resumed QA tooling work. Earlier failures and retests retained. Task finishing commit is HEAD; push and CI verification follow.
+
+T-25 first CI run 39662321351: Node 22 coverage hit the unchanged 5 s timeout in the 3 MiB descriptor case; other unit jobs and package checks passed. The synthetic descriptor now uses a 256 KiB random comment plus legal trailing XML whitespace, preserving exact 3 MiB inflated length, compressed size below one outer chunk and moderate ratio. Retesting without timeout changes.
+
+T-25 CI follow-up local retest: 290 tests pass, 99.02% lines / 96.24% branches; affected ESLint passes. All ten other jobs in the original CI passed. Pushing the test-data performance correction and awaiting fresh CI.
