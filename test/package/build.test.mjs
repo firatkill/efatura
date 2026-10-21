@@ -70,3 +70,18 @@ test('TC-M2-063 / D-74: published dist retains bundled dependency licence notice
   }
   assert.ok(notices.includes('Permission is hereby granted'));
 });
+
+test('TC-M2-010 / UT-12: identifier helpers are available in ESM and CJS', () => {
+  for (const mode of ['module', 'commonjs']) {
+    const imports =
+      mode === 'module'
+        ? "import { isValidVkn, isValidTckn, isValidUuid, classifyTaxId } from '@firatkill/efatura';"
+        : "const { isValidVkn, isValidTckn, isValidUuid, classifyTaxId } = require('@firatkill/efatura');";
+    const program =
+      imports +
+      "console.log(isValidVkn('9990000013') && isValidTckn('50000000128') && isValidUuid('00000000-0000-0000-0000-000000000001') && classifyTaxId('9990000013').scheme === 'VKN');";
+    const result = spawnSync(process.execPath, [`--input-type=${mode}`, '-e', program], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    assert.equal(result.stdout.trim(), 'true');
+  }
+});

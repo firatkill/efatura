@@ -68,3 +68,8 @@ export { validateInvoice } from './validate';
  * ISSUE_CATALOGUE.EF001.severity; // 'error'
  */
 export { ISSUE_CATALOGUE, ISSUE_CODES } from './validate/catalogue';
+/** Validate identifier checksums and classify tax identifiers.
+ * @example
+ * classifyTaxId('9990000013'); // { scheme: 'VKN', valid: true, anonymous: false }
+ */
+export { isValidVkn, isValidTckn, isValidUuid, classifyTaxId } from './ids';
