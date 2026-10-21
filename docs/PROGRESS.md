@@ -14,53 +14,53 @@
 
 The finishing commit is recorded when a task is completed. In its own completion commit, `HEAD` identifies that commit; later updates replace it with the hash.
 
-| Task | Description                                                        | Status | Finishing commit |
-| ---- | ------------------------------------------------------------------ | ------ | ---------------- |
-| T-01 | Scaffold the repository and tooling                                | done   | 5c060ad          |
-| T-02 | Build, exports map and package checks                              | done   | ce74eee          |
-| T-03 | Test runners and CI test jobs                                      | done   | 9f7ddf7          |
-| T-04 | Changesets, licence check, docs check, templates                   | done   | e5b5c4d          |
-| T-05 | Configuration, errors and internal helpers                         | done   | 7fd18e8          |
-| T-06 | Decimal module and minor units                                     | done   | 7a413ed          |
-| T-07 | Input decoding and guard                                           | done   | 6032094          |
-| T-08 | Namespace-resolved XML tree, query, select and paths               | done   | fbf42af          |
-| T-09 | Public model types and value conventions                           | done   | 748533d          |
-| T-10 | Code lists and their verification                                  | done   | 1a582d0          |
-| T-11 | Identity, references, exchange rate and due date mapping           | doing  | —                |
-| T-12 | Party mapping                                                      | done   | b2c6a5b          |
-| T-13 | Line, item, price, delivery and allowance mapping                  | done   | 3c150f0          |
-| T-14 | Taxes, withholding, totals, payment and computed totals            | done   | 76beb06          |
-| T-15 | Attachments and base64                                             | doing  | —                |
-| T-16 | `parseInvoice` orchestration                                       | todo   | —                |
-| T-17 | Issue framework, catalogue and messages                            | todo   | —                |
-| T-18 | Identifier algorithms                                              | todo   | —                |
-| T-19 | Identity and party rules (EF001–EF017)                             | todo   | —                |
-| T-20 | Currency and amount rules (EF020–EF035)                            | todo   | —                |
-| T-21 | Totals rules (EF040–EF049)                                         | todo   | —                |
-| T-22 | Line and tax rules (EF050–EF066)                                   | todo   | —                |
-| T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                |
-| T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                |
-| T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                |
-| T-26 | Rows                                                               | todo   | —                |
-| T-27 | CSV                                                                | todo   | —                |
-| T-28 | CLI arguments, inputs and glob                                     | todo   | —                |
-| T-29 | CLI outputs, summary, progress, exit codes and texts               | todo   | —                |
-| T-30 | CLI tests                                                          | todo   | —                |
-| T-31 | Fixture builder, identities and XSLT texts                         | todo   | —                |
-| T-32 | Scenarios, generation and manifest                                 | todo   | —                |
-| T-33 | Fixture check in CI                                                | todo   | —                |
-| T-34 | Snapshot tests                                                     | todo   | —                |
-| T-35 | Property and fuzz tests                                            | todo   | —                |
-| T-36 | Browser tests and benchmark                                        | todo   | —                |
-| T-37 | Playground scaffold, design tokens, fonts, theme, i18n, layout     | todo   | —                |
-| T-38 | Headers, CSP, build guards and samples                             | todo   | —                |
-| T-39 | Worker, client, dropzone, processing and cancel                    | todo   | —                |
-| T-40 | Results view: tables, cards, filters, sort, pagination, issues     | todo   | —                |
-| T-41 | Detail view and official view                                      | todo   | —                |
-| T-42 | Exports in the playground and third-party licences                 | todo   | —                |
-| T-43 | Playground E2E, accessibility, responsiveness and privacy tests    | todo   | —                |
-| T-44 | READMEs, release workflow and playground deploy                    | todo   | —                |
-| T-45 | Real-world check and release 0.1.0                                 | todo   | —                |
+| Task | Description                                                        | Status | Finishing commit                     |
+| ---- | ------------------------------------------------------------------ | ------ | ------------------------------------ |
+| T-01 | Scaffold the repository and tooling                                | done   | 5c060ad                              |
+| T-02 | Build, exports map and package checks                              | done   | ce74eee                              |
+| T-03 | Test runners and CI test jobs                                      | done   | 9f7ddf7                              |
+| T-04 | Changesets, licence check, docs check, templates                   | done   | e5b5c4d                              |
+| T-05 | Configuration, errors and internal helpers                         | done   | 7fd18e8                              |
+| T-06 | Decimal module and minor units                                     | done   | 7a413ed                              |
+| T-07 | Input decoding and guard                                           | done   | 6032094                              |
+| T-08 | Namespace-resolved XML tree, query, select and paths               | done   | fbf42af                              |
+| T-09 | Public model types and value conventions                           | done   | 748533d                              |
+| T-10 | Code lists and their verification                                  | done   | 1a582d0                              |
+| T-11 | Identity, references, exchange rate and due date mapping           | done   | 8fb44f9                              |
+| T-12 | Party mapping                                                      | done   | b2c6a5b                              |
+| T-13 | Line, item, price, delivery and allowance mapping                  | done   | 3c150f0                              |
+| T-14 | Taxes, withholding, totals, payment and computed totals            | done   | 76beb06                              |
+| T-15 | Attachments and base64                                             | done   | 1b40f4a                              |
+| T-16 | `parseInvoice` orchestration                                       | doing  | HEAD (local checks pass; CI pending) |
+| T-17 | Issue framework, catalogue and messages                            | todo   | —                                    |
+| T-18 | Identifier algorithms                                              | todo   | —                                    |
+| T-19 | Identity and party rules (EF001–EF017)                             | todo   | —                                    |
+| T-20 | Currency and amount rules (EF020–EF035)                            | todo   | —                                    |
+| T-21 | Totals rules (EF040–EF049)                                         | todo   | —                                    |
+| T-22 | Line and tax rules (EF050–EF066)                                   | todo   | —                                    |
+| T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                                    |
+| T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                                    |
+| T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                                    |
+| T-26 | Rows                                                               | todo   | —                                    |
+| T-27 | CSV                                                                | todo   | —                                    |
+| T-28 | CLI arguments, inputs and glob                                     | todo   | —                                    |
+| T-29 | CLI outputs, summary, progress, exit codes and texts               | todo   | —                                    |
+| T-30 | CLI tests                                                          | todo   | —                                    |
+| T-31 | Fixture builder, identities and XSLT texts                         | todo   | —                                    |
+| T-32 | Scenarios, generation and manifest                                 | todo   | —                                    |
+| T-33 | Fixture check in CI                                                | todo   | —                                    |
+| T-34 | Snapshot tests                                                     | todo   | —                                    |
+| T-35 | Property and fuzz tests                                            | todo   | —                                    |
+| T-36 | Browser tests and benchmark                                        | todo   | —                                    |
+| T-37 | Playground scaffold, design tokens, fonts, theme, i18n, layout     | todo   | —                                    |
+| T-38 | Headers, CSP, build guards and samples                             | todo   | —                                    |
+| T-39 | Worker, client, dropzone, processing and cancel                    | todo   | —                                    |
+| T-40 | Results view: tables, cards, filters, sort, pagination, issues     | todo   | —                                    |
+| T-41 | Detail view and official view                                      | todo   | —                                    |
+| T-42 | Exports in the playground and third-party licences                 | todo   | —                                    |
+| T-43 | Playground E2E, accessibility, responsiveness and privacy tests    | todo   | —                                    |
+| T-44 | READMEs, release workflow and playground deploy                    | todo   | —                                    |
+| T-45 | Real-world check and release 0.1.0                                 | todo   | —                                    |
 
 ## Open questions for the owner
 
@@ -99,4 +99,8 @@ T-13 local acceptance passed: 122 unit tests, 100% line and 96.26% branch covera
 
 T-14 local acceptance passed: 142 unit tests, 100% lines and 96.67% branches, lint/typecheck, browser suite, build/size/docs. CI run 39579431743 passed all jobs.
 
-T-15 local acceptance passed: 172 unit tests, 100% lines and 96.75% branches, lint/typecheck, browser suite and build/size/docs. CI pending.
+T-15 local acceptance passed: 172 unit tests, 100% lines and 96.75% branches, lint/typecheck, browser suite and build/size/docs. CI run 39580087237 passed all jobs.
+
+T-16 parser orchestration, public exports and D-71 namespace descriptors are implemented. Correctness checks pass: 184 unit tests, 100% lines / 97.12% branches, 12 browser tests, lint, typecheck, build, package smoke, publint, attw, docs parity and licences. All 434 code-list records were compared before and after compact internal storage and are identical. Decimal operations are independently tree-shakeable behind the unchanged public facade. D-72 approved continuing optimization. The size checks now pass after excluding unused profile/type display labels from parser-only imports; final aggregate verification is underway. The ZIP entry is intentionally empty until T-25, so its functional behavior and shared-core identity cannot yet be tested. M1 is not complete and T-17 has not started.
+
+T-16 final local acceptance passed: `pnpm check` and `pnpm test:browser`; 184 unit tests, 12 browser cases, 100% line and 96.79% branch coverage. Final size: full core 39.95 kB / 40 kB, parser-only 35.70 kB / 36 kB. D-72 records approval to continue optimization after the QA check-in. The fourth size-only attempt and final lint correction are retained in the ledger; all M1 cases are now resolved locally. Remote CI and milestone review remain before closure.

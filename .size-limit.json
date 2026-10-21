@@ -6,9 +6,9 @@
     "limit": "40 kB"
   },
   {
-    "name": "core: VERSION placeholder until T-16",
+    "name": "core: parseInvoice",
     "path": "dist/index.js",
-    "import": "{ VERSION }",
+    "import": "{ parseInvoice }",
     "limit": "36 kB"
   },
   {

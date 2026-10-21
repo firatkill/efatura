@@ -1135,6 +1135,127 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-034",
+      "ac_reference": "FR-01, FR-04",
+      "milestone": "M1 Model + core parser",
+      "title": "Parser orchestration",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "blocked",
+          "actual_result": "Targeted orchestration tests pass, but typechecking exposed the unspecified representation of an absent NOT_INVOICE namespace: XmlElement.ns allows null while fatal-error details do not. Owner asked to approve the existing namespace descriptor convention; implementation decision pending.",
+          "note": "Targeted orchestration tests pass, but typechecking exposed the unspecified representation of an absent NOT_INVOICE namespace: XmlElement.ns allows null while fatal-error details do not. Owner asked to approve the existing namespace descriptor convention; implementation decision pending."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-71 owner-approved namespace descriptors implemented and tested for URI, absent namespace and undeclared prefix. Full parser orchestration, ESM/CJS self-reference and three-browser tests pass.",
+          "note": "D-71 owner-approved namespace descriptors implemented and tested for URI, absent namespace and undeclared prefix. Full parser orchestration, ESM/CJS self-reference and three-browser tests pass."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-035",
+      "ac_reference": "FR-04, FR-13",
+      "milestone": "M1 Model + core parser",
+      "title": "Parser options and issues",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Targeted options tests passed, but lint rejected defensive checks on the statically narrowed ParseOptions type. The runtime-validation boundary now accepts unknown and narrows the supplied values explicitly.",
+          "note": "Targeted options tests passed, but lint rejected defensive checks on the statically narrowed ParseOptions type. The runtime-validation boundary now accepts unknown and narrows the supplied values explicitly."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Defensive options validation now uses an unknown input boundary. Lint/typecheck, rule validation, deterministic issue sorting/deduplication and option behavior pass in the full 184-test suite.",
+          "note": "Defensive options validation now uses an unknown input boundary. Lint/typecheck, rule validation, deterministic issue sorting/deduplication and option behavior pass in the full 184-test suite."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-037",
+      "ac_reference": "NFR-05, NFR-11, NFR-18",
+      "milestone": "M1 Model + core parser",
+      "title": "Public package contract",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Initial real-parser size check: full core 40.27 kB vs 40 kB; parseInvoice 39.11 kB vs 36 kB. Investigating unused code-list retention; budgets unchanged.",
+          "note": "Initial real-parser size check: full core 40.27 kB vs 40 kB; parseInvoice 39.11 kB vs 36 kB. Investigating unused code-list retention; budgets unchanged."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Second size run after pure currency-table initialization: full core 40.25 kB; parseInvoice 36.72 kB. Both unchanged budgets exceeded.",
+          "note": "Second size run after pure currency-table initialization: full core 40.25 kB; parseInvoice 36.72 kB. Both unchanged budgets exceeded."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Third size run after data-preserving compact tables and independently tree-shakeable decimal operations: full core 39.88 kB passes; parseInvoice 36.12 kB exceeds by 121 B. Owner check-in requested before further optimization. All 434 verified records compare equal to the pre-refactor data; 34 targeted tests pass.",
+          "note": "Third size run after data-preserving compact tables and independently tree-shakeable decimal operations: full core 39.88 kB passes; parseInvoice 36.12 kB exceeds by 121 B. Owner check-in requested before further optimization. All 434 verified records compare equal to the pre-refactor data; 34 targeted tests pass."
+        },
+        {
+          "result": "blocked",
+          "actual_result": "Awaiting owner answer to the required three-failure check-in before further size optimization.",
+          "note": "Independent verification passed: build, lint/typecheck (after preserving the unit-table nonbreaking space with a Unicode escape), 184 unit tests and coverage, 12 browser cases, ESM/CJS package smoke, publint, attw, docs parity and licences. Full core is within budget; parseInvoice remains 121 B over. No budget or threshold changed. No task commit or push yet."
+        },
+        {
+          "result": "fail",
+          "actual_result": "After D-72 approval, pure configuration initializers alone did not resolve the size excess: parser 36.14 kB; full core 39.88 kB.",
+          "note": "After D-72 approval, pure configuration initializers alone did not resolve the size excess: parser 36.14 kB; full core 39.88 kB."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Separated profile/type membership from display labels so parser-only imports omit unused labels; all budgets unchanged and passing: parser 35.70 kB, full core 39.89 kB. Build declarations pass. Completing final aggregate checks.",
+          "note": "Separated profile/type membership from display labels so parser-only imports omit unused labels; all budgets unchanged and passing: parser 35.70 kB, full core 39.89 kB. Build declarations pass. Completing final aggregate checks."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Final aggregate lint rejected two non-nullable type assertions in the split code-list representation. Replaced them with explicit static-table integrity guards; public values remain unchanged.",
+          "note": "Final aggregate lint rejected two non-nullable type assertions in the split code-list representation. Replaced them with explicit static-table integrity guards; public values remain unchanged."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Final pnpm check and three-browser suite passed after the explicit table guard correction. Full core 39.95 kB / 40 kB; parser 35.70 kB / 36 kB. Unit suite: 184 tests, 100% lines and 96.79% branches; decimal lines 100%. Package formats, CLI baseline, tooling, publint, attw, licences and docs parity passed. All 434 code-list records remain identical. D-72 authorizes the completed optimization.",
+          "note": "Final pnpm check and three-browser suite passed after the explicit table guard correction. Full core 39.95 kB / 40 kB; parser 35.70 kB / 36 kB. Unit suite: 184 tests, 100% lines and 96.79% branches; decimal lines 100%. Package formats, CLI baseline, tooling, publint, attw, licences and docs parity passed. All 434 code-list records remain identical. D-72 authorizes the completed optimization."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": "docs/PROGRESS.md#open-questions-for-the-owner",
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-036",
+      "ac_reference": "FR-16, NFR-09",
+      "milestone": "M1 Model + core parser",
+      "title": "JSON safety and determinism",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Full model roundtrips through JSON and structuredClone in Node, Chromium, Firefox and WebKit. Full unit suite: 184 tests; 100% lines, 97.12% branches. Decimal operations retain 100% line coverage after tree-shaking refactor.",
+          "note": "Full model roundtrips through JSON and structuredClone in Node, Chromium, Firefox and WebKit. Full unit suite: 184 tests; 100% lines, 97.12% branches. Decimal operations retain 100% line coverage after tree-shaking refactor."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

@@ -81,12 +81,14 @@ The core is a pure function pipeline: bytes → text → XML tree → model → 
 
 Type-only imports (`import type`) from `src/types.ts` are allowed in every module (for example `export/*` uses the `BatchItem` type). ESLint enforces the Node built-in ban (section 17.3). The self-reference rule exists so that `dist/zip.*` and `dist/cli.js` share one copy of the core with the consumer (one `EfaturaParseError` class, no dual-package hazard).
 
+Internal storage and bundling: verified code-list labels may use fixed-column delimited literals, reconstructed into the specified public map objects without changing values. Profile/type membership is independent of display labels. Exact decimal operations live in `src/decimal/operations.ts` behind the unchanged public `decimal` facade so unused operations can be removed from parser-only bundles. These are representation-only optimizations; all public types and budgets remain unchanged.
+
 ### 1.3 Data flow of one `parseInvoice` call
 
 1. `decodeInput(input)` → `{ text, encoding, issues }` (section 6.1).
 2. `guardXml(text)` → throws `EfaturaParseError` for empty input, oversize, DOCTYPE, malformed XML (section 6.2).
 3. `parseXmlTree(text)` → `XmlElement` root with resolved namespaces plus EF009 issues (sections 6.3–6.4).
-4. Root check: local name `Invoice`, else throw `NOT_INVOICE` with `details: { root, namespace }`. When the root local name is `StandardBusinessDocument` (GİB envelope; namespace `http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader`, verify against GİB UBL-TR documentation), add `hint: 'envelope'`; the playground then shows `fileError.NOT_INVOICE.envelope`.
+4. Root check: local name `Invoice`, else throw `NOT_INVOICE` with `details: { root, namespace }`. The namespace detail is the namespace URI when present, `'none'` when absent, or `'prefix:x'` for an undeclared prefix `x`, using the same descriptors as EF009 (D-71). When the root local name is `StandardBusinessDocument` (GİB envelope; namespace `http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader`, verify against GİB UBL-TR documentation), add `hint: 'envelope'`; the playground then shows `fileError.NOT_INVOICE.envelope`.
 5. `mapInvoice(root, ctx)` → `Invoice` plus mapping issues (EF015, EF023, EF030, EF031, EF032) (section 7).
 6. `validateInvoice(invoice, options)` → validation issues (section 9), unless `validate: false`.
 7. Issues are merged, de-duplicated (same code + path + message), sorted by severity (error, warning, info), then by path (code-point order), then by code. Severity overrides from `options.rules` are applied last; rules set to `'off'` are dropped.
@@ -506,6 +508,65 @@ export const PLAYGROUND = {
   filterDebounceMs: 200,
   mobileBreakpointPx: 640,
 } as const;
+/** Transitional rule names for T-16 option validation; T-17 replaces this with ISSUE_CODES.
+ * @example
+ * KNOWN_ISSUE_CODES.includes('EF009'); // true
+ */
+export const KNOWN_ISSUE_CODES = [
+  'EF001',
+  'EF002',
+  'EF003',
+  'EF004',
+  'EF005',
+  'EF006',
+  'EF007',
+  'EF008',
+  'EF009',
+  'EF010',
+  'EF011',
+  'EF012',
+  'EF013',
+  'EF014',
+  'EF015',
+  'EF016',
+  'EF017',
+  'EF020',
+  'EF021',
+  'EF022',
+  'EF023',
+  'EF024',
+  'EF025',
+  'EF026',
+  'EF030',
+  'EF031',
+  'EF032',
+  'EF035',
+  'EF040',
+  'EF041',
+  'EF042',
+  'EF043',
+  'EF044',
+  'EF045',
+  'EF046',
+  'EF047',
+  'EF048',
+  'EF049',
+  'EF050',
+  'EF051',
+  'EF052',
+  'EF053',
+  'EF054',
+  'EF055',
+  'EF060',
+  'EF061',
+  'EF062',
+  'EF063',
+  'EF064',
+  'EF065',
+  'EF066',
+  'EF090',
+  'EF091',
+] as const;
 ```
 
 The playground imports `PLAYGROUND` through a dedicated export `efaturaConfig` (section 5.1) so it does not duplicate numbers.

@@ -789,6 +789,9 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-67 | A-07: All 28 specified unit codes occur in current GİB executable membership. | English labels checked against UN/ECE Rec. 20 revision 8e as distributed by OASIS UBL 2.1. Direct UNECE revision 17e access returned 403; no claim of verifying that revision. Correct C62 to one and NIU to number of international units. | T-10, checked 2026-10-21; source links in docs/CODE-LIST-VERIFICATION.md |
 | D-68 | A-11: 178 active alphabetic currency codes and precisions verified against SIX List One, published 2026-09-17. | N.A. maps to null; required 12 Turkish labels supplied and remaining English labels retained in both languages. | T-10, checked 2026-10-21; source links in docs/CODE-LIST-VERIFICATION.md |
 | D-69 | Owner approved combined EF015 diagnostic details: reason, value and resolved scheme, plus original schemeId for the case-normalization variant. | Reconciles §7.5.1 with §9.3 without changing tax-ID selection or severity. | T-12, owner approval 2026-10-21 |
+| D-70 | Verified the StandardBusinessDocumentHeader namespace in the official e-Fatura package envelope XSD. | The namespace matches TRD §1.3; NOT_INVOICE envelope hints can use the specified root name. | T-16, checked 2026-10-21; e-FaturaPaketi/xsd/Envelope/StandardBusinessDocumentHeader.xsd |
+| D-71 | NOT_INVOICE uses the existing namespace descriptors: URI, `none`, or `prefix:x` for an undeclared prefix. | Resolves the nullable XML namespace versus string/number fatal-error details contract without widening the API. | Owner approved, 2026-10-21; T-16 |
+| D-72 | Continue T-16 bundle optimization after the QA three-failure check-in; keep all size budgets unchanged. | Owner authorized further work on the remaining parser-only size excess. | Owner approved, 2026-10-21; T-16 |
 
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 

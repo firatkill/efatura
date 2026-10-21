@@ -1,6 +1,6 @@
 import { CURRENCIES } from '../codes/currencies';
 import { TRY_ALIASES } from '../config';
-import { decimal } from './decimal';
+import * as decimal from './operations';
 
 /** Get the currency's precision, including Turkish-lira aliases.
  * @example

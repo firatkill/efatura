@@ -4,6 +4,7 @@
  * IDENTITIES.SUP_A.taxId;
  */
 export const IDENTITIES = {
+  FOREIGN: { name: 'Example Trading GmbH (fictitious)', taxId: null, scheme: null, identifier: 'F-0001' },
   SUP_A: { name: 'Örnek Yazılım Anonim Şirketi', taxId: '9990000013', scheme: 'VKN' },
   PER_A: { name: 'Ayşe Örnek', taxId: '50000000128', scheme: 'TCKN' },
   BAD_VKN: { name: 'Örnek Hatalı Anonim Şirketi', taxId: '9990000014', scheme: 'VKN' },
