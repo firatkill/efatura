@@ -1068,6 +1068,73 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-031",
+      "ac_reference": "FR-12",
+      "milestone": "M1 Model + core parser",
+      "title": "Base64 decoding",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Base64 cases passed, but lint rejected unnecessary string casts in the parameterized tests. Removed the casts without changing expectations.",
+          "note": "Base64 cases passed, but lint rejected unnecessary string casts in the parameterized tests. Removed the casts without changing expectations."
+        },
+        {
+          "result": "pass",
+          "actual_result": "UT-04 passes standard padding, omitted padding, invalid-character positions, empty input and 100 byte-array round trips; lint casts corrected.",
+          "note": "UT-04 passes standard padding, omitted padding, invalid-character positions, empty input and 100 byte-array round trips; lint casts corrected."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-032",
+      "ac_reference": "FR-12",
+      "milestone": "M1 Model + core parser",
+      "title": "Attachment metadata and XSLT",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Attachment cases passed, but lint rejected unnecessary string casts in the XSLT truth-table test. Removed the casts and added direct mapped-size verification for 100 synthetic byte arrays.",
+          "note": "Attachment cases passed, but lint rejected unnecessary string casts in the XSLT truth-table test. Removed the casts and added direct mapped-size verification for 100 synthetic byte arrays."
+        },
+        {
+          "result": "pass",
+          "actual_result": "UT-20 passes metadata/data modes, every XSLT predicate and PDF/image exclusion, lazy invalid-data retention and mapped size for 100 synthetic byte arrays. Full checks: 172 units, 100% lines/96.75% branches, lint/typecheck, browsers, build/size/docs.",
+          "note": "UT-20 passes metadata/data modes, every XSLT predicate and PDF/image exclusion, lazy invalid-data retention and mapped size for 100 synthetic byte arrays. Full checks: 172 units, 100% lines/96.75% branches, lint/typecheck, browsers, build/size/docs."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-033",
+      "ac_reference": "FR-12",
+      "milestone": "M1 Model + core parser",
+      "title": "Attachment helpers",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Lazy bytes/text helpers pass UTF-8, windows-1254, unsupported encoding fallback, missing/invalid data errors and first-XSLT selection.",
+          "note": "Lazy bytes/text helpers pass UTF-8, windows-1254, unsupported encoding fallback, missing/invalid data errors and first-XSLT selection."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
