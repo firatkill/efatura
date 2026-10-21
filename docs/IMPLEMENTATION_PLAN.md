@@ -13,16 +13,16 @@ Ordered tasks to build efatura from an empty folder to a published 0.1.0 and a d
 
 ## Milestone overview
 
-| Milestone | Tasks | Exit criteria |
-|---|---|---|
-| M0 Setup | T-01 – T-04 | Tooling, build, package checks, test runners and CI skeleton green |
-| M1 Model + core parser | T-05 – T-16 | `parseInvoice` maps every field in TRD §7 on hand-written XML |
-| M2 Validation | T-17 – T-22 | Every issue code has positive and negative tests |
-| M3 ZIP + batch + exports | T-23 – T-27 | Batch, ZIP limits, rows and CSV done; size budgets met |
-| M4 CLI | T-28 – T-30 | CLI tests pass on Linux and Windows |
+| Milestone                     | Tasks       | Exit criteria                                                                        |
+| ----------------------------- | ----------- | ------------------------------------------------------------------------------------ |
+| M0 Setup                      | T-01 – T-04 | Tooling, build, package checks, test runners and CI skeleton green                   |
+| M1 Model + core parser        | T-05 – T-16 | `parseInvoice` maps every field in TRD §7 on hand-written XML                        |
+| M2 Validation                 | T-17 – T-22 | Every issue code has positive and negative tests                                     |
+| M3 ZIP + batch + exports      | T-23 – T-27 | Batch, ZIP limits, rows and CSV done; size budgets met                               |
+| M4 CLI                        | T-28 – T-30 | CLI tests pass on Linux and Windows                                                  |
 | M5 Fixtures + full test suite | T-31 – T-36 | 43 scenarios, manifest check, snapshots, property, browser and benchmark tests in CI |
-| M6 Playground | T-37 – T-43 | Static site complete; E2E, axe and privacy tests pass; preview deploy |
-| M7 Docs + release + deploy | T-44 – T-45 | 0.1.0 on npm with provenance; playground live at efatura.firatkil.com |
+| M6 Playground                 | T-37 – T-43 | Static site complete; E2E, axe and privacy tests pass; preview deploy                |
+| M7 Docs + release + deploy    | T-44 – T-45 | 0.1.0 on npm with provenance; playground live at efatura.firatkil.com                |
 
 ---
 
@@ -628,45 +628,45 @@ Ordered tasks to build efatura from an empty folder to a published 0.1.0 and a d
 
 ## Traceability
 
-| Requirement | Tasks |
-|---|---|
-| FR-01 – FR-04 | T-07, T-08, T-16 |
-| FR-05 | T-09, T-11 |
-| FR-06 | T-12 |
-| FR-07 | T-13 |
-| FR-08 | T-14 |
-| FR-09 | T-13, T-14 |
-| FR-10, FR-11 | T-11, T-14 |
-| FR-12 | T-15 |
-| FR-13 | T-08, T-16 |
-| FR-14 | T-10 |
-| FR-15 | T-06 |
-| FR-16 | T-16 |
-| FR-17 – FR-20 | T-17 – T-22 |
-| FR-21 | T-18 |
-| FR-22, FR-23, FR-25, FR-26, FR-28 | T-23 |
-| FR-24, FR-27, FR-29 | T-24, T-25 |
-| FR-30 – FR-32 | T-26 |
-| FR-33 | T-27 |
-| FR-34 – FR-38 | T-28 – T-30 |
-| FR-39 – FR-52 | T-37 – T-43 |
-| FR-53 – FR-56 | T-31 – T-33, T-04 |
-| FR-57 | T-45 |
-| FR-58 – FR-61 | T-44, T-45 |
-| NFR-01, NFR-02 | T-39, T-43, T-45 |
-| NFR-03 | T-36 |
-| NFR-04 | T-25 |
-| NFR-05 | T-02, T-16, T-25, T-42 |
-| NFR-06, NFR-12 | T-38, T-41, T-43 |
-| NFR-07, NFR-08 | T-37, T-40, T-43 |
-| NFR-09, NFR-10 | T-32, T-34, T-35 |
-| NFR-11 | T-02 |
-| NFR-13 | T-03 and every code task |
-| NFR-14 | T-01, T-03, T-36 |
-| NFR-15 | T-04, T-42 |
-| NFR-16 | T-30 |
-| NFR-17 | T-01 |
-| NFR-18 | T-04, T-44 |
+| Requirement                       | Tasks                    |
+| --------------------------------- | ------------------------ |
+| FR-01 – FR-04                     | T-07, T-08, T-16         |
+| FR-05                             | T-09, T-11               |
+| FR-06                             | T-12                     |
+| FR-07                             | T-13                     |
+| FR-08                             | T-14                     |
+| FR-09                             | T-13, T-14               |
+| FR-10, FR-11                      | T-11, T-14               |
+| FR-12                             | T-15                     |
+| FR-13                             | T-08, T-16               |
+| FR-14                             | T-10                     |
+| FR-15                             | T-06                     |
+| FR-16                             | T-16                     |
+| FR-17 – FR-20                     | T-17 – T-22              |
+| FR-21                             | T-18                     |
+| FR-22, FR-23, FR-25, FR-26, FR-28 | T-23                     |
+| FR-24, FR-27, FR-29               | T-24, T-25               |
+| FR-30 – FR-32                     | T-26                     |
+| FR-33                             | T-27                     |
+| FR-34 – FR-38                     | T-28 – T-30              |
+| FR-39 – FR-52                     | T-37 – T-43              |
+| FR-53 – FR-56                     | T-31 – T-33, T-04        |
+| FR-57                             | T-45                     |
+| FR-58 – FR-61                     | T-44, T-45               |
+| NFR-01, NFR-02                    | T-39, T-43, T-45         |
+| NFR-03                            | T-36                     |
+| NFR-04                            | T-25                     |
+| NFR-05                            | T-02, T-16, T-25, T-42   |
+| NFR-06, NFR-12                    | T-38, T-41, T-43         |
+| NFR-07, NFR-08                    | T-37, T-40, T-43         |
+| NFR-09, NFR-10                    | T-32, T-34, T-35         |
+| NFR-11                            | T-02                     |
+| NFR-13                            | T-03 and every code task |
+| NFR-14                            | T-01, T-03, T-36         |
+| NFR-15                            | T-04, T-42               |
+| NFR-16                            | T-30                     |
+| NFR-17                            | T-01                     |
+| NFR-18                            | T-04, T-44               |
 
 ## Release checklist (0.1.0)
 

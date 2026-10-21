@@ -36,6 +36,68 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-001",
+      "ac_reference": "NFR-14, NFR-17",
+      "milestone": "M0 Setup",
+      "title": "Pinned workspace installs and strict checks pass",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Frozen install, lint, typecheck passed; exact dependency versions verified.",
+          "note": "Frozen install, lint, typecheck passed; exact dependency versions verified."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-002",
+      "ac_reference": "NFR-14",
+      "milestone": "M0 Setup",
+      "title": "Core rejects Node built-ins",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Vitest boundary test confirms ESLint rejects node:fs in browser core.",
+          "note": "Vitest boundary test confirms ESLint rejects node:fs in browser core."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-004",
+      "ac_reference": "NFR-15",
+      "milestone": "M0 Setup",
+      "title": "npm account and package name verified",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Initial npm whoami returned ENEEDAUTH; owner notified.",
+          "note": "Initial npm whoami returned ENEEDAUTH; owner notified."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Owner logged in; npm whoami returned firatkill; package lookup returned expected 404.",
+          "note": "Owner logged in; npm whoami returned firatkill; package lookup returned expected 404."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
