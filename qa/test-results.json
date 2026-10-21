@@ -1201,6 +1201,15 @@
           "result": "pass",
           "actual_result": "Defensive options validation now uses an unknown input boundary. Lint/typecheck, rule validation, deterministic issue sorting/deduplication and option behavior pass in the full 184-test suite.",
           "note": "Defensive options validation now uses an unknown input boundary. Lint/typecheck, rule validation, deterministic issue sorting/deduplication and option behavior pass in the full 184-test suite."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Three mapping-isolation assertions encountered newly registered EF001 validation issues.",
+          "note": "Tests intended to isolate mapping now explicitly set validate:false, or select EF009 by code instead of assuming it sorts first. New integration tests cover default validation and overrides."
+        },
+        {
+          "result": "pass",
+          "note": "Mapping-scope tests pass with explicit validate:false; default validation/override integration covered in TC-M2-013. All 217 unit tests pass."
         }
       ],
       "regression_of": null,
@@ -1520,6 +1529,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
         }
       ],
       "regression_of": null,
@@ -1544,6 +1558,11 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
         }
       ],
       "regression_of": null,
@@ -1770,6 +1789,301 @@
           "result": "pass",
           "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
           "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-012",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF001 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 targeted required-field cases pass, including approved D-76 all-null totals and present invalid amounts.",
+          "note": "T-19 targeted required-field cases pass, including approved D-76 all-null totals and present invalid amounts."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-013",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF002 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 invalid/corrected/missing UUID targeted cases pass.",
+          "note": "T-19 invalid/corrected/missing UUID targeted cases pass."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-014",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF003 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-015",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF004 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-016",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF005 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-017",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF006 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-018",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF007 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-019",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF008 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-021",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF010 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-022",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF011 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-023",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF012 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-024",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF013 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-025",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF014 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-027",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF016 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-028",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF017 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
+          "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
         }
       ],
       "regression_of": null,

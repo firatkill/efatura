@@ -2267,6 +2267,8 @@ Test vectors (UT-11):
 
 Notation: `T` = tolerance; `LEA`, `TEA`, `TIA`, `ATA`, `CTA`, `PRA`, `PA` = `totals.lineExtensionAmount.value`, `taxExclusiveAmount`, `taxInclusiveAmount`, `allowanceTotalAmount`, `chargeTotalAmount`, `payableRoundingAmount`, `payableAmount` (all Decimals); `≈` means `decimal.within(x, y, T)`; `Σ` is `decimal.sum` over non-null values. "M" in the Kind column marks a mapping issue (produced while reading, kept when `validate: false`); "V" a validation rule; "B" a batch issue.
 
+D-76: EF001 detects an absent/empty `cac:LegalMonetaryTotal` when all seven `invoice.totals` fields are null. This is model-based and independent of `includeRaw`. A present Amount object with invalid numeric text is not absent (EF030 handles it).
+
 #### 9.3.1 Rules
 
 | Code  | Sev.    | Kind | Check (issue raised when)                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Path                                                      | Params / details                                                  |
