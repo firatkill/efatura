@@ -1,3 +1,4 @@
+import { totalsRules } from './rules/totals';
 import { currencyRules } from './rules/currency';
 import { identityRules } from './rules/identity';
 import { partyRules } from './rules/parties';
@@ -42,7 +43,7 @@ export function runRules(invoice: Invoice, rules: readonly Rule[], options: Pars
  */
 export function validationIssues(invoice: Invoice, options: ParseOptions = {}): Issue[] {
   // T-19–T-22 register category rules in catalogue order.
-  return runRules(invoice, [identityRules, partyRules, currencyRules], options);
+  return runRules(invoice, [identityRules, partyRules, currencyRules, totalsRules], options);
 }
 
 /** Validate an already-parsed model; mapping diagnostics are not recreated.
