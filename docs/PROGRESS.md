@@ -27,8 +27,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-09 | Public model types and value conventions                           | done   | 748533d          |
 | T-10 | Code lists and their verification                                  | done   | 1a582d0          |
 | T-11 | Identity, references, exchange rate and due date mapping           | doing  | —                |
-| T-12 | Party mapping                                                      | doing  | —                |
-| T-13 | Line, item, price, delivery and allowance mapping                  | todo   | —                |
+| T-12 | Party mapping                                                      | done   | b2c6a5b          |
+| T-13 | Line, item, price, delivery and allowance mapping                  | doing  | —                |
 | T-14 | Taxes, withholding, totals, payment and computed totals            | todo   | —                |
 | T-15 | Attachments and base64                                             | todo   | —                |
 | T-16 | `parseInvoice` orchestration                                       | todo   | —                |
@@ -93,4 +93,6 @@ T-11 local acceptance passed: 113 unit tests, lint/typecheck, 100% line and 97.3
 
 T-12 independent party/address/contact field mapping is implemented; targeted UT-16 field tests and full local checks pass: 115 unit tests, lint/typecheck, 100% lines and 97.47% branches, nine browser cases, build/size/docs. The prescribed synthetic identity subset is introduced now for these tests; T-31 completes the generator identities. EF015 combined details approved in D-69; completing tax-ID resolution.
 
-T-12 tax-ID resolution and approved EF015 details are complete. Local checks passed: 118 unit tests, 100% line and 97.60% branch coverage, lint/typecheck, browser suite and build/size/docs. CI pending.
+T-12 tax-ID resolution and approved EF015 details are complete. Local checks passed: 118 unit tests, 100% line and 97.60% branch coverage, lint/typecheck, browser suite and build/size/docs. CI run 39578422078 passed all jobs.
+
+T-13 local acceptance passed: 122 unit tests, 100% line and 96.26% branch coverage, lint/typecheck, browser suite and build/size/docs. Tax conversion is injected through the typed boundary until T-14. CI pending.

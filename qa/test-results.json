@@ -973,6 +973,44 @@
       "root_cause_group": null,
       "clickup_task": "docs/PROGRESS.md#open-questions-for-the-owner (repository override: owner escalation, no ClickUp)",
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-026",
+      "ac_reference": "FR-07",
+      "milestone": "M1 Model + core parser",
+      "title": "Line mapping",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All line/item/price/delivery/allowance fields and absent aggregate conventions pass. Full local checks: 122 unit tests, 100% lines/96.26% branches, lint/typecheck, nine browser cases, build/size/docs.",
+          "note": "All line/item/price/delivery/allowance fields and absent aggregate conventions pass. Full local checks: 122 unit tests, 100% lines/96.26% branches, lint/typecheck, nine browser cases, build/size/docs."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M1-027",
+      "ac_reference": "FR-07",
+      "milestone": "M1 Model + core parser",
+      "title": "Merge line taxes",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Multiple ordinary line tax totals merge with exact decimal sum, joined raw texts, first currency and ordered subtotals. Withholding remains separate. T-14 supplies the tax mapper through the typed boundary.",
+          "note": "Multiple ordinary line tax totals merge with exact decimal sum, joined raw texts, first currency and ordered subtotals. Withholding remains separate. T-14 supplies the tax mapper through the typed boundary."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
