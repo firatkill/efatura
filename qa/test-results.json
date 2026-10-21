@@ -216,6 +216,11 @@
           "result": "pass",
           "actual_result": "Built CLI version test passed.",
           "note": "Built CLI version test passed."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Approved direct Node chmodSync callback: local CLI and package tests passed; Windows retest follows in CI.",
+          "note": "Approved direct Node chmodSync callback: local CLI and package tests passed; Windows retest follows in CI."
         }
       ],
       "regression_of": null,
