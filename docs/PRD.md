@@ -775,6 +775,7 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-53 | Replace the tsup shell onSuccess command with a direct Node chmodSync callback. | Owner approved the correction after Windows CI lost the path separator. | T-03, 2026-10-21 |
 | D-54 | Add Zlib to the production licence allowlist. | Owner approved the licence of pako, a transitive dependency of the prescribed Excel writer; no new runtime dependency. | T-04, 2026-10-21 |
 | D-55 | Include . alongside playground in pnpm workspace packages. | Owner approved explicit root membership so Changesets discovers the published package. | T-04, 2026-10-21 |
+| D-56 | Verified the T-06 currency subset against SIX ISO 4217 List One, published 2026-09-17: TRY/USD/EUR/GBP/CHF 2, JPY 0, KWD 3, XAU N.A. | Official list checked 2026-10-21; full A-11 verification remains T-10. | T-06; https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml |
 
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
