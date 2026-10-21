@@ -36,8 +36,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-18 | Identifier algorithms                                              | done   | ee82cde          |
 | T-19 | Identity and party rules (EF001–EF017)                             | done   | 29e3607          |
 | T-20 | Currency and amount rules (EF020–EF035)                            | done   | 6f32db8          |
-| T-21 | Totals rules (EF040–EF049)                                         | done   | HEAD             |
-| T-22 | Line and tax rules (EF050–EF066)                                   | todo   | —                |
+| T-21 | Totals rules (EF040–EF049)                                         | done   | f65f3b4          |
+| T-22 | Line and tax rules (EF050–EF066)                                   | done   | HEAD             |
 | T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                |
 | T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                |
 | T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                |
@@ -128,3 +128,11 @@ Final T-20 coverage passed all 227 tests with one local worker after a host-cont
 T-20 CI run 39594788959 passed all jobs. T-21 totals rules are in progress.
 
 T-21 local acceptance passed: 237 unit tests, 100% lines / 97.55% branches, all validation lines 100%; 12 browser and five package cases; lint/typecheck/build/size/docs parity. Both EF041 formulas, EF043/EF044 split, four tax locations, per-unit skips, base-quantity precision and custom/default tolerance boundaries pass. Full core 39.59 kB, parser 35.38 kB. CI verification follows push.
+
+T-21 CI run 39595268059 passed all jobs. T-22 line and tax validation is in progress.
+
+T-22 implementation and functional verification pass: 250 unit tests, 100% lines / 97.72% branches, validation lines 100%; 12 browser and five package cases; lint/typecheck/build/docs parity. Namespace-only assertion now selects EF009 explicitly while retaining new EF050 root errors. Full core remains 40.02 kB (18 bytes over 40 kB); parser-only passes at 35.83 kB. After three size failures, the QA skill-required owner check-in is pending. T-22 is not committed or complete; no budgets or parser transforms were changed. M2 closure review awaits resolution; T-23 has not started.
+
+Owner approved continuing size optimization (D-80). Currency membership now has one stored code sequence shared with its metadata, with all 178 prior verified records protected by a byte-for-byte digest regression test. Acceptance checks are in progress.
+
+T-22 final local acceptance passed: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; 12 browser tests, CLI baseline, five package and six tooling tests; lint/typecheck/build/size/publint/attw/licences/docs parity. D-80 authorizes continued internal optimization; shared currency membership preserves every prior record. Full core 39.56 kB and parser 35.84 kB meet unchanged limits. All M2 cases are resolved; T-22 CI and milestone review follow the push.

@@ -642,6 +642,10 @@
         {
           "result": "pass",
           "note": "Final full T-20 coverage passed 227 tests with one worker: 100% lines, 97.40% branches; no threshold/timeout changes."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": "TC-M1-015",
@@ -881,6 +885,15 @@
           "result": "pass",
           "actual_result": "Task acceptance complete locally: nine browser cases across Chromium/Firefox/WebKit, build, all size budgets, docs parity, publint and attw passed. Initial concurrent-run failures are retained in the ledger; no limits or tests weakened.",
           "note": "Task acceptance complete locally: nine browser cases across Chromium/Firefox/WebKit, build, all size budgets, docs parity, publint and attw passed. Initial concurrent-run failures are retained in the ledger; no limits or tests weakened."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Currency preservation and size tests passed, but lint rejected a nullable-to-string assertion in the shared table binding.",
+          "note": "Map the guaranteed code sequence directly and index its metadata instead; no records or expected values change."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1224,6 +1237,19 @@
         {
           "result": "pass",
           "note": "Mapping-scope tests pass with explicit validate:false; default validation/override integration covered in TC-M2-013. All 217 unit tests pass."
+        },
+        {
+          "result": "fail",
+          "actual_result": "T-22 full suite: root namespace assertion selected the new EF050 root error instead of EF009.",
+          "note": "Select EF009 explicitly at /Invoice to preserve the namespace requirement without assuming no other root diagnostics."
+        },
+        {
+          "result": "pass",
+          "note": "Targeted parser/line/tax suites passed 25 tests after selecting EF009 explicitly; new validation errors remain enabled and ordering unchanged."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1336,6 +1362,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1365,6 +1395,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1389,6 +1423,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1413,6 +1451,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1437,6 +1479,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1461,6 +1507,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1485,6 +1535,10 @@
           "result": "pass",
           "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
           "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1539,6 +1593,30 @@
           "result": "pass",
           "actual_result": "D-79 equivalence, drift guards, lint/typecheck, browser (12), ESM/CJS package (5), docs, licences, publint and attw passed. Removed numeric-conversion modules no longer require bundled licence notices; remaining notices retained.",
           "note": "D-79 equivalence, drift guards, lint/typecheck, browser (12), ESM/CJS package (5), docs, licences, publint and attw passed. Removed numeric-conversion modules no longer require bundled licence notices; remaining notices retained."
+        },
+        {
+          "result": "fail",
+          "actual_result": "T-22 full core is 40.04 kB, 39 bytes over the unchanged 40 kB budget; parser-only passes at 35.91 kB. Reduce repeated path construction in our line rules without changing parser transforms or behavior.",
+          "note": "T-22 full core is 40.04 kB, 39 bytes over the unchanged 40 kB budget; parser-only passes at 35.91 kB. Reduce repeated path construction in our line rules without changing parser transforms or behavior."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Caching line paths reduced full core overrun to 14 bytes; parser-only remains within budget. Simplify constant tax-path construction and share the zero-value predicate before the next check.",
+          "note": "Caching line paths reduced full core overrun to 14 bytes; parser-only remains within budget. Simplify constant tax-path construction and share the zero-value predicate before the next check."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Third consecutive T-22 size attempt: full core remains 18 bytes over 40 kB; parser-only passes at 35.83 kB. Size work paused for the QA skill-required owner check-in; functional verification continues.",
+          "note": "Third consecutive T-22 size attempt: full core remains 18 bytes over 40 kB; parser-only passes at 35.83 kB. Size work paused for the QA skill-required owner check-in; functional verification continues."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-80 storage deduplication passed byte-for-byte currency preservation and actual size limits: 39.58 kB full, 35.84 kB parser. Final acceptance in progress.",
+          "note": "D-80 storage deduplication passed byte-for-byte currency preservation and actual size limits: 39.58 kB full, 35.84 kB parser. Final acceptance in progress."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1568,6 +1646,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1597,6 +1679,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1626,6 +1712,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1655,6 +1745,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1684,6 +1778,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1713,6 +1811,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1742,6 +1844,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1771,6 +1877,10 @@
           "result": "pass",
           "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
           "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1800,6 +1910,10 @@
           "result": "pass",
           "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
           "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1824,6 +1938,10 @@
           "result": "pass",
           "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
           "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1872,6 +1990,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1896,6 +2018,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1915,6 +2041,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1934,6 +2064,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1953,6 +2087,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1972,6 +2110,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -1991,6 +2133,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2010,6 +2156,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2029,6 +2179,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2048,6 +2202,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2067,6 +2225,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2086,6 +2248,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2105,6 +2271,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2124,6 +2294,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2143,6 +2317,10 @@
           "result": "pass",
           "actual_result": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule.",
           "note": "T-19 acceptance: 217 unit tests, 100% lines / 97.23% branches (validation lines 100%), 12 browser cases, five package tests; lint, typecheck, docs, build and unchanged size limits pass. Normative message assertions and corrected-input negatives cover every T-19 rule."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2177,6 +2355,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2196,6 +2378,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2215,6 +2401,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2234,6 +2424,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2253,6 +2447,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2272,6 +2470,10 @@
           "result": "pass",
           "actual_result": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified.",
           "note": "T-20 currency/amount cases passed with normative EN/TR diagnostics, positive/negative and missing-prerequisite coverage; D-78 partial currency parameters verified."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2296,6 +2498,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2315,6 +2521,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2334,6 +2544,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2353,6 +2567,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2372,6 +2590,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2391,6 +2613,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2410,6 +2636,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2429,6 +2659,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2448,6 +2682,10 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,
@@ -2467,6 +2705,314 @@
           "result": "pass",
           "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
           "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-051",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF051 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Targeted line rules passed, but lint requires explicit String conversion in the expected indexed path; corrected the test expression.",
+          "note": "Targeted line rules passed, but lint requires explicit String conversion in the expected indexed path; corrected the test expression."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-050",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF050 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-052",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF052 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-053",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF053 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-054",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF054 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-055",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF055 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-056",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF060 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-057",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF061 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-058",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF062 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-059",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF063 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-060",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF064 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-061",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF065 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-062",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF066 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass.",
+          "note": "T-22 full coverage passed 250 unit tests: 100% lines, 97.72% branches, validation lines 100%. Exact positive/negative diagnostics, missing prerequisites and D-78 missing percent pass. Lint/typecheck/docs, 12 browser cases and five package cases pass."
+        },
+        {
+          "result": "pass",
+          "note": "Final T-22 acceptance: 251 unit tests, 100% lines / 97.61% branches, validation/decimal/identifier lines 100%; lint/typecheck, 12 browser tests, CLI baseline, five package and six tooling tests, size, publint/attw, licences and docs parity all pass. Currency records preserve the pre-optimization digest. Full core 39.56 kB, parser 35.84 kB; limits unchanged."
         }
       ],
       "regression_of": null,

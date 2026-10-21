@@ -111,7 +111,7 @@ it('TC-M1-035 / UT-22: root namespace issues and repeated fallback events dedupl
     '<Invoice><Note>A</Note><Note>B</Note><LineCountNumeric>bad</LineCountNumeric></Invoice>',
   );
   expect(result.issues.filter((i) => i.code === 'EF009')).toHaveLength(2);
-  expect(result.issues.find((i) => i.path === '/Invoice')).toMatchObject({
+  expect(result.issues.find((i) => i.path === '/Invoice' && i.code === 'EF009')).toMatchObject({
     code: 'EF009',
     details: { expected: NS.inv, actual: 'none' },
   });
