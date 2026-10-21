@@ -7,6 +7,7 @@ it('TC-M1-002 / UT-39: public configuration equals the normative constants and i
     yieldBudgetMs: 50,
     progressIntervalMs: 100,
     zipPushChunkBytes: 1024 * 1024,
+    zipInflateChunkBytes: 1024,
     maxXmlBytes: 50 * 1024 * 1024,
     defaultTolerance: '0.01',
     zipLimits: {
@@ -32,6 +33,7 @@ it('TC-M1-002 / UT-39: public configuration equals the normative constants and i
     yieldBudgetMs: config.YIELD_BUDGET_MS,
     progressIntervalMs: config.PROGRESS_INTERVAL_MS,
     zipPushChunkBytes: config.ZIP_PUSH_CHUNK_BYTES,
+    zipInflateChunkBytes: config.ZIP_INFLATE_CHUNK_BYTES,
     maxXmlBytes: config.MAX_XML_BYTES,
     defaultTolerance: config.DEFAULT_TOLERANCE,
     zipLimits: config.DEFAULT_ZIP_LIMITS,

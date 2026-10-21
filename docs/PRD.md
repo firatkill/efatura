@@ -807,6 +807,9 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 
 | D-84 | Specialize unused parser path expressions to a private tag stack under pinned source/default/option guards. | T-23 prototype meets unchanged size budgets; preserves security checks, requires expanded equivalence tests and actual bundled licence parity. See docs/T23-BUNDLE-PROPOSAL.md. | Owner approved continuation, 2026-10-21 |
 
+| D-85 | Use a terminating synchronous UnzipInflate wrapper with 1024-byte inner pushes and discard decoders for ignored/rejected entries; expose zipInflateChunkBytes. | A-14 confirms output allocation precedes callbacks and unstarted entries retain compressed data. Prototype meets the unchanged 30 MiB bomb-memory limit; outer chunk ratio bounds remain unchanged. See docs/T25-STREAMING-PROPOSAL.md. | Owner approved, 2026-10-21 |
+| D-86 | Owner approved continuing T-25 tooling fixes and retests after the QA three-failure check-in; all thresholds remain unchanged. | Owner approval, 2026-10-21. |
+
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
 ## 16. Glossary (Türkçe ↔ English)

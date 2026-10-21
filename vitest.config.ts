@@ -10,6 +10,7 @@ const alias = {
 
 export default defineConfig({
   resolve: { alias },
+  optimizeDeps: { include: ['fflate'] },
   define: { __EFATURA_VERSION__: JSON.stringify('0.0.0-test') },
   test: {
     setupFiles: ['test/setup.ts'],

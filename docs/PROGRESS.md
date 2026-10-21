@@ -39,8 +39,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-21 | Totals rules (EF040–EF049)                                         | done   | f65f3b4          |
 | T-22 | Line and tax rules (EF050–EF066)                                   | done   | b3d7697          |
 | T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | done   | 730d9bb          |
-| T-24 | ZIP helpers: classification, junk, limits, errors                  | done   | HEAD             |
-| T-25 | Streaming ZIP reader and `iterateAny`                              | todo   | —                |
+| T-24 | ZIP helpers: classification, junk, limits, errors                  | done   | 0baee55          |
+| T-25 | Streaming ZIP reader and `iterateAny`                              | done   | HEAD             |
 | T-26 | Rows                                                               | todo   | —                |
 | T-27 | CSV                                                                | todo   | —                |
 | T-28 | CLI arguments, inputs and glob                                     | todo   | —                |
@@ -152,3 +152,13 @@ T-23 complete locally: D-81–D-84 recorded; batch API, duplicates, sources, sum
 T-23 CI 39630107500: all 11 jobs green at 730d9bb. T-24 started.
 
 T-24 local acceptance complete: classification/junk detection, positive finite ZIP limits, bilingual error factory and normative ZipLimits type; 270 tests pass, 100% lines / 97.76% branches, 15 browser tests and all required local gates. Two unchanged depth tests initially timed out under local load, then passed targeted/full retests. Finishing commit HEAD; push and CI verification follow.
+
+T-24 CI 39631324289: all 11 jobs green at 0baee55. T-25 A-14 spike confirms synchronous callbacks, unknown descriptor sizes, no UnzipInflate termination and no encryption flags. The normative 20 MiB bomb test exposes 87,941,824 bytes of arrayBuffers growth before the first rejection callback, exceeding 30 MiB; preparing a bounded-decoder proposal before ZIP implementation.
+
+T-25 D-85 approved and implemented in draft: bounded terminating inflater, discard decoders, nested ZIP/mixed input APIs, encryption pre-read, limits, progress and cancellation. All 18 targeted ZIP/any tests pass, including the independent 20 MiB bomb memory check below 30 MiB. Full acceptance, commit, push and CI remain pending.
+
+Open owner check-in for T-25: qa-test-run-loop requires a check-in after three consecutive tooling failures (coverage command selection, then draft lint issues). Continue fixing/retesting the remaining callback-flag inference lint issue, or pause that case? Asked through the input tool; other behavior tests continued and pass. No thresholds were changed.
+
+Owner approved continuing T-25 tooling fixes and retests (D-86). The callback error state now uses an object so TypeScript recognizes mutations inside the synchronous ZIP callback. Acceptance checks resumed.
+
+T-25 local acceptance complete: 290 unit tests, 99.02% lines / 96.24% branches, 15 browser tests; lint/typecheck/build/docs, five package tests, six tooling tests, publint/attw/licences pass. Core 39.10 kB, parser 33.81 kB, ZIP 49.12 kB. D-85 records bounded inflation/discard decoders; D-86 records resumed QA tooling work. Earlier failures and retests retained. Task finishing commit is HEAD; push and CI verification follow.
