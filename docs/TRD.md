@@ -3767,6 +3767,8 @@ Prettier: `{ "singleQuote": true, "trailingComma": "all", "printWidth": 110 }`; 
 
 `playground/size-limit.json`: `dist/assets/index-*.js` + `dist/assets/index-*.css` ≤ 90 kB, `dist/assets/parse.worker-*.js` ≤ 60 kB, `dist/assets/xlsx-*.js` (or the chunk named after `write-excel-file`) ≤ 120 kB. Limits use the size-limit default (brotli). R-12 covers a measured overrun.
 
+Until T-16, the 36 kB entry above imports `{ VERSION }` and is named `core: VERSION placeholder until T-16` (D-50). T-16 restores the normative parser entry.
+
 ### 17.5 Package checks
 
 `publint --strict` and `attw --pack .` must pass with no ignored rules. The `package` job also runs `npm pack --dry-run` through `attw --pack` and fails if the tarball contains files outside `dist/`, the READMEs, `LICENSE`, `CHANGELOG.md` and `package.json`.

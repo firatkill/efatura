@@ -117,6 +117,68 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-005",
+      "ac_reference": "NFR-05, NFR-11",
+      "milestone": "M0 Setup",
+      "title": "Build and package compatibility checks pass",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Build and publint passed; attw failed because npm pack could not write to the existing root-owned npm cache. Retesting with a task-specific temporary cache.",
+          "note": "Build and publint passed; attw failed because npm pack could not write to the existing root-owned npm cache. Retesting with a task-specific temporary cache."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Build, publint, attw with temporary npm cache, and all three size budgets passed. Lint, typecheck and unit suite passed.",
+          "note": "Build, publint, attw with temporary npm cache, and all three size budgets passed. Lint, typecheck and unit suite passed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-006",
+      "ac_reference": "FR-60, NFR-14",
+      "milestone": "M0 Setup",
+      "title": "ZIP references the shared core",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Consumer tests passed for ESM and CJS; ZIP runtime and declaration outputs reference the shared core.",
+          "note": "Consumer tests passed for ESM and CJS; ZIP runtime and declaration outputs reference the shared core."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M0-007",
+      "ac_reference": "NFR-14",
+      "milestone": "M0 Setup",
+      "title": "CLI is executable and reports version",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Built CLI reports efatura 0.0.0 and has executable permissions.",
+          "note": "Built CLI reports efatura 0.0.0 and has executable permissions."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

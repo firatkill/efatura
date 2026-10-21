@@ -29,3 +29,17 @@ jobs:
         with: { cache: true }
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22 }
+      - uses: pnpm/action-setup@v6
+        with: { cache: true }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm test:package
+      - run: pnpm size
+      - run: pnpm publint
+      - run: pnpm attw

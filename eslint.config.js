@@ -50,6 +50,7 @@ export default tseslint.config(
     ],
   },
   js.configs.recommended,
+  { files: ['test/package/*.mjs'], languageOptions: { globals: { process: 'readonly' } } },
   {
     files: ['**/*.ts'],
     extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],
@@ -107,6 +108,11 @@ export default tseslint.config(
     files: ['playground/src/**/*.ts'],
     ignores: ['playground/src/components/samples.ts'],
     rules: { 'no-restricted-globals': ['error', 'fetch'] },
+  },
+  {
+    files: ['*.config.ts'],
+    extends: [tseslint.configs.disableTypeChecked],
+    languageOptions: { parserOptions: { project: false } },
   },
   prettier,
 );

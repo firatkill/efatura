@@ -768,6 +768,8 @@ Issue messages (English and Turkish) for every code are in TRD §9.3. CLI help a
 | D-48 | Use actions/checkout@v7, actions/setup-node@v7 and pnpm/action-setup@v6; configure pnpm caching on action-setup, after setup-node. | Current setup-node removed its cache input. Owner approved the current actions and supported pnpm cache input. | A-21; owner approval 2026-10-21; official action.yml files |
 | D-49 | npm whoami confirmed firatkill after the owner logged in; @firatkill/efatura returned 404. | Confirms user scope and package-name availability without publishing. | A-22; npm registry checked 2026-10-21 |
 
+| D-50 | Until T-16 introduces parseInvoice, the 36 kB single-export size check imports VERSION. T-16 switches it to parseInvoice; core 40 kB and ZIP 50 kB limits stay active throughout. | T-02 has only placeholder exports, so the original import could not build. | Owner approval 2026-10-21 |
+
 Append new decisions at the end. Record verified assumptions (TRD §20) as new rows.
 
 ## 16. Glossary (Türkçe ↔ English)
