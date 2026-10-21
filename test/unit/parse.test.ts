@@ -93,7 +93,10 @@ it('TC-M1-035 / FR-04 FR-13 / UT-22: mapping diagnostics survive validate false 
   const input = `<Invoice xmlns="${NS.inv}" xmlns:cbc="${NS.cbc}" xmlns:cac="${NS.cac}"><cbc:Note>Kur: 35</cbc:Note><cac:LegalMonetaryTotal><cbc:PayableAmount>bad</cbc:PayableAmount></cac:LegalMonetaryTotal></Invoice>`;
   const normal = parseInvoice(input, { validate: false });
   expect(normal.issues.map((i) => i.code)).toEqual(['EF030', 'EF032', 'EF023']);
-  const overridden = parseInvoice(input, { rules: { EF030: 'info', EF032: 'off', EF023: 'error' } });
+  const overridden = parseInvoice(input, {
+    validate: false,
+    rules: { EF030: 'info', EF032: 'off', EF023: 'error' },
+  });
   expect(overridden.issues.map((i) => [i.code, i.severity])).toEqual([
     ['EF030', 'info'],
     ['EF023', 'error'],
@@ -112,7 +115,10 @@ it('TC-M1-035 / UT-22: root namespace issues and repeated fallback events dedupl
     code: 'EF009',
     details: { expected: NS.inv, actual: 'none' },
   });
-  expect(parseInvoice('<x:Invoice/>').issues[0]?.details).toEqual({ expected: NS.inv, actual: 'prefix:x' });
+  expect(parseInvoice('<x:Invoice/>').issues.find((issue) => issue.code === 'EF009')?.details).toEqual({
+    expected: NS.inv,
+    actual: 'prefix:x',
+  });
 });
 it('TC-M1-035 / UT-22: issue deduplication and code-point path/code sorting precede overrides', () => {
   const actual = mapping.mapInvoice;
@@ -127,7 +133,7 @@ it('TC-M1-035 / UT-22: issue deduplication and code-point path/code sorting prec
     );
     return value;
   });
-  const result = parseInvoice(`<Invoice xmlns="${NS.inv}"/>`);
+  const result = parseInvoice(`<Invoice xmlns="${NS.inv}"/>`, { validate: false });
   expect(result.issues.map((i) => [i.path, i.code])).toEqual([
     ['/Invoice/A', 'EF031'],
     ['/Invoice/A', 'EF032'],
