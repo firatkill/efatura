@@ -135,6 +135,11 @@
           "result": "pass",
           "actual_result": "Build, publint, attw with temporary npm cache, and all three size budgets passed. Lint, typecheck and unit suite passed.",
           "note": "Build, publint, attw with temporary npm cache, and all three size budgets passed. Lint, typecheck and unit suite passed."
+        },
+        {
+          "result": "pass",
+          "actual_result": "GitHub CI 39562977773 passed lint, typecheck and package jobs, including consumer tests and size budgets.",
+          "note": "GitHub CI 39562977773 passed lint, typecheck and package jobs, including consumer tests and size budgets."
         }
       ],
       "regression_of": null,
