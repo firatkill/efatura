@@ -271,13 +271,23 @@
       "ac_reference": "NFR-13, NFR-14",
       "milestone": "M0 Setup",
       "title": "Test CI matrices pass",
-      "status": "open",
+      "status": "resolved",
       "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
       "attempts": [
         {
           "result": "fail",
           "actual_result": "CI 39563369677 passed Node 20/22/24 units, browser and Linux CLI; both Windows CLI jobs failed because the normative shell chmod command resolved distcli.js. Owner approval requested for direct Node callback.",
           "note": "CI 39563369677 passed Node 20/22/24 units, browser and Linux CLI; both Windows CLI jobs failed because the normative shell chmod command resolved distcli.js. Owner approval requested for direct Node callback."
+        },
+        {
+          "result": "pass",
+          "actual_result": "GitHub Actions run 39566277873 passed all 11 jobs, including unit Node 20/22/24, Chromium/Firefox/WebKit, and CLI Ubuntu/Windows Node 20/24. D-53 corrected the Windows shell-path failure.",
+          "note": "GitHub Actions run 39566277873 passed all 11 jobs, including unit Node 20/22/24, Chromium/Firefox/WebKit, and CLI Ubuntu/Windows Node 20/24. D-53 corrected the Windows shell-path failure."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Final T-04 CI run 39566500555 passed all configured CI jobs, including the newly added docs, licences and tooling checks.",
+          "note": "Final T-04 CI run 39566500555 passed all configured CI jobs, including the newly added docs, licences and tooling checks."
         }
       ],
       "regression_of": null,

@@ -18,8 +18,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | ---- | ------------------------------------------------------------------ | ------ | ---------------- |
 | T-01 | Scaffold the repository and tooling                                | done   | 5c060ad          |
 | T-02 | Build, exports map and package checks                              | done   | ce74eee          |
-| T-03 | Test runners and CI test jobs                                      | doing  | —                |
-| T-04 | Changesets, licence check, docs check, templates                   | doing  | —                |
+| T-03 | Test runners and CI test jobs                                      | done   | 9f7ddf7          |
+| T-04 | Changesets, licence check, docs check, templates                   | done   | e5b5c4d          |
 | T-05 | Configuration, errors and internal helpers                         | todo   | —                |
 | T-06 | Decimal module and minor units                                     | todo   | —                |
 | T-07 | Input decoding and guard                                           | todo   | —                |
@@ -68,7 +68,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 ## Verification limits
 
-- D-53–D-55 record all three approved corrections. T-03 and T-04 final CI verification is in progress.
+- M0 is complete. D-53–D-55 record all three approved corrections. CI runs 39566277873 and 39566500555 passed; the QA ledger, milestone report and review are in qa/. Stop before T-05 for the owner milestone checkpoint.
 - Local aggregate checks passed: lint, typecheck, unit coverage, CLI, package compatibility, six tooling tests, size budgets, publint, attw, licences and docs parity. Chromium, Firefox and WebKit smoke tests passed separately.
 - Windows CLI Node 20 and 24 passed after the direct Node chmod callback correction.
 - Negative checks rejected network access, a temporary GPL dependency and missing export TSDoc. Temporary files and manifest changes were restored.
