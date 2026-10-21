@@ -8,7 +8,7 @@
 - Hook checks passed: owner accepted, other author/committer rejected, attribution removed.
 - Codex configuration has no attribution override; commits use explicit messages through git and the repository hook.
 - GitHub repository created and initial commits pushed after explicit owner approval (D-46).
-- No implementation task or milestone is complete.
+- T-01 implementation and local/CI acceptance checks passed; the owner GitHub-settings checklist remains below. No milestone is complete.
 
 ## Tasks
 
@@ -16,7 +16,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 
 | Task | Description                                                        | Status | Finishing commit |
 | ---- | ------------------------------------------------------------------ | ------ | ---------------- |
-| T-01 | Scaffold the repository and tooling                                | doing  | —                |
+| T-01 | Scaffold the repository and tooling                                | done   | 5c060ad          |
 | T-02 | Build, exports map and package checks                              | todo   | —                |
 | T-03 | Test runners and CI test jobs                                      | todo   | —                |
 | T-04 | Changesets, licence check, docs check, templates                   | todo   | —                |
