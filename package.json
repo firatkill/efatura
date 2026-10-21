@@ -85,13 +85,16 @@
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.node.json --noEmit && pnpm --filter playground typecheck",
-    "test": "vitest run test/unit/tooling.test.ts",
+    "test": "vitest run --project unit",
     "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && tsup",
     "dev": "tsup --watch",
     "size": "size-limit",
     "publint": "publint --strict",
     "attw": "attw --pack .",
-    "test:package": "node --test test/package/*.test.mjs"
+    "test:package": "node --test test/package/*.test.mjs",
+    "test:coverage": "vitest run --project unit --coverage",
+    "test:browser": "vitest run --project browser",
+    "test:cli": "pnpm build && vitest run --project cli"
   },
   "dependencies": {
     "fast-xml-parser": "5.11.2",
