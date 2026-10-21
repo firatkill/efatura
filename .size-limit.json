@@ -1,0 +1,20 @@
+[
+  {
+    "name": "core: full import",
+    "path": "dist/index.js",
+    "import": "*",
+    "limit": "40 kB"
+  },
+  {
+    "name": "core: VERSION placeholder until T-16",
+    "path": "dist/index.js",
+    "import": "{ VERSION }",
+    "limit": "36 kB"
+  },
+  {
+    "name": "zip: full import (includes core)",
+    "path": "dist/zip.js",
+    "import": "*",
+    "limit": "50 kB"
+  }
+]

@@ -17,7 +17,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | Task | Description                                                        | Status | Finishing commit |
 | ---- | ------------------------------------------------------------------ | ------ | ---------------- |
 | T-01 | Scaffold the repository and tooling                                | done   | 5c060ad          |
-| T-02 | Build, exports map and package checks                              | todo   | —                |
+| T-02 | Build, exports map and package checks                              | doing  | —                |
 | T-03 | Test runners and CI test jobs                                      | todo   | —                |
 | T-04 | Changesets, licence check, docs check, templates                   | todo   | —                |
 | T-05 | Configuration, errors and internal helpers                         | todo   | —                |

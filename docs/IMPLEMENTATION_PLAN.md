@@ -246,7 +246,7 @@ Ordered tasks to build efatura from an empty folder to a published 0.1.0 and a d
 - **Implements**: FR-01, FR-04, FR-13, FR-16, D-22
 - **Files**: `src/parse.ts`, `src/model/invoice.ts`, `src/index.ts` (exports so far, each with TSDoc and `@example`), `test/unit/parse.test.ts` (UT-22, UT-23), `test/unit/errors.test.ts` (UT-38 completed).
 - **Steps**:
-  1. Implement TRD §1.3 steps 1–8 (validation is a no-op until T-17). Remove the T-02 placeholders `VERSION` and `ZIP_VERSION` (D-44) and point the T-04 docs-check test at a real export.
+  1. Implement TRD §1.3 steps 1–8 (validation is a no-op until T-17). Restore the 36 kB size check to `parseInvoice` (D-50). Remove the T-02 placeholders `VERSION` and `ZIP_VERSION` (D-44) and point the T-04 docs-check test at a real export.
   2. Option validation (`TypeError` for bad `tolerance`, unknown rule codes, non-positive `maxBytes`).
   3. JSON-safety test (UT-23) on a full hand-written invoice covering every model section.
 - **Acceptance**:
