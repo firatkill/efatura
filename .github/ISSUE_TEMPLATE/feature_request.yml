@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest a change to efatura.
+body:
+  - type: textarea
+    id: problem
+    attributes: { label: Problem and proposed behaviour }
+    validations: { required: true }
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Synthetic example
+      description: Do not attach real invoices. Describe the structure using synthetic data only.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy
+      options:
+        - label: This issue contains no real invoice data.
+          required: true

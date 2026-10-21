@@ -290,13 +290,18 @@
       "ac_reference": "NFR-15",
       "milestone": "M0 Setup",
       "title": "Allowed production licences pass",
-      "status": "open",
+      "status": "resolved",
       "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
       "attempts": [
         {
           "result": "fail",
           "actual_result": "Installed write-excel-file → jszip → pako has (MIT AND Zlib); the required allowlist omits Zlib. Owner decision requested; no bypass applied.",
           "note": "Installed write-excel-file → jszip → pako has (MIT AND Zlib); the required allowlist omits Zlib. Owner decision requested; no bypass applied."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-54 approved Zlib. Production licence check passed for root and playground; SPDX tests cover MIT AND Zlib and retain GPL rejection.",
+          "note": "D-54 approved Zlib. Production licence check passed for root and playground; SPDX tests cover MIT AND Zlib and retain GPL rejection."
         }
       ],
       "regression_of": null,
@@ -371,13 +376,18 @@
       "ac_reference": "FR-60",
       "milestone": "M0 Setup",
       "title": "Changesets status works",
-      "status": "open",
+      "status": "resolved",
       "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
       "attempts": [
         {
           "result": "fail",
           "actual_result": "Changesets did not recognize the published root package with only playground in pnpm-workspace.yaml.",
           "note": "Changesets did not recognize the published root package with only playground in pnpm-workspace.yaml."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-55 approved explicit root workspace membership. Frozen install and pnpm changeset status passed and recognized the published root package.",
+          "note": "D-55 approved explicit root workspace membership. Frozen install and pnpm changeset status passed and recognized the published root package."
         }
       ],
       "regression_of": null,
