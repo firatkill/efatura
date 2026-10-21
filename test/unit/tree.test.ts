@@ -47,7 +47,7 @@ it('TC-M1-013 / UT-07: strict matches win; tolerant namespace pairs deduplicate 
   ]);
   const fallback = parseXmlTree('<Invoice><x:ID>A</x:ID><ID>B</ID></Invoice>');
   expect(children(fallback, 'cbc', 'ID', context)).toHaveLength(2);
-  expect(namespaceIssues(events).map((issue) => issue.details.actual)).toEqual([
+  expect(namespaceIssues(events).map((issue) => issue.details?.['actual'])).toEqual([
     'urn:wrong',
     'prefix:x',
     'none',

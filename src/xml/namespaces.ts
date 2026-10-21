@@ -1,3 +1,4 @@
+import { createIssue } from '../validate/issue';
 import type { NS } from '../config';
 import type { XmlElement } from './tree';
 
@@ -31,12 +32,5 @@ export function namespaceIssues(events: readonly NamespaceEvent[]) {
       seen.add(key);
       return true;
     })
-    .map(({ expected, actual, path }) => ({
-      code: 'EF009' as const,
-      severity: 'warning' as const,
-      path,
-      message: `Element is not in the expected namespace ${expected}; it was matched by its local name.`,
-      messageTr: `Eleman beklenen ${expected} ad alanında değil; yerel adıyla eşleştirildi.`,
-      details: { expected, actual },
-    }));
+    .map(({ expected, actual, path }) => createIssue('EF009', path, { expected }, { expected, actual }));
 }

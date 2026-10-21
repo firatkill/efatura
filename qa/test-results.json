@@ -331,6 +331,15 @@
           "result": "pass",
           "actual_result": "Docs check passed; isolated tests reject README drift, missing fixture coverage, message and bilingual UI copy mismatches.",
           "note": "Docs check passed; isolated tests reject README drift, missing fixture coverage, message and bilingual UI copy mismatches."
+        },
+        {
+          "result": "fail",
+          "actual_result": "T-17 stronger catalogue checker rejected the old tooling fixture shape.",
+          "note": "Updated fixture against normative T-17 catalogue structure, not checker behavior."
+        },
+        {
+          "result": "pass",
+          "note": "Six tooling tests pass; exact catalogue metadata/messages and UI copy rejection preserved."
         }
       ],
       "regression_of": null,
@@ -604,9 +613,24 @@
           "result": "pass",
           "actual_result": "Sequential complete coverage suite passed with the unchanged 5 s timeout; 10000-level tree remains correct. Earlier timeout attempts occurred under heavy local load.",
           "note": "Sequential complete coverage suite passed with the unchanged 5 s timeout; 10000-level tree remains correct. Earlier timeout attempts occurred under heavy local load."
+        },
+        {
+          "result": "fail",
+          "actual_result": "10,000-level XML test exceeded unchanged 5000ms timeout under heavy local CPU load in full coverage run.",
+          "note": "Earlier T-17 full coverage run passed all 199 tests; no XML algorithm change."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Isolated covered tree test again exceeded unchanged 5000ms timeout.",
+          "note": "Host CPU contention observed; no timeout or test threshold changes."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Affected tree suite passes all 5 tests in 1.83s, unchanged timeout and assertions.",
+          "note": "CPU contention cleared; full coverage rerun follows."
         }
       ],
-      "regression_of": null,
+      "regression_of": "TC-M1-015",
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
@@ -1255,6 +1279,391 @@
           "result": "pass",
           "actual_result": "Full model roundtrips through JSON and structuredClone in Node, Chromium, Firefox and WebKit. Full unit suite: 184 tests; 100% lines, 97.12% branches. Decimal operations retain 100% line coverage after tree-shaking refactor.",
           "note": "Full model roundtrips through JSON and structuredClone in Node, Chromium, Firefox and WebKit. Full unit suite: 184 tests; 100% lines, 97.12% branches. Decimal operations retain 100% line coverage after tree-shaking refactor."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-007",
+      "ac_reference": "FR-18, NFR-18",
+      "milestone": "M2 Validation",
+      "title": "Documentation parity negative probes",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Negative coverage probe copied its own EF002 expectation into the searched test tree, so the text-presence check counted it as coverage. Replaced the probe repository with explicit mapping-only test references and a fixed T-17 progress fixture; no production coverage gate weakened.",
+          "note": "Negative coverage probe copied its own EF002 expectation into the searched test tree, so the text-presence check counted it as coverage. Replaced the probe repository with explicit mapping-only test references and a fixed T-17 progress fixture; no production coverage gate weakened."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Temporary-repository parity probe rejects a one-character Turkish mutation, restores cleanly, and activates missing-test/fixture gates at their approved stages.",
+          "note": "Temporary-repository parity probe rejects a one-character Turkish mutation, restores cleanly, and activates missing-test/fixture gates at their approved stages."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Full check: 199 unit tests, coverage, CLI and package checks pass. M0 docs-check tooling fixture still used the temporary catalogue shape; updating its fixture to the T-17 normative catalogue and TRD section structure.",
+          "note": "Full check: 199 unit tests, coverage, CLI and package checks pass. M0 docs-check tooling fixture still used the temporary catalogue shape; updating its fixture to the T-17 normative catalogue and TRD section structure."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-005",
+      "ac_reference": "FR-17",
+      "milestone": "M2 Validation",
+      "title": "Amount traversal",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Initial typecheck found a misspelled synthetic AllowanceCharge field and unsafe indexed line spread in the traversal test; corrected against the normative model. Shared Issue typing also required optional indexed details access in the existing tree test.",
+          "note": "Initial typecheck found a misspelled synthetic AllowanceCharge field and unsafe indexed line spread in the traversal test; corrected against the normative model. Shared Issue typing also required optional indexed details access in the existing tree test."
+        },
+        {
+          "result": "pass",
+          "actual_result": "Full amount traversal and empty/null branches passed after correcting test model field names and narrowing; typecheck passed.",
+          "note": "Full amount traversal and empty/null branches passed after correcting test model field names and narrowing; typecheck passed."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-001",
+      "ac_reference": "FR-18",
+      "milestone": "M2 Validation",
+      "title": "Complete issue catalogue",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All 53 catalogue definitions and message variants match normative TRD rows, severity, kind and category order.",
+          "note": "All 53 catalogue definitions and message variants match normative TRD rows, severity, kind and category order."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-002",
+      "ac_reference": "FR-18",
+      "milestone": "M2 Validation",
+      "title": "Bilingual rendering and details",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "String and bilingual Label interpolation, repeated substitutions, optional details and exact EN/TR output passed.",
+          "note": "String and bilingual Label interpolation, repeated substitutions, optional details and exact EN/TR output passed."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-003",
+      "ac_reference": "FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "Issue normalization",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Deduplication and severity/path/code ordering passed; overrides and off are applied last.",
+          "note": "Deduplication and severity/path/code ordering passed; overrides and off are applied last."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-004",
+      "ac_reference": "FR-19, FR-20",
+      "milestone": "M2 Validation",
+      "title": "Validation options",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Standalone validation rejects invalid tolerance/rules; context default/custom tolerance and ordered reporting pass.",
+          "note": "Standalone validation rejects invalid tolerance/rules; context default/custom tolerance and ordered reporting pass."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-006",
+      "ac_reference": "FR-17, FR-19, FR-20",
+      "milestone": "M2 Validation",
+      "title": "Validation and mapping separation",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Mapping-only diagnostics remain under validate false; standalone validation emits no mapping diagnostics. Category rules remain scheduled for T-19–T-22.",
+          "note": "Mapping-only diagnostics remain under validate false; standalone validation emits no mapping diagnostics. Category rules remain scheduled for T-19–T-22."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-063",
+      "ac_reference": "NFR-05, NFR-11, NFR-12",
+      "milestone": "M2 Validation",
+      "title": "Published package stays within unchanged budgets",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Initial complete-catalogue build: full core 42.27 kB / 40 kB, parser-only 38.01 kB / 36 kB.",
+          "note": "Isolated build experiment identifies unused transitive context metadata retention. Proposed bundling the pinned parser with a behavior-preserving tree-shaking transform; no production build change yet."
+        },
+        {
+          "result": "fail",
+          "actual_result": "D-74 approved. Published size passes at 38.53/34.35 kB; equivalence test setup incorrectly appended src twice to the resolved dependency path. Correcting test setup.",
+          "note": "D-74 approved. Published size passes at 38.53/34.35 kB; equivalence test setup incorrectly appended src twice to the resolved dependency path. Correcting test setup."
+        },
+        {
+          "result": "pass",
+          "actual_result": "D-74 transform equivalence and drift guards pass (2 tests); all nine context arrays, regexes, labels, predicates, invalid arguments and frozen registry match original. Published size passes: full core 38.53 kB, parseInvoice 34.35 kB.",
+          "note": "D-74 transform equivalence and drift guards pass (2 tests); all nine context arrays, regexes, labels, predicates, invalid arguments and frozen registry match original. Published size passes: full core 38.53 kB, parseInvoice 34.35 kB."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": "docs/T17-BUNDLE-PROPOSAL.md",
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-020",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF009 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-026",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF015 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-032",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF023 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-036",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF030 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-037",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF031 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-038",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF032 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-039",
+      "ac_reference": "FR-17, FR-18",
+      "milestone": "M2 Validation",
+      "title": "EF035 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code.",
+          "note": "Targeted mapping regression tests passed: exact code, default severity, canonical path, EN/TR messages and existing details; corrected input does not raise the code."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-17 final acceptance: 199 unit tests; 100% lines, 96.92% branches; 12 browser tests; 4 package tests; 6 tooling tests; lint, typecheck, size, publint, attw, licences and docs parity pass.",
+          "note": "Coverage run used --maxWorkers=2 to limit local CPU contention, with all existing thresholds and timeouts unchanged. D-73/D-74 applied. Bundled dependency notices included."
         }
       ],
       "regression_of": null,

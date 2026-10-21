@@ -1,3 +1,4 @@
+import { xmlParserBundlePlugin, writeBundledLicenses } from './scripts/xml-parser-bundle';
 import { chmodSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'tsup';
 
@@ -14,7 +15,12 @@ export default defineConfig([
     platform: 'neutral',
     treeshake: true,
     splitting: false,
-    external: ['fast-xml-parser', 'fflate', '@firatkill/efatura'],
+    external: ['fflate', '@firatkill/efatura'],
+    noExternal: ['fast-xml-parser'],
+    esbuildPlugins: [xmlParserBundlePlugin()],
+    onSuccess: async () => {
+      writeBundledLicenses('dist/index.js.map');
+    },
   },
   {
     entry: { cli: 'src/cli/main.ts' },

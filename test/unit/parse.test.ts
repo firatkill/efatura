@@ -2,7 +2,8 @@ import { expect, it, vi, afterEach } from 'vitest';
 import { parseInvoice, EfaturaParseError, decodeXml, selectText } from '@firatkill/efatura';
 import type { ParseOptions } from '@firatkill/efatura';
 import { fullInvoiceXml } from '../helpers/invoice';
-import { NS, KNOWN_ISSUE_CODES } from '../../src/config';
+import { NS } from '../../src/config';
+import { ISSUE_CODES } from '../../src/validate/catalogue';
 import * as mapping from '../../src/model/invoice';
 afterEach(() => vi.restoreAllMocks());
 
@@ -154,7 +155,7 @@ it('TC-M1-035 / UT-22: invalid options throw TypeError and valid rule names are 
     { rules: { EF009: 'fatal' } },
   ])
     expect(() => parseInvoice('<Invoice/>', options as unknown as ParseOptions)).toThrow(TypeError);
-  for (const code of KNOWN_ISSUE_CODES)
+  for (const code of ISSUE_CODES)
     expect(() => parseInvoice('<Invoice/>', { rules: { [code]: 'off' } })).not.toThrow();
   expect(() => parseInvoice('<Invoice/>', { maxBytes: 9 })).toThrow(
     expect.objectContaining({ code: 'INPUT_TOO_LARGE', details: { size: 10, limit: 9 } }),

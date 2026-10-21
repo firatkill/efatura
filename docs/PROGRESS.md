@@ -32,7 +32,7 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-14 | Taxes, withholding, totals, payment and computed totals            | done   | 76beb06          |
 | T-15 | Attachments and base64                                             | done   | 1b40f4a          |
 | T-16 | `parseInvoice` orchestration                                       | done   | f983667          |
-| T-17 | Issue framework, catalogue and messages                            | todo   | —                |
+| T-17 | Issue framework, catalogue and messages                            | done   | HEAD             |
 | T-18 | Identifier algorithms                                              | todo   | —                |
 | T-19 | Identity and party rules (EF001–EF017)                             | todo   | —                |
 | T-20 | Currency and amount rules (EF020–EF035)                            | todo   | —                |
@@ -102,3 +102,11 @@ T-15 local acceptance passed: 172 unit tests, 100% lines and 96.75% branches, li
 T-16 completed in f983667. Final `pnpm check` and three-browser suite passed: 184 unit cases, 12 browser cases, 100% lines / 96.79% branches; decimal line coverage 100%. Full core 39.95 kB / 40 kB; parser-only 35.70 kB / 36 kB. All 434 verified code-list records remain unchanged after internal storage/tree-shaking optimization. CI run 39583967695 passed every job. D-70–D-72 record the verified envelope namespace, approved namespace descriptors and authorization to continue size optimization.
 
 M1 is complete: all 37 cases resolved, ledger integrity passed, and qa/M1-report.md and qa/M1-review.md document coverage, historical failures and verification limits. Validation, functional ZIP/CLI processing, generated fixtures, snapshots/fuzzing, benchmarks, private-corpus acceptance, playground manual checks and release remain later work. The ZIP entry is intentionally empty until T-25; its functional behavior and shared-core identity are not yet verified. No publish/deployment occurred. Stopped at the milestone boundary; T-17 has not started.
+
+## M2 in progress
+
+Owner authorized continuing after M1. M2 case design is recorded in qa/test-cases.md before implementation. D-73 records the approved staged coverage gates and shared issue-infrastructure imports. T-17 is being implemented with catalogue parity enforced immediately.
+
+D-74 approves bundling the pinned XML parser with guarded, unchanged safety-context metadata relocation. The actual published bundle is being verified against the original security predicates and unchanged size budgets.
+
+T-17 local acceptance passed: 199 unit tests, 100% lines / 96.92% branches (validation lines 100%), 12 browser tests across Chromium/Firefox/WebKit, one CLI test, four package tests, six tooling tests, lint/typecheck/build, size, publint/attw, licences and docs parity. Two deep-tree timeout failures under host CPU contention are retained in the ledger; affected retest and full coverage with two workers passed without changing timeouts or thresholds. Full core 38.53 kB and parser-only 34.35 kB; ZIP remains a placeholder until T-25. Rules are registered in T-19–T-22, generated-fixture coverage activates in T-32 under D-73. Remote CI verification follows the push.
