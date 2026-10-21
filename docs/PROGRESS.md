@@ -29,8 +29,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-11 | Identity, references, exchange rate and due date mapping           | doing  | —                |
 | T-12 | Party mapping                                                      | done   | b2c6a5b          |
 | T-13 | Line, item, price, delivery and allowance mapping                  | done   | 3c150f0          |
-| T-14 | Taxes, withholding, totals, payment and computed totals            | doing  | —                |
-| T-15 | Attachments and base64                                             | todo   | —                |
+| T-14 | Taxes, withholding, totals, payment and computed totals            | done   | 76beb06          |
+| T-15 | Attachments and base64                                             | doing  | —                |
 | T-16 | `parseInvoice` orchestration                                       | todo   | —                |
 | T-17 | Issue framework, catalogue and messages                            | todo   | —                |
 | T-18 | Identifier algorithms                                              | todo   | —                |
@@ -97,4 +97,6 @@ T-12 tax-ID resolution and approved EF015 details are complete. Local checks pas
 
 T-13 local acceptance passed: 122 unit tests, 100% line and 96.26% branch coverage, lint/typecheck, browser suite and build/size/docs. Tax conversion is injected through the typed boundary until T-14. CI run 39578874259 passed all jobs.
 
-T-14 local acceptance passed: 142 unit tests, 100% lines and 96.67% branches, lint/typecheck, browser suite, build/size/docs. CI pending.
+T-14 local acceptance passed: 142 unit tests, 100% lines and 96.67% branches, lint/typecheck, browser suite, build/size/docs. CI run 39579431743 passed all jobs.
+
+T-15 local acceptance passed: 172 unit tests, 100% lines and 96.75% branches, lint/typecheck, browser suite and build/size/docs. CI pending.
