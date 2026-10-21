@@ -27,3 +27,46 @@ test('TC-M0-007 / CT-02: executable CLI prints the package version', () => {
   assert.equal(result.stdout, `efatura ${version}\n`);
   if (process.platform !== 'win32') accessSync('dist/cli.js', constants.X_OK);
 });
+
+test('TC-M2-063 / D-74, UT-05–UT-07: bundled parser preserves XML guards, depth and encoding in ESM/CJS', () => {
+  for (const mode of ['module', 'commonjs']) {
+    const imports =
+      mode === 'module'
+        ? "import { parseInvoice, EfaturaParseError } from '@firatkill/efatura';"
+        : "const { parseInvoice, EfaturaParseError } = require('@firatkill/efatura');";
+    const program =
+      imports +
+      `
+      const assert = (await import('node:assert/strict')).default;
+      for (const xml of ['<!DOCTYPE Invoice><Invoice/>', '<!ENTITY x "x"><Invoice/>', '<Invoice>']) {
+        assert.throws(() => parseInvoice(xml), EfaturaParseError);
+      }
+      const result = parseInvoice('<Invoice>' + '<x>'.repeat(200) + '</x>'.repeat(200) + '</Invoice>');
+      assert.equal(result.invoice.lines.length, 0);
+      const bytes = new TextEncoder().encode('<Invoice/>');
+      assert.equal(parseInvoice(bytes).invoice.lines.length, 0);
+    `;
+    const wrapped =
+      mode === 'commonjs'
+        ? `(async () => { ${program} })().catch(error => { console.error(error); process.exitCode = 1; });`
+        : program;
+    const result = spawnSync(process.execPath, [`--input-type=${mode}`, '-e', wrapped], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+  }
+});
+
+test('TC-M2-063 / D-74: published dist retains bundled dependency licence notices', () => {
+  const notices = readFileSync('dist/THIRD_PARTY_LICENSES.txt', 'utf8');
+  for (const name of [
+    '@nodable/entities',
+    'fast-xml-parser',
+    'xml-naming',
+    'anynum',
+    'strnum',
+    'path-expression-matcher',
+    'is-unsafe',
+  ]) {
+    assert.ok(notices.includes(`${name}@`), `Missing licence for ${name}`);
+  }
+  assert.ok(notices.includes('Permission is hereby granted'));
+});

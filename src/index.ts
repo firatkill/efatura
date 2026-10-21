@@ -57,3 +57,14 @@ export { efaturaConfig } from './config-public';
  * import type { Invoice, ParseOptions } from '@firatkill/efatura';
  */
 export type * from './types';
+
+/** Validate a parsed model with the same configurable validation rules.
+ * @example
+ * validateInvoice(invoice, { tolerance: '0.01' });
+ */
+export { validateInvoice } from './validate';
+/** Inspect issue metadata and byte-exact bilingual templates.
+ * @example
+ * ISSUE_CATALOGUE.EF001.severity; // 'error'
+ */
+export { ISSUE_CATALOGUE, ISSUE_CODES } from './validate/catalogue';

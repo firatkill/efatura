@@ -83,6 +83,8 @@ Type-only imports (`import type`) from `src/types.ts` are allowed in every modul
 
 Internal storage and bundling: verified code-list labels may use fixed-column delimited literals, reconstructed into the specified public map objects without changing values. Profile/type membership is independent of display labels. Exact decimal operations live in `src/decimal/operations.ts` behind the unchanged public `decimal` facade so unused operations can be removed from parser-only bundles. These are representation-only optimizations; all public types and budgets remain unchanged.
 
+D-73 permits `xml/*` and `model/*` to import only shared issue construction, message rendering and catalogue infrastructure from `validate`; importing validation rules or the rule runner remains forbidden. This narrowly overrides the table above for T-17.
+
 ### 1.3 Data flow of one `parseInvoice` call
 
 1. `decodeInput(input)` → `{ text, encoding, issues }` (section 6.1).
@@ -357,6 +359,7 @@ Notes:
 ```ts
 import { chmodSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'tsup';
+import { xmlParserBundlePlugin, writeBundledLicenses } from './scripts/xml-parser-bundle';
 
 const { version } = JSON.parse(readFileSync('./package.json', 'utf8')) as { version: string };
 
@@ -371,7 +374,12 @@ export default defineConfig([
     platform: 'neutral',
     treeshake: true,
     splitting: false,
-    external: ['fast-xml-parser', 'fflate', '@firatkill/efatura'],
+    external: ['fflate', '@firatkill/efatura'],
+    noExternal: ['fast-xml-parser'],
+    esbuildPlugins: [xmlParserBundlePlugin()],
+    onSuccess: async () => {
+      writeBundledLicenses('dist/index.js.map');
+    },
   },
   {
     entry: { cli: 'src/cli/main.ts' },
@@ -508,65 +516,6 @@ export const PLAYGROUND = {
   filterDebounceMs: 200,
   mobileBreakpointPx: 640,
 } as const;
-/** Transitional rule names for T-16 option validation; T-17 replaces this with ISSUE_CODES.
- * @example
- * KNOWN_ISSUE_CODES.includes('EF009'); // true
- */
-export const KNOWN_ISSUE_CODES = [
-  'EF001',
-  'EF002',
-  'EF003',
-  'EF004',
-  'EF005',
-  'EF006',
-  'EF007',
-  'EF008',
-  'EF009',
-  'EF010',
-  'EF011',
-  'EF012',
-  'EF013',
-  'EF014',
-  'EF015',
-  'EF016',
-  'EF017',
-  'EF020',
-  'EF021',
-  'EF022',
-  'EF023',
-  'EF024',
-  'EF025',
-  'EF026',
-  'EF030',
-  'EF031',
-  'EF032',
-  'EF035',
-  'EF040',
-  'EF041',
-  'EF042',
-  'EF043',
-  'EF044',
-  'EF045',
-  'EF046',
-  'EF047',
-  'EF048',
-  'EF049',
-  'EF050',
-  'EF051',
-  'EF052',
-  'EF053',
-  'EF054',
-  'EF055',
-  'EF060',
-  'EF061',
-  'EF062',
-  'EF063',
-  'EF064',
-  'EF065',
-  'EF066',
-  'EF090',
-  'EF091',
-] as const;
 ```
 
 The playground imports `PLAYGROUND` through a dedicated export `efaturaConfig` (section 5.1) so it does not duplicate numbers.
@@ -2207,6 +2156,8 @@ An own decoder (no `atob`, no `Buffer`): a 256-entry lookup table for the standa
 
 ## 9. Validation
 
+D-74 build exception: the library bundles pinned `fast-xml-parser` and its transitive dependencies instead of externalizing the parser. `scripts/xml-parser-bundle.ts` accepts only `is-unsafe` 2.0.2 with the expected source shape, relocates each unchanged context label to its defining module, and marks the aggregate registry freeze pure. All predicates and labels remain unchanged. A guard failure requires reviewing the new dependency source; never silently bypass the transform or relax size/security limits. The published bundle contains the transformed code, so consumer builds receive the same measured implementation. `fflate` and the package self-reference remain external.
+
 ### 9.1 Framework
 
 - `src/validate/catalogue.ts` holds `ISSUE_CATALOGUE`: for each code its default severity, category, whether it is a mapping issue or a validation rule, and its message templates (section 9.3). `ISSUE_CODES` is the tuple of all codes, in catalogue order.
@@ -2216,6 +2167,8 @@ An own decoder (no `atob`, no `Buffer`): a 256-entry lookup table for the standa
 - Paths are built by `src/xml/path.ts` from model positions, for example `linePath(3) = '/Invoice/cac:InvoiceLine[3]'`, `partyPath('supplier') = '/Invoice/cac:AccountingSupplierParty/cac:Party'`. Indexes are 1-based and always written for repeated elements (`cac:TaxTotal[1]`), never for single ones.
 - `walkAmounts(invoice)` (`src/validate/rules/amounts.ts`) yields every `Amount` in the model with its canonical path, in model order; EF021 uses it.
 - Tolerance `T` = `options.tolerance ?? DEFAULT_TOLERANCE`. Invalid tolerance (not a decimal ≥ 0) or an unknown code in `options.rules` throws `TypeError`.
+
+The catalogue is a readonly record keyed by `IssueCode`. Each definition has `severity`, `category`, `kind` (`M`, `V`, `B`), `message`, `messageTr` and optional `variants` mapping variant names to `Label`. The main templates are the unqualified row, or the first listed variant when no unqualified row exists. `validateInvoice` accepts `Pick<ParseOptions, 'rules' | 'tolerance'>`; mapping diagnostics are never reconstructed. `walkAmounts` yields `{ amount, path }` in the field order of the normative model interfaces (§7.2), including non-null Amount objects with null values.
 
 ### 9.2 Identifier algorithms (normative)
 
@@ -4021,7 +3974,7 @@ Until T-16, the 36 kB entry above imports `{ VERSION }` and is named `core: VERS
 Fails when:
 
 1. An export of `src/index.ts` or `src/zip.ts` lacks a TSDoc comment with an `@example` (read with the TypeScript compiler API).
-2. A code in `ISSUE_CODES` is missing from TRD section 9.3, from `test/unit/validate/`, or from the expected issues of every scenario in `fixtures/scenarios/` (each code must be expected by at least one generated fixture).
+2. A code in `ISSUE_CODES` is missing from TRD section 9.3. Per D-73, mapping-code tests are enforced at T-17; validation-code tests activate with their ordered implementation tasks T-19–T-22, and batch-code tests at T-23. Expected generated-fixture coverage activates at T-32: each code must then be expected by at least one scenario in `fixtures/scenarios/`. The checker uses the doing/done task rows in `docs/PROGRESS.md` to activate later gates; no fixture coverage is claimed earlier.
 3. A message in `ISSUE_CATALOGUE` differs from the TRD 9.3.2 table (parsed from this file).
 4. A key in `playground/src/i18n/en.ts` is missing from PRD §9, or its English or Turkish text differs from the PRD tables (parsed by key column).
 5. `README.md` and `README.tr.md` have different numbers of `##` headings or different code blocks.

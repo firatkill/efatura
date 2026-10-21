@@ -1,3 +1,4 @@
+import { createIssue } from '../validate/issue';
 import type { Issue, ParseOptions, UnitInfo } from '../types';
 import type { QueryContext } from '../xml/query';
 import type { NamespacePrefix } from '../xml/namespaces';
@@ -34,26 +35,18 @@ export function at(
 ): MappingContext {
   return { ...context, path: elementPath(context.path, prefix, name, position) };
 }
-/** Temporary numeric mapping diagnostics, replaced by the catalogue in T-17.
+/** Numeric mapping diagnostics rendered from the shared catalogue.
  * @example
  * numberIssue(createContext(), 'EF030', 'invalid');
  */
 export function numberIssue(context: MappingContext, code: 'EF030' | 'EF031' | 'EF032', value: string): void {
   const normalized = value.replace(',', '.');
-  const messages = {
-    EF030: [`${value} is not a valid number.`, `${value} geçerli bir sayı değil.`],
-    EF031: [
-      `${value} uses a decimal comma; it was read as ${normalized}.`,
-      `${value} ondalık ayırıcı olarak virgül kullanıyor; ${normalized} olarak okundu.`,
-    ],
-    EF032: [`Amount ${value} has no currencyID.`, `${value} tutarında currencyID yok.`],
-  } as const;
-  context.issues.push({
-    code,
-    severity: code === 'EF030' ? 'error' : 'warning',
-    path: context.path,
-    message: messages[code][0],
-    messageTr: messages[code][1],
-    details: code === 'EF031' ? { value, normalized } : { value },
-  });
+  context.issues.push(
+    createIssue(
+      code,
+      context.path,
+      { value, normalized },
+      code === 'EF031' ? { value, normalized } : { value },
+    ),
+  );
 }

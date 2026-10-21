@@ -89,27 +89,80 @@ export function checkDocs(root: string): string[] {
   const codes = new Set(strings(catalogue).filter((value) => /^EF\d{3}$/.test(value)));
   const tests = readTree(join(root, 'test/unit/validate'));
   const scenarios = readTree(join(root, 'fixtures/scenarios'));
-  for (const code of codes) {
-    if (!trd.includes(code)) problems.push(`${code}: missing from TRD`);
-    if (!tests.includes(code)) problems.push(`${code}: missing validation test`);
-    if (!new RegExp(`${code}:(error|warning|info)`).test(scenarios))
-      problems.push(`${code}: missing fixture expectation`);
-  }
-  // T-17 extends catalogue checks for its concrete variant representation.
-  const messageRows = table(trd).filter(([code]) => /^EF\d{3}/.test(code ?? ''));
-  const messages = new Set(messageRows.flatMap((row) => row.slice(1)));
-  function checkMessages(node: ts.Node) {
+  const progress = read(join(root, 'docs/PROGRESS.md'));
+  const reached = (task: number) =>
+    new RegExp(`^\\| T-${String(task).padStart(2, '0')} \\|[^\\n]*\\| (?:doing|done)\\s*\\|`, 'm').test(
+      progress,
+    );
+  const rules = [...trd.matchAll(/^\| (EF\d{3})\s*\| (error|warning|info)\s*\| ([MVB])/gm)];
+  const messageRows = table(trd.split('#### 9.3.2 Messages')[1]?.split('#### 9.3.3')[0] ?? '').filter(
+    ([code]) => /^EF\d{3}/.test(code ?? ''),
+  );
+  const entries = new Map<string, ts.ObjectLiteralExpression>();
+  function collect(node: ts.Node): void {
     if (
       ts.isPropertyAssignment(node) &&
-      ts.isStringLiteralLike(node.initializer) &&
-      ['message', 'messageTr'].includes(node.name.getText(catalogue).replace(/['"]/g, '')) &&
-      !messages.has(node.initializer.text)
-    ) {
-      problems.push(`Catalogue message differs from TRD: ${node.initializer.text}`);
-    }
-    ts.forEachChild(node, checkMessages);
+      /^EF\d{3}$/.test(node.name.getText(catalogue)) &&
+      ts.isObjectLiteralExpression(node.initializer)
+    )
+      entries.set(node.name.getText(catalogue), node.initializer);
+    ts.forEachChild(node, collect);
   }
-  checkMessages(catalogue);
+  collect(catalogue);
+  function properties(node: ts.ObjectLiteralExpression): Map<string, ts.Expression> {
+    return new Map(
+      node.properties.flatMap((p) =>
+        ts.isPropertyAssignment(p)
+          ? [[p.name.getText(catalogue).replace(/['"]/g, ''), p.initializer] as const]
+          : [],
+      ),
+    );
+  }
+  const text = (node: ts.Expression | undefined) =>
+    node && ts.isStringLiteralLike(node) ? node.text : undefined;
+  for (const code of codes) {
+    const rule = rules.find((row) => row[1] === code);
+    if (!rule) problems.push(`${code}: missing from TRD`);
+    const number = Number.parseInt(code.slice(2), 10);
+    const task = number < 20 ? 19 : number < 40 ? 20 : number < 50 ? 21 : number < 90 ? 22 : 23;
+    if ((rule?.[3] === 'M' || reached(task)) && !tests.includes(code))
+      problems.push(`${code}: missing validation test`);
+    if (reached(32) && !new RegExp(`${code}:(error|warning|info)`).test(scenarios))
+      problems.push(`${code}: missing fixture expectation`);
+    const entry = entries.get(code);
+    if (!entry) {
+      problems.push(`${code}: missing catalogue definition`);
+      continue;
+    }
+    const fields = properties(entry);
+    if (text(fields.get('severity')) !== rule?.[2] || text(fields.get('kind')) !== rule?.[3])
+      problems.push(`${code}: catalogue metadata differs from TRD`);
+    const rows = messageRows.filter(([name]) => name === code || name?.startsWith(`${code} (`));
+    const first = rows[0];
+    if (!first || text(fields.get('message')) !== first[1] || text(fields.get('messageTr')) !== first[2])
+      problems.push(`${code}: catalogue message differs from TRD`);
+    const variants = fields.get('variants');
+    const variantFields =
+      variants && ts.isObjectLiteralExpression(variants)
+        ? properties(variants)
+        : new Map<string, ts.Expression>();
+    for (const row of rows) {
+      const variant = /\(([^)]+)\)/.exec(row[0] ?? '')?.[1];
+      if (!variant) continue;
+      const value = variantFields.get(variant);
+      const pair =
+        value && ts.isObjectLiteralExpression(value) ? properties(value) : new Map<string, ts.Expression>();
+      if (text(pair.get('en')) !== row[1] || text(pair.get('tr')) !== row[2])
+        problems.push(`${code} (${variant}): catalogue message differs from TRD`);
+    }
+    for (const variant of variantFields.keys())
+      if (!rows.some(([name]) => name === `${code} (${variant})`))
+        problems.push(`${code} (${variant}): unexpected catalogue variant`);
+  }
+  if (catalogue.text)
+    for (const rule of rules) {
+      if (rule[1] && !codes.has(rule[1])) problems.push(`${rule[1]}: missing from ISSUE_CODES`);
+    }
 
   const copyRows = table(read(join(root, 'docs/PRD.md')));
   const en = literalProperties(source(join(root, 'playground/src/i18n/en.ts')));

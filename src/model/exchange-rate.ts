@@ -1,3 +1,4 @@
+import { createIssue } from '../validate/issue';
 import { RATE_NOTE_PATTERN } from '../config';
 import type { ExchangeRate } from '../types';
 import type { XmlElement } from '../xml/tree';
@@ -7,14 +8,7 @@ import type { MappingContext } from './context';
 import { code, decimalValue } from './values';
 
 function fallback(context: MappingContext, rate: string, source: string): void {
-  context.issues.push({
-    code: 'EF023',
-    severity: 'warning',
-    path: context.path,
-    message: `Exchange rate ${rate} was taken from ${source}, not from PricingExchangeRate.`,
-    messageTr: `${rate} döviz kuru PricingExchangeRate yerine ${source} kaynağından alındı.`,
-    details: { rate, source },
-  });
+  context.issues.push(createIssue('EF023', context.path, { rate, source }, { rate, source }));
 }
 
 /** Resolve exchange rates in the normative priority order, then inspect notes.

@@ -1,3 +1,4 @@
+import { createIssue } from '../validate/issue';
 import type { Address, Contact, Party, PersonName } from '../types';
 import type { XmlElement } from '../xml/tree';
 import { attr, child, children, text, textOf } from '../xml/query';
@@ -108,14 +109,15 @@ export function mapParty(el: XmlElement | null, context: MappingContext): Party 
     if (scheme !== 'VKN' && scheme !== 'TCKN') continue;
     const value = identifier.value.replace(/\s+/g, '');
     if (identifier.schemeId !== scheme) {
-      context.issues.push({
-        code: 'EF015',
-        severity: 'info',
-        path: at(at(context, 'cac', 'PartyIdentification', i + 1), 'cbc', 'ID').path,
-        message: `schemeID ${schemeId} is not upper-case; it was read as ${scheme}.`,
-        messageTr: `schemeID ${schemeId} büyük harfle yazılmamış; ${scheme} olarak okundu.`,
-        details: { reason: 'case', value, scheme, schemeId },
-      });
+      context.issues.push(
+        createIssue(
+          'EF015',
+          at(at(context, 'cac', 'PartyIdentification', i + 1), 'cbc', 'ID').path,
+          { schemeId, scheme },
+          { reason: 'case', value, scheme, schemeId },
+          'case',
+        ),
+      );
     }
     return { ...fields, taxId: { scheme, value, schemeRaw: identifier.schemeId, inferred: false } };
   }
@@ -124,14 +126,15 @@ export function mapParty(el: XmlElement | null, context: MappingContext): Party 
     const value = identifier.value.replace(/\s+/g, '');
     const scheme = /^\d{10}$/.test(value) ? 'VKN' : /^\d{11}$/.test(value) ? 'TCKN' : null;
     if (scheme === null) continue;
-    context.issues.push({
-      code: 'EF015',
-      severity: 'info',
-      path: at(at(context, 'cac', 'PartyIdentification', i + 1), 'cbc', 'ID').path,
-      message: `Identifier ${value} has no schemeID; it was read as ${scheme} from its length.`,
-      messageTr: `${value} tanımlayıcısında schemeID yok; uzunluğundan ${scheme} olarak okundu.`,
-      details: { reason: 'missing', value, scheme },
-    });
+    context.issues.push(
+      createIssue(
+        'EF015',
+        at(at(context, 'cac', 'PartyIdentification', i + 1), 'cbc', 'ID').path,
+        { value, scheme },
+        { reason: 'missing', value, scheme },
+        'missing',
+      ),
+    );
     return { ...fields, taxId: { scheme, value, schemeRaw: null, inferred: true } };
   }
   return { ...fields, taxId: null };
