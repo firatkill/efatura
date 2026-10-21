@@ -1,0 +1,41 @@
+{
+  "project": "efatura",
+  "cases": [
+    {
+      "tc_reference": "TC-SETUP-001",
+      "ac_reference": "AGENTS.md §7",
+      "milestone": "Repository setup (before M0)",
+      "title": "Initialize with owner identity and active hook",
+      "status": "resolved",
+      "environment": "Local macOS repository; git CLI",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Verified with git CLI and direct hook invocations; temporary inputs removed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-SETUP-002",
+      "ac_reference": "AGENTS.md §7",
+      "milestone": "Repository setup (before M0)",
+      "title": "Enforce authorship and remove attribution",
+      "status": "resolved",
+      "environment": "Local macOS repository; git CLI",
+      "attempts": [
+        {
+          "result": "pass",
+          "note": "Verified with git CLI and direct hook invocations; temporary inputs removed."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    }
+  ]
+}
