@@ -1670,6 +1670,112 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-008",
+      "ac_reference": "FR-21",
+      "milestone": "M2 Validation",
+      "title": "VKN algorithm vectors",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All normative VKN vectors pass, including customs VKN; implementation follows TRD §9.2.",
+          "note": "All normative VKN vectors pass, including customs VKN; implementation follows TRD §9.2."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Lint rejects the normative non-null assertions despite the preceding regex guarantee. Adding narrowly scoped documented ESLint exceptions explicitly permitted by AGENTS.md and TRD §9.2; arithmetic unchanged.",
+          "note": "Lint rejects the normative non-null assertions despite the preceding regex guarantee. Adding narrowly scoped documented ESLint exceptions explicitly permitted by AGENTS.md and TRD §9.2; arithmetic unchanged."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
+          "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-009",
+      "ac_reference": "FR-21",
+      "milestone": "M2 Validation",
+      "title": "TCKN algorithm vectors",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "All normative TCKN vectors pass, including both wrong check digits and anonymous placeholder.",
+          "note": "All normative TCKN vectors pass, including both wrong check digits and anonymous placeholder."
+        },
+        {
+          "result": "fail",
+          "actual_result": "Same normative non-null assertion lint conflict as TC-M2-008; applying the allowed regex-guarantee exception.",
+          "note": "Same normative non-null assertion lint conflict as TC-M2-008; applying the allowed regex-guarantee exception."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
+          "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-010",
+      "ac_reference": "FR-21",
+      "milestone": "M2 Validation",
+      "title": "UUID and tax-ID classification",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "UUID shape/case/no-version constraints and all tax classification branches pass.",
+          "note": "UUID shape/case/no-version constraints and all tax classification branches pass."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
+          "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-011",
+      "ac_reference": "FR-21",
+      "milestone": "M2 Validation",
+      "title": "Identifier source verification",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "Read independent VKN implementations by paracycle and sadikay, and TCKN by paracycle and onury; checksum arithmetic equivalent. Source references and wrapper-policy distinction recorded in D-75. No dependency added.",
+          "note": "Read independent VKN implementations by paracycle and sadikay, and TCKN by paracycle and onury; checksum arithmetic equivalent. Source references and wrapper-policy distinction recorded in D-75. No dependency added."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-18 acceptance: 202 unit tests; 100% lines / 97% branches, identifiers 100% lines; 12 browser cases; five package cases; lint, typecheck, build, size, docs, publint and attw pass.",
+          "note": "Normative regex-guaranteed assertions use narrow documented lint exceptions permitted by AGENTS.md. Full core 38.87 kB; parser-only 34.37 kB."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }
