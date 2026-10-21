@@ -99,19 +99,23 @@ describe('UT-33 / FR-24–26 streaming ZIP', () => {
     expect(result.summary.invoices).toBe(1);
   });
   it('TC-M3-020: normal 3 MiB descriptor uses the whole outer push denominator', async () => {
-    // Deterministic printable pseudo-random comment: valid XML, moderate compression.
+    // Deterministic comment plus legal XML whitespace: 3 MiB inflated, moderate compression.
     let state = 1;
-    const bytes = new Uint8Array(3 * 1024 * 1024);
+    const bytes = new Uint8Array(256 * 1024);
     for (let i = 0; i < bytes.length; i++) {
       state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
-      bytes[i] = 65 + ((state >>> 24) % 4);
+      bytes[i] = 65 + ((state >>> 24) % 26);
     }
     const text = fullInvoiceXml.replace(
       '</Invoice>',
       '<!--' + new TextDecoder().decode(bytes) + '--></Invoice>',
     );
-    const packed = descriptor('a.xml', strToU8(text));
+    const content = strToU8(text);
+    const padded = new Uint8Array(3 * 1024 * 1024).fill(32);
+    padded.set(content);
+    const packed = descriptor('a.xml', padded);
     expect(packed.length).toBeLessThan(1024 * 1024);
+    expect(padded.length / packed.length).toBeLessThan(100);
     expect(codes(await parseZip(packed))).toEqual([]);
   });
   it('TC-M3-021: invalid archives, encrypted flags and unsupported method', async () => {

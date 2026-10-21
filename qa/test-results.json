@@ -3593,6 +3593,10 @@
         {
           "result": "pass",
           "note": "T-25 final lint/typecheck/build/docs and size pass: core 39.10 kB, parser 33.81 kB, ZIP 49.12 kB. All 15 browser, five package and six tooling cases pass; publint, attw and licences pass. No thresholds changed."
+        },
+        {
+          "result": "pass",
+          "note": "T-25 CI follow-up: full local coverage retest passes all 290 tests, lines 99.02%, branches 96.24%; affected ESLint passes. Original CI failed only the descriptor timeout; all ten other jobs passed. Preserve 5 s timeout and all memory/ratio/size budgets."
         }
       ],
       "regression_of": null,
@@ -3730,6 +3734,19 @@
         {
           "result": "pass",
           "note": "Final T-25 full coverage suite passes 290 tests, including stored/deflated nesting, all limits, queue draining, descriptor sizing, encryption and corrupt streams, cancellation and mixed-input duplicate detection. Lines 99.02%, branches 96.24%; strict module thresholds unchanged."
+        },
+        {
+          "result": "fail",
+          "note": "CI Node 22 coverage: 3 MiB descriptor case timed out at 5000 ms (8.8 s); all other 289 tests passed. Keep timeout and size/ratio assertions unchanged; reduce synthetic fixture-generation and giant-comment parsing overhead with a smaller random comment plus legal trailing XML whitespace.",
+          "actual_result": "CI Node 22 coverage: 3 MiB descriptor case timed out at 5000 ms (8.8 s); all other 289 tests passed. Keep timeout and size/ratio assertions unchanged; reduce synthetic fixture-generation and giant-comment parsing overhead with a smaller random comment plus legal trailing XML whitespace."
+        },
+        {
+          "result": "pass",
+          "note": "Corrected 3 MiB descriptor fixture passes the targeted case in 1.70 s under current host load. Exact inflated size, one outer chunk, ratio <100 and no ZIP error asserted; timeout unchanged."
+        },
+        {
+          "result": "pass",
+          "note": "T-25 CI follow-up: full local coverage retest passes all 290 tests, lines 99.02%, branches 96.24%; affected ESLint passes. Original CI failed only the descriptor timeout; all ten other jobs passed. Preserve 5 s timeout and all memory/ratio/size budgets."
         }
       ],
       "regression_of": null,
