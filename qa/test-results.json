@@ -2278,6 +2278,201 @@
       "root_cause_group": null,
       "clickup_task": null,
       "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-045",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF045 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "fail",
+          "actual_result": "Initial totals tests passed but lint rejected an unnecessary non-null assertion in a synthetic subtotal fixture; replaced with an explicit existence check.",
+          "note": "Initial totals tests passed but lint rejected an unnecessary non-null assertion in a synthetic subtotal fixture; replaced with an explicit existence check."
+        },
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-040",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF040 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-041",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF041 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-042",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF042 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-043",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF043 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-044",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF044 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-046",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF046 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-047",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF047 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-048",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF048 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
+    },
+    {
+      "tc_reference": "TC-M2-049",
+      "ac_reference": "FR-17, FR-18, FR-19",
+      "milestone": "M2 Validation",
+      "title": "EF049 positive, negative and boundary cases",
+      "status": "resolved",
+      "environment": "macOS / Node 24.10.0 / pnpm 10.18.3",
+      "attempts": [
+        {
+          "result": "pass",
+          "actual_result": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting.",
+          "note": "T-21 targeted and full coverage tests passed: exact TRD diagnostics, missing prerequisites, tolerance boundaries and all four TaxTotal kinds. Lint/typecheck pass after replacing a fixture assertion and formatting."
+        }
+      ],
+      "regression_of": null,
+      "root_cause_group": null,
+      "clickup_task": null,
+      "retraction_reason": null
     }
   ]
 }

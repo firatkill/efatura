@@ -35,8 +35,8 @@ The finishing commit is recorded when a task is completed. In its own completion
 | T-17 | Issue framework, catalogue and messages                            | done   | 940a803          |
 | T-18 | Identifier algorithms                                              | done   | ee82cde          |
 | T-19 | Identity and party rules (EF001–EF017)                             | done   | 29e3607          |
-| T-20 | Currency and amount rules (EF020–EF035)                            | done   | HEAD             |
-| T-21 | Totals rules (EF040–EF049)                                         | todo   | —                |
+| T-20 | Currency and amount rules (EF020–EF035)                            | done   | 6f32db8          |
+| T-21 | Totals rules (EF040–EF049)                                         | done   | HEAD             |
 | T-22 | Line and tax rules (EF050–EF066)                                   | todo   | —                |
 | T-23 | Batch API: `iterateMany`, `parseMany`, duplicates, progress, abort | todo   | —                |
 | T-24 | ZIP helpers: classification, junk, limits, errors                  | todo   | —                |
@@ -124,3 +124,7 @@ T-19 completed in 29e3607; CI 39592462877 passed all jobs. T-20 targeted currenc
 T-20 local acceptance passed: 227 unit tests, 100% lines / 97.40% branches, validation lines 100%; 12 browser and five package cases; lint/typecheck, docs, licences, publint and attw. D-78 records missing message parameters; D-79 records approved parser specialization with equivalence/source/version/option guards. Full core 38.77 kB / 40 kB, parser 34.41 kB / 36 kB. CI verification follows push.
 
 Final T-20 coverage passed all 227 tests with one local worker after a host-contention deep-tree timeout; isolated retest also passed. Timeout and coverage thresholds are unchanged, and failure/retest history is retained.
+
+T-20 CI run 39594788959 passed all jobs. T-21 totals rules are in progress.
+
+T-21 local acceptance passed: 237 unit tests, 100% lines / 97.55% branches, all validation lines 100%; 12 browser and five package cases; lint/typecheck/build/size/docs parity. Both EF041 formulas, EF043/EF044 split, four tax locations, per-unit skips, base-quantity precision and custom/default tolerance boundaries pass. Full core 39.59 kB, parser 35.38 kB. CI verification follows push.
