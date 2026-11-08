@@ -102,7 +102,7 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm test:cli && pnpm test:package && pnpm test:tooling && pnpm size && pnpm publint && pnpm attw && pnpm licenses:check && pnpm docs:check"
   },
   "dependencies": {
-    "fast-xml-parser": "5.11.2",
+    "fast-xml-parser": "5.12.0",
     "fflate": "0.8.3"
   },
   "devDependencies": {
@@ -124,7 +124,7 @@
     "tsup": "8.5.1",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.72.0",
+    "typescript-eslint": "8.72.1",
     "vitest": "4.1.12"
   }
 }
