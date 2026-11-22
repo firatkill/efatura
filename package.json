@@ -102,7 +102,7 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm test:cli && pnpm test:package && pnpm test:tooling && pnpm size && pnpm publint && pnpm attw && pnpm licenses:check && pnpm docs:check"
   },
   "dependencies": {
-    "fast-xml-parser": "5.11.2",
+    "fast-xml-parser": "5.12.1",
     "fflate": "0.8.3"
   },
   "devDependencies": {
@@ -116,15 +116,15 @@
     "@vitest/coverage-v8": "4.1.12",
     "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
-    "fast-check": "4.10.2",
-    "playwright": "1.64.1",
-    "prettier": "3.9.10",
+    "fast-check": "4.10.3",
+    "playwright": "1.65.1",
+    "prettier": "3.10.1",
     "publint": "0.3.25",
     "size-limit": "11.2.0",
     "tsup": "8.5.1",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.72.0",
+    "typescript-eslint": "8.73.0",
     "vitest": "4.1.12"
   }
 }
